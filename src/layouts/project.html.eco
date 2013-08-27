@@ -1,0 +1,13 @@
+---
+layout: "default"
+---
+
+<div class="project">
+    <h2><%- @document.title %></h2>
+    <div>
+        <%- @content %>
+    </div>
+    <div>
+        <%- @partial('project-linkedposts', { title: @document.title })%>
+    </div>
+</div>
