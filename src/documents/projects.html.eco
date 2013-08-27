@@ -1,0 +1,15 @@
+---
+title: 'Projects'
+isPage: true
+order: 2
+---
+
+<% for page in @getCollection("projects").toJSON(): %>
+    <div id="project-description">
+        <h2><a href='<%=page.url%>'><%= page.title %></a></h2>
+        <p>
+            <%- page.description %>
+        </p>
+        <%- @partial('project-linkedposts', { title: page.title })%>
+    </div>
+<% end %>
