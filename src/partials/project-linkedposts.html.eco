@@ -1,0 +1,8 @@
+<div id="project-linkedposts">
+    <h3>Posts referencing <%= @title %></h3>
+    <ul>
+        <% for doc in @getCollection('posts').findAll({tags: '$in': @title}).toJSON(): %>
+            <li><a href="<%= doc.url %>"><%= doc.title %></a></li>
+        <% end %>
+    </ul>
+</div>
