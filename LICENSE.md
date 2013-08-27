@@ -1,0 +1,1 @@
+Copyright [P. van der Velde](http://pvandervelde.github.io). All rights reserved.
