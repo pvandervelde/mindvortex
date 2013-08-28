@@ -26,7 +26,7 @@ docpadConfig = {
                 model.setMetaDefaults({layout:"post"})
         
         projects: ->
-            @getCollection('html').findAllLive({relativeOutDirPath:'projects'},[{title:-1}]).on "add", (model) ->
+            @getCollection('html').findAllLive({relativeOutDirPath:'projects'},[{title:1}]).on "add", (model) ->
                 model.setMetaDefaults({layout:"project"})
             
         frontpage: ->
