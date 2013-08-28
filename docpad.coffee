@@ -10,7 +10,7 @@ docpadConfig = {
                 posts: -1
                 
         datefromfilename:
-            removeDate: true
+            removeDate: false
 
     # =================================
     # DocPad collections
@@ -42,7 +42,7 @@ docpadConfig = {
         # Specify some site properties
         site:
             # The production url of our website
-            url: "http://pvandervelde.github.io/"
+            url: "http://pvandervelde.github.io"
 
             # Here are some old site urls that you would like to redirect from
             oldUrls: [
@@ -53,12 +53,12 @@ docpadConfig = {
 
             # The website description (for SEO)
             description: """
-                When your website appears in search results in say Google, the text here will be shown underneath your website's title.
+                The place where I ramble on about software development, fluid dynamics, flying and climbing.
                 """
 
             # The website keywords (for SEO) separated by commas
             keywords: """
-                patrick van der velde, nuclei, sherlock, nAnicitus, nAdoni, nTreva, open source, github
+                Patrick van der Velde, Petrik, Nuclei, Sherlock, nAnicitus, nAdoni, nTreva, Fluid dynamics, CFD, rock climbing, paragliding
                 """
             
             # The name of the author
