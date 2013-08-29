@@ -38,9 +38,11 @@
             <ul>
                 <% for page in @getCollection("pages").toJSON(): %>
                     <li class="<%= if page.id is @document.id then 'active' else 'inactive' %>">
-                        <a href="<%= page.url %>">
+                        <% if page.id is @document.id: %>
                             <%= page.title %>
-                        </a>
+                        <% else: %>
+                            <a href="<%= page.url %>"><%= page.title %></a>
+                        <% end %>
                     </li>
                 <% end %>
             </ul>
@@ -54,7 +56,7 @@
             <div id="sbox2">
                 <h2>Recent</h2>
                 <ul>
-                    <% for recent in @getCollection("frontpage").toJSON()[1..4]: %>
+                    <% for recent in @getCollection("frontpage").toJSON()[0..9]: %>
                         <li><a href="<%= recent.url %>"><%= recent.title %></a></li>
                     <% end %>
                 </ul>
