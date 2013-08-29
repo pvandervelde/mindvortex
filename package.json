@@ -31,7 +31,7 @@
     "npm": "1.1.x"
   },
   "dependencies": {
-    "docpad": "~6.50.0",
+    "docpad": "~6.51.1",
     "docpad-plugin-coffeescript": "~2.2.2",
     "docpad-plugin-eco": "~2.0.2",
     "docpad-plugin-marked": "~2.1.1",
@@ -46,7 +46,7 @@
     "docpad-plugin-datefromfilename": "~2.0.4"
   },
   "devDependencies": {
-    "docpad-plugin-livereload": "~2.5.2"
+    "docpad-plugin-livereload": "~2.5.3"
   },
   "main": "node_modules/docpad/bin/docpad-server"
 }
