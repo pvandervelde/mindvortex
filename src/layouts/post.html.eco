@@ -25,7 +25,7 @@ layout: "default"
       });
     </script>
     
-    <div id="post-comments>
+    <div id="post-comments">
         <h2>Comments</h2>
         <div id="post-comment-header">
             Want to leave a comment? Visit <a href="https://github.com/<%= @site.githubuser %>/<%= @site.githubrepository %>/issues/<%= @document.commentIssueId %>"> this post's issue page on 
