@@ -1,5 +1,5 @@
 ---
-title: 'Nuclei release - V0.6.5.0'
+title: 'Nuclei release - V0.6.6.0'
 tags: ['Nuclei']
 commentIssueId: 11
 ---
