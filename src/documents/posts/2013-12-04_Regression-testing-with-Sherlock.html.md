@@ -1,8 +1,7 @@
 ---
 title: 'Regression testing with Sherlock'
 tags: ['Sherlock', 'Regression test']
-commentIssueId: 5000
-ignore: true
+commentIssueId: 25
 ---
 
 Over a series of posts I hope to explain how to set up and use the [Sherlock](/projects/sherlock.html) test environment system. The idea is to follow the set up procedure I used both at home for the [Apollo](/projects/apollo.html) project and the proof of concept I am working on at my work place. But first lets start with a short explanation of what Sherlock is and what it does. 
@@ -46,8 +45,8 @@ When executing a test with Sherlock the following steps are present:
 
 The next following posts will describe:
 
-1. [How to set up the Hyper-V host machine.](/posts/2013-11-25_Setting-up-Sherlock-serverside.html)
-* [How to prepare a virtual machine for use as a testing environment.](/posts/2013-11-26_Setting-up-Sherlock-virtualmachines.html)
+1. How to set up the Hyper-V host machine.
+* How to prepare a virtual machine for use as a testing environment.
 * How to verify that all the environments have been configured correctly.
 * How to integrate with a build server. This will discuss build jobs, build scripts and test configuration.
 * A description on how I used Sherlock to perform integration tests on the console application of Apollo.
