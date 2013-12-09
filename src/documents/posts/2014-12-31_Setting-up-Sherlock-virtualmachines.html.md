@@ -27,6 +27,7 @@ see other documentation here: https://github.com/pvandervelde/Sherlock/wiki/Inst
 * Disable automatic updates (don't even download them, it's pointless as the machine gets reset every time after use anyway)
 * Disable the [screensaver]() and the [automatic locking of the desktop](). [Why do I need to do that?](http://www.brianbondy.com/blog/id/100/).
 * Disable UAC (otherwise you can't execute MSI installs, even if your user is an admin).
+ * Note that in some cases corporate network controls / group policies can play havoc with carefully laid plans, e.g. disabling the UAC on Windows 8 through a group policy may not give the results you expect. In this case create a local admin user to run the regression test.
 
 * Install Sherlock.Service.exe
 * Update the config file
