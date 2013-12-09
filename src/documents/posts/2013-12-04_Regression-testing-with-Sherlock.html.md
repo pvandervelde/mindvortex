@@ -40,12 +40,25 @@ When executing a test with Sherlock the following steps are present:
 * Once an environment has completed its test steps it will report the completion the test, upon which the host service will terminate the environment and restore it to the original state.
 * Once all environments have completed their test steps the test is marked as completed and the test report is compiled and placed in the predetermined location.  
 
+### Pre-requisites
+
+The first pre-requisite in the configuration is the [latest release](https://github.com/pvandervelde/Sherlock/releases) of sherlock. A release consists of a number of ZIP packages including:
+
+* **console.zip** - Contains the binaries and configuration files for the console application which is used to register a test.
+* **sherlock.web.api.zip** - The web service that will store information about a new test in the database.
+* **sherlock.web.intranet.zip** - The management web site that can be used to add or remove test environments.
+* **service.zip** - The windows service that is used to run the *master controller* or the *executor controller*.
+* **service.master.zip** - The master controller application which handles the scheduling of tests, loading and unloading of test environments and processing of the test reports. 
+* **service.executor.zip** - The executor controller application which controls the execution of a test on a test environment.
+* **sql.zip** - The SQL change scripts for the database.
+
+The second pre-requisite is the availability of a physical machine on which a Windows version with [Hyper-V](http://en.wikipedia.org/wiki/Hyper-V#System_requirements_and_specifications) can be installed.
 
 ### Planned posts: 
 
 The next following posts will describe:
 
-1. How to set up the Hyper-V host machine.
+1. [How to set up the Hyper-V host machine.](/posts/2013-12-10_Setting-up-Sherlock-serverside.html)
 * How to prepare a virtual machine for use as a testing environment.
 * How to verify that all the environments have been configured correctly.
 * How to integrate with a build server. This will discuss build jobs, build scripts and test configuration.
