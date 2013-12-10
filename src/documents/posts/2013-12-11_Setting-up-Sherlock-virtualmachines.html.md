@@ -1,8 +1,7 @@
 ---
 title: 'Setting up Sherlock for regression testing - Virtual machines'
 tags: ['Sherlock']
-commentIssueId: 5000
-ignore: true
+commentIssueId: 29
 ---
 After [setting up the host machine](/posts/2013-12-10_Setting-up-Sherlock-serverside.html) the next step in the [configuration](/posts/2013-12-04_Regression-testing-with-Sherlock.html) of Sherlock is to set up one or more virtual machines. Each virtual machine will have the following applications installed:
 
@@ -42,7 +41,7 @@ Finally before installing Sherlock a few tweaks should be made to the operating 
 * **Interactive user:** If you need to run interactive tests, e.g. UI tests, then you need to make sure a user is logged in. Use [Autologon](http://technet.microsoft.com/en-us/sysinternals/bb963905.aspx) to automatically log your user in when the computer starts while still maintaining password security.
 * **Windows 8 switch to desktop:** If you are on Windows 8 you need to make sure that the desktop is [available](http://www.7tutorials.com/how-boot-desktop-windows-8-skip-start-screen) for interactive applications to execute on.
 * **Screen saver:** In order to prevent any interactive tests from failing due to a [screensaver](http://windows.microsoft.com/en-nz/windows-vista/turn-your-screen-saver-on-or-off) or the [automatic locking of the desktop](http://answers.microsoft.com/en-us/windows/forum/windows_7-security/disable-automatic-lock-with-windows-7/daef8f0a-810f-46e8-9420-3c32c4bd6479) both those features need to be turned off. 
-* **Windows error reporting:** Any tests that run on the desktop may hang eternally if the application under tests fails and displays the Windows Error Reporting (WER) dialog. In order to prevent this from happening  [WER should be disabled](http://4sysops.com/archives/how-to-disable-windows-error-reporting/). The most efficient way of doing this is to use the group policy controls to disable the following elements:
+* **Windows error reporting:** Any tests that run on the desktop may hang eternally if the application under tests fails and displays the Windows Error Reporting (WER) dialog. In order to prevent this from happening [WER should be disabled](http://4sysops.com/archives/how-to-disable-windows-error-reporting/). The most efficient way of doing this is to use the group policy controls to disable the following elements:
  * In `Computer Configuration\Administrative Templates\System\Internet Communication Management\Internet Communication settings` enable the setting: `Turn off Windows Error Reporting`.
  * In `Computer Configuration\Administrative Templates\Windows Components\Windows Error Reporting` enable the settings `Disable Windows error reporting` and `Prevent display of the user interface for critical errors`, and disable the setting `Display error notification`.
 * **Automatic updates:** Automatic updates can be disabled because they will never be deployed due to the fact that the machine is reset after each test.
@@ -59,16 +58,18 @@ Once the operating system is configured [Sherlock](https://github.com/pvandervel
 * Set the update service to start automatically when the computer starts. This can be done as an actual service (in case no interactive tests will be executed) or by automatically starting the application when the user logs on to windows (in case interactive tests need to be executed).
 * The last step is to let the executor controller through the firewall. For this create an inbound rule that allows `c:\ProgramData\Sherlock\Sherlock.Service.Executor\{VERSION}\Sherlock.Service.Executor.exe` to connect to all types of protocols. Normally only Domain and private networks should be sufficient.
 
+### Testing
+Once the operating system and Sherlock have been configured it is sensible to test the configurations to make sure it all works. In order to do this take the following steps:
 
-final steps while the VM is on:
-
-* Test the whole thing by restarting the machine
-* After the application starts (both Sherlock.Service and Sherlock.Service.Executor), stop them both (Sherlock.Service first because it keeps the other one alive)
-* Remove data from `c:\ProgramData\Sherlock`
-* Shut down the machine (through the official windows manner)
- 
+* Restart the virtual machine. Once the machine starts up it should (depending on your configuration)
+ * Automatically log on the test user
+ * On windows 8 switch to the desktop
+ * Start the Sherlock update service. The service should download the latest version of the executor controller and start it. You can verify this by looking at the logs which can be found in `c:\programdata\sherlock\sherlock.service\{VERSION}\logs` and `c:\programdata\sherlock\sherlock.service.executor\{VERSION}\logs` for the update service and the executor controller respectively.
+* After both applications have started stop them both by stopping the update service (`Sherlock.Service`).
+* Once the applications have been stopped remove the data from the directory `c:\ProgramData\Sherlock`.
+* Shut down the machine.
+* Take a [snapshot](http://blogs.msdn.com/b/virtual_pc_guy/archive/2008/01/16/managing-snapshots-with-hyper-v.aspx) of the current state of the virtual machine and give it a sensible name.
 
 
 ### Host configuration
-* Save snapshot on VM
-* Add to database through the management website
+Finally the last step in the configuration of a new test environment is to register the environment with Sherlock through the management website.

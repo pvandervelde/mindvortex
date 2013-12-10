@@ -59,7 +59,7 @@ The second pre-requisite is the availability of a physical machine on which a Wi
 The next following posts will describe:
 
 1. [How to set up the Hyper-V host machine.](/posts/2013-12-10_Setting-up-Sherlock-serverside.html)
-* [How to prepare a virtual machine for use as a testing environment.](/posts/2014-12-31_Setting-up-Sherlock-virtualmachines.html)
+* [How to prepare a virtual machine for use as a testing environment.](/posts/2013-12-11_Setting-up-Sherlock-virtualmachines.html)
 * How to verify that all the environments have been configured correctly.
 * How to integrate with a build server. This will discuss build jobs, build scripts and test configuration.
 * A description on how I used Sherlock to perform integration tests on the console application of Apollo.
