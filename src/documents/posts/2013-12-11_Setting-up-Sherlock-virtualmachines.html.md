@@ -1,5 +1,5 @@
 ---
-title: 'Setting up Sherlock for regression testing - Virtual machines'
+title: 'Sherlock configuration - Virtual machines'
 tags: ['Sherlock']
 commentIssueId: 29
 ---
