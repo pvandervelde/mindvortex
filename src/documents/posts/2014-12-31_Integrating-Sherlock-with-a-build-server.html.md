@@ -18,6 +18,8 @@ Integrating with the build server:
  *  2 Build flow projects: 'Nightly', runs Build & Test at midnight if there are changes. 'Release' triggered manually whenever somebody wants a release to QA, runs 'Build', 'Test' and 'Deploy'
  *  Allows your 'Build' job to be re-used for CI, nightly and release. Also is the only project that actually creates binaries and packages, hence no configuration differences between your CI build and your release builds.
  *  Drawback is that you have more projects, which can be a problem if you either have lots of different applications that need build server configurations or if you need to pay for project configurations
+* Current way I've done it at home is (with [TeamCity]()):
+
 
 Some other random things
 
