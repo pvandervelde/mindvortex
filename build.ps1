@@ -1,2 +1,0 @@
-docpad install
-docpad generate
