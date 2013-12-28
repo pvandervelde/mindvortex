@@ -46,7 +46,8 @@
     "docpad-plugin-datefromfilename": "~2.0.4"
   },
   "devDependencies": {
-    "docpad-plugin-livereload": "~2.5.3"
+    "docpad-plugin-livereload": "~2.5.3",
+    "docpad-plugin-services": "~2.4.6"
   },
   "main": "node_modules/docpad/bin/docpad-server"
 }

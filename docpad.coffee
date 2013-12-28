@@ -70,6 +70,9 @@ docpadConfig = {
             # The github repository for the current website
             githubrepository: "pvandervelde.github.io"
             
+            services:
+                googleAnalytics: 'UA-46605109-1'
+            
             # The website's styles
             styles: [
                 '/vendor/normalize.css'
