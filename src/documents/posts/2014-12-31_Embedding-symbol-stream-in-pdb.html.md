@@ -1,6 +1,6 @@
 ---
 title: 'Embedding a symbol stream in a PDB file'
-tags: ['Source server', 'PDB', 'Symbol stream', 'SRCSRV']
+tags: ['Source server', 'PDB', 'Symbol stream', 'SRCSRV', 'nAnicitus']
 commentIssueId: 5000
 ignore: true
 ---
@@ -8,9 +8,9 @@ ignore: true
 * In order to have a symbol server you don't need anything special (just push your symbols through [SymStore][symstore_msdn]. However in order to also have a source server (which can get the sources that match your symbols) you need to edit the SRCSRV stream in the PDB files.
 * You can write to this stream via the PDBStr utility. With this utility you can write the contents of a file to the SRCSRV stream in a given PDB file. The one big question is what do you write?
 * Good place to start is the [source server documentation][sourceserver_msdn].
-* Most examples are for VERSION=1 type streams, i.e. the kind that get your sources from a version control system (you can then embedd the command to the VCS in the PDB to get your sources). If however you just want a UNC path then you need VERSION=2
+* Most examples are for VERSION=1 type streams, i.e. the kind that get your sources from a version control system (you can then embed the command to the VCS in the PDB to get your sources). If however you just want a UNC path then you need VERSION=2
 
-* Source paths are embedded as: <FILE>*<PROJECT>*<VERSION>*<RELATIVE_FILE>
+* Source paths are embedded as: `<FILE>*<PROJECT>*<VERSION>*<RELATIVE_FILE>`
 * Path for extract target made from
  * UNCROOT 
  * %var2%
@@ -18,7 +18,7 @@ ignore: true
  * %var4%
 
 * Original example from: http://www.jayway.com/2011/06/19/hosting-your-own-source-symbol-server/. See the attachment to the blog post
-* Combined with an (unhealthy) dose of MSDN and google
+* Combined with an (unhealthy) dose of MSDN and google and trial-and-error
 
 
 ```
@@ -36,6 +36,7 @@ SRCSRV: source files ---------------------------------------
 ```
 
 Meaning
+
 * Version = 2
 * IndexVersion = 2
 * VerCtrl = http
