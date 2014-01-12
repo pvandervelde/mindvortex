@@ -7,7 +7,9 @@ ignore: true
 
 * Disclaimer: Second time I'm doing this. First time was with TestComplete. Now doing a full developer version. Learning as I go. Didn't even write the actual tests last time, am writing them now
 
-* How do I set up regression tests? For console / scripty apps
+* Console
+ * Invoke and gather output (redirect output stream if you have to) and compare to known good state. Problem lies in keeping track of the known good state. And making sure that the known-good state is actually good (so don't just copy it from the app). 
+* Scripty apps. Run a bunch of scripts
 
 Example of scripty app
 
