@@ -62,5 +62,5 @@ The next following posts will describe:
 * How to prepare a virtual machine for use as a [testing environment](/posts/2013-12-11_Setting-up-Sherlock-virtualmachines.html).
 * How to [verify](/posts/2013-12-24_Setting-up-Sherlock-verification.html)  that all the environments have been configured correctly.
 * How to integrate with a [build server](/posts/2014-01-13_Integrating-Sherlock-with-a-build-server.html). This will discuss build jobs, build scripts and test configuration.
-* A description on how I used Sherlock to [perform integration tests](/posts/2014-02-18_Regression-testing-console-applications.html) on the console application of Apollo.
-* And a description on how I used Sherlock to perform integration tests on a WPF application of [Apollo](/projects/apollo.html).
+* A description on how I used Sherlock to [perform integration tests](/posts/2014-02-18_Regression-testing-console-applications.html) on the console application of [Apollo](/projects/apollo.html).
+* And a description on how I used Sherlock to [perform integration tests](/posts/2014-12-31_Regression-testing-gui-applications.html) on a WPF application of [Apollo](/projects/apollo.html).

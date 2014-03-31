@@ -1,8 +1,7 @@
 ---
-title: 'Regression testing for a GUI application with White'
+title: 'GUI testing with TestStack.White'
 tags: ['Regression testing', 'UI test', 'TestStack.White', 'Apollo']
-commentIssueId: 5000
-ignore: true
+commentIssueId: 38 
 ---
 
 In the [previous](/posts/2014-02-18_Regression-testing-console-applications.html) post I explained how I created the regression tests for a script running application that belongs to the [Apollo](/projects/apollo.html) project. In this post I will explain how I created the regression tests for an Apollo application with a graphical user interface (UI).
@@ -13,42 +12,52 @@ My initial attempt to write a regression test suite for the GUI application was 
 * A secondary drawback of using a unit test framework is that there is normally no way to re-run a test case if it fails, something which is more acceptable for a regression test than for a unit test.
 * The test code got rather complicated due to the many helper methods, script files etc.. While ScriptCs coped beautifully with this it turned out to hard for me to work with without the organizing features of a complete IDE.
 
-In the end I wrote a custom (console) application that handles the ordering and execution of the different test cases.
+In the end I wrote a custom (console) application that handles the ordering and execution of the different test cases in the way that makes sense for my current requirements.
 
-* Will give some examples of the pieces of code in my application. Note that this is not actually a test framework because I've only written one so it's still quite specific. Maybe if I write a few more I might make it into a framework
+#### Testing application
+The testing application executes the tests, collects the results and logs all the outputs. When executing the tests each test is executed a maximum of three times before it is marked as a fail. The following code is used by the application to execute the test steps and to keep track of the number of times a test step is executed. 
 
+<gist>9202656?file=Apollo_Regression_ExecuteTestStep.cs</gist>
 
-### Testing framework
+<gist>9202656?file=Apollo_Regression_TestStep.cs</gist>
 
+The reason for having multiple attempts to complete a test is that the nature of the GUI automation testing is that it is not completely [consistent](http://www.mathpirate.net/log/2009/12/23/ui-automation-tricks-and-traps/). By allowing a test to fail twice it is possible to work around the problem of inconsistent handling of controls.
 
-* Robustness
- * Try..catch everywhere. Catch exception, even though you shouldn't 
- * My code retries a test 3 times before it calls it a fail. If the test passes before that no further retries are done and the test is considered passed. Again sometimes you just need a second shot at it. It is probably worth it logging this behaviour so that you can try to understand why it is not working. **[EXAMPLE CODE]**
- * Store results of test and only exit at the end of all the tests so that you always have a complete test run **[EXAMPLE CODE]**
- * Add heaps of debugging methods / logging etc.. At some point you will need it. **[EXAMPLE CODE]**
- * Retry actions that get controls, several times because you may not always be able to get to a control when you want. Note that humans are generally much slower so they might not see that a control isn't available for 0.1 second, your UI tests should easily be able to spot that. This also makes for some very tricky debugging. you will need a decent amount of logging to catch these.
- * I wrote a retry method that retries an action several times, potentially with wait time-outs between the retries. Note that the White framework handles retries for certain actions but I found that sometimes you just need to retry again (and maybe even wait a bit). **[EXAMPLE CODE]**
- * Time-outs, ugly but sometimes necessary.
- * Check this page for [some hints on how to do UI testing](http://www.mathpirate.net/log/2009/12/23/ui-automation-tricks-and-traps/)
- * You can make the tests surprisingly robust so don't give up if at first you can't get the test to do what you want. **[EXAMPLE]**
-* For each test restart the application if at all possible so that you end up with a known application state. This will improve the repeatability of the tests. 
- * If the application is slow to start up then you now have a good reason to speed it up. If that's not possible carefully combine tests but be aware that tests may fail due to polluted application state. 
- * Note that some application state survives restarts (e.g. settings). It would be good if you have a way of resetting that state in a relatively sure-fire way. My tests currently don't do that but they really should.
-* Make sure you reset your application state either at the end of each test or at the start of each test. Or even better both, because you can never know if you are going to actually make it to the end (application may crash)
+The second part of the application keeps track of the test results while the tests are running. The application will always try to execute all the tests, irrespective of their final success or failure. That way the user will always have a complete report of the state of all the tests.
 
+<gist>9202656?file=Apollo_Regression_EntryPoint.cs</gist>
 
-### Tests
+Finally the application provides utility methods for logging which should be used liberally by both the application and the test steps.
 
-* I chose to use [TestStack.White](https://github.com/TestStack/White) for GUI part
- * Chose it over [CodedUI](http://msdn.microsoft.com/en-us/library/dd286726.aspx) and others because it is an open source library, which has been around for a bit so it should be pretty stable and if push comes to shove I can get hold of the source and fix any problems with it. Also it allows me to program in C# instead of some silly script language.
- * Is quite powerful but there are definitely some tricky bits to it. e.g. sometimes the internal retry / wait parts of White don't manage to come up with a result, however retrying / waiting in the test code usually solves that problem
- * Some tricky bits aren't actually a problem with White but more with the underlying UI action framework that is build into windows, e.g. most controls can be found by automation ID but windows cannot, even if they have one.
-* Write lots of helper methods to make the tests more clear.
- * If a helper method returns a value it should either return the requested object or null. Then always check for null when calling the method. Only throw test fail exception when the conditions for the method are wrong (e.g. the application under test (AUT) has crashed or something like that).
- * If the helper method just executes some action it will throw a specific test fail exception.
-* Think about test ordering. Most sensible seems to be to test independent functionality before testing dependent functionality. However the ordering is some what arbitrary
-* This has been much more tricky than I thought it would be and the approach I used required some decent coding skills so this may or may not be suitable in other situations depending on the skill sets of the testers / developers etc.
-* Share data between tests and application so that the tests are always in sync with the application state. Note that this means that the tests are linked to a specific version of the application, but that is ok because the tests always are anyway
- * Application / Product / Company names can be shared via a shared config or shared code file **[EXAMPLE CODE]**
- * Automation IDs should be shared via a shared code file. Note that application ID names should be pointing to a given area / functionality, not specific controls. Note that in my case that's not always done the right way. Still learning here. **[EXAMPLE CODE - IN APP - IN TEST]**
-* Don't give up if you can't get the tests to be reliable, just keep improving the robustness of the test code and eventually it should even out. During the writing of the tests I found several bugs in my application so in all it has paid off.
+#### Tests
+In order for the tests to interact with the GUI I chose to use the [TestStack.White](https://github.com/TestStack/White) library mainly because it is a mature open source library that has a number of active contributors. One thing to keep in mind when selecting a GUI automation library is that the [underlying technology](http://en.wikipedia.org/wiki/Microsoft_UI_Automation) has some tricky hooks to it that cannot be completely hidden by the automation library. One example is that all controls can be found based on their [automation ID](http://msdn.microsoft.com/en-us/library/aa349646%28v=vs.110%29.aspx) but windows cannot, even if the window in question has an automation ID.
+
+The main piece of advice for writing UI automation tests is always to write some helper methods to hide the underlying complexity of the UI access technology. In my case I took the following steps:  
+
+* Control very carefully how your helper methods return information to the caller, either through a return value or through exceptions. In my case if a helper method returns a value it should either return the requested object or null if it fails to get the requested object. The calling code should then always check for null and handle the case of a null return value, e.g. by retrying the method call. The only time the method will throw an exception is if the assumed conditions for the method are wrong, e.g. the application under test (AUT) has crashed. If the helper method has no return value then it may throw if it fails to execute.
+
+<gist>9202656?file=Apollo_Regression_HelpersForMenu.cs</gist>
+
+* All actions that get a control will try to get the control several times if they fail. Due to the nature of UI automation it is possible that the control is not available the first time the code tries to get hold of the control. This may be due tot he fact that the automation tests are fast enough that they try to get the control in the 0.1 second that the control is not available yet. Note that this also makes for some very tricky debugging which requires a decent amount of logging. 
+
+<gist>9202656?file=Apollo_Regression_Retry.cs</gist>
+
+Note that automation tests are usually linked strongly to a specific version of the software because the tests assume the availability of certain automation IDs and controls. Some parts are implicitly linked and others can be, but don't have to be, explicitly linked. Examples are: 
+* The application, product and company names can be shared through a configuration or shared code file:
+
+<gist>9202656?file=Apollo_Regression_CompanyInformation.cs</gist>
+
+* Automation IDs can be shared via a shared code file. Note that application ID names should be pointing to a given area / functionality, not specific controls (Also note that in my case that's not always done the right way):
+
+<gist>9202656?file=Apollo_Regression_AutomationID.cs</gist>
+
+<gist>9202656?file=Apollo_Explorer_MenuView.xaml</gist>
+
+When executing the tests it is a good idea to reset your application state either at the end of each test or at the start of each test. Or even better both to make sure that you always start a test from the same state irrespective of the way the previous test ended, e.g. with an application crash.
+
+Finally do not give up if you find it hard to make the tests reliable. By continually improving the robustness of the test code eventually the tests will start to behave in the way you expect them too. Some [tricks and hacks](http://www.mathpirate.net/log/2009/12/23/ui-automation-tricks-and-traps/) that I found necessary are:
+* Time-outs while getting controls, setting values on controls or getting values from controls. While these are ugly they are sometimes necessary.
+* For each test restart the application if at all possible so that you end up with a known application state. This will improve the repeatability of the tests. Note that if the application is slow to start up then you can either improve the start up performance of the application or if that is not possible then carefully combine tests but be aware that tests may fail due to polluted application state. 
+* Note that some application state survives restarts, e.g. user and application settings. It would be good if you have a way of resetting that state in a relatively sure-fire way. This is something I have not implemented yet though.
+
+And then the last comment must be that the development of these tests has been much more complicated than I thought it would be. The approach I used required some coding skills so this may or may not be suitable in other situations depending on the skill sets of the testers or developers.
