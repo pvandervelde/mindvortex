@@ -4,7 +4,7 @@ tags: ['Source server', 'PDB', 'Symbol stream', 'SRCSRV', 'nAnicitus', 'UNC']
 commentIssueId: 39
 ---
 
-The [nAnicitus](/projects/nanicitus.html) application processes [NuGet](nuget.org) symbol packages to push the symbols and sources up to their respective location for the symbol and source servers to work. In order to have a symbol server nothing special needs to be done, just push the symbols through [SymStore][symstore_msdn] and a nice directory with indexed symbols is created. However in order to allow debuggers to obtain the source files related to a given PDB some manipulation of the PDB files is necessary. Specifically the SRCSRV stream in the PDB file needs to be [modified][modifying_srcsrv_stream].
+The [nAnicitus](/projects/nanicitus.html) application processes [NuGet symbol](http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-symbol-package) packages to push the symbols and sources up to their respective location for the symbol and source servers to work. In order to have a symbol server nothing special needs to be done, just push the symbols through the [SymStore][symstore_msdn] application and a nice directory with indexed symbols is created. However in order to allow debuggers to obtain the source files related to a given PDB some manipulation of the PDB files is necessary. Specifically the SRCSRV stream in the PDB file needs to be [modified][modifying_srcsrv_stream].
 
 The documentation gives a decent overview of how the source indexing works but it does not actually provide the information necessary to determine what should be written to the SRCSRV stream for a given PDB file. In fact if you want to know what information should be written to the SRCSRV stream if you want to store the indexed source files in a directory instead of getting them from your source control system then even the almighty [google](https://www.google.co.nz/webhp?tab=ww&ei=FwljU6S7J8byoATTxoLIAQ&ved=0CBMQ1S4#q=PDB+SRCSRV+UNC+VERSION%3D2) is rather quiet.   
 
@@ -28,8 +28,8 @@ In this stream the [variables mean][srcsrv_v1]:
 * **`VerCtrl = http`** - 'Version control' is done through HTTP. This variable is potentially optional.
 * **`SRCSRVVERCTRL = http`** - Specifies the VCS in use. In this case that's UNC, potentially over http.
 * **`UNCROOT`** - 'Local variable' indicating what the UNC root path is.
-* **`HTTP_EXTRACT_TARGET`** - 'Local variable' indicating how to determine the path of a source file on the server given it's embedded path and srcsrv information.
-* **`SRCSRVTG`** - The template used by the debugger to determine the path of the source files based on their embedded path and srcsrv information.
+* **`HTTP_EXTRACT_TARGET`** - 'Local variable' indicating how to determine the path of a source file on the server given it's embedded path and SRCSRV information.
+* **`SRCSRVTG`** - The template used by the debugger to determine the path of the source files based on their embedded path and SRCSRV information.
 * **`SRCSRVCMD`** - The command for the VCS to extract the source files. For UNC this is not required.
 
 When nAnicitus processes a PDB file it generates a SRCSRV file that looks similar to this:
@@ -58,7 +58,7 @@ The process of pushing the symbols and sources up to their respective locations 
 * For each PDB the source paths are extracted from the PDB with `scrtool.exe`.
 * For each source path the matching source file is located by looking at all source files and seeing source file path matches the 'best', i.e. using the longest common substring approach, starting from the end of the path in order to ensure a match on the file name.
 * Once the source file is located the relative file path for the source file on the source server is calculated.
-* Once all the source files from the PDB are processed the srcsrv stream file is created and embedded into the PDB with `pdbstr.exe`.
+* Once all the source files from the PDB are processed the SRCSRV stream file is created and embedded into the PDB with `pdbstr.exe`.
 * Once all PDBs have been indexed they are pushed through the `symstore.exe` tool to the symbol server.
 * The source files are copied to the desired directory on the source server.
 * Finally the original NuGet symbol package is moved to the directory containing all the processed symbol packages. 
