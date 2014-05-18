@@ -1,8 +1,7 @@
 ---
 title: 'Embedding a symbol stream in a PDB file'
 tags: ['Source server', 'PDB', 'Symbol stream', 'SRCSRV', 'nAnicitus', 'UNC']
-commentIssueId: 5000
-ignore: true
+commentIssueId: 39
 ---
 
 The [nAnicitus](/projects/nanicitus.html) application processes [NuGet](nuget.org) symbol packages to push the symbols and sources up to their respective location for the symbol and source servers to work. In order to have a symbol server nothing special needs to be done, just push the symbols through [SymStore][symstore_msdn] and a nice directory with indexed symbols is created. However in order to allow debuggers to obtain the source files related to a given PDB some manipulation of the PDB files is necessary. Specifically the SRCSRV stream in the PDB file needs to be [modified][modifying_srcsrv_stream].
@@ -25,13 +24,13 @@ In order to write to the SRCSRV stream one can use the [PDBStr utility][pdbstr_t
 
 In this stream the [variables mean][srcsrv_v1]:
 
-* **Version = 2** - Indicates the version of the SRCSRV stream
-* **VerCtrl = http** - 'Version control' is done through HTTP. This variable is potentially optional.
-* **SRCSRVVERCTRL = http** - Specifies the VCS in use. In this case that's UNC, potentially over http.
-* **UNCROOT** - 'Local variable' indicating what the UNC root path is.
-* **HTTP_EXTRACT_TARGET** - 'Local variable' indicating how to determine the path of a source file on the server given it's embedded path and srcsrv information.
-* **SRCSRVTG** - The template used by the debugger to determine the path of the source files based on their embedded path and srcsrv information.
-* **SRCSRVCMD** - The command for the VCS to extract the source files. For UNC this is not required.
+* **`Version = 2`** - Indicates the version of the SRCSRV stream
+* **`VerCtrl = http`** - 'Version control' is done through HTTP. This variable is potentially optional.
+* **`SRCSRVVERCTRL = http`** - Specifies the VCS in use. In this case that's UNC, potentially over http.
+* **`UNCROOT`** - 'Local variable' indicating what the UNC root path is.
+* **`HTTP_EXTRACT_TARGET`** - 'Local variable' indicating how to determine the path of a source file on the server given it's embedded path and srcsrv information.
+* **`SRCSRVTG`** - The template used by the debugger to determine the path of the source files based on their embedded path and srcsrv information.
+* **`SRCSRVCMD`** - The command for the VCS to extract the source files. For UNC this is not required.
 
 When nAnicitus processes a PDB file it generates a SRCSRV file that looks similar to this:
 
@@ -51,24 +50,20 @@ When nAnicitus processes a PDB file it generates a SRCSRV file that looks simila
 
 The redirection of the source paths is handled as `<FILE>*<PROJECT>*<VERSION>*<RELATIVE_FILE>` which means that the `c:\source\MyProject\MyClass.cs` file will be found on the source server at `\\MyServer\sources\MyProject\1.2.3.4\MyProject\MyClass.cs`
 
-Done via:
+The process of pushing the symbols and sources up to their respective locations with nAnicitus is done via the following steps:
 
-* Extract source paths from PDB with `scrtool.exe`.
-* For each path determine the base path. This is done by finding the matching source file (which are embedded in the NuGet symbol package) (currently done by looking at all source files and seeing source file path matches the 'best' (i.e. longest common substring, starting from the end of the path))
-* Create the relative file path with the source file as base
-* Once the relative paths for all files are known, create the srcsrv stream file
-* Embed the srcsrv stream file in the PDB with `pdbstr.exe`
-* Push the PDB's through the `symstore.exe` tool
-* Copy the sources to the correct directory in the source server path. 
+1. The user drops the NuGet symbol package containing the binaries, PDB files and source files into the designated upload folder for nAnicitus.
+* nAnicitus detects the new NuGet package and pushes the file path onto the queue for processing by the indexing thread.
+* The indexing thread pulls the file path from the queue and unzips the NuGet symbol package in a temporary location.
+* For each PDB the source paths are extracted from the PDB with `scrtool.exe`.
+* For each source path the matching source file is located by looking at all source files and seeing source file path matches the 'best', i.e. using the longest common substring approach, starting from the end of the path in order to ensure a match on the file name.
+* Once the source file is located the relative file path for the source file on the source server is calculated.
+* Once all the source files from the PDB are processed the srcsrv stream file is created and embedded into the PDB with `pdbstr.exe`.
+* Once all PDBs have been indexed they are pushed through the `symstore.exe` tool to the symbol server.
+* The source files are copied to the desired directory on the source server.
+* Finally the original NuGet symbol package is moved to the directory containing all the processed symbol packages. 
 
-
-* Note that the path to the source server directory is embedded in the PDB. While there is a way to redirect that with the help of [??]() nAnicitus also stores the processed NuGet symbol packages, thus making it possible to reprocess those packages should the need ever arise (e.g. moving server)
-
-Debugging
-
-* Don't forget about the srctool.exe application. This lets you read the actual embedded source streams in a PDB. Very useful for debugging.
-* PDBStr allows you to write out the srcsrv stream to a file. Note that this tool is not well documented and pretty finicky.
-
+Note that the path to the source server directory is embedded in the PDB. If the location of the source server changes then the information in the PDB files will no longer be correct. While there is a way to redirect the embedded paths nAnicitus also stores the processed NuGet symbol packages in a designated directory. This makes it possible to re-process the packages should the need ever arise.
 
 [symstore_msdn]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff558848(v=vs.85).aspx
 [sourceserver_msdn]:http://msdn.microsoft.com/en-us/library/windows/desktop/ms680641%28v=vs.85%29.aspx
