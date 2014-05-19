@@ -42,11 +42,10 @@ docpadConfig = {
         # Specify some site properties
         site:
             # The production url of our website
-            url: "http://pvandervelde.github.io"
+            url: "http://www.petrikvandervelde.nl"
 
             # Here are some old site urls that you would like to redirect from
-            oldUrls: [
-            ]
+            oldUrls: ["http://pvandervelde.github.io/"]
 
             # The default title of our website
             title: "Mind Vortex"
@@ -58,7 +57,7 @@ docpadConfig = {
 
             # The website keywords (for SEO) separated by commas
             keywords: """
-                Patrick van der Velde, Petrik, Nuclei, Sherlock, nAnicitus, nAdoni, nTreva, Fluid dynamics, CFD, rock climbing, paragliding
+                Patrick van der Velde, Petrik, Nuclei, Sherlock, nAnicitus, nAdoni, nTreva, rock climbing, paragliding
                 """
             
             # The name of the author
