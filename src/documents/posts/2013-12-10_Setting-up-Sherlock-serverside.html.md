@@ -4,7 +4,7 @@ tags: ['Sherlock']
 commentIssueId: 28
 ---
 
-In this post I will explain how to configure the [Sherlock](https://github.com/pvandervelde/Sherlock) host services, which handle test registration and selection and control of the test environments for a test. The set-up follows the following steps:
+In this post I will explain how to configure the [Sherlock](/projects/sherlock.html) host services, which handle test registration and selection and control of the test environments for a test. The set-up follows the following steps:
 
 * Preparing the host machine which includes installation of the OS and the required services.
 * Installation of database.

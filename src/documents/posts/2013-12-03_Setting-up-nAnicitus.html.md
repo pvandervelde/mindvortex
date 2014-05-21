@@ -4,7 +4,7 @@ tags: ['nAnicitus', 'Symbol server', 'SymStore', 'PDB']
 commentIssueId: 24
 ---
 
-In this post I will explain how to install and configure the nAnicitus windows service. nAnicitus is a windows service that acts as a gatekeeper for the [SymStore][symstore_msdn] application. SymStore provides a relatively simple way to create a local / private [symbol server][symbolserver_msdn].
+In this post I will explain how to install and configure the [nAnicitus](/projects/nanicitus.html) windows service. nAnicitus is a windows service that acts as a gatekeeper for the [SymStore][symstore_msdn] application. SymStore provides a relatively simple way to create a local / private [symbol server][symbolserver_msdn].
 
 This statement should bring up a few questions, cunning questions like:
 

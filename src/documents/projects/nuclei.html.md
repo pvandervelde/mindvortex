@@ -3,7 +3,7 @@ title: 'Nuclei'
 description: "Nuclei is a collection of libraries containing classes and functions for inter-application interaction via a command mechanism, diagnostics, configuration handling, exception handling and assembly location and loading."
 ---
 
-[Nuclei](https://github.com/pvandervelde/Nuclei) is a collection of libraries containing classes and functions for inter-application interaction via a command mechanism, diagnostics, configuration handling, 
+[Nuclei](http://pvandervelde.github.io/Nuclei) is a collection of libraries containing classes and functions for inter-application interaction via a command mechanism, diagnostics, configuration handling, 
 exception handling and assembly location and loading.
 
 The capabilities in Nuclei are currently divided as follows:

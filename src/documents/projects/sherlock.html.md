@@ -3,7 +3,7 @@ title: 'Sherlock'
 description: "Sherlock provides a means to schedule and automatically execute tests in an controlled environment."
 ---
 
-[Sherlock](https://github.com/pvandervelde/Sherlock) provides a means to schedule and automatically execute tests in an controlled environment. In order to schedule a test the configuration and the 
+[Sherlock](http://pvandervelde.github.io/Sherlock) provides a means to schedule and automatically execute tests in an controlled environment. In order to schedule a test the configuration and the 
 test data can be uploaded to the server via a console application. The test configuration describes all the steps necessary to perform a complete test. This includes installation of MSI files, copying 
 files / directories and execution of powershell scripts. 
 

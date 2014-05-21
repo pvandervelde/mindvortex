@@ -4,7 +4,7 @@ tags: ['Sherlock', 'Jenkins', 'TeamCity', 'MsBuild']
 commentIssueId: 34
 ---
 
-Once the configuration of [Sherlock](https://github.com/pvandervelde/Sherlock) is complete the last step needed to make use of automatic regression testing is to integrate with a build server. In this post I will explain which steps need to be taken to integrate Sherlock with a build server. Examples will be given for [Jenkins](http://jenkins-ci.org/), which is used at my work, and [TeamCity](http://www.jetbrains.com/teamcity/), which I use personally. 
+Once the configuration of [Sherlock](/projects/sherlock.html) is complete the last step needed to make use of automatic regression testing is to integrate with a build server. In this post I will explain which steps need to be taken to integrate Sherlock with a build server. Examples will be given for [Jenkins](http://jenkins-ci.org/), which is used at my work, and [TeamCity](http://www.jetbrains.com/teamcity/), which I use personally. 
 
 In order to integrate with a build server you will need to: 
 

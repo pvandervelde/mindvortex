@@ -47,7 +47,7 @@ Finally before installing Sherlock a few tweaks should be made to the operating 
 * **Automatic updates:** Automatic updates can be disabled because they will never be deployed due to the fact that the machine is reset after each test.
 
 ### Configuring Sherlock
-Once the operating system is configured [Sherlock](https://github.com/pvandervelde/Sherlock/releases) can be installed and configured. 
+Once the operating system is configured [Sherlock](/projects/sherlock.html) can be installed and configured. 
 
 * Unzip the **service.zip** package into the `c:\sherlock` directory.
 * Copy the XML file containing the public key used to sign the manifests to the virtual machine and place it in the `c:\sherlock` directory.

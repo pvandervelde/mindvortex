@@ -4,7 +4,7 @@ tags: ['Regression testing', 'Console', 'Apollo', 'Scripting']
 commentIssueId: 37
 ---
 
-After [setting up](/posts/2013-12-04_Regression-testing-with-Sherlock.html) [Sherlock](https://github.com/pvandervelde/Sherlock) you will need to create some tests that you can execute with Sherlock. In this post I will describe how I created the regression tests for the command line application of [Apollo](/projects/apollo.html).
+After [setting up](/posts/2013-12-04_Regression-testing-with-Sherlock.html) [Sherlock](/projects/sherlock.html) you will need to create some tests that you can execute with Sherlock. In this post I will describe how I created the regression tests for the command line application of [Apollo](/projects/apollo.html).
 
 For this case the application-under-test (AUT) is the Apollo console application which provides the user with a way to control the capabilities of Apollo, e.g. running a fluid dynamics simulation, by executing a Python script. The goal of the regression test for the console application is to execute a large part of the API which is used by scripts to interact with the different parts of Apollo.
 
