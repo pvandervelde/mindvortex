@@ -18,6 +18,11 @@ docpadConfig = {
                 document.setMeta(
                     layout: 'tags'
                 )
+                
+        sitemap:
+            changefreq: 'weekly'
+            priority: 0.5
+            filePath: 'sitemap.xml'
         
     # =================================
     # DocPad collections
