@@ -11,26 +11,36 @@ docpadConfig = {
                 
         datefromfilename:
             removeDate: false
-
+        
+        tags:
+            extension: '.html.eco'
+            injectDocumentHelper: (document) ->
+                document.setMeta(
+                    layout: 'tags'
+                )
+        
     # =================================
     # DocPad collections
             
     collections:
     
         pages: ->
-             @getCollection("html").findAllLive({isPage:true},[{order:1}]).on "add", (model) ->
+             @getCollection("html").findAllLive({isPage:true,ignored:{$ne: true}},[{order:1}]).on "add", (model) ->
                 model.setMetaDefaults({layout:"default"})
         
         posts: (database) ->
-            database.findAllLive({relativeOutDirPath:'posts'},[{date:-1}]).on "add", (model) ->
+            database.findAllLive({relativeOutDirPath:'posts',ignored:{$ne: true}},[{date:-1}]).on "add", (model) ->
                 model.setMetaDefaults({layout:"post"})
         
         projects: ->
-            @getCollection('html').findAllLive({relativeOutDirPath:'projects'},[{title:1}]).on "add", (model) ->
+            @getCollection('html').findAllLive({relativeOutDirPath:'projects',ignored:{$ne: true}},[{title:1}]).on "add", (model) ->
                 model.setMetaDefaults({layout:"project"})
             
         frontpage: ->
-            @getCollection("html").findAllLive({relativeOutDirPath: $in: ['posts','projects']},[{date: -1}])
+            @getCollection("html").findAllLive({relativeOutDirPath: {$in: ['posts','projects']},ignored:{$ne: true}},[{date: -1}])
+            
+        tags: ->
+            @getCollection("html").findAllLive({relativeOutDirPath: 'tags'})
 
     # =================================
     # Template Data

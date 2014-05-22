@@ -11,7 +11,7 @@
             <p>
                 <%= @post.date.toLocaleDateString() %> | Posted in
                 <% for tag in @post.tags: %>
-                    <a id="post-category" href="/tags/<%= tag %>.html"><%= tag %></a>
+                    <a id="post-category" href="/tags/<%= tag.replace(" ", "-").toLowerCase() %>.html"><%= tag %></a>
                 <% end %>
             </p>
         </div>
