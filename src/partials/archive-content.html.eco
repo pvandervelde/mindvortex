@@ -1,0 +1,22 @@
+<% currentYear = "" %>
+<% for document in @collection.toJSON(): %>
+    <% date = @moment(document.date) %>
+    <% year = date.format("YYYY") %>
+    <div class="archive">
+        <% if year isnt currentYear: %>
+            <div class="archive-year"><%= year %></div>
+            <% currentYear = year %>
+        <% end %>
+        <div class="archive-title"><a href="<%= document.url %>"><%= document.title %></a></div>
+        <% if document.tags?: %>
+            <div class="archive-tags">
+                <p>
+                    <%= date.format("MMM D") %> | Posted in
+                        <% for tag in document.tags: %>
+                            <a id="post-category" href="/tags/<%= tag.replace(" ", "-").toLowerCase() %>.html"><%= tag %></a>
+                        <% end %>
+                </p>
+            </div>
+        <% end %>
+    </div>
+<% end %>
