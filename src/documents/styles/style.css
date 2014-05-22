@@ -484,6 +484,13 @@ hr {
     list-style: none;
 }
 
+/** PAGINATION */
+
+.pagination {
+    padding-top: 1em;
+    border-top: 1px solid #D4D4D4;
+}
+
 /** SIDEBAR */
 
 #sidebar {

@@ -25,7 +25,7 @@ docpadConfig = {
     collections:
     
         pages: ->
-             @getCollection("html").findAllLive({isPage:true,ignored:{$ne: true}},[{order:1}]).on "add", (model) ->
+             @getCollection("html").findAllLive({isPage:true,ignored:{$ne: true},isPagedAuto:{$ne:true}},[{order:1}]).on "add", (model) ->
                 model.setMetaDefaults({layout:"default"})
         
         posts: (database) ->
