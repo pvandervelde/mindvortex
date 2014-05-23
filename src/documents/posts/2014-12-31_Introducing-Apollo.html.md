@@ -2,7 +2,7 @@
 title: 'Introducing Apollo'
 tags: ['Apollo']
 commentIssueId: 5000
-ignore: true
+ignored: true
 ---
 
 * What does it do
