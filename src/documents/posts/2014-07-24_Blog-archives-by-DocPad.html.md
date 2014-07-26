@@ -4,7 +4,7 @@ tags: ['Blog', 'DocPad']
 commentIssueId: 44
 ---
 
-A while ago I decided that it was time to add an [archive](/archives.html) page to the website so that there would be a place to get a quick overview of all the posts that I have written. Fortunately setting up an archive page with [DocPad](http://docpad.org/) is relatively simple.  
+A while ago I decided that it was time to add an [archive](/archives.html) page to the website so that there would be a place to get a quick overview of all the posts that I have written. Fortunately setting up an archive page with [DocPad](http://docpad.org/) is relatively [simple](https://github.com/pvandervelde/mindvortex/commit/31698aa10fd205f41999e0b89792744a2bb8b82b).  
 
 The first step to take was to add a new layout for the archive page.
 
