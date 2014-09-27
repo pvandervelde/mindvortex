@@ -1,11 +1,13 @@
 ---
-title: 'Continuous integration of GitVersion branches'
+title: 'Continuous integration of GitFlow branches'
 tags: ['Jenkins', 'Continous integration', 'GitVersion']
 commentIssueId: 5000
 ignored: true
 ---
 
-Set up continuous integration for Apollo. Currently using the [GitVersion]() approach. 
+The [Apollo](/projects/apollo.html) project uses [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) as its branching approach. Because of the structured nature of this model it is possible to automate 
+
+ 
 Have:
 
 * Continuous integration on the feature, release and hot fix branches. Continuous integration executes the following steps
