@@ -84,9 +84,6 @@ docpadConfig = {
             # The github repository for the current website
             githubrepository: "pvandervelde.github.io"
             
-            # The disqus name
-            disqusShortName: 'mindvortex'
-            
             services:
                 googleAnalytics: 'UA-46605109-1'
             
@@ -133,6 +130,9 @@ docpadConfig = {
         getPageUrlWithHostname: ->
             "#{@site.url}#{@document.url}"
             
+        # The disqus name
+        disqusShortName: "mindvortex"
+        
         moment: require('moment')
 
     # =================================
