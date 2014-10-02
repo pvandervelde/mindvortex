@@ -84,6 +84,9 @@ docpadConfig = {
             # The github repository for the current website
             githubrepository: "pvandervelde.github.io"
             
+            # The disqus name
+            disqusShortName: 'mindvortex'
+            
             services:
                 googleAnalytics: 'UA-46605109-1'
             
@@ -126,6 +129,9 @@ docpadConfig = {
         getPreparedKeywords: ->
             # Merge the document keywords with the site keywords
             @site.keywords.concat(@document.keywords or []).join(', ')
+            
+        getPageUrlWithHostname: ->
+            "#{@site.url}#{@document.url}"
             
         moment: require('moment')
 
