@@ -1,7 +1,6 @@
 ---
 title: 'Building a Jenkins master in Azure'
 tags: ['Jenkins', 'Azure']
-commentIssueId: 5000
 ignored: true
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: 'Continuous integration of GitFlow branches'
 tags: ['Jenkins', 'Continous integration', 'GitVersion']
-commentIssueId: 5000
 ignored: true
 ---
 
