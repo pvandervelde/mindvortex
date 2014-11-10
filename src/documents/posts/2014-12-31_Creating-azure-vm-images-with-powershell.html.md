@@ -1,15 +1,13 @@
 ---
 title: 'Creating Azure VM images with Powershell'
 tags: ['Powershell', 'Azure']
-commentIssueId: 5000
-ignored: true
 ---
 
 As part of a new [project](https://github.com/pvandervelde/azure-jenkins) to create a [Jenkins CI server](http://jenkins-ci.org/) on Azure I am writing a set of powershell scripts to control virtual machines on Azure. For this project the plan is to use virtual machine (VM) images as a template for an ['immutable server'](http://martinfowler.com/bliki/ImmutableServer.html) that will contain the Jenkins instance. 
 
-Obviously the actual server isn't really 'immutable' given that the jenkins instance will update / add / delete files on the hard drive which will change the state of the server. The immutable idea isn't applied to the whole server but more to the configuration part of the server. The idea being that the configuration of the server will not be changed once the server is created. Any configuration changes (e.g. a new version of Jenkins) will be done by creating a new image, spinning up a new server based on that image and then destroying the old server and replacing it with the new one.  
+Now the actual server isn't really 'immutable' given that the jenkins instance will update, add and delete files on the hard drive which will obviously change the state of the server. As such the immutable idea isn't applied to the whole server but more to the configuration part of the server. The idea being that the configuration of the server will not be changed once the server is put in production. Any configuration changes (e.g. a new version of Jenkins) will be done by creating a new image, spinning up a new server based on that image and then destroying the old server and replacing it with the new one.  
 
-In order to create a suitable image we will need to build an image with all the required software on it and then verify that this image has indeed been created correctly.
+So in order to achieve this goal the first step will be to build an image with all the required software on it and then verify that this image has indeed been created correctly.
 
 To create the image we first obtain a certificate that can be used for the WinRM SSL connection between the Azure VM and the local machine that is executing the creation scripts. You can either get an official one or you can use a self-signed certificate (which is obviously less secure). Two things of interest are: 
 
@@ -24,17 +22,16 @@ Once the VM is running a new Powershell remote session can be opened to the mach
 
 <gist>eb6e28934d5fd16fe186</gist>
 
+The next step is to copy all the installer files and configuration scripts to the VM. This can be done over the [remoting channnel](http://measureofchaos.wordpress.com/2012/09/26/copying-files-via-powershell-remoting-channel/). 
 
+<gist>b2f5b4156e5efe67f495</gist>
 
+Once all the required files have been copied to the VM the configuration of the machine can be started. This can be done in many different ways, e.g through the use of a [configuration](https://www.getchef.com/) [management](http://puppetlabs.com/) [tool](http://technet.microsoft.com/en-us/library/dn249912.aspx) or just via the use of plain old scripts. When the configuration is complete and all the necessary clean-up has been done the time has come to turn the VM into an image. Before doing that a Windows machine will have to be [sysprepp'ed](http://en.wikipedia.org/wiki/Sysprep) so that there are no unique identifiers in the image (and thus in the copies).
 
-* Create the image. Steps:
+In order to sysprep an Azure VM it is necessary to execute the sysprep command through a script on the VM because sysprep [fails](http://blogs.msdn.com/b/brocode/archive/2014/06/20/how-to-automate-sysprep-of-an-iaas-vm-on-microsoft-azure.aspx) if the command is given directly through the remoting channel. The following function creates a new Powershell script which invokes sysprep, copies that to the VM and then executes that script. Once sysprep has completed running the machine will be turned off and an image can be created. 
 
-    * Copy all files to the remote over the [remoting channnel](http://measureofchaos.wordpress.com/2012/09/26/copying-files-via-powershell-remoting-channel/)
-    * Execute the installation scripts (via Puppet, Chef, DSC or just plain old powershell)
-    * Sysprep the machine. Note that this has to be done from a script that lives on the VM, you can't just send a sysprep command to the machine because [apparently]() sysprep starts but will just exit instead of doing work.
-    * Once the machine has shut down grab an image from it
-* Test that the image is actually correct. Steps:
-    * Use the newly created image to create a new VM (using the same steps as for the creation, except using the new image instead of the standard base image)
-    * Execute a verification script that verifies that all desired applications / settings have been applied and that nothing is left behind that shouldn't be.
+<gist>349767f804a32195ee67</gist>
+
+The next step is to test the new image in order to verify that all configuration changes have been applied correctly. The explanation of how the testing of an virtual machine image works is a topic for the next blog post.
 
 
