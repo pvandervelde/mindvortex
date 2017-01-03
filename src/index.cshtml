@@ -1,0 +1,11 @@
+@{
+    foreach(IDocument doc in Documents[BlogKeys.Posts].Take(5))
+    {
+        <div class="post-header">
+            @Html.Partial("_PostHeader.cshtml", doc)
+        </div>
+        <div class="post-content">
+            <@Html.Raw(doc.String(BlogKeys.Excerpt))
+        </div>
+    }
+}
