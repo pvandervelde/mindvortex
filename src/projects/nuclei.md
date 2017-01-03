@@ -1,9 +1,11 @@
----
-title: 'Nuclei'
-description: "Nuclei is a collection of libraries containing classes and functions for inter-application interaction via a command mechanism, diagnostics, configuration handling, exception handling and assembly location and loading."
+Title: 'Nuclei'
+Lead: "Nuclei is a collection of libraries containing classes and functions for inter-application interaction via a command mechanism, diagnostics, configuration handling, exception handling and assembly location and loading."
+Tags:
+  - Project
+ShowInNavBar: false
 ---
 
-[Nuclei](http://pvandervelde.github.io/Nuclei) is a collection of libraries containing classes and functions for inter-application interaction via a command mechanism, diagnostics, configuration handling, 
+[Nuclei](http://pvandervelde.github.io/Nuclei) is a collection of libraries containing classes and functions for inter-application interaction via a command mechanism, diagnostics, configuration handling,
 exception handling and assembly location and loading.
 
 The capabilities in Nuclei are currently divided as follows:
@@ -17,7 +19,7 @@ The capabilities in Nuclei are currently divided as follows:
     * User provides command and notification interfaces which provide asynchronous methods which can be called by remote endpoints. Command parameters and return data are transported over via a message based mechanism.
 * __Nuclei.Configuration__ - Provides an abstraction of a configuration. Build-in support for configuration via an application config file.
 * __Nuclei.Diagnostics__ - Provides classes for logging (using NLog) and and in-application measuring of performance.
-* __Nuclei.Nunit.Extensions__ - Contains a simple implementation of contract verification for NUnit. Ideas based on the 
+* __Nuclei.Nunit.Extensions__ - Contains a simple implementation of contract verification for NUnit. Ideas based on the
 [contract verifiers in MbUnit](http://interfacingreality.blogspot.co.nz/2009/03/contract-verifiers-in-mbunit-v307.html). Currently only has verifiers for hashcode and equality.
 
 * __Nuclei.AppDomains__ - Provides classes for the creation of AppDomains with pre-set assembly resolve and exception handlers.

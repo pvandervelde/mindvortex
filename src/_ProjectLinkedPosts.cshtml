@@ -1,0 +1,30 @@
+<div id="project-linkedposts">
+
+    @{
+        var title = Model.String(BlogKeys.Title);
+
+        var posts = Documents[BlogKeys.Tags]
+            .Where(
+                x =>
+                {
+                    var documentTitle = x.String(BlogKeys.Title);
+                    return string.Equals(title, documentTitle, StringComparison.OrdinalIgnoreCase);
+                })
+            .SelectMany(x => x.DocumentList(BlogKeys.Posts))
+            .OrderByDescending(x => x.Get<DateTime>("Published"))
+            .Take(5);
+
+        <h3>Recent posts referencing @title</h3>
+        <ul>
+            @foreach(var post in posts)
+            {
+                var link = Context.GetLink(post);
+                var postTitle = post.String(BlogKeys.Title);
+                <li><a href="@link">@postTitle</a></li>
+            }
+        </ul>
+        <div id="project-linkedposts-more">
+            More posts referencing <a href="/tags/@title.ToLower()">@title</a>
+        </div>
+    }
+</div>
