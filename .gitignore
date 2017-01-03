@@ -2,3 +2,5 @@ node_modules/
 out/
 .docpad.db
 *.log
+packages/
+build/
