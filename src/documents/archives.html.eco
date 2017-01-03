@@ -1,7 +1,0 @@
----
-title: 'Archives'
-isPage: true
-order: 3
----
-
-<%- @partial('archive-content', {collection: @getCollection('posts')}) %>
