@@ -1,7 +1,5 @@
----
-title: 'About'
-isPage: true
-order: 4
+Title: 'About'
+Order: 5000
 ---
 
 ### Who
@@ -22,7 +20,7 @@ in [Auckland](http://en.wikipedia.org/wiki/Auckland), [New Zealand](http://en.wi
 
 ### When
 
-Some things since birth, other things since a varying point in time since birth. 
+Some things since birth, other things since a varying point in time since birth.
 
 
 ### Why
@@ -32,7 +30,7 @@ In general, and depending on the context, because I can, or because it's there. 
 
 ### And finally
 
-There is so much more to explore here, so do take a look. 
+There is so much more to explore here, so do take a look.
 
 * Some (open source) [projects](/projects.html).
 * Some random [posts](/index.html) about software, climbing and flying.
