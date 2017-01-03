@@ -1,0 +1,114 @@
+@{
+        string Title = Model.String(BlogKeys.Title);
+        string PageTitle = Context.String(BlogKeys.Title) + (string.IsNullOrWhiteSpace(Title) ? string.Empty : " - " + Title);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+    <title>@PageTitle</title>
+    <meta name="description" content="@Context.String(BlogKeys.Description)" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="application/rss+xml" rel="alternate" title="@Context.String(BlogKeys.Title)" href="@Context.GetLink("/feed.rss")" />
+    <link type="application/atom+xml" rel="alternate" title="@Context.String(BlogKeys.Title)" href="@Context.GetLink("/feed.atom")" />
+    <link rel="shortcut icon" href="@Context.GetLink("/assets/favicon.ico")" type="image/x-icon">
+    <link rel="icon" href="@Context.GetLink("/assets/favicon.ico")" type="image/x-icon">
+
+    <link href="@Context.GetLink("/assets/css/normalize.css")" rel="stylesheet" />
+    <link href="@Context.GetLink("/assets/css/h5bp.css")" rel="stylesheet">
+    <link href="@Context.GetLink("/assets/css/font-awesome.min.css")" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="@Context.GetLink("/assets/css/override.css")" rel="stylesheet" />
+    <link href="@Context.GetLink("/assets/css/github.css")" rel="stylesheet" type="text/css">
+
+
+    <meta name="application-name" content="@Context.String(BlogKeys.Title)" />
+    <meta name="msapplication-tooltip" content="@Context.String(BlogKeys.Title)" />
+    <meta name="msapplication-starturl" content="@Context.GetLink("/")" />
+
+    <meta property="og:title" content="@PageTitle" />
+    @* <meta property="og:image" content="@Blog.Image" /> *@
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@Context.GetLink(Model, true)" />
+    <!-- TODO: More social graph meta tags -->
+
+    <script src="@Context.GetLink("/assets/js/jquery.min.js")"></script>
+    <script src="@Context.GetLink("/assets/js/bootstrap.min.js")"></script>
+    <script src="@Context.GetLink("/assets/js/highlight.pack.js")"></script>
+    <script src="@Context.GetLink("/assets/js/clean-blog.js")"></script>
+    <script src="@Context.GetLink("/assets/js/d3.v3.min.js")"></script>
+    <script src="@Context.GetLink("/assets/js/trianglify.min.js")"></script>
+    <script src="@Context.GetLink("/assets/js/Please-compressed.js")"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="@Context.GetLink("/assets/js/html5shiv.js")"></script>
+            <script src="@Context.GetLink("/assets/js/respond.min.js")"></script>
+    <![endif]-->
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+        <div id="header" class="container">
+            <div id="logo">
+                <h1><a href="@Context.GetLink("/")">@Context.String(BlogKeys.Title)</a></h1>
+            </div>
+            <div id="menu">
+                <ul>
+                    @Html.Partial("_Navbar")
+                </ul>
+            </div>
+        </div>
+
+        <div id="page" class="container">
+            <div id="sidebar">
+                <div id="sbox1">
+                    @Html.Partial("_Sidebar")
+                </div>
+                <div id="sbox2">
+                    <h2>Recent</h2>
+
+                </div>
+                <div id="sbox3">
+                    <h2>Tags</h2>
+                    <div>
+                        <ul class="list-unstyled">
+                            @foreach (IDocument tagDocument in Documents[BlogKeys.Tags].OrderByDescending(x => x.DocumentList(BlogKeys.Posts).Count()).Take(10))
+                            {
+                                string tag = tagDocument.String(BlogKeys.Tag);
+                                string postCount = tagDocument.DocumentList(BlogKeys.Posts).Count().ToString();
+                                <li>
+                                    <a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-sm"> @tag (@postCount)</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <br />
+                    <ul class="pager">
+                        <li class="next">
+                            <a href="/tags">View All Tags &rarr;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div id="content">
+                @RenderBody()
+            </div>
+        </div>
+
+        <footer>
+            @Html.Partial("_Footer")
+        </footer>
+    </body>
+</html>
