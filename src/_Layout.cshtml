@@ -75,13 +75,23 @@
                 </div>
                 <div id="sbox2">
                     <h2>Recent</h2>
-
+                    <ul class="list-unstyled">
+                        @foreach(IDocument doc in Documents[BlogPipelines.RawPosts].Take(10))
+                        {
+                            <li><a href="@Context.GetLink(doc)">@doc.String(BlogKeys.Title)</a></li>
+                        }
+                    </ul>
+                    <ul class="pager">
+                        <li class="next">
+                            <a href="@Context.GetLink("/posts")">Archive &rarr;</a>
+                        </li>
+                    </ul>
                 </div>
                 <div id="sbox3">
                     <h2>Tags</h2>
                     <div>
                         <ul class="list-unstyled">
-                            @foreach (IDocument tagDocument in Documents[BlogKeys.Tags].OrderByDescending(x => x.DocumentList(BlogKeys.Posts).Count()).Take(10))
+                            @foreach (IDocument tagDocument in Documents[BlogPipelines.Tags].OrderByDescending(x => x.DocumentList(BlogKeys.Posts).Count()).Take(10))
                             {
                                 string tag = tagDocument.String(BlogKeys.Tag);
                                 string postCount = tagDocument.DocumentList(BlogKeys.Posts).Count().ToString();
