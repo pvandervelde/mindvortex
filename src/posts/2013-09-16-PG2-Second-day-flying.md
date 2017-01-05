@@ -7,7 +7,7 @@ commentIssueId: 6
 
 On Sunday the weather was good enough for some flying on the west coast. So at 11.30am about 8 of us gathered at [Kario](http://en.wikipedia.org/wiki/Kariotahi_Beach) and the second day of my [PG2](/tags/PG2.html) had started.
 
-<img align="left" alt="Paraglider soaring high over beautiful west coast" src="/images/paragliding/paraglide_0004.JPG" />
+<p><img align="left" alt="Paraglider soaring high over beautiful west coast" src="/assets/images/paragliding/paraglide_0004.JPG" /></p>
 
 The first thing to notice about the west coast is that it looks amazing, rugged and empty. It seems that with paragliding besides the flying I also get to look out over the amazing landscapes New Zealand has. Double win!
 
@@ -19,7 +19,7 @@ After the ground handling a few short flights down the slope were made with a la
 * A paraglider moves around more than you would think, even in a nice constant sea breeze
 * If you land at even a slight angle to the wind it gets really hard to put the glider on its back, instead of its side. I got only one landing totally right.
 
-<img align="right" alt="Flying my new Gin Atlas" src="/images/paragliding/paraglide_0005.JPG" />
+<p><img align="right" alt="Flying my new Gin Atlas" src="/assets/images/paragliding/paraglide_0005.JPG" /></p>
 
 And then it was time for the unexpected highlight of the day. When I paid for the PG2 course I paid for a combination package, which includes the PG2 course, a glider and a harness. Now I still haven't selected a harness but I have selected the glider, a bright red [Gin Atlas](http://gingliders.com/paragliders/atlas/). I didn't expect to be able to fly it so soon in my course but after my initial three flights both instructors gave me the go ahead to fly it.
 

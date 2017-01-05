@@ -7,7 +7,7 @@ html, body {
 body {
     margin: 0px;
     padding: 0px;
-    background: #080808 url(/images/main-bg.png) repeat;
+    background: #080808 url(/assets/images/main-bg.png) repeat;
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     color: #2B2B2B;
@@ -103,7 +103,7 @@ hr {
     width: 900px;
     height: 150px;
     padding: 0px 50px;
-    background: url(/images/gradient-bg.png) no-repeat center top;
+    background: url(/assets/images/gradient-bg.png) no-repeat center top;
 }
 
 /** LOGO */
