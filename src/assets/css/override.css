@@ -68,7 +68,7 @@ hr {
     float: left;
     margin: 0 0.1em;
     padding: 0.4em;
-    color: #fff; 
+    color: #fff;
     background: #0091E6;
     border-radius: 0.4em;
 }
@@ -77,7 +77,7 @@ hr {
     float: right;
     margin: 0 0.1em;
     padding: 0.4em;
-    color: #fff; 
+    color: #fff;
     background: #0091E6;
     border-radius: 0.4em;
 }
@@ -248,7 +248,7 @@ hr {
     /* border-radius: 5px; */
     /* padding: 5px 10px; */
     margin-bottom: 10px;
-    
+
 }
 
 #post-meta {
@@ -261,7 +261,7 @@ hr {
 #post-category {
     margin: 0 0.1em;
     padding: 0.4em;
-    color: #fff; 
+    color: #fff;
     background: #0091E6;
     border-radius: 0.4em;
 }
@@ -277,7 +277,7 @@ hr {
     border-top: 1px solid #D4D4D4;
 }
 
-#post-comments { 
+#post-comments {
     padding-top: 1em;
 }
 
@@ -334,6 +334,7 @@ hr {
 .archive-year {
   font-size: 36px;
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .archive + .archive .archive-year {

@@ -81,11 +81,6 @@
                             <li><a href="@Context.GetLink(doc)">@doc.String(BlogKeys.Title)</a></li>
                         }
                     </ul>
-                    <ul class="pager">
-                        <li class="next">
-                            <a href="@Context.GetLink("/posts")">Archive &rarr;</a>
-                        </li>
-                    </ul>
                 </div>
                 <div id="sbox3">
                     <h2>Tags</h2>
@@ -109,8 +104,6 @@
                     </ul>
                 </div>
             </div>
-
-
 
             <div id="content">
                 @RenderBody()
