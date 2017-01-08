@@ -1,7 +1,34 @@
 <div>
     <div class="navlinks">
-        <a href="/" title="Previous Post: PREVIOUS" class="navlinks-prev">« PREVIOUS</a>
-        <a href="/" title="Next Post: NEXT" class="navlinks-next">NEXT »</a>
+        @{
+            var previousIndex = -1;
+            var nextIndex = -1;
+
+            var list = Documents[BlogPipelines.RawPosts].Where(x => x.ContainsKey("Published")).OrderByDescending(x => x.Get<DateTime>("Published")).ToList();
+            for(int i = 0; i < list.Count; i++)
+            {
+                var doc = list[i];
+                if (Model.FilePath(Keys.RelativeFilePath).Equals(doc.FilePath(Keys.RelativeFilePath)))
+                {
+                    previousIndex = i + 1;
+                    nextIndex = i - 1;
+                    break;
+                }
+            }
+
+            IDocument next = ((nextIndex > -1) && (nextIndex < list.Count)) ? list[nextIndex] : null;
+            IDocument previous = ((previousIndex > -1) && (previousIndex < list.Count)) ? list[previousIndex] : null;
+
+            if (previous != null)
+            {
+                <a href="@Context.GetLink(previous)" title="Previous Post: @previous.String(BlogKeys.Title)" class="navlinks-prev">« @previous.String(BlogKeys.Title)</a>
+            }
+
+            if (next != null)
+            {
+                <a href="@Context.GetLink(next)" title="Next Post: @next.String(BlogKeys.Title)" class="navlinks-next">@next.String(BlogKeys.Title) »</a>
+            }
+        }
     </div>
 </div>
 <div id="disqus_thread"></div>
