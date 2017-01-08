@@ -4,7 +4,7 @@
 
 <div id="post">
     <div id="post-header">
-        @Html.Partial("_PostHeader.cshtml")
+        @Html.Partial("_PostHeader.cshtml", Tuple.Create(Model, Model))
     </div>
 
     <div id="post-content">

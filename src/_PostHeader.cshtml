@@ -1,12 +1,26 @@
+<!--
+    Model is: Tuple<IDocument, IDocument>.
+    The first one is the current document that is being rendered, the second one is the one for which the post header should be rendered.
+-->
+
+@model System.Tuple<Wyam.Common.Documents.IDocument, Wyam.Common.Documents.IDocument>
 @{
-    var Published = Model.Get<DateTime>(BlogKeys.Published);
-    var Tags = Model.Get<string[]>(BlogKeys.Tags);
+    var Published = Model.Item2.Get<DateTime>(BlogKeys.Published);
+    var Tags = Model.Item2.Get<string[]>(BlogKeys.Tags);
 }
 
 <h2>
     @{
-        var link = Context.GetLink(Model);
-        <a href="@link">@Model.String(BlogKeys.Title)</a>
+        var link = Context.GetLink(Model.Item2);
+        var headerText = Model.Item2.String(BlogKeys.Title);
+        if (Model.Item1.Id == Model.Item2.Id)
+        {
+            <text>@headerText</text>
+        }
+        else
+        {
+            <a href="@link">@headerText</a>
+        }
     }
 </h2>
 <div id="post-meta">
