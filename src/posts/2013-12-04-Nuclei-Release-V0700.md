@@ -1,10 +1,11 @@
 Title: Nuclei release - V0.7.0.0
 Tags:
   - Nuclei
-commentIssueId: 26
 ---
 
-Version [V0.7.0.0](https://github.com/pvandervelde/Nuclei/releases/tag/V0.7.0.0) of the [Nuclei](/projects/nuclei.html) library has been released. This release adds support for grouping timing results based on their logical area.
+Version [V0.7.0.0](https://github.com/pvandervelde/Nuclei/releases/tag/V0.7.0.0) of the
+[Nuclei](/projects/nuclei.html) library has been released. This release adds support for grouping
+timing results based on their logical area.
 
 ``` cs
 var group1 = new TimingGroup();
