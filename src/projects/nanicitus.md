@@ -5,7 +5,7 @@ Tags:
 ShowInNavBar: false
 ---
 
-[nAnicitus](http://pvandervelde.github.io/nAnicitus) is a windows service that acts as a gatekeeper for the [SymStore][symstore_msdn] application. SymStore provides a relatively simple way to create
+[nAnicitus](https://github.com/pvandervelde/nAnicitus) is a windows service that acts as a gatekeeper for the [SymStore][symstore_msdn] application. SymStore provides a relatively simple way to create
 a local / private symbol server with the disadvantage that it should really only be called by one user at the time because it doesn't support [multiple transactions at the same time][symstore_msdn_singletransaction].
 The nAnicitus windows service 'serializes' access to SymStore to allow multiple users to add symbols to the symbol server.
 
