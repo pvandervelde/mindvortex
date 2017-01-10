@@ -106,7 +106,24 @@
             </div>
 
             <div id="content">
-                @RenderBody()
+                @{
+                    var tags = Model.Get<string[]>(BlogKeys.Tags);
+                    var isProjectPage = (tags != null) && tags.Any(s => string.Equals("Project", s, StringComparison.OrdinalIgnoreCase));
+                    if (isProjectPage)
+                    {
+                        <div class="project">
+                            <h2>@Model.String(BlogKeys.Title)</h2>
+                            <div>
+                                @RenderBody()
+                            </div>
+                            @Html.Partial("_ProjectLinkedPosts.cshtml", Model)
+                        </div>
+                    }
+                    else
+                    {
+                        @RenderBody()
+                    }
+                }
             </div>
         </div>
 
