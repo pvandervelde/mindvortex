@@ -4,7 +4,7 @@ Tags:
   - PG2
 ---
 
-Last weekend I thought I could repeat the [full weekend flying](/posts/2013-10-13_PG2-Spending-a-weekend-in-the-air.html)
+Last weekend I thought I could repeat the [full weekend flying](/posts/PG2-Spending-a-weekend-in-the-air.html)
 trick that I pulled a few weeks back. The weather forecast was for sunny and windy, but not too
 windy. So on Saturday morning we drove out to the beach but when we got to the launch site it became
 clear that it would be touch-and-go due to the high winds. In the end I only got a little hop while
