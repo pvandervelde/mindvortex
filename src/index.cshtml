@@ -1,0 +1,15 @@
+@{
+    foreach(IDocument doc in Documents[BlogPipelines.RawPosts].Take(5))
+    {
+        <div id="post-spacer">
+            <div id="post">
+                <div id="post-header">
+                    @Html.Partial("_PostHeader.cshtml", Tuple.Create(Model, doc))
+                </div>
+                <div id="post-content">
+                    @Html.Raw(doc.Content)
+                </div>
+            </div>
+        </div>
+    }
+}

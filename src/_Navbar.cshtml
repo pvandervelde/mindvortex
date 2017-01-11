@@ -1,0 +1,37 @@
+@{
+    var pages = Documents[BlogPipelines.Pages]
+        .Where(x => x.Get<bool>(BlogKeys.ShowInNavbar, true))
+        .Select(
+            x =>
+            {
+                var order = x.Get<int>("Order");
+                order = (order != 0) ? order : 1000;
+
+                var link = Context.GetLink(x);
+                var title = x.String(BlogKeys.Title);
+                if (string.IsNullOrEmpty(title) && string.Equals(link, "/", StringComparison.OrdinalIgnoreCase))
+                {
+                    title = "Home";
+                    order = -1;
+                }
+
+                return Tuple.Create(title, link, x.Id, order);
+            })
+        .Where(x => !string.IsNullOrEmpty(x.Item1))
+        .OrderBy(x => x.Item4);
+    foreach(var page in pages)
+    {
+        if (Model.Id == page.Item3)
+        {
+            <li class="active" >
+                @page.Item1
+            </li>
+        }
+        else
+        {
+            <li class="inactive" >
+                <a href="@page.Item2">@page.Item1</a>
+            </li>
+        }
+    }
+}

@@ -1,0 +1,18 @@
+Title: Tags
+ShowInNavBar: false
+---
+<div class="container-sm-height">
+    <div class="row row-sm-height">
+        <div class="col-sm-12 col-sm-height">
+            <h2>Tags</h2>
+            <ul>
+                @foreach (IDocument tagDocument in Documents[BlogKeys.Tags].OrderBy(x => x.String(BlogKeys.Tag)))
+                {
+                    string tag = tagDocument.String(BlogKeys.Tag);
+                    string postCount = tagDocument.DocumentList(BlogKeys.Posts).Count().ToString();
+                    <li><a role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-sm"> @tag (@postCount)</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

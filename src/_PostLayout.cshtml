@@ -1,0 +1,24 @@
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<div id="post">
+    <div id="post-header">
+        @Html.Partial("_PostHeader.cshtml", Tuple.Create(Model, Model))
+    </div>
+
+    <div id="post-content">
+        @RenderBody()
+    </div>
+
+    <div id="post-footer">
+        @Html.Partial("_PostFooter.cshtml")
+    </div>
+</div>
+
+
+
+
+
+
+
