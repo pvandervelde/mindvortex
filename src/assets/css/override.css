@@ -88,7 +88,7 @@ hr {
 }
 
 .container {
-    width: 1000px;
+    width: 1200px;
     margin: 0px auto;
 }
 
@@ -100,7 +100,7 @@ hr {
 
 #header {
     overflow: hidden;
-    width: 900px;
+    width: 1200px;
     height: 150px;
     padding: 0px 50px;
     background: url(/assets/images/gradient-bg.png) no-repeat center top;
@@ -178,7 +178,7 @@ hr {
 
 #page {
     overflow: hidden;
-    width: 900px;
+    width: 1200px;
     padding: 70px 50px 50px 50px;
     background-color: #FFFFFF;
     border-radius: 10px 10px 0px 0px;
@@ -199,7 +199,7 @@ hr {
 
 #content {
     float: right;
-    width: 580px;
+    width: 820px;
 }
 
 #content #onecolumn
@@ -357,7 +357,7 @@ hr {
 
 #sidebar {
     float: left;
-    width: 260px;
+    width: 300px;
     padding-top: 10px;
 }
 
@@ -420,7 +420,7 @@ hr {
 
 #footer {
     overflow: hidden;
-    width: 900px;
+    width: 1200px;
     padding: 40px 50px 50px 50px;
     background-color: #161616;
     border-top: 6px solid #000000;
@@ -444,7 +444,7 @@ hr {
 
 #footer #fbox1 {
     float: left;
-    width: 260px;
+    width: 340px;
     margin-right: 60px;
 }
 
@@ -466,7 +466,7 @@ hr {
 
 #footer #fbox2 {
     float: right;
-    width: 260px;
+    width: 340px;
 }
 
 #footer #fbox2  ul{
@@ -482,13 +482,13 @@ hr {
 
 #footer #fbox3 {
     float: right;
-    width: 260px;
+    width: 340px;
 }
 
 #copyright
 {
     overflow: hidden;
-    width: 900px;
+    width: 1200px;
     padding: 50px;
 }
 
@@ -535,7 +535,7 @@ hr {
 
 #slider .viewer
 {
-    width: 900px;
+    width: 1200px;
     height: 400px;
     margin: 0 auto 50px auto;
     overflow: hidden;
@@ -549,7 +549,7 @@ hr {
 #slider .viewer .reel .slide
 {
     position: relative;
-    width: 900px;
+    width: 1200px;
     height: 500px;
 }
 
