@@ -1,0 +1,32 @@
+Title: Projects
+---
+
+@{
+    var projects = Documents[BlogPipelines.Pages]
+        .Where(
+            x =>
+            {
+                var tags = x.Get<string[]>(BlogKeys.Tags);
+                if (tags == null)
+                {
+                    return false;
+                }
+
+                return tags.Any(s => string.Equals("Project", s, StringComparison.OrdinalIgnoreCase));
+            })
+        .OrderBy(x => x.String(BlogKeys.Title));
+    foreach(var project in projects)
+    {
+        var link = Context.GetLink(project);
+        var title = project.String(BlogKeys.Title);
+        var description = project.String(BlogKeys.Lead);
+
+        <div id="project-description">
+            <h2><a href="@link">@title</a></h2>
+            <p>
+                @description
+            </p>
+            @Html.Partial("_ProjectLinkedPosts.cshtml", project)
+        </div>
+    }
+}

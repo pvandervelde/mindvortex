@@ -1,0 +1,8 @@
+
+ShowInNavBar: false
+---
+
+<div id="posts">
+    <h3 id="post-tags-header">Posts tagged with: @Model.String(BlogKeys.Tag)</h3>
+    @Html.Partial("_PostList", Model.DocumentList(BlogKeys.Posts).OrderByDescending(x => x.Get<DateTime>(BlogKeys.Published)))
+</div>
