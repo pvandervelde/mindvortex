@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<archive>
+    <name>mindvortex-${VersionSemantic}</name>
+    <files>
+        <file src="${DirBuildSite}\**\*.*" target="" />
+    </files>
+</archive>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    DefaultTargets="MindVortex_Build_Wyam_Run"
+    ToolsVersion="11.0"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <Import
+        Condition="Exists('$(DirNBuildKitMsBuildShared)\shared.importbuildsharedsettings.props') AND '$(ExistsSharedImportBuildSharedSettings)' != 'true' "
+        Project="$(DirNBuildKitMsBuildShared)\shared.importbuildsharedsettings.props" />
+
+    <Import Project="$(DirNBuildKitMsBuildExtensions)\GetToolFullPath.msbuild"
+            Condition="Exists('$(DirNBuildKitMsBuildExtensions)\GetToolFullPath.msbuild') AND '$(ExistsExtensionsGetToolFullPath)' != 'true' "/>
+    <Import Project="$(DirNBuildKitMsBuildExtensions)\NuGetInstall.msbuild"
+            Condition="Exists('$(DirNBuildKitMsBuildExtensions)\NuGetInstall.msbuild') AND '$(ExistsExtensionsNuGetInstall)' != 'true' " />
+    <Import Project="$(DirNBuildKitMsBuildExtensions)\SearchPackagesDirectoryForToolPath.msbuild"
+            Condition="Exists('$(DirNBuildKitMsBuildExtensions)\SearchPackagesDirectoryForToolPath.msbuild') AND '$(ExistsExtensionsSearchPackagesDirectoryForToolPath)' != 'true' " />
+
+    <Target
+        DependsOnTargets="_MindVortex_Build_Wyam_GetToolPaths"
+        Name="MindVortex_Build_Wyam_Run">
+        <Error
+            Condition=" '$(ToolsExternalWyamPath)' == '' "
+            Text="The Wyam executable does not exist. Cannot generate the site." />
+
+        <Exec
+            Command="&quot;$(ToolsExternalWyamPath)&quot; --input $(DirSrc) --output $(DirBuildSite) --use-local-packages --packages-path $(DirPackages)"
+            WorkingDirectory="$(DirWorkspace)" />
+    </Target>
+
+    <Target Name="_MindVortex_Build_Wyam_GetToolPaths">
+        <Error
+            Condition="!Exists('$(DirPackages)') "
+            Text="The packages directory does not exist. Cannot search for the Wyam executables." />
+
+        <NuGetInstall
+            Condition=" '$(ToolsExternalWyamPath)' == 'UNDEFINED' "
+            NuGetPath="$(ToolsExternalNuGetPath)"
+            PackageDirectory="$(DirPackages)"
+            PackageName="Wyam"
+            PackageVersion="$(ToolsExternalWyamVersion)"
+            Sources="@(NuGetSources)" />
+        <SearchPackagesDirectoryForToolPath
+            Condition=" '$(ToolsExternalWyamPath)' == 'UNDEFINED' "
+            FileToLocate="wyam.exe"
+            PackagesDir="$(DirPackages)">
+            <Output
+                PropertyName="ToolsExternalWyamPath"
+                TaskParameter="Path" />
+        </SearchPackagesDirectoryForToolPath>
+        <GetToolFullPath
+            Condition=" '$(ToolsExternalWyamPath)' != 'UNDEFINED' "
+            Tool="$(ToolsExternalWyamPath)">
+            <Output
+                PropertyName="ToolsExternalWyamPath"
+                TaskParameter="Path" />
+        </GetToolFullPath>
+        <Message
+            Condition="Exists('$(ToolsExternalWyamPath)') "
+            Importance="low"
+            Text="The Wyam executable was found at: $(ToolsExternalWyamPath)" />
+        <Error
+            Condition="!Exists('$(ToolsExternalWyamPath)') "
+            Text="Could not locate the Wyam executable path. Cannot generate the site." />
+    </Target>
+ </Project>
