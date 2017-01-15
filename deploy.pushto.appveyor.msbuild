@@ -15,7 +15,7 @@
     </Target>
 
     <Target Name="_MindVortex_Deploy_PushTo_AppVeyor_Push"
-            Condition=" '@(IsOnAppVeyorBuildServer)' == 'true' "
+            Condition=" '$(IsOnAppVeyorBuildServer)' == 'true' "
             Outputs="%(PushToGitHubReleaseSpecs.Identity)">
         <ItemGroup>
             <AppVeyorArtefacts Include="$(DirBuildDeploy)\**\*.zip" />
