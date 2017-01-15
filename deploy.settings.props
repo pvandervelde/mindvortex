@@ -311,7 +311,7 @@
              <Repository>https://github.com/pvandervelde/pvandervelde.github.io.git</Repository>
              <Branch>master</Branch>
              <ExtractZipFiles>true</ExtractZipFiles>
-             <CommitMessage>New Post: $(NextPostTitle)</CommitMessage>
+             <CommitMessage>$(PushMessage)</CommitMessage>
         </PushToGitBranchSpecs>
     </ItemGroup>
 

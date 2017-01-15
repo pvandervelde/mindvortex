@@ -1,1 +1,1 @@
-Automatic publishing with AppVeyor
+Updated to using AppVeyor for builds and deployments

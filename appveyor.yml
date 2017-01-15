@@ -68,7 +68,7 @@ before_deploy:
   - ps: $fileContent += "`n-----END RSA PRIVATE KEY-----`n"
   - ps: Set-Content c:\users\appveyor\.ssh\id_rsa $fileContent
   - ps: $message = Get-Content next_post.txt
-  - ps: Set-AppveyorBuildVariable -Name NextPostTitle -Value $message
+  - ps: Set-AppveyorBuildVariable -Name PushMessage -Value $message
 
 # to run your custom scripts instead of provider deployments
 deploy_script: msbuild entrypoint.msbuild /t:deploy /v:diagnostic /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
