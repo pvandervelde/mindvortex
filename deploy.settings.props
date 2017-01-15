@@ -74,6 +74,7 @@
                 Prepare;
             </Groups>
         </DeployStepsToExecute>
+        <!--
         <DeployStepsToExecute Include="$(DeployStepsPrepareTagVcs)">
             <Properties>
                 Configuration=$(ProductionConfiguration);
@@ -84,6 +85,7 @@
                 Tag;
             </Groups>
         </DeployStepsToExecute>
+        -->
         <DeployStepsToExecute Include="$(DeployStepsPrepareGetIssueIds)">
             <Properties>
             </Properties>
