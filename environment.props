@@ -17,6 +17,16 @@
         <IsOnBuildServer Condition=" '$(IsOnBuildServer)' == '' ">UNDEFINED</IsOnBuildServer>
         <IsOnBuildServer Condition=" '$(IsOnBuildServer)' == 'UNDEFINED' AND ( '$(IsOnAppVeyorBuildServer)' != 'true' )">false</IsOnBuildServer>
         <IsOnBuildServer Condition=" '$(IsOnBuildServer)' == 'UNDEFINED' AND ( '$(IsOnAppVeyorBuildServer)' == 'true' )">true</IsOnBuildServer>
+
+        <!-- Git parameters -->
+        <JenkinsGitBranchExpectedHeader>origin/</JenkinsGitBranchExpectedHeader>
+        <TfsGitBranchExpectedHeader>LG:refs/heads/</TfsGitBranchExpectedHeader>
+
+        <BranchGitExpected>UNDEFINED</BranchGitExpected>
+        <BranchGitExpected Condition=" '$(IsOnAppVeyorBuildServer)' == 'True' " >$(APPVEYOR_REPO_BRANCH)</BranchGitExpected>
+
+        <GitRevNoExpected>UNDEFINED</GitRevNoExpected>
+        <GitRevNoExpected Condition=" '$(IsOnAppVeyorBuildServer)' == 'True' ">$(APPVEYOR_REPO_COMMIT)</GitRevNoExpected>
     </PropertyGroup>
 
     <!--
