@@ -1,0 +1,74 @@
+
+# Notes:
+#   - Minimal appveyor.yml file is an empty file. All sections are optional.
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+#   - Section names should be unique on each level.
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+# version format
+version: 1.0.{build}-{branch}
+
+# you can use {branch} name in version format too
+# version: 1.0.{build}-{branch}
+
+# branches to build
+branches:
+  # blacklist
+  except:
+    - develop
+    - gh-pages
+
+# Do not build on tags (GitHub and BitBucket)
+skip_tags: true
+
+# Maximum number of concurrent jobs for the project
+max_jobs: 1
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Build worker image (VM template)
+image: Visual Studio 2015
+
+# environment variables
+
+
+environment:
+  push_key:
+    secure: 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
+
+
+# scripts that run after cloning repository
+# install:
+  # to run script as a PowerShell command prepend it with ps:
+  # - ps: Write-Host 'This is PowerShell'
+  # batch commands start from cmd:
+  # - cmd: echo This is batch again
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+# to run your custom scripts instead of automatic MSBuild
+build_script: msbuild entrypoint.msbuild /t:build /v:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+# scripts to run before deployment
+before_deploy:
+  - ps: $fileContent = "-----BEGIN RSA PRIVATE KEY-----`n"
+  - ps: $fileContent += $env:push_key.Replace(' ', "`n")
+  - ps: $fileContent += "`n-----END RSA PRIVATE KEY-----`n"
+  - ps: Set-Content c:\users\appveyor\.ssh\id_rsa $fileContent
+  - ps: $message = Get-Content push_message.txt
+  - ps: Set-AppveyorBuildVariable -Name PushMessage -Value $message
+
+# to run your custom scripts instead of provider deployments
+deploy_script: msbuild entrypoint.msbuild /t:deploy /v:diagnostic /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
