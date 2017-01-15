@@ -143,7 +143,9 @@
             </Groups>
         </DeployStepsToExecute>
         -->
-        <DeployStepsToExecute Include="$(DirWorkspace)\deploy.pushto.appveyor.msbuild">
+        <DeployStepsToExecute
+            Condition=" '$(BranchGitExpected)' != 'master' "
+            Include="$(DirWorkspace)\deploy.pushto.appveyor.msbuild">
             <Properties>
                 Configuration=$(ProductionConfiguration);
                 Platform=$(Platform);
@@ -153,8 +155,9 @@
                 Push;
             </Groups>
         </DeployStepsToExecute>
-        <!--
-        <DeployStepsToExecute Include="$(DeployStepsPushToGitBranch)">
+        <DeployStepsToExecute
+            Condition=" '$(BranchGitExpected)' == 'master' "
+            Include="$(DeployStepsPushToGitBranch)">
             <Properties>
                 Configuration=$(ProductionConfiguration);
                 Platform=$(Platform);
@@ -164,6 +167,7 @@
                 Push;
             </Groups>
         </DeployStepsToExecute>
+        <!--
         <DeployStepsToExecute Include="$(DeployStepsPushToGitRepository)">
             <Properties>
                 Configuration=$(ProductionConfiguration);
@@ -304,11 +308,11 @@
         allow the use of build templates, e.g. $(DirBuildDeploy)\myarchive-${VersionSemantic}.zip
     -->
     <ItemGroup>
-        <PushToGitBranchSpecs Include="$(DirBuildDeploy)\blog-${VersionSemantic}.zip">
-             <Repository>$(GitRemoteRepository)</Repository>
+        <PushToGitBranchSpecs Include="$(DirBuildDeploy)\$(ProductNameInFilePath)-${VersionSemantic}.zip">
+             <Repository>https://github.com/pvandervelde/pvandervelde.github.io.git</Repository>
              <Branch>master</Branch>
              <ExtractZipFiles>true</ExtractZipFiles>
-             <CommitMessage>New changes</CommitMessage>
+             <CommitMessage>New Post: $(NextPostTitle)</CommitMessage>
         </PushToGitBranchSpecs>
     </ItemGroup>
 
