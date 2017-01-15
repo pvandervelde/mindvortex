@@ -144,7 +144,6 @@
         </DeployStepsToExecute>
         -->
         <DeployStepsToExecute
-            Condition=" '$(BranchGitExpected)' != 'master' "
             Include="$(DirWorkspace)\deploy.pushto.appveyor.msbuild">
             <Properties>
                 Configuration=$(ProductionConfiguration);

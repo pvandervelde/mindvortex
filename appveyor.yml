@@ -19,7 +19,7 @@ version: 1.0.{build}-{branch}
 branches:
   # blacklist
   except:
-    - master
+    - develop
     - gh-pages
 
 # Do not build on tags (GitHub and BitBucket)
