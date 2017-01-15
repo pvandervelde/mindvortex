@@ -53,7 +53,7 @@ install:
 #---------------------------------#
 
 # to run your custom scripts instead of automatic MSBuild
-build_script: msbuild entrypoint.msbuild /t:build /v:diagnostic /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+build_script: msbuild entrypoint.msbuild /t:build /v:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 #---------------------------------#
 #     deployment configuration    #

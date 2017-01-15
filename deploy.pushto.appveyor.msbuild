@@ -18,7 +18,7 @@
             Condition=" '@(IsOnAppVeyorBuildServer)' == 'true' "
             Outputs="%(PushToGitHubReleaseSpecs.Identity)">
         <ItemGroup>
-            <AppVeyorArtefacts include="$(DirBuildDeploy)\**\*.zip" />
+            <AppVeyorArtefacts Include="$(DirBuildDeploy)\**\*.zip" />
         </ItemGroup>
         <Exec
             Command="appveyor PushArtifact %(AppVeyorArtefacts.Identity)"
