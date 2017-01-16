@@ -310,7 +310,7 @@
     -->
     <ItemGroup>
         <PushToGitBranchSpecs Include="$(DirBuildDeploy)\$(ProductNameInFilePath)-${VersionSemantic}.zip">
-             <Repository>https://github.com/pvandervelde/pvandervelde.github.io.git</Repository>
+             <Repository>git@github.com:pvandervelde/pvandervelde.github.io.git</Repository>
              <Branch>master</Branch>
              <ExtractZipFiles>true</ExtractZipFiles>
              <CommitMessage>$(PushMessage)</CommitMessage>
