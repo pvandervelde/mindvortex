@@ -71,4 +71,4 @@ before_deploy:
   - ps: Set-AppveyorBuildVariable -Name PushMessage -Value $message
 
 # to run your custom scripts instead of provider deployments
-deploy_script: msbuild entrypoint.msbuild /t:deploy /v:diagnostic /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+deploy_script: msbuild entrypoint.msbuild /t:deploy /v:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
