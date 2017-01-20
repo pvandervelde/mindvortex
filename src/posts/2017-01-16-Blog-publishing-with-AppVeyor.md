@@ -11,7 +11,7 @@ One part of [improving my career and increasing my professional reach](/posts/Go
 post more to this blog about the work that I am doing and the code and skills that come from this
 work. Unfortunately at the moment writing is still more of a chore than it is a pleasure so that
 means that if I want to publish more I need to make it very easy for me to do so, otherwise the publishing
-process will just add yet another obstacle that I need to get past while producting content.
+process will just add yet another obstacle that I need to get past while producing content.
 
 With me being a build engineer by profession the obvious solution was not to follow the
 [sensible path](https://www.troyhunt.com/its-a-new-blog/) of a managed system but to create some
