@@ -887,7 +887,7 @@
             The full path and version for the Wyam command line application
         -->
         <ToolsExternalWyamPath Condition=" '$(ToolsExternalWyamPath)' == '' ">UNDEFINED</ToolsExternalWyamPath>
-        <ToolsExternalWyamVersion Condition=" '$(ToolsExternalWyamVersion)' == '' ">0.15.8-beta</ToolsExternalWyamVersion>
+        <ToolsExternalWyamVersion Condition=" '$(ToolsExternalWyamVersion)' == '' ">0.17.1</ToolsExternalWyamVersion>
     </PropertyGroup>
 
 
