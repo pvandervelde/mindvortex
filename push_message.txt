@@ -1,1 +1,1 @@
-New Post: Blog publishing with AppVeyor
+New Post: Updating my Hyper-V server to Windows 2016

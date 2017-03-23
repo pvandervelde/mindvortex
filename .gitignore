@@ -4,3 +4,4 @@ out/
 *.log
 packages/
 build/
+packages.xml
