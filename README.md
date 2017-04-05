@@ -1,6 +1,6 @@
 # Mind vortex
 
-The source code for my personal website, based on [DocPad](http://docpad.org/).
+The source code for my personal website, based on [Wyam](https://wyam.io/).
 
 [![Build status](https://ci.appveyor.com/api/projects/status/i4dq2g9nq4hq4xvl?svg=true)](https://ci.appveyor.com/project/pvandervelde/mindvortex)
 
