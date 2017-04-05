@@ -3,11 +3,11 @@
 #theme CleanBlog
 
 // Body code
-Settings.Host = "www.petrikvandervelde.nl";
-Settings.LinksUseHttps = true;
-GlobalMetadata["Title"] = "Mind vortex";
-GlobalMetadata["Intro"] = "Dutch software developer, living, working and playing in New Zealand. Rock climber, and paragliding pilot. Developer of [Sherlock](http://pvandervelde.github.io/Sherlock), [Nuclei](http://pvandervelde.github.io/Nuclei) and other projects";
-GlobalMetadata["MarkdownExtensions"] = "pipetables+emphasisextras+attributes+definitionlists+abbreviations+figures+bootstrap+emojis+smartypants";
+Settings[Keys.Host] = "www.petrikvandervelde.nl";
+Settings[Keys.LinksUseHttps] = true;
+Settings[BlogKeys.Title] = "Mind vortex";
+Settings[BlogKeys.Intro] = "Dutch software developer, living, working and playing in New Zealand. Rock climber, and paragliding pilot. Developer of [Sherlock](http://pvandervelde.github.io/Sherlock), [Nuclei](http://pvandervelde.github.io/Nuclei) and other projects";
+Settings[BlogKeys.MarkdownExtensions] = "pipetables+emphasisextras+attributes+definitionlists+abbreviations+figures+bootstrap+emojis+smartypants";
 
 Pipelines[Blog.Pages].Replace("RazorFiles",
     Concat(
