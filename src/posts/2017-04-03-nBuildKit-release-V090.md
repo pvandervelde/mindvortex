@@ -4,7 +4,7 @@ Tags:
 ---
 
 Version [0.9.0](https://github.com/nbuildkit/nBuildKit.MsBuild/releases/tag/0.9.0) of [nBuildKit](https://github.com/nbuildkit/nBuildKit.MsBuild)
-has been released. The last release I talked about on this blog was [0.5.1](2015-05-23-nBuildKit-release-V051).
+has been released. The last release I talked about on this blog was [0.5.1](posts/nBuildKit-release-V051).
 Since then a [lot more versions](https://github.com/nbuildkit/nBuildKit.MsBuild/releases) have been
 released. The `0.9.0` release was supposed to be a stabilization release but there were many major
 improvements which makes this a major change release.
@@ -38,55 +38,33 @@ The highlights are
   different packages have been created for [Jenkins](https://jenkins.io/),
   [TFS2013](https://msdn.microsoft.com/library/ms181709%28v=vs.120%29.aspx?f=255&MSPPError=-2147217396)
   and [TFS2015 / TFS2017](https://www.visualstudio.com/en-us/docs/build/overview).
+- The layout of the scripts and NuGet packages has changed so that it is easier to create a
+  [new set of build tools based on nBuildKit](https://github.com/nbuildkit/nBuildKit.MsBuild/issues/220).
+  With this change it is now possible to create a build / test / deploy library that includes all or
+  some of the nBuildKit capabilities while providing its own additional capabilities. An example is
+  the [ops-tools-build](https://github.com/ops-resource/ops-tools-build) library which is being used
+  in the [infrastructure-as-code](https://en.wikipedia.org/wiki/Infrastructure_as_Code) work I'm doing.
 
+In addition to the major changes some additional build, test and deploy steps have also been defined:
 
-
-
-
-- The extensibility has got a new layer. It is now possible to create a build / test / deploy library that includes
-  the nBuildKit capabilities while providing its own additional capabilities. For an example see the
-  [ops-tools-build]() library
-  which is being used in the [infrastructure-as-code]() work I'm doing.
-
-
-
-
-
-
-
-
-A number of new build, test and deploy steps have also been defined:
-
-
-
-
-
-
-
-
-
-- New step capabilities
-  - Complete a [gitflow]() stage (i.e. finishing the feature, hotfix or release branch) to verify that the merge
-    will not break the build. Additionally the results of the merge can be captured (by archiving the `.git` folder)
-    and can be used in the deploy process to push the merge to a git remote
-  - Copying files from a NuGet package
-  - Copying files from the file system
-  - ILMerging assemblies
-  - Generating a targets file from an assembly containing MsBuild tasks
-  - Invoking [Wyam](https://wyam.io). Note that this is a late addition and hasn't been tested properly yet
-  - Invoking pester during the test phase
-  - Pushing files to a git branch during the deploy stage
-  - Pushing an entire repository to a git remote during the deploy stage
-
-
-
-
+- Complete a [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows#gitflow-workflow)
+  stage, e.g. finishing the feature, hotfix or release branch, to verify that the pending merge will
+  not break the build. Additionally the results of the merge can be captured, by archiving the
+  `.git` folder, and can later be used in the deploy process to push the merge to a git remote.
+- [Copying files](https://github.com/nbuildkit/nBuildKit.MsBuild/issues/255) from the file system or
+  from a NuGet package.
+- [ILMerge](https://github.com/nbuildkit/nBuildKit.MsBuild/issues/238) one or more assemblies into a
+  target assembly.
+- Generating a targets file from an assembly containing MsBuild tasks.
+- [Invoking](https://github.com/nbuildkit/nBuildKit.MsBuild/issues/146) [Wyam](https://wyam.io)
+  during the build process. Note that this is a late addition and hasn't been tested completely yet
+- Invoking [Pester](https://github.com/pester/Pester) during the test phase.
+- Pushing files to a git branch during the deploy stage.
+- Pushing an entire repository to a git remote during the deploy stage.
 
 Finally the performance of the whole build process has been improved by changing how the template
-tokens are generated and loaded. The overall speed up for the nBuildKit build itself is about a
-factor two.
+tokens are [generated and loaded](https://github.com/nbuildkit/nBuildKit.MsBuild/issues/242). The
+overall speed up for the nBuildKit build itself is about a factor two.
 
-All the work items that have been closed can be found on [github](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/26?closed=1).
-
-For the next release the focus is on improving the build and deploy process of nBuildKit itself and
-improving the documentation.
+All the work items that have been closed for this release can be found on
+[github](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/26?closed=1).
