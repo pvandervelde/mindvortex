@@ -5,9 +5,10 @@ Tags:
   - Ubiquiti
 ---
 
-A little while back we finally got fibre in our street. After spending many years on ADSl (we don't talk about the time of
-dial-up ...) it was finally time for some decent network speeds at home. As the fibre was being installed in my house
-it was also time to evaluate the networking gear I was using. Until then
+A little while back we finally got fibre in our street. After spending many years on ADSl (we don't
+talk about the time of dial-up ...) it was finally time for some decent network speeds at home. As
+the fibre was being installed in my house it was also time to evaluate the networking gear I was
+using. Until then
 
 - Until then only used standard consumer gear. That worked fine, but didn't allow much configuration. The last router
   I had allowed some configuration of IP distribution but still limited. As I was getting more hardware (the Hyper-V
