@@ -4,7 +4,7 @@ param(
     [string] $source = 'src',
     [string] $destination = 'build\site',
     [string] $packages = 'packages',
-    [string] $version = '0.17.3',
+    [string] $version = '0.17.1',
     [switch] $preview,
     [switch] $watch
 )
