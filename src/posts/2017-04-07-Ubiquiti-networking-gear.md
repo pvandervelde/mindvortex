@@ -10,7 +10,7 @@ talk about the time of dial-up ...) it was finally time for some decent network 
 the fibre was being installed in my house it was also time to evaluate the networking gear I was
 using. Until now I had always used the modem / router provided by the ISP with an additional cheap
 switch. The gear always worked fine, but didn't provide configuration options other than the ones that
-describe the connection to the ISP. As I was starting to use my [Hyper-V server](./2017-03-18-Updating-Hyper-v-server-to-Windows2016.md)
+describe the connection to the ISP. As I was starting to use my [Hyper-V server](./posts/Updating-Hyper-v-server-to-Windows2016)
 a lot more and was starting to run multiple VM's it would be nice to get some better control over
 the network. Additionally based on one of [Troy Hunt's](https://www.troyhunt.com/no-you-cant-join-my-wifi-network/)
 blog posts I would also like to set up a separate guest network.
