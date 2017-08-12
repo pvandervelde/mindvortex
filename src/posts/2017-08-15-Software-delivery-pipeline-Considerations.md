@@ -1,4 +1,4 @@
-Title: Software delivery pipeline: Considerations
+Title: Software delivery pipeline - Considerations
 Tags:
   - Delivering software
   - DevOps
