@@ -1,6 +1,7 @@
 Title: Software delivery pipeline - Considerations
 Tags:
   - Delivering software
+  - Software delivery pipeline
   - DevOps
 ---
 
@@ -12,26 +13,29 @@ workflow including [Continuous Integration](https://en.wikipedia.org/wiki/Contin
 [Continuous Delivery](https://en.wikipedia.org/wiki/Continuous_delivery)
 or even [Continuous deployment](https://www.agilealliance.org/glossary/continuous-deployment).
 A reduction in development time requires that more parts of the development workflow
-are automated. In general this automation is achieved with the help of scripts,
-tools and the supporting infrastructure.
+are automated. In general this automation is achieved by creating a
+[development pipeline](http://www.informit.com/articles/article.aspx?p=1621865&seqNum=2)
+with the help of scripts, tools and the supporting infrastructure.
 
-For the remainder of this post the build, test and release automation system is considered
+For the remainder of this post the development pipeline is considered
 to consist of:
 
 - The scripts that are used during the different parts of the cycle, i.e. the build, test
   and release scripts.
 - The continuous integration system which is used to execute the different scripts.
+- The tools, like the compiler, test frameworks, etc.
 
 Items like version control, package management, issue tracking, system monitoring,
-customer support and others are not included in the discussion to keep the scope small.
+customer support and others are not included in the discussion. While these systems
+are essential in application development and deployment each of these systems spans
+a large enough area that it warrants a more thorough discussion than can be given in
+this post.
 
 In order to be able to select or create a suitable build, test and release automation
 system we need to know what desirable properties of such a system are.
 
-Some of the most important
-properties are:
-
-- Consistency: The system must behave consistently. When a specific commit is pushed into
+- Consistency: The system must return the same outputs each time it is executed with a
+  specific input. For instance when a specific commit is pushed into the pipeline
 
 Building the same commit multiple times creates the same results
 - Performance: Build as fast as possible, more specifically get results back to the
