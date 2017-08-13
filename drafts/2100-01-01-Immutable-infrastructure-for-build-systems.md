@@ -1,6 +1,7 @@
 Title: Software delivery pipeline: Immutable infrastructure
 Tags:
   - Delivering software
+  - Software delivery pipeline
   - Immutable infrastructure
   - DevOps
 ---
