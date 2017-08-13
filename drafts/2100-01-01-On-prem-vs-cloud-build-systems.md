@@ -1,6 +1,7 @@
 Title: Software delivery pipeline: On-prem or in the cloud?
 Tags:
   - Delivering software
+  - Software delivery pipeline
   - On-prem
   - Cloud
   - DevOps
