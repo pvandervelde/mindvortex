@@ -1,4 +1,4 @@
-Title: Software delivery pipeline: On-prem or in the cloud?
+Title: Software delivery pipeline - On-prem or in the cloud?
 Tags:
   - Delivering software
   - Software delivery pipeline
@@ -12,8 +12,9 @@ Tags:
       worry about the infrastructure either
     - Generally scales 'infinitely' (at least what the user is concerned)
     - No control over the infrastructure also means no control over the build controller
-      and plugins
-    - Generally pay per use
+      and probably not the plugins / capabilities either
+    - Generally pay per use / CPU min. This can get expensive if you have a lot of services
+      that need to be running all the time
 - On-prem systems:
     - Have to provide the infrastructure / resources
     - Have to handle scaling yourself
@@ -23,7 +24,8 @@ Tags:
     - Outages are your problem to resolve, but not dependent on other people
     - Pay ahead for hardware and keep paying for the maintenance
 
-Depends on the situation of the 'company' that needs the build system. For smaller
+Both approaches have pros and cons. And which system is the most suitable depends
+ on the situation of the 'company' that needs the build system. For smaller
 companies it is probably more efficient to use cloud based systems as they don't need
 additional personel to maintain the system. Once a company grows additional staff to
 maintain an on-prem build system.
