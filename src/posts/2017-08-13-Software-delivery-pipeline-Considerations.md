@@ -138,6 +138,7 @@ and versions of all the parts are tracked for each input set.
     of the time with the ability to handle high peak loads, if necessary with a reduction in
     performance.
   - Make sure the scripts and tools don't do any work that is not necessary
+  - Can split into stages
 
 #### Robustness
 
@@ -167,3 +168,8 @@ and versions of all the parts are tracked for each input set.
     - Keep majority of the process described in the scripts. They're easier to adapt
     - Provide DSL for describing a pipeline
     - Automatic generation of the pipeline job configuations, so that it is easy to update
+
+### More
+
+More posts about this topic can be found via the
+[Software delivery pipeline](/tags/software-delivery-pipeline.html) tag.
