@@ -25,12 +25,35 @@ Tags:
     - Pay ahead for hardware and keep paying for the maintenance
 
 Both approaches have pros and cons. And which system is the most suitable depends
- on the situation of the 'company' that needs the build system. For smaller
+ on the situation of the 'company' that needs the build system.
+
+- Should do a calculation of which costs more. If you use the system relatively little
+  cloud systems are cheaper, however if you use the system constantly then it is likely
+  that on-prem systems are cheaper. Obviously a cost calculation should also include the
+  cost of training and staff maintaining the system. There is no infrastructure maintenance
+  for a cloud system, but that doesn't mean there is no maintenance. And depending on how
+  well the cloud system fits the local workflow there might be a lot of training / maintenance
+  needed.
+  Additionally you will always pay for the cloud system,
+  while on-prem hardware is written off after a while. Obviously using old hardware means
+  you don't get the highest performance so that's another trade-off.
+- If there are regulations about access to source code and processes maybe an on-prem system
+  is required. Some cloud systems might provide the appropriate controls, and some might not.
+  An on-prem system should always be able to provide the right controls and logs because you
+  control how it is configured
+- In case of very specific executor configuration on-prem is ore likely to be the right choice,
+  although some cloud systems allow connecting custom executors
+- Finally can combine systems. Use on-prem with an overflow to cloud, or have cloud for most
+  tasks but have on-prem for some specific ones that require highly configured executors.
+
+For smaller
 companies it is probably more efficient to use cloud based systems as they don't need
 additional personel to maintain the system. Once a company grows additional staff to
-maintain an on-prem build system.
+maintain an on-prem build system might be a good investment.
 
-Having a on-prem system provides more control over the configuration etc. That might
-be important for some companies, for instance if you want to make sure that the code
-of the software never leaves the premises, or if you need to have oversight for
-certification / ??
+In the end the decision to select a cloud build system or a on-prem build system depends
+very strongly on the situation the company is in. As time progresses the best type of system
+may change from on-prem to cloud or visa versa.
+Both systems have their advantages and disadvantages. In the end all that matters is that
+a system that fits the development process is selected, independent of what the different
+vendors say is the best thing.
