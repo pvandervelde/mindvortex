@@ -46,6 +46,22 @@ are essential in application development and deployment each of these systems sp
 a large enough area that it warrants a more thorough discussion than can be given in
 this post.
 
+Additionally the following terms will be used throughout this post:
+
+- Input set - A collection of information that is provided to the pipeline to start
+  the process of turning these generating the desired artefacts. An input set may consist
+  of source code, e.g. in terms of a given commit to the source control system, files or
+  documents, configuration values or any other combination of information which is required
+  to create, validate and deploy the product artefacts.
+  An input set should contain all the information needed to generate and deploy the product
+  artefacts and each time a specific input set is provided to the pipeline exactly the
+  same artefacts will be produced.
+- Executor - In general the development pipeline will be driven by a continuous integration
+  system which itself consists of a controlling unit, which receives the tasks and distributes them,
+  and a set of executing units which perform the actual computational tasks. In small systems
+  the controlling unit may also perform the computational tasks, however even in this case
+  a distinction can be made between the controlling and executing parts.
+
 ### Considerations
 
 In order to start the selection of suitable components for a development pipeline
