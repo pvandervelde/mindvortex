@@ -1,6 +1,7 @@
 Title: Ops-Tools-Build release - V0.1.0 and V0.1.1
 Tags:
   - Ops-Tools-Build
+  - Ops-Resource
 ---
 
 Last week version [0.1.0](https://github.com/ops-resource/ops-tools-build/releases/tag/0.1.0) of the
