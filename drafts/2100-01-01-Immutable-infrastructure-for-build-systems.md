@@ -49,4 +49,4 @@ there.
       - Note: Building resources will in general take longer than building applications,
         especially if the resource needs to be put on a Windows VM.
     - Execute the (integration / regression) tests against the newly created resource
-    -
+    - Deploy the new instances and retire the existing instance
