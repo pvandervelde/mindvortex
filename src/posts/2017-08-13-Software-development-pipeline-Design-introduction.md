@@ -1,12 +1,13 @@
-Title: Software delivery pipeline - Design introduction
+Title: Software development pipeline - Design introduction
 Tags:
   - Delivering software
-  - Software delivery pipeline
+  - Software development pipeline
+  - Pipeline design
   - DevOps
 ---
 
 In order to deliver new or improved software applications within the desired
-time spn while maintaining or improving quality modern development moves towards
+time span while maintaining or improving quality modern development moves towards
 [shorter development and delivery](https://techbeacon.com/doing-continuous-delivery-focus-first-reducing-release-cycle-times)
 cycles. This is often achieved through the use of agile processes and a development
 workflow including [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration),
@@ -14,11 +15,14 @@ workflow including [Continuous Integration](https://en.wikipedia.org/wiki/Contin
 or even [Continuous deployment](https://www.agilealliance.org/glossary/continuous-deployment).
 
 One of the consequences of this desire to reduce the development cycle time on the
-development process is that more parts of the development workflow
-have to be automated. One way this automation can be achieved is by creating a
+development process is that more tasks in the development workflow
+have to be automated in order to reduce the time taken for the specific task.
+One way this automation can be achieved is by creating a
 [development pipeline](http://www.informit.com/articles/article.aspx?p=1621865&seqNum=2) which
 takes the source code and moves it through a set of largely automatic transformations, e.g. compilation,
-testing and packaging, to obtain a validated application that can be deployed.
+testing, packaging and potentially deployment, to obtain a validated application that
+at the very least can be deployed or even used immediately depending on the capabilities of the
+pipeline.
 
 In order to configure a development pipeline, whether that is on-prem or in the cloud, for
 one or more development teams one will have to understand what the requirements are which
@@ -27,8 +31,6 @@ the pipeline is going to be situated, either on-prem, in the cloud or a combinat
 how the pipeline will be assembled and managed. In this post and the following ones some of
 these issues will be discussed starting with the requirements or considerations that need
 to be given to the characteristics or behaviours of the development pipeline.
-
-### Definitions
 
 Prior to discussing what the considerations are for selecting tooling and infrastructure
 for a development pipeline it is important to decide what elements are part of the pipeline
@@ -44,9 +46,9 @@ Items like version control, package management, issue tracking, system monitorin
 customer support and others are not included in the discussion. While these systems
 are essential in application development and deployment each of these systems spans
 a large enough area that it warrants a more thorough discussion than can be given in
-this post.
+this post series.
 
-Additionally the following terms will be used throughout this post:
+Additionally the following terms will be used throughout this post series:
 
 - Input set - A collection of information that is provided to the pipeline to start
   the process of turning these generating the desired artefacts. An input set may consist
@@ -62,15 +64,13 @@ Additionally the following terms will be used throughout this post:
   the controlling unit may also perform the computational tasks, however even in this case
   a distinction can be made between the controlling and executing parts.
 
-### Considerations
-
 In order to start the selection of suitable components for a development pipeline
 it is important to know what the desirable properties of such a system are. The following
 ordered properties are thought to be the most important ones to consider.
 
 - Correctness: The pipeline must return the right outputs for a specific input, i.e it
   should report errors to the interested parties if there are any and report success
-  if there are no errors.
+  and produce the desired artefacts if there are no errors.
 - Performance: The pipeline must push changes through the different stages fast
   in order to get results back to the interested parties as soon as possible.
 - Robustness: The pipeline must be able to cope with environmental changes, both expected
@@ -82,8 +82,8 @@ ordered properties are thought to be the most important ones to consider.
 There are of course other desirable properties for a development pipeline like ease-of-use,
 maintainability, etc.. It is however considered that the aforementioned properties are the
 most critical ones. The linked posts provide additional reasons why each of these properties
-are important and how a software delivery pipeline can be designed to satisfy these important
+are important and how a software development pipeline can be designed to satisfy these important
 considerations.
 
 Additional posts about this topic can be found via the
-[Software delivery pipeline](/tags/software-delivery-pipeline.html) tag.
+[Software development pipeline](/tags/software-development-pipeline.html) tag.

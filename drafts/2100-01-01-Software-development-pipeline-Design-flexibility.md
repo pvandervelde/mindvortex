@@ -1,4 +1,9 @@
-Title: Software delivery pipeline - Design flexibilty
+Title: Software development pipeline - Design flexibilty
+Tags:
+  - Delivering software
+  - Software development pipeline
+  - Pipeline design
+  - DevOps
 ---
 
 - Why is flexibility important

@@ -1,4 +1,9 @@
-Title: Software delivery pipeline - Design correctness
+Title: Software development pipeline - Design correctness
+Tags:
+  - Delivering software
+  - Software development pipeline
+  - Pipeline design
+  - DevOps
 ---
 
 The first property to consider is *correctness*, namely the pipeline must produce results

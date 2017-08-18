@@ -1,4 +1,9 @@
-Title: Software delivery pipeline - Design robustness
+Title: Software development pipeline - Design robustness
+Tags:
+  - Delivering software
+  - Software development pipeline
+  - Pipeline design
+  - DevOps
 ---
 
 - Has to be able to deal with changes in the environment in a sensible way

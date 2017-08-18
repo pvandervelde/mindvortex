@@ -1,4 +1,9 @@
-Title: Software delivery pipeline - Design performance
+Title: Software development pipeline - Design performance
+Tags:
+  - Delivering software
+  - Software development pipeline
+  - Pipeline design
+  - DevOps
 ---
 
 The second property to consider is *performance*, namely the pipeline must provide feedback on
