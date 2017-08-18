@@ -81,7 +81,9 @@ ordered properties are thought to be the most important ones to consider.
 
 There are of course other desirable properties for a development pipeline like ease-of-use,
 maintainability, etc.. It is however considered that the aforementioned properties are the
-most critical ones.
+most critical ones. The linked posts provide additional reasons why each of these properties
+are important and how a software delivery pipeline can be designed to satisfy these important
+considerations.
 
-More posts about this topic can be found via the
+Additional posts about this topic can be found via the
 [Software delivery pipeline](/tags/software-delivery-pipeline.html) tag.
