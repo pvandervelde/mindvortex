@@ -20,21 +20,19 @@ have to be automated in order to reduce the time taken for the specific task.
 One way this automation can be achieved is by creating a
 [development pipeline](http://www.informit.com/articles/article.aspx?p=1621865&seqNum=2) which
 takes the source code and moves it through a set of largely automatic transformations, e.g. compilation,
-testing, packaging and potentially deployment, to obtain a validated application that
-at the very least can be deployed or even used immediately depending on the capabilities of the
-pipeline.
+testing, packaging and potentially deployment, to obtain a validated, and potentially deployed, application.
 
 In order to configure a development pipeline, whether that is on-prem or in the cloud, for
 one or more development teams one will have to understand what the requirements are which
-are placed on the pipeline, which tooling is available to create the pipeline, where
-the pipeline is going to be situated, either on-prem, in the cloud or a combination and
-how the pipeline will be assembled and managed. In this post and the following ones some of
+are placed on the pipeline, which tooling is available to create the pipeline, whether the
+pipeline will be situated on-prem, in the cloud or a combination and
+how the pipeline will be assembled and managed. In this post series some of
 these issues will be discussed starting with the requirements or considerations that need
 to be given to the characteristics or behaviours of the development pipeline.
 
 Prior to discussing what the considerations are for selecting tooling and infrastructure
-for a development pipeline it is important to decide what elements are part of the pipeline
-and which elements are not considered to be part of the pipeline. For the remainder of this
+for a development pipeline, it is important to decide what elements are part of the pipeline
+and which elements are not. For the remainder of this
 post series the development pipeline is considered to consist of:
 
 - The scripts that are used during the different parts of the cycle, i.e. the build, test
@@ -48,7 +46,7 @@ are essential in application development and deployment each of these systems sp
 a large enough area that it warrants a more thorough discussion than can be given in
 this post series.
 
-Additionally the following terms will be used throughout this post series:
+Additionally, the following terms will be used throughout the series:
 
 - Input set - A collection of information that is provided to the pipeline to start
   the process of turning these generating the desired artefacts. An input set may consist
