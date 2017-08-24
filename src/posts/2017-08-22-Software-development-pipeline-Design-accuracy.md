@@ -1,4 +1,4 @@
-Title: Software development pipeline - Design correctness
+Title: Software development pipeline - Design accuracy
 Tags:
   - Delivering software
   - Software development pipeline
@@ -6,32 +6,69 @@ Tags:
   - DevOps
 ---
 
-The first property to consider is *correctness*, namely the pipeline must produce results
-that are consistent with the inputs, whether that result is a success result, the application was
-build and validated without issue, or a failure result, and it must do so the correctly and
-repeatably for each input set. This is so that the development
-teams can rely on the system to always return a result that reflects the expected state of the
-process. Without the correctness the development teams will eventually lose their trust in the
-development pipeline which will lead them to ignore the results because they will assume that the
-failure is one of the system instead of one with the pipeline inputs.
+[ISO](https://en.wikipedia.org/wiki/Accuracy_and_precision#ISO_definition_.28ISO_5725.29) defines
+accuracy as the combination of [correctness](http://dictionary.cambridge.org/dictionary/english/correct?q=correctness),
+in agreement with the true facts, and [consistency](http://dictionary.cambridge.org/dictionary/english/consistency),
+always behaving or performing in a similar way.
+
+
+
+It must do so for both success results, i.e. the application was build and validated without issue, and failure results.
+
+
+The reason to value *accuracy* as the number one characteristic of the development pipeline is
+because it is important for the development teams to be able to rely on the outputs of the
+pipeline, whether they are product artefacts, test results or output logs. Without the correctness
+the development teams will eventually lose their trust in the development pipeline which will
+lead them to ignore the results because they will assume that a failure is one of the system
+instead of one caused by the input set. Once the development teams lose the trust in the
+pipeline it will take a lot of work to regain their trust.
 
 Once we know that having a development pipeline which delivers correct results is important the
 next step is to determine how correctness can be build into the development pipeline. In essence
-building this development pipeline is simple, all one
-has to do is to ensure that all the parts that form the the pipeline behave correctly for a
-given input set.
+this task is a simple one, all one has to do is to ensure that all the parts that form the the
+pipeline behave correctly for all input sets. Obviously practically this is a lot more difficult
+than the previous statement makes it seem.
+
+
+
+
+However it does point out that
+
+
+
 
 For the scripts, tools and continuous integration system this means that each input returns a
 correct response. Fortunately most scripts and tools do so for the majority of the inputs.
 In cases where a tool returns an incorrect response an issue should be logged and corrected.
+
+- Any higher level tools / scripts should be able to handle errors from the lower level tools / scripts
+  and process them. Note that this doesn't mean that the higher level tool / script should fix the issue,
+  more that it should respond consistently
+- How do we deal with errors etc.?
+
+
 With the tools taken care of two other areas need to be carefully controlled. The first is
 that the infrastructure on top of which the development pipeline executes should be stable
 and consistent, and the second is to ensure that the interaction of all the different parts
 does not lead to incorrect results.
 
+
+
+
+
 For infrastructure the biggest issue lies with outages of the network or the different
 services. These types of issues can be resolved with the standard operations approaches
 for highly available infrastructure.
+
+- Robustness isn't correctness. Technically the infrastructure can fall over all the time as long as it
+  delivers correct results. However outages make it hard to be correct because running one input set multiple
+  times may return different results each time due to infrastructure issues. So in essence robustness is
+  important for correctness too. More information about robustness will be provided in a future post
+
+
+
+
 
 Interaction issues should only occur when there is a change to one of the components of
 the pipeline because the interactions are consistent when the pipeline is in use.

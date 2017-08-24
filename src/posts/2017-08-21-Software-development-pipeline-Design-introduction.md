@@ -66,9 +66,9 @@ In order to start the selection of suitable components for a development pipelin
 it is important to know what the desirable properties of such a system are. The following
 ordered properties are thought to be the most important ones to consider.
 
-- Correctness: The pipeline must return the right outputs for a specific input, i.e it
-  should report errors to the interested parties if there are any and report success
-  and produce the desired artefacts if there are no errors.
+- [Accurate](Software-development-pipeline-Design-accuracy.html): The pipeline must return the right
+  outputs for a specific input, i.e it should report errors to the interested parties if there are any
+  and report success and produce the desired artefacts if there are no errors.
 - Performance: The pipeline must push changes through the different stages fast
   in order to get results back to the interested parties as soon as possible.
 - Robustness: The pipeline must be able to cope with environmental changes, both expected
