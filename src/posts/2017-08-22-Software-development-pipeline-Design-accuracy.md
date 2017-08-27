@@ -11,21 +11,19 @@ accuracy as the combination of [correctness](http://dictionary.cambridge.org/dic
 in agreement with the true facts, and [consistency](http://dictionary.cambridge.org/dictionary/english/consistency),
 always behaving or performing in a similar way.
 
-
-
-It must do so for both success results, i.e. the application was build and validated without issue, and failure results.
-
-
 The reason to value *accuracy* as the number one characteristic of the development pipeline is
 because it is important for the development teams to be able to rely on the outputs of the
-pipeline, whether they are product artefacts, test results or output logs. Without the correctness
+pipeline, whether they are product artefacts, test results or output logs. Without the accuracy
 the development teams will eventually lose their trust in the development pipeline which will
 lead them to ignore the results because they will assume that a failure is one of the system
 instead of one caused by the input set. Once the development teams lose the trust in the
 pipeline it will take a lot of work to regain their trust.
 
 Once we know that having a development pipeline which delivers correct results is important the
-next step is to determine how correctness can be build into the development pipeline. In essence
+next step is to determine how accuracy can be build into the development pipeline.
+
+
+In essence
 this task is a simple one, all one has to do is to ensure that all the parts that form the the
 pipeline behave correctly for all input sets. Obviously practically this is a lot more difficult
 than the previous statement makes it seem.
