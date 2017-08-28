@@ -22,22 +22,16 @@ pipeline it will take a lot of work to regain their trust.
 Once we know that having a development pipeline which delivers correct results is important the
 next step is to determine how accuracy can be build into the development pipeline.
 
-
-In essence
-this task is a simple one, all one has to do is to ensure that all the parts that form the the
-pipeline behave correctly for all input sets. Obviously practically this is a lot more difficult
-than the previous statement makes it seem.
-
-
-
-
-However it does point out that
-
-
-
+In theory this task is a simple one, all one has to do is to ensure that all the parts that form the the
+pipeline behave correctly for all input sets. However as indicated by many -
+[`In theory there is no difference between theory and practice. In practice there is`](http://wiki.c2.com/?DifferenceBetweenTheoryAndPractice)
+which means that practically achieving is a difficult task to achieve due to the
+many interactions between the pipeline parts. However this does mean that for the
+very least the individual parts need to behave both correctly and consistently.
 
 For the scripts, tools and continuous integration system this means that each input returns a
-correct response. Fortunately most scripts and tools do so for the majority of the inputs.
+correct response and does so consistently for each input set. Fortunately most scripts
+and tools do so for the majority of the inputs.
 In cases where a tool returns an incorrect response an issue should be logged and corrected.
 
 - Any higher level tools / scripts should be able to handle errors from the lower level tools / scripts
