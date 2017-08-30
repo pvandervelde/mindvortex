@@ -21,13 +21,32 @@ pipeline it will take a lot of work to regain their trust.
 
 Once we know that having a development pipeline which delivers correct results is important the
 next step is to determine how accuracy can be build into the development pipeline.
-
 In theory this task is a simple one, all one has to do is to ensure that all the parts that form the the
 pipeline behave correctly for all input sets. However as indicated by many -
 [`In theory there is no difference between theory and practice. In practice there is`](http://wiki.c2.com/?DifferenceBetweenTheoryAndPractice)
-which means that practically achieving is a difficult task to achieve due to the
-many interactions between the pipeline parts. However this does mean that for the
-very least the individual parts need to behave both correctly and consistently.
+which means that practically achieving accuracy is a difficult task due to the
+many, often complex, interactions between the pipeline parts.
+
+One statement that can be made is that at the very least the individual parts need
+to behave both correctly and consistently because the pipeline will certainly not
+perform correctly if the parts are not accurate.
+
+As indicated [previously](Software-development-pipeline-Design-introduction.html) the
+development pipeline consists of
+
+- The scripts that are used during the different parts of the cycle, i.e. the build, test
+  and release scripts.
+- The continuous integration system which is used to execute the different scripts.
+- The tools, like the compiler, test frameworks, etc.
+
+Based on this
+
+
+
+
+
+
+
 
 For the scripts, tools and continuous integration system this means that each input returns a
 correct response and does so consistently for each input set. Fortunately most scripts
@@ -60,7 +79,8 @@ for highly available infrastructure.
 
 
 
-
+- Interaction is the final bit. Need to make sure that all the parts connect in
+  the correct way
 
 Interaction issues should only occur when there is a change to one of the components of
 the pipeline because the interactions are consistent when the pipeline is in use.
