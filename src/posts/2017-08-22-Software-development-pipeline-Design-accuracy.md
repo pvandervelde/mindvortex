@@ -22,14 +22,13 @@ pipeline it will take a lot of work to regain their trust.
 Once we know that having a development pipeline which delivers correct results is important the
 next step is to determine how accuracy can be build into the development pipeline.
 In theory this task is a simple one, all one has to do is to ensure that all the parts that form the the
-pipeline behave correctly for all input sets. However as indicated by many -
-[`In theory there is no difference between theory and practice. In practice there is`](http://wiki.c2.com/?DifferenceBetweenTheoryAndPractice)
+pipeline behave correctly for all input sets. However as indicated by
+[many](http://wiki.c2.com/?DifferenceBetweenTheoryAndPractice) -
+
+> In theory there is no difference between theory and practice. In practice there is
+
 which means that practically achieving accuracy is a difficult task due to the
 many, often complex, interactions between the pipeline parts.
-
-One statement that can be made is that at the very least the individual parts need
-to behave both correctly and consistently because the pipeline will certainly not
-perform correctly if the parts are not accurate.
 
 As indicated [previously](Software-development-pipeline-Design-introduction.html) the
 development pipeline consists of
@@ -39,43 +38,43 @@ development pipeline consists of
 - The continuous integration system which is used to execute the different scripts.
 - The tools, like the compiler, test frameworks, etc.
 
-Based on this
-
-
-
-
-
-
-
+Based on this categorization of the pipeline parts and the previous statement one possible
+way of approaching accuracy for a development pipeline is to first ensure that all the parts
+are individually accurate. As a second stage the changes in accuracy due to interaction between
+the parts can be dealt with.
 
 For the scripts, tools and continuous integration system this means that each input returns a
 correct response and does so consistently for each input set. Fortunately most scripts
-and tools do so for the majority of the inputs.
-In cases where a tool returns an incorrect response an issue should be logged and corrected.
+and tools do so for the majority of the inputs. In cases where a tool returns an incorrect response
+the standard software development process should be followed by recording an issue, scheduling the
+issue and implementing, testing and deploying a new version of the tool. In this process
+it is important to test thoroughly to ensure that the changes do not negatively impact
+tool accuracy. Additionally it is important that (automated) regression testing against known input sets
+should be performed as well as high level (automated) smoke tests of the entire development pipeline
+to validate that the issue has been fixed and no further issues have been introduced.
 
-- Any higher level tools / scripts should be able to handle errors from the lower level tools / scripts
-  and process them. Note that this doesn't mean that the higher level tool / script should fix the issue,
-  more that it should respond consistently
-- How do we deal with errors etc.?
+In order to minimize disruption to the development teams tests should be conducted outside
+business hours if no test environment is available, i.e. if the production development
+pipeline has to be used for the final tests. It is of course better if a test environment
+is available so that testing can take place during business hours without affecting
+the development teams. Additionally having a test environment with a copy of the
+development pipeline allows for the development of new features and other changes
+while the production pipeline is in use.
+
+With the approach to development and improvement of the tools taken care of the other area that
+needs to be carefully controlled is the infrastructure on top of which the development pipeline
+executes. For infrastructure the biggest issues are related to outages of different parts of
+the infrastructure, e.g. the network or the different services.
+
+- These types of issues can be resolved with the standard operations approaches
+  for highly available infrastructure.
 
 
-With the tools taken care of two other areas need to be carefully controlled. The first is
-that the infrastructure on top of which the development pipeline executes should be stable
-and consistent, and the second is to ensure that the interaction of all the different parts
-does not lead to incorrect results.
-
-
-
-
-
-For infrastructure the biggest issue lies with outages of the network or the different
-services. These types of issues can be resolved with the standard operations approaches
-for highly available infrastructure.
-
-- Robustness isn't correctness. Technically the infrastructure can fall over all the time as long as it
-  delivers correct results. However outages make it hard to be correct because running one input set multiple
-  times may return different results each time due to infrastructure issues. So in essence robustness is
-  important for correctness too. More information about robustness will be provided in a future post
+It should be noted that it is not necessary, but extremely helpful, for the infrastructure
+to be robust in order to provide an accurate development pipeline. Tooling can, and
+probably should, be adapted to handle and correct for infrastructure failures. However
+as one expects it is much easier to build a development pipeline on top of a robust
+infrastructure.
 
 
 
