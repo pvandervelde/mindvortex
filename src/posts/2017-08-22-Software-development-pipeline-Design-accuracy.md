@@ -64,31 +64,45 @@ while the production pipeline is in use.
 With the approach to development and improvement of the tools taken care of the other area that
 needs to be carefully controlled is the infrastructure on top of which the development pipeline
 executes. For infrastructure the biggest issues are related to outages of different parts of
-the infrastructure, e.g. the network or the different services.
+the infrastructure, e.g. the network or the different services. In most cases
+failures on the infrastructure level do not directly influence the correctness of the development
+pipeline. It is obviously possible for a failure in the infrastructure to lead
+to an incorrect service being used, e.g. the test package manager instead of the
+production one. However unless other issues are present, i.e. the test package manager
+has packages of the same version but different content, it is unlikely that
+a failure in the infrastructure will allow artefacts to pass the development pipeline
+while they should not. A more likely result is that failures in the infrastructure
+lead to failures in the development pipeline thus affecting the ability of the
+pipeline to deliver the correct results consistently.
 
-- These types of issues can be resolved with the standard operations approaches
-  for highly available infrastructure.
+The types of issues mentioned can mostly be prevented by using the modern approaches
+to IT operations like [configuration management](https://en.wikipedia.org/wiki/Software_configuration_management)
+and [immutable servers](https://martinfowler.com/bliki/ImmutableServer.html) to ensure
+that the state of the infrastructure is known, [monitoring](https://en.wikipedia.org/wiki/System_monitor)
+to ensure that those responsible for operations are notified of issues and
+standard operating procedures and potentially auto-remediation scripts to
+quickly resolve issues that arise.
 
-
-It should be noted that it is not necessary, but extremely helpful, for the infrastructure
+It should be noted that it is not necessary, though extremely helpful, for the infrastructure
 to be robust in order to provide an accurate development pipeline. Tooling can, and
-probably should, be adapted to handle and correct for infrastructure failures. However
-as one expects it is much easier to build a development pipeline on top of a robust
-infrastructure.
+probably should, be adapted to handle and correct for infrastructure failures as
+much as possible. However as one expects it is much easier to build a development
+pipeline on top of a robust infrastructure.
 
+The final part of the discussion on the accuracy of the development pipeline deals
+with the relation between accuracy and the interaction of the tools and infrastructure.
+The main issue with interaction issues is that they are often hard to understand
+due to the, potentially large, number of components involved. Additionally certain
+interaction issues may only occur under specific circumstances like high load or
+specific times of the day / month / year, e.g. daylight savings or on leap days.
 
+Because of the complexity it is important when building and maintaining a development pipeline
+to following the normal development process, i.e. using version control,
+(unit) testing, continuous integration, delivery or deployment, work item tracking
+and extensive testing etc. for all changes to the pipeline. This applies to the scripts
+and tools as well as the [infrastructure](https://en.wikipedia.org/wiki/Infrastructure_as_Code).
 
-- Interaction is the final bit. Need to make sure that all the parts connect in
-  the correct way
-
-Interaction issues should only occur when there is a change to one of the components of
-the pipeline because the interactions are consistent when the pipeline is in use.
-In order to ensure that the pipeline maintains correctness when changes are made to parts of the
-pipeline it is important to apply the normal development process, i.e. using version control,
-(unit) testing, continuous integration, delivery or deployment, and work item tracking etc.,
-for each of the changes. This applies to the scripts and tools as well as the
-[infrastructure](https://en.wikipedia.org/wiki/Infrastructure_as_Code). Additionally it
-is especially important to execute thorough regression testing for any change to the
+Additionally it is especially important to execute thorough regression testing for any change to the
 pipeline to ensure that a change to a single part does not negatively influence the
 correctness of the pipeline.
 
