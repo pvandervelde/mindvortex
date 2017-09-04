@@ -91,5 +91,5 @@ Additional posts about this topic can be found via the
 
 - August 30th: Replaced the term `correctness` with the term `accuracy` because that
   is a better description of the combined concepts of consistency and correctness.
-- August 30th: Added the link to the post providing the high level description on
+- September 4th: Added the link to the post providing the high level description on
   how to achieve accuracy for a development pipeline
