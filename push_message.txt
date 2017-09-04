@@ -1,1 +1,1 @@
-New Posts: nBuildKit release 0.10.0, Ops-Tools-Build release 0.3.0 and first post describing the construction of a software development pipeline.
+New Posts: nBuildKit release 0.10.2 and post describing the importance of accuracy for a development pipeline.
