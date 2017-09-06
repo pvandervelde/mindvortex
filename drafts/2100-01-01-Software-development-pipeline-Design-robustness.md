@@ -17,5 +17,5 @@ Tags:
 - How do we achieve robustness
   - Extensive error handling, both for known cases (e.g. service offline) and general error handling
     for unexpected cases
-  - Infrastructure: highly available services
+  - Infrastructure: highly available services and graceful degradation
   - Scripts: Error handling, retries, proper error messages
