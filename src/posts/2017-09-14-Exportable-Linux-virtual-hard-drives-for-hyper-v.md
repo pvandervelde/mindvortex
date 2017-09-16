@@ -44,7 +44,66 @@ documentation for the different options in the preseed files is hard to find. In
 of the [ubuntu sample preseed](https://help.ubuntu.com/lts/installation-guide/example-preseed.txt) file,
 bug reports, old forum messages and a few blog
 [posts](https://blog.jhnr.ch/2017/02/23/resolving-no-x64-based-uefi-boot-loader-was-found-when-starting-ubuntu-virtual-machine/)
-resulted in the following preseed file
+allowed me to determine that to make the Ubuntu installer place the UEFI files in the correct location
+two parts of the preseed file needed to be changed from the default Ubuntu one. The first
+part is the partitioning section which requires that at least an `EFI` partition and (most likely)
+a `boot` partition are defined. This almost requires that a custom recipe is defined. The one
+I currently use looks as follows:
+
+    # Or provide a recipe of your own...
+    # If not, you can put an entire recipe into the preconfiguration file in one
+    # (logical) line. This example creates a small /boot partition, suitable
+    # swap, and uses the rest of the space for the root partition:
+    d-i partman-auto/expert_recipe string       \
+        grub-efi-boot-root ::                   \
+            1 1 1 free                          \
+                $bios_boot{ }                   \
+                method{ biosgrub }              \
+            .                                   \
+            256 256 256 fat32                   \
+                $primary{ }                     \
+                method{ efi }                   \
+                format{ }                       \
+            .                                   \
+            512 512 512 ext4                    \
+                $primary{ }                     \
+                $bootable{ }                    \
+                method{ format }                \
+                format{ }                       \
+                use_filesystem{ }               \
+                filesystem{ ext4 }              \
+                mountpoint{ /boot }             \
+            .                                   \
+            4096 4096 4096 linux-swap           \
+                $lvmok{ }                       \
+                method{ swap }                  \
+                format{ }                       \
+            .                                   \
+            10000 20000 -1 ext4                 \
+                $lvmok{ }                       \
+                method{ format }                \
+                format{ }                       \
+                use_filesystem{ }               \
+                filesystem{ ext4 }              \
+                mountpoint{ / }                 \
+            .
+
+Note that syntax for the partioner section is very particular. Note especially the  dots (`.`) at
+the end of each section. If the syntax isn't completely correct nothing will work but no sensible
+error messages will be provided.
+Additionally the Ubuntu install complained when there was no `swap` section so I added one. This
+shouldn't be necessary to get the UEFI files in the correct location but it is apparently necessary
+to get Ubuntu to install in the first place.
+
+The second part of the preseed file that should be changed is the `grub-installer` section. There
+the following line should be added
+
+    d-i grub-installer/force-efi-extra-removable boolean true
+
+This line indicates that grub should force install the UEFI files, thus overriding the normal state
+of not installing the UEFI boot files.
+
+This means that the complete preseed file looks as follows
 
     # preseed configuration file for Ubuntu.
     # Based on: https://help.ubuntu.com/lts/installation-guide/armhf/apbs04.html
@@ -280,64 +339,7 @@ resulted in the following preseed file
 
     choose-mirror-bin mirror/http/proxy string
 
-To make the Ubuntu installer place the UEFI files in the correct location requires two parts of the
-preseed file to be changed from the default Ubuntu one. The first part is the partitioning section
-which requires that at least an `EFI` partition and (most likely) a `boot` partition are defined.
-This almost requires that a custom recipe is defined which looks as follows:
-
-    # Or provide a recipe of your own...
-    # If not, you can put an entire recipe into the preconfiguration file in one
-    # (logical) line. This example creates a small /boot partition, suitable
-    # swap, and uses the rest of the space for the root partition:
-    d-i partman-auto/expert_recipe string       \
-        grub-efi-boot-root ::                   \
-            1 1 1 free                          \
-                $bios_boot{ }                   \
-                method{ biosgrub }              \
-            .                                   \
-            256 256 256 fat32                   \
-                $primary{ }                     \
-                method{ efi }                   \
-                format{ }                       \
-            .                                   \
-            512 512 512 ext4                    \
-                $primary{ }                     \
-                $bootable{ }                    \
-                method{ format }                \
-                format{ }                       \
-                use_filesystem{ }               \
-                filesystem{ ext4 }              \
-                mountpoint{ /boot }             \
-            .                                   \
-            4096 4096 4096 linux-swap           \
-                $lvmok{ }                       \
-                method{ swap }                  \
-                format{ }                       \
-            .                                   \
-            10000 20000 -1 ext4                 \
-                $lvmok{ }                       \
-                method{ format }                \
-                format{ }                       \
-                use_filesystem{ }               \
-                filesystem{ ext4 }              \
-                mountpoint{ / }                 \
-            .
-
-The syntax for the partioner is very particular. Note especially the  dots (`.`) at the end of each
-section. If the syntax isn't completely correct nothing will work but no sensible error messages will
-be provided.
-
-Also note that the Ubuntu install complained when there was no `swap` section.
-
-The second part of the preseed file that should be changed is the `grub-installer` section. There
-the following line should be added
-
-    d-i grub-installer/force-efi-extra-removable boolean true
-
-This line indicates that grub should force install the UEFI files, thus overriding the normal state
-of not installing the UEFI boot files.
-
-The complete preseed file can be found in the
+The complete preseed file can also be found in the
 [http preseed directory](https://github.com/ops-resource/ops-tools-baseimage/tree/master/src/linux/ubuntu/http)
 of the [Ops-Tools-BaseImage](https://github.com/ops-resource/ops-tools-baseimage) project. This
 project also publishes a [NuGet](https://www.nuget.org/packages/Ops.Tools.BaseImage.Linux/) package
