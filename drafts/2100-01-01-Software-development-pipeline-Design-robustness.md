@@ -15,6 +15,16 @@ Tags:
       back to the team. If the pipeline just crashes it will be harder to figure out what went wrong
       thus slowing the team down
 - How do we achieve robustness
+  - Simple things:
+    - Execute the pipeline in your own workspace and only in your own workspace. The workspace is
+      'private' to the current pipeline step, no other processes should be working in the local
+      workspace. This removes issues with unexpected changes to the file system
+    - Ensure that the workspace is clean before starting, for a known definition of clean. This way
+      the pipeline step starts from a known state
+    - Do not depend on global (machine, container, network) state. Global state might change unexpectedly
+    - Mirror external sources and carefully control what is in the mirrors (leftpad anyone?)
+    - Ideally don't rely on caching. Pull data fresh from the local data store (packages etc.)
+      each time. This prevents cache polution from being a problem
   - Extensive error handling, both for known cases (e.g. service offline) and general error handling
     for unexpected cases
   - Infrastructure: highly available services and graceful degradation
