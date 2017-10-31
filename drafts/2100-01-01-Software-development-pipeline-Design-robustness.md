@@ -9,6 +9,8 @@ Tags:
 - Has to be able to deal with changes in the environment in a sensible way
 - Has to be able to deal with changes in the source code and report the correct
   errors
+- Note that robustness is generally aimed at situations we understand, i.e. things we can sort of predict,
+  the other value is resilience (see paper)
 - Why is robustness important
     - The environment may experience changes, e.g. minor outages, failing services etc. In this
       case the pipeline should be able to deal with these issues and provide a sensible report
@@ -34,3 +36,6 @@ Tags:
     (but don't over-alert) so that we get alerted before everything is on fire.
   - Automatic remediation if possible
   - Fall-backs for everything
+- Notes
+  - Robustness and performance are generally not friends. A robust process can well be slower than a
+    non-robust one because it's easy to be fast if stuff doesn't have to work.
