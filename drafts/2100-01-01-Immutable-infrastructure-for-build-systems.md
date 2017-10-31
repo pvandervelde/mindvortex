@@ -32,6 +32,8 @@ there.
     by hand which reduces the ease at which they can be build
   - Resources should be on virtual machines or Docker containers. That way it's easy to
     create an instance of the resource which is required in order to test
+    - General idea is to have one resource per VM / container instance. One resource may contain
+      multiple services / daemons but it always serves a single goal.
   - General workflow:
     - Update the code for the resource
     - (Optionally) validate the sources using the suitable linters. Especially for
