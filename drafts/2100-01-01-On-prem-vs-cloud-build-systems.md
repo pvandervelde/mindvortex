@@ -37,10 +37,18 @@ Both approaches have pros and cons. And which system is the most suitable depend
   Additionally you will always pay for the cloud system,
   while on-prem hardware is written off after a while. Obviously using old hardware means
   you don't get the highest performance so that's another trade-off.
+  - Cannot necessarily directly compare. The lift-and-shift approach will probably lead to a
+    worse outcome for the cloud system
+  - A lot depends on the complexity of the system as well. If it's just a build system (i.e.
+    some form of controller with one or more agents / executors) then it's probably easy to compare
+    both systems. However most systems will include many other parts, e.g. package repositories,
+    test environments, release / deployment systems, source control etc.
+- Cloud systems require less effort but don't excuse using crappy approaches. In the end one still
+  needs to know that the system provides the accuracy, performance, robustness and flexibility.
 - If there are regulations about access to source code and processes maybe an on-prem system
   is required. Some cloud systems might provide the appropriate controls, and some might not.
   An on-prem system should always be able to provide the right controls and logs because you
-  control how it is configured
+  control how it is configured. Note however that the latter will obviously cost money
 - In case of very specific executor configuration on-prem is ore likely to be the right choice,
   although some cloud systems allow connecting custom executors
 - Finally can combine systems. Use on-prem with an overflow to cloud, or have cloud for most
