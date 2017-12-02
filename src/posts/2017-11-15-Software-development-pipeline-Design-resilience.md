@@ -7,7 +7,7 @@ Tags:
 ---
 
 This [paper](https://www.researchgate.net/publication/276139783_Four_concepts_for_resilience_and_the_implications_for_the_future_of_resilience_engineering)
-defines four different types of 'resilience', one of which is robustnes, i.e. the ability to absorb
+defines four different types of 'resilience', one of which is robustness, i.e. the ability to absorb
 pertubations. Note that this requires that we know where the pertubations are coming from, and
 robustness in one direction may affect the ability to be robust in another direction
 
@@ -18,7 +18,8 @@ Others are:
   capabilities that you had in excess before failure occurred
 - Graceful extensibility, i.e. the opposite of brittleness, or how to extend adaptive capacity in
   the face of surprise. This is the ability to stretch in the face of surprises
-- Sustained adaptibility. Generally applied to systems / layered networks
+- Sustained adaptibility. Generally applied to systems / layered networks. The ability to adapt
+  and grow new capabilities in the face of changes / chaos / unexpected issues
 
 The general goal for resilience / robustness is to recover from unexpected changes and return back
 to normal. However it seems that recovery back to normal from major trauma is a bit of a misnomer because
@@ -33,10 +34,6 @@ In general the pipeline has to be able to:
   (e.g. additional tools being deployed) to big changes (migration of many of the services), and from
   expected (maintenance or planned upgrades) to unexpected (outages)
 - Deal with changes in the source code and report the correct errors
-
-
-Why is robustness important
-
 - The environment may experience changes, e.g. minor outages, failing services etc. In this
   case the pipeline should be able to deal with these issues and provide a sensible report
   back to the team. If the pipeline just crashes it will be harder to figure out what went wrong
