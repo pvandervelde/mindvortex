@@ -30,73 +30,94 @@ The other definitions for resilience are:
   the loss of sub-systems can be compensated.
 
 Which ever definition of resilience is used in general the goal is to be able to recover from
-unexpected changes and return back to the normal state, ideally with minimal intervention. It should
-be noted that returning back to normal after major trauma can be deceiving because the 'normal' as
+unexpected changes and return back to the normal state, ideally with minimal intervention. An interesting
+side note is that returning back to normal after major trauma can be deceiving because the 'normal' as
 experienced before the trauma will be different from the 'normal' experienced after the trauma due
 to the lessons learned from the trauma and permanent changed caused by the trauma.
 
+Additionally it is not just the unexpected or traumatic changes that are interesting in the case of a
+development pipeline but also the expected ones, e.g. upgrades, maintenance etc., because in general
+it is important for the pipeline to continue functioning while those changes are happening.
 
+For a development pipeline resilience can be approached on different levels. For instance the
+pipeline should be resilient against:
 
-Additionally it is not just the unexpected changes that are interesting but also the expected ones,
-e.g. upgrades, maintenance etc. because in general we would like the pipeline to continue functioning
-while those changes are happening.
+- Changes in the environment which range from small changes, e.g. additional tools being deployed,
+  to big changes, e.g. migration of many of the services, and from expected, i.e. maintenance or
+  planned upgrades, to unexpected
+- Changes in the inputs and the results of processing those inputs which may range from build and test
+  errors to issues with executors
+- Invalid or incorrect configurations.
 
+Once it is known what resilience actually means and what type of situations the pipeline is expected
+to be able to handle the next question is how the pipeline can handle these situations, both in
+terms of what the expected responses are and in terms of how the pipeline should be designed.
 
+There are a mirriad of simple steps that can be taken to provide a base level of resilience. None
+of these simple steps will guard against major trauma but they will be able to either prevent or
+smooth out many of the smaller issues that would otherwise cause the development team to lose faith
+in the pipeline outputs. Some examples of simple steps that can be taken to improve resilience in
+a development pipeline are:
 
+- For each pipeline step ensure that it is executed in a clean 'workspace', i.e. a directory or drive,
+  that will only ever be used by that specific single step. This workspace should be 'private' to the
+  specific pipeline step and no other processes should be allowed to execute in this workspace. This
+  prevents issues with unexpected changes to the file system. There are still cases where 'unexpected'
+  changes to the file system can occur, for instance when running parallel executions within the same
+  pipeline step in the same workspace. This type of behaviour should therefore be avoided as much as
+  possible
+- Do not depend on global, i.e. machine, container or network, state. Global state has a tendency
+  to change in random ways at random times.
+- Avoid using source which are external to the pipeline infrastructure becaues these are prone to
+  unspected random changes. If a build step requires data from an external source then the external
+  source should be mirrored and mirrors should be carefully controled for their content. This should
+  prevent issues with external packages and inputs changing or disappearing, e.g.[leftpad](https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/).
+- If external sources are suitably mirrored inside the pipeline infrastructure then it is possible
+  to remove the caches for these external sources on the executors. By pulling data in fresh from the
+  local data store cache polution issues can be prevented
+- Ensure that each resource is appropriately secured against undesirable acces. This is especially
+  true for the executor resources. It is important to note that pipeline steps are essentially random
+  scripts from an unknown source, even if the scripts are pulled from internal sources, because the
+  scripts will not be security verified before being used. This means that the pipeline scripts should
+  not be allowed to to make any changes or to obtain secrets that they shouldn't have access to.
 
-In general the pipeline has to be able to:
+As mentioned the afforementioned steps form a decent base for improving resilience and they are
+fairly easy to implement, hence they make a good first stage in the improvement of the resilience
+of the development pipeline. Once these steps have been implemented more complex steps can be taken
+to futher improve the state of the development pipeline. These additional steps can be divided into
+items that help prevent issues, items that test and verify the current state, items that aid in
+recovery and finally items, like logging and metrics, that help during post-mortems of failure cases.
 
-- Deal with changes in the environment in a sensible way. Changes may range from small changes
-  (e.g. additional tools being deployed) to big changes (migration of many of the services), and from
-  expected (maintenance or planned upgrades) to unexpected (outages)
-- Deal with changes in the source code and report the correct errors
-- The environment may experience changes, e.g. minor outages, failing services etc. In this
-  case the pipeline should be able to deal with these issues and provide a sensible report
-  back to the team. If the pipeline just crashes it will be harder to figure out what went wrong
-  thus slowing the team down.
-- Users will make mistakes in configuration. The pipeline should be able to report something sensible
-  in this case
-- Expected outages should not lead to failures. In this case expected outages mean outages of services
-  for which we are expecting that they may go offline
-- Failure in a step should only fail the stage if there is no way to complete the stage correctly,
-  e.g. in case of failure to get data, maybe the answer is to retry
-- A robust pipeline is more likely to only error if there is an actual issue with the inputs
+Improved prevention of trauma / outages can partially be achieved by ensuring that all parts of the
+development pipeline are able to handle different error states which can be achieved by building in
+extensive error handling capabilities, both for known cases, e.g. service offline, and general error
+handling for unexpected cases. For the tooling / script side of the pipeline this means for instance
+adding error handling structures nearly everywhere and providing the ability to retry actions.
+For the infrastructure side of the pipeline this could mean providng highly available services and
+ensuring that service delivery gracefully degrades if it can no longer be provided at the required
+standard.
 
+Even if every possible precaution is taken it is not possible to prevent all modes of failure. Unexpected
+failures will always occur no matter what the capabilities of the development pipeline are. This means
+that some of the way to improve resilience is to provide capabilities to recover from failures and to
+recognise that unexpected conditions exist and to notify the users and administrators of this situation.
+It should be noted that providing these capabilities may be much harder to implement due to the
+flexible nature of the issues that are being solved for these cases.
 
+One way to ensure that the system is ready to handle unexpected conditions is by exposing the system
+to semi-controlled unexpected conditions. One example of this is the
+[chaos monkey approach](https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey) which tests the
+resilience of a system by randomly taking down parts of the system. In a well designed system this
+should result in a response of the system in order to restore the now missing capabilities.
 
+The actual handling of unexpected conditions requires that the system has some capability to instigate
+recovery which can for instance consist of having fall-back options for the different sub-systems,
+providing automatic remediation services which monitor the system state and apply different standard
+recovery techniques like restarting failing services or machines or creating new resources to replace
+missing ones.
 
-
-
-
-How do we achieve robustness
-
-- Simple things:
-    - Execute the pipeline in your own workspace and only in your own workspace. The workspace is
-      'private' to the current pipeline step, no other processes should be working in the local
-      workspace. This removes some issues with unexpected changes to the file system. There are
-      still cases where 'unexpected' changes to the file system can occur, for instance when
-      running parallel executions within the same pipeline stage in the same workspace. This type of
-      behaviour should therefore be avoided as much as possible
-    - Ensure that the workspace is clean before starting, for a known definition of clean. This way
-      the pipeline step starts from a known state
-    - Do not depend on global (machine, container, network) state. Global state might change unexpectedly
-    - Mirror external sources and carefully control what is in the mirrors
-      ([leftpad](https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/) anyone?)
-    - Ideally don't rely on caching. Pull data fresh from the local data store (packages etc.)
-      each time. This prevents cache polution from being a problem
-- More complicated things
-    - Extensive error handling, both for known cases (e.g. service offline) and general error handling
-      for unexpected cases
-    - Infrastructure: highly available services and graceful degradation
-    - Scripts: Error handling, retries, proper error messages
-    - Constant testing. Even testing in production, taking services down etc. (chaos monkey)
-    - Logs, metrics and monitoring. Get all the data and alert on it. Ensure that we do predictive alerting
-      (but don't over-alert) so that we get alerted before everything is on fire.
-    - Automatic remediation if possible
-    - Fall-backs for everything
-
-
-Notes
-
-- Robustness and performance are generally not friends. A robust process can well be slower than a
-  non-robust one because it's easy to be fast if stuff doesn't have to work.
+From the high level descriptions given above it is hopefully clear that it will not be easy to create
+a resilient development pipeline and depending on the demands placed on the pipeline many hours of
+work will be consumed by improving the current state and learning from failures. In order to ensure
+that this effort is not a wasted effort it is definitely worth applying iterative improvement approaches
+and only continuing the improvement process if there is actual demand for improvements.
