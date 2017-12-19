@@ -16,9 +16,7 @@ In order to be robust for given disturbances one has to know in advance where th
 come from, e.g. in the case of a development pipeline it might be expected that pipeline stages will
 fail and will polute or damage parts or all of the executor it was running on. Robustness in this
 case would be defined as the ability of the pipeline to handle this damage, for instance by repairing
-or replacing the executor.
-
-The other definitions for resilience are:
+or replacing the executor. The other definitions for resilience are:
 
 - Rebound, the ability to recover from trauma: In order to achieve this capacity ahead of time is
   required, i.e. in order to recover from a disturbance one needs to be able to deploy capabilities
@@ -88,7 +86,7 @@ to futher improve the state of the development pipeline. These additional steps 
 items that help prevent issues, items that test and verify the current state, items that aid in
 recovery and finally items, like logging and metrics, that help during post-mortems of failure cases.
 
-Improved prevention of trauma / outages can partially be achieved by ensuring that all parts of the
+One way prevention of trauma / outages can partially be improved is by ensuring that all parts of the
 development pipeline are able to handle different error states which can be achieved by building in
 extensive error handling capabilities, both for known cases, e.g. service offline, and general error
 handling for unexpected cases. For the tooling / script side of the pipeline this means for instance
@@ -104,8 +102,9 @@ recognise that unexpected conditions exist and to notify the users and administr
 It should be noted that providing these capabilities may be much harder to implement due to the
 flexible nature of the issues that are being solved for these cases.
 
-One way to ensure that the system is ready to handle unexpected conditions is by exposing the system
-to semi-controlled unexpected conditions. One example of this is the
+By exposing the system continuously to semi-controlled unexpected conditions it is possible to
+provide early and controlled feedback to the operators and administrators regarding the resilience
+of the development pipeline. One example of this is the
 [chaos monkey approach](https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey) which tests the
 resilience of a system by randomly taking down parts of the system. In a well designed system this
 should result in a response of the system in order to restore the now missing capabilities.
