@@ -23,9 +23,8 @@ Tags:
   - Development pipeline specific
     - ?
 
-Discussing on-prem systems only. These ideas apply to cloud-based build systems as well
-but given that the user doesn't have to worry about the infrastructure it is of less importance
-there.
+This discussion is useful for both on-prem and cloud systems. In a cloud system there is less infrastructure
+to worry about but those bits that exist should still follow this approach.
 
 - How can we achieve this
   - Requires [infrastructure-as-code]() as well. Otherwise we still have to make the resources
@@ -52,3 +51,27 @@ there.
         especially if the resource needs to be put on a Windows VM.
     - Execute the (integration / regression) tests against the newly created resource
     - Deploy the new instances and retire the existing instance
+  - Also requires [configuration-as-code]() because the configuration needs to be recorded somewhere
+    so that when you rebuild a resource it will get the most up to date configuration
+    - Store the configuration in a version control system and push it to the infrastructure on change
+    - Can follow a standard process that allows testing configurations (e.g. in a test environment)
+    - The infrastructure should have it's own shared storage for configurations so that the 'build'
+      process can push to the shared storage and configurations are distributed from there. That ensures
+      that the build process doesn't need to know where to deliver exactly (which can change as the
+      infrastructure changes). One option is to use SQL / no-SQL type storage (e.g. elastic search etc.),
+      another option is to use a system like [consul](https://consul.io) which has a distributed key-value
+      store
+  - One difficult problem to resolve is the deployment and provisioning of resources, the addition,
+    replacement or removal of resources and then applying the appropriate configurations so that the
+    (essentially generic) resources can be used in the specific environment
+    - In many examples configurations etc. are hard-coded into the resource, this means you can not
+      use the resource in other environments. Ideally it is possible to use a continuous deployment
+      system for the creation and testing of the resources. This means that a resource should essentially
+      be free of environment specific configuration. These types of configurations should not be applied
+      until a resource is added to the environment
+    - Provisioning requires that you can apply all the environment specific information to a resource.
+      This is a difficult problem to solve. Several ways are:
+      - For VMs you can use DVD / ISO files that are linked on first start-up of the resource
+      - Can use systems like [consul-template]() which can generate configurations from a distributed
+        key-value store, or resources can be able to pull their own configurations from a shared store.
+

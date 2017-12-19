@@ -12,6 +12,9 @@ Tags:
       way, however tests might run on a different machine so those results might come back
       in a asynchronous way.
     - Different products may require different approaches
+    - Flexibility is also required when dealing with resilience / robustness. In case of a
+      major disruption flexibility may help with quickly restoring services through alternate
+      means.
 - How do we achieve this
     - Keep majority of the process described in the scripts. They're easier to adapt
     - Provide DSL for describing a pipeline

@@ -71,7 +71,7 @@ ordered properties are thought to be the most important ones to consider.
   and report success and produce the desired artefacts if there are no errors.
 - Performance: The pipeline must push changes through the different stages fast
   in order to get results back to the interested parties as soon as possible.
-- Robustness: The pipeline must be able to cope with environmental changes, both expected
+- Resilience: The pipeline must be able to cope with environmental changes, both expected
   and unexpected.
 - Flexibility: The pipeline must be easy to adapt to new products and tools so that it can
   be used without having to replace large parts each time a new product or tool needs to
@@ -89,7 +89,10 @@ Additional posts about this topic can be found via the
 
 #### Edits
 
-- August 30th: Replaced the term `correctness` with the term `accuracy` because that
+- August 30th 2017: Replaced the term `correctness` with the term `accuracy` because that
   is a better description of the combined concepts of consistency and correctness.
-- September 4th: Added the link to the post providing the high level description on
-  how to achieve accuracy for a development pipeline
+- September 4th 2017: Added the link to the post providing the high level description on
+  how to achieve accuracy for a development pipeline.
+- Nobember 5th 2017: Replaced the term `robustness` with the term `resilience` because it
+  captures a broader perspective on the ability of the system to handle expected and unexpected
+  changes.
