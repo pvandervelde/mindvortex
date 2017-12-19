@@ -1,1 +1,1 @@
-Maintenance: Fixing the missing google analytics ID
+New Post: Software development pipeline - Design resilience
