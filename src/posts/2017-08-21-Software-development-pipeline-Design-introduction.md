@@ -69,13 +69,14 @@ ordered properties are thought to be the most important ones to consider.
 - [Accurate](Software-development-pipeline-Design-accuracy.html): The pipeline must return the right
   outputs for a specific input, i.e it should report errors to the interested parties if there are any
   and report success and produce the desired artefacts if there are no errors.
-- Performance: The pipeline must push changes through the different stages fast
-  in order to get results back to the interested parties as soon as possible.
-- Resilience: The pipeline must be able to cope with environmental changes, both expected
-  and unexpected.
 - Flexibility: The pipeline must be easy to adapt to new products and tools so that it can
   be used without having to replace large parts each time a new product or tool needs to
   be included.
+- [Performance](Software-development-pipeline-Design-performance.html): The pipeline must push changes
+  through the different stages fast in order to get results back to the interested parties as soon
+  as possible.
+- [Resilience](Software-development-pipeline-Design-resilience.html): The pipeline must be able to
+  cope with environmental changes, both expected and unexpected.
 
 There are of course other desirable properties for a development pipeline like ease-of-use,
 maintainability, etc.. It is however considered that the aforementioned properties are the
