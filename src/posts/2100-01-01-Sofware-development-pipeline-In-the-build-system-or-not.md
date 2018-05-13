@@ -11,6 +11,7 @@ Tags:
   - Makes it easy to quickly create pipelines, one build triggers one or more other builds.
   - In many cases also allows steps that require human interaction, e.g. approval or manual triggers
   - Great because it's build in and easily accessible
+  - Works great for static systems, i.e. systems that all behave the same, always run the same steps in the same order
 - No so great because
   - Assumes that the build system is the center of everything, which may be true but it might not. Why would the
     build system be the core of everything and not the version control system or the issue tracker or ...
@@ -36,6 +37,11 @@ Tags:
     in the pipeline etc.. Often build systems don't have this capability, they store just enough information that they
     can do what they need to do, once again they are not database systems (and if they are it is recommended that you
     don't tinker with them)
+  - Dynamic systems are harder. These can happen if you have multiple component stages, e.g. one artefact is build and
+    tested which then triggers the pipeline for one or more artefacts which consume the new artefact, e.g. building
+    a VM image with the binaries for a web service (or something like that)
+  - Build system enabled systems often work from one repository, what if you need multiple components each of which lives
+    in their own repository
 - Maybe it is better to have a separate system that tracks the state of the pipeline. That way you can treat it as the
   critical infrastructure that it is, with the appropriate separation of data and business rule processing etc.
   - As far as I'm aware there is no software for this purpose out there
