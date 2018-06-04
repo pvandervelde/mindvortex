@@ -37,6 +37,8 @@ Tags:
     in the pipeline etc.. Often build systems don't have this capability, they store just enough information that they
     can do what they need to do, once again they are not database systems (and if they are it is recommended that you
     don't tinker with them)
+  - History is a thing. At some stage development or support will want to know where a specific artefact comes from. This
+    historic data needs to be accessible for much longer than build information needs to be accessible for.
   - Dynamic systems are harder. These can happen if you have multiple component stages, e.g. one artefact is build and
     tested which then triggers the pipeline for one or more artefacts which consume the new artefact, e.g. building
     a VM image with the binaries for a web service (or something like that)
