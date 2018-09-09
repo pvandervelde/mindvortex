@@ -13,8 +13,15 @@ Tags:
   - Great because it's build in and easily accessible
   - Works great for static systems, i.e. systems that all behave the same, always run the same steps in the same order
 - No so great because
+  - Assumes that the core of everything is a 'build'. Most of the time that is not the case. A 'build' is just a way
+    to get an artefact and artefacts are what most people care about. Developers write code that turns into artefacts,
+    testers test artefacts, artefacts are deployed and the provide the services that serve the customers. So the best
+    item to track is the artefact, not a build. But build systems are aimed at builds, not artefacts.
   - Assumes that the build system is the center of everything, which may be true but it might not. Why would the
     build system be the core of everything and not the version control system or the issue tracker or ...
+  - Puts knowledge about how to build your product in your build system. It is better if that knowledge is captured in
+    scripts / tools that can be executed without needing the build system, otherwise you lock yourself into a specific
+    build system and changing over will be hard.
   - In reality all systems are required. There isn't necessarily one system that knows enough to make decisions
     about the state of the pipeline. If we assume that we have to put this capability in the build system then we
     will end up encoding a lot of knowledge in the build scripts. That is fairly straight forward for simple pipelines
