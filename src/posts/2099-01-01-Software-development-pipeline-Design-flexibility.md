@@ -18,8 +18,8 @@ Additionally the different stages in the pipeline will require different approac
 will in general be executed by a build system returning the results in a synchronous way, however
 test steps might run on a different machine from the process that controls the test steps so those
 results might come back via an asynchronous route.
-Finally flexibility is also required when dealing with resilience. In case of a disruption
-flexibility may help with quickly restoring services through alternate means.
+Finally flexibility also improves resilience since in case of a disruption
+an adaptable or flexible pipeline will allow restoring services through alternate means.
 
 Making a flexible pipeline is achieved in the same way flexibility is achieved in other software
 products, by using modular parts, standard inputs and outputs and carefully considered design. Some
@@ -30,14 +30,17 @@ of the appropriate options are for instance:
   processes and applications. There can be one or more stages, e.g. build, test and deploy, which
   are dependent on each other only through their inputs and outputs. This allows adding more stages
   if required.
-- Start a new step or stage in the pipeline by having it respond to a standard notification. That
-  allows each step can determine when new information is available. The steps can pull down additional
-  information from the appropriate sources when they are notified. This allows notifications to be generic
-  while steps can still acquire the information they need to execute. Additionally having pipeline
-  steps respond to notifications means that it is very easy to add new steps in the process because
-  a new executor only has to be instantiated and connected to the message source, e.g. a distributed queue.
-- The steps which are executed inside a stage should be allowed to vary in number, type and order.
-  As with the stages steps should ideally use well-known inputs and produce well-known outputs.
+- A step or stage in the pipeline can be started through a response to a standard notification. That
+  allows each step to determine what information it needs to start exectution. Additional information
+  can be downloaded from the appropriate sources upon receiving a notification. This approach allows
+  notifications to be generic  while steps can still acquire the information they need to execute.
+  Additionally having pipeline steps respond to notifications means that it is very easy to add new
+  steps in the process because a new executor only has to be instantiated and connected to the
+  message source, e.g. a distributed queue.
+- If a stage consists of multiple, dependent steps, then it should be easy to add and remove
+  steps based on the requirements. In these cases it would generally be preferred that a stage like
+  this executes one or more scripts as they are easier to extend than services. As with the stages steps
+  should ideally use well-known inputs and produce well-known outputs.
 - Inputs for stages and steps are for instance
     - Source information, e.g. a commit ID
     - Artefacts, e.g. packages installers, zip files etc.
@@ -50,31 +53,37 @@ In order to make the most of the pipeline it is better if the artefacts generate
 are not created, tested and deployed in a single monolitic process. It is much simpler to use the
 flexibility of the pipeline for a product that consists of many smaller components than it is to
 do so for a product that consists of a large single component because smaller components
-can be created much quicker and in general assembly of a larger piece from components is quicker
-than regeneration of the entire piece from scratch. In many cases only a few components will be
-recreated which saves time.
+can be created much quicker and in general assembly of a larger piece from components is quicker and
+more flexible than regeneration of the entire piece from scratch. In many cases only a few components
+will be recreated which saves time.
 
-The exact implementation of the pipeline determines how flexible and easy to extend it will be. However
-some basic suggestions are:
+The exact implementation of the pipeline determines how flexible and easy to extend it will be. Given that
+the use and implementation of the pipeline vary quite a lot it is hard to provide detailed implementation
+details, however some basic suggestions are:
 
 - Keep the build part of the pipeline described in the scripts given that scripts are, in general,
   easier to adapt. By pulling the scripts from a package, e.g. a NuGet or NPM package, it is in general
   quick and easy to update to a later version of these scripts. An additional benefit of
   keeping the process in the scripts is that developers can execute the individual steps of the pipeline
   from their local machines. That allows them to ensure builds / tests work before pushing to the
-  pipeline, provides a means of building things if the pipeline is offline etc.
-
-
-- Don't store a description of the pipeline in a file. Let the pipeline, as in the stages and steps,
+  pipeline and provides a means of building things if the pipeline is not available.
+- It is easier to reason about a pipeline if the entire description of that pipeline is stored in
+  a single file, ideally in source control. However as the pipeline evolves and more steps and stages
+  are executed in parallel it will become increasingly difficult to capture the entire pipeline in
+  a single file. While harder to reason about it is in the end
+  simpler and more flexible to let the pipeline layout, as in the stages, steps and orders of these items,
   be determined by the executors that are available and listening for notifications. That way it's easy
-  to quickly add new steps.
-
-
-- Any part of the process that cannot be done by a script, e.g. test systems, items that need services (e.g.
-  certificate signing, which require that the certificates are present on the current machine, which is something
-  you will probably not want to do on every machine) etc., should have a service that is available to both
-  the build system and the developers executing the scripts locally. For any services that should only
-  be provided to the build server (e.g. signing) the scripts should allow skipping the steps that
+  to change the layout of the pipeline.
+- Any part of the process that cannot be done by a script, e.g. test systems, items that need services, e.g.
+  certificate signing, which require that the certificates are present on the current machine, something
+  which might not be possible to do on every machine etc., should have a service that is available to both
+  the pipeline and the developers executing the scripts locally. For any services that should only
+  be provided to the build server, e.g. signing, the scripts should allow skipping the steps that
   need the service.
-- Provide DSL for describing a pipeline
-- Automatic generation of the pipeline job configuations, so that it is easy to update when changes occur
+- For stages that execute scripts, e.g. the build stage, jobs can be automatically generated
+  from information stored in source control. This makes it easy to update the actions executed by these
+  stages without requiring developers to perform the configuration manually.
+
+
+
+NEED TO END THIS????
