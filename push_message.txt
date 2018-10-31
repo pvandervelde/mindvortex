@@ -1,1 +1,1 @@
-New Post: Software development pipeline - Design resilience
+New Post: Software development pipeline - Design flexibility
