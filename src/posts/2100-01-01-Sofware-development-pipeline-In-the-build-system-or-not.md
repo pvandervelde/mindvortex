@@ -45,38 +45,42 @@ The advantages of creating a pipeline in your build system are:
 - The development team has nearly complete control over the build configuration which ensures that
   it is easy for the development teams to have a pipeline that suits their needs.
 
+Based on the advantages of having a pipeline in the build system it seems pretty straight forward to
+say that having the pipeline in the build system is a good thing. However as with all things there
+are also drawbacks to having the pipeline in the build system.
 
-From the advantages it seems pretty easy. Always use it but there are disadvantages as well.
+- Having the pipeline in the build system makes two assumptions that may not be correct in certain
+  cases.
+    - The first assumption is that the build system is the center of all the work being done
+      because the pipeline is controlled by the build system, thus requiring that all actions feedback into
+      said build system. This however shouldn't be a given, after all why would the build system be the
+      core system and not the source control system or the issue tracker. In reality all systems are
+      required to deliver high quality software. This means in most cases that none of these systems
+      have enough knowledge by themselves to make decisions about the complete state of the pipeline.
+      By making the assumption that the build system is at the core of the pipeline the result will
+      be that the knowledge of the pipeline work flow will end up being encoded in the build configurations
+      and the build scripts. For simple pipelines this is a sensible thing to do but as the pipeline
+      gets more complex this approach will be sub-optimal at best and more likely detrimental due to
+      the complexity of providing all users with the overview of how the pipeline functions.
+    - The second, but potentially more important, assumption is that the item the development teams
+      care most about is 'build' or 'build job'. This however is not the case most of the time because
+      a 'build' is just a way to create or alter an artefact, i.e. the package, container, installer
+      etc.. It is artefacts that people care about most because artefacts are the carrying vehicle
+      for the features and bug fixes that the customer cares about.
 
-  - Assumes that the core of everything is a 'build'. Most of the time that is not the case. A 'build' is just a way
-    to get an artefact and artefacts are what most people care about. Developers write code that turns into artefacts,
-    testers test artefacts, artefacts are deployed and the provide the services that serve the customers. So the best
-    item to track is the artefact, not a build. But build systems are aimed at builds, not artefacts.
-  - Assumes that the build system is the center of everything, which may be true but it might not. Why would the
-    build system be the core of everything and not the version control system or the issue tracker or ...
-  - In reality all systems are required. There isn't necessarily one system that knows enough to make decisions
-    about the state of the pipeline. If we assume that we have to put this capability in the build system then we
-    will end up encoding a lot of knowledge in the build scripts or the build configurations. That
-    is fairly straight forward for simple pipelines
-    but quite hard for more complex ones
-  - Will load up the build system with additional tasks. Tasks that require the system to be up and running constantly
-    (which is important most of the time anyway) but also require that it stores persistent data, which build systems
-    normally do not do. Having it store state means we now need to treat it as a database (and that it will behave like
-    one which seems unlikely because people writing build systems, create build systems, not databases, and people that
-    write build systems and have databases might need to reconsider (I'm looking at you Mr
-    TFS 'everything-is-a-table-and-json-in-xml-in-a-database-field-is-awesome'))
-  - Makes the assumption that we can just run every task through the build system, but builds and deploys
-    are fundamentally different things. One should be repeatable (builds) and can just be stopped on failure
-    and the other is often not exactly repeatable (because artefacts can only be moved from a location once etc.)
-    and should often not just be stopped (but rolled-back or not 'committed').
+       Developers write code that turns into artefacts,
+      testers test artefacts, artefacts are deployed and the provide the services that serve the customers. So the best
+      item to track is the artefact, not a build. But build systems are aimed at builds, not artefacts.
 
 
-  - Pipelines are specific to the company producing the software because each company has a different development / release
-    process. Maybe the overall system is the same (everybody is using agile now right?) but the details differ and for the
-    pipeline the details make all the difference. Build system driven pipelines have a large amount of flexibilty but
-    they are still limited to having a standard approach, i.e. the standard approach deemed sensible by the
-    vendor
 
+
+
+
+- Having the build system be the the center of the pipeline means that the build system
+  will have to start storing persistent data with all the issues that come with this kind of data.
+  External systems will also need to be able to access this data in some kind of way so that they can
+  either get, add or update information.
 
   - If the build system has all the knowledge about the pipeline then it needs to be easily accessible and changable. It
     should be possible to add additional information, e.g. the versions / names of artefacts created by a build. The status
@@ -89,11 +93,28 @@ From the advantages it seems pretty easy. Always use it but there are disadvanta
     historic data needs to be accessible for much longer than build information needs to be accessible for.
 
 
+
+     - Makes the assumption that we can just run every task through the build system, but builds and deploys
+    are fundamentally different things. One should be repeatable (builds) and can just be stopped on failure
+    and the other is often not exactly repeatable (because artefacts can only be moved from a location once etc.)
+    and should often not just be stopped (but rolled-back or not 'committed').
+
+
+
+
+  - Pipelines are specific to the company producing the software because each company has a different development / release
+    process. Maybe the overall system is the same (everybody is using agile now right?) but the details differ and for the
+    pipeline the details make all the difference. Build system driven pipelines have a large amount of flexibilty but
+    they are still limited to having a standard approach, i.e. the standard approach deemed sensible by the
+    vendor
+
+
+
+
+
   - Dynamic systems are harder. These can happen if you have multiple component stages, e.g. one artefact is build and
     tested which then triggers the pipeline for one or more artefacts which consume the new artefact, e.g. building
     a VM image with the binaries for a web service (or something like that)
-  - Build system enabled systems often work from one repository, what if you need multiple components each of which lives
-    in their own repository
   - Build systems work much better if they are immutable, i.e. created from standard components (e.g. controller and agents)
     with automatically generated build jobs. This allows a build system to be expanded or replaced really
     easily (cattle not pets even for build systems). That is much harder if the build system is the core of
