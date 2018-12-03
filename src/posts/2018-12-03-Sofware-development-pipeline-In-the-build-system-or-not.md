@@ -53,7 +53,7 @@ are also drawbacks to having the pipeline in the build system.
 - Having the pipeline in the build system makes some assumptions that may not be correct in certain
   cases.
     - The first assumption is that the build system is the center of all the work being done
-      because the pipeline is controlled by the build system, thus requiring that all actions feedback
+      because the pipeline is controlled by the build system, thus requiring that all actions feed back
       into said build system. This however shouldn't be a given, after all why would the build system
       be the core system and not the source control system or the issue tracker. In reality all systems
       are required to deliver high quality software. This means in most cases that none of these systems
@@ -84,18 +84,17 @@ are also drawbacks to having the pipeline in the build system.
   kind of data, for instance:
     - The data stored in the pipeline is valuable to the development team both at the current time and
       in the future when the development team needs to determine where an artefact comes from. This means
-      that the data needs to be kept safe for much longer than build information is normally kept. In
-      order to achieve this the standard data protection rules apply for instance access controls and
-      backups.
+      that the data potentially needs to be kept safe for much longer than build information is
+      normally kept. In order to achieve this the standard data protection rules apply for instance
+      access controls and backups.
     - The information about the pipeline needs to be easily accessible and changable both by the build
       system and by systems external to the build system. It should be possible to add additional
       information, e.g. the versions / names of artefacts created by a build. The status of the artefact
       as it progresses through the pipeline etc.. All this information is important either during the
-      pipeline process or in hindsight when the developers or customer support needs to know when a
-      certain artefact was in the pipeline etc.. Often build systems don't have this capability, they
-      store just enough information that they can do what they need to do, and in general they are
-      not database systems (and if they are it is recommended that you don't tinker with them and in
-      general it is made difficult to append or add information)
+      pipeline process or after the artefacts have been delivered to the customer. Often build
+      systems don't have this capability, they store just enough information that they can do what
+      they need to do, and in general they are not database systems (and if they are it is recommended
+      that you don't tinker with them and in general it is made difficult to append or add information).
     - Build systems work much better if they are immutable, i.e. created from standard components (e.g.
       controller and agents) with automatically generated build jobs (more about the reasons both of
       these will follow in future posts). This allows a build system to be expanded or replaced really
@@ -107,19 +106,22 @@ are also drawbacks to having the pipeline in the build system.
   which is a great benefit, but less control for the administrators. Because the pipeline provides the
   development teams with all the abilities there is, in general, less ability for the admins to guide
   things in the right direction or to block developers from doing things that they shouldn't be doing
-  or have access to. For instance in the Jenkins pipeline it is possible for developers to use all the
-  credentials that jenkins has access to. However this might not be desirable for high power credentials
-  or credentials for highly restricted resources. An other example is that the selection of the build
-  executor is done in the pipeline configuration, however in some cases it may make sense to limit
-  access to executors, after all having a build that can migrate from node to node makes sense in
-  some cases but it's not free. Additionally the ease with which parallel steps can be created will
+  or have access to. While this may seem to be a benefit for the developers, no more annoying admins
+  getting in the way, it is in fact a drawback because this behaviour means that the developers take
+  on the responsibility to administer some or all of the underlying build system. Examples of the
+  change of control are for instance in the Jenkins pipeline it is possible for developers to use
+  all the credentials that jenkins has access to. However this might not be desirable for high power
+  credentials or credentials for highly restricted resources. An other example is that the selection
+  of the build executor is done in the pipeline configuration, however in some cases it may make sense
+  to limit access to executors, after all having a build that can migrate from node to node makes
+  sense in some cases but it's not free. Further the ease with which parallel steps can be created will
   lead to many parallel jobs. This might be great for one pipeline but isn't necessarily the best for
   the overall system. In some cases serializing the steps for a single pipeline can lead to greater
-  overall throughput if there are many different jobs for many different teams
+  overall throughput if there are many different jobs for many different teams.
 
-Based on all the advantages and disadvantages it may still be difficult to decide whether or not a
-development team should use the pipeline in their build system or not. In general it will be sensible
-to use the pipeline capabilities that are build into your build system in cases where you either
+Based on all the advantages and disadvantages that are listed here it may be difficult to decide whether
+or not a development team should use the pipeline in their build system or not. In general it will be
+sensible to use the pipeline capabilities that are build into your build system in cases where you either
 have a fairly simple pipeline that is easy to reason about or where no external systems need to interact
 with the data in the pipeline.
 
