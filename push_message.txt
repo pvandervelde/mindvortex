@@ -1,1 +1,1 @@
-New Post: Software development pipeline - Design flexibility
+New Post: Software development pipeline - In the build system or not
