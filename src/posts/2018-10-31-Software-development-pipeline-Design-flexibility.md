@@ -1,4 +1,4 @@
-Title: Software development pipeline - Design flexibilty
+Title: Software development pipeline - Design flexibility
 Tags:
   - Delivering software
   - Software development pipeline
@@ -88,3 +88,7 @@ And with that we have come to the end of this journey into the guiding principle
 a build and release pipeline. There are of course many additions that can be made with regards to
 the general design process and even more additions for specific use cases. Those however will have
 to wait until another post.
+
+#### Edits
+
+- December 3rd 2018: Fixed a typo in the post title
