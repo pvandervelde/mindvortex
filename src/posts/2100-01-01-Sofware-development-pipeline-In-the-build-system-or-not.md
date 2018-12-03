@@ -1,3 +1,4 @@
+---
 Title: Software development pipeline - In the build system or not
 Tags:
   - Delivering software
@@ -52,10 +53,10 @@ are also drawbacks to having the pipeline in the build system.
 - Having the pipeline in the build system makes some assumptions that may not be correct in certain
   cases.
     - The first assumption is that the build system is the center of all the work being done
-      because the pipeline is controlled by the build system, thus requiring that all actions feedback into
-      said build system. This however shouldn't be a given, after all why would the build system be the
-      core system and not the source control system or the issue tracker. In reality all systems are
-      required to deliver high quality software. This means in most cases that none of these systems
+      because the pipeline is controlled by the build system, thus requiring that all actions feedback
+      into said build system. This however shouldn't be a given, after all why would the build system
+      be the core system and not the source control system or the issue tracker. In reality all systems
+      are required to deliver high quality software. This means in most cases that none of these systems
       have enough knowledge by themselves to make decisions about the complete state of the pipeline.
       By making the assumption that the build system is at the core of the pipeline the result will
       be that the knowledge of the pipeline work flow will end up being encoded in the build configurations
@@ -69,33 +70,38 @@ are also drawbacks to having the pipeline in the build system.
       for the features and bug fixes that the customer cares about. From this perspective it makes
       sense to track the artefacts instead of builds because the artefact flows through the entire pipeline
       while builds are only part of the pipeline.
-    - A third assumption is that every task can somehow be run through the build system, but this is not
-      always the case and even when it is possible it is not necessarily sensible. For instance builds and
-      deploys are fundamentally different things, one should be repeatable (builds) and can just be stopped
-      on failure and restarted if necesary and the other is often not exactly repeatable (because artefacts
-      can only be moved from a location once etc.) and should often not just be stopped (but rolled-back or
-      not 'committed'). Another example is long running tests for which the results may be fed back into the
-      build system if required but that doesn't necessarily make sense.
+    - A third assumption is that every task can somehow be run through the build system, but this is
+      not always the case and even when it is possible it is not necessarily sensible. For instance
+      builds and deploys are fundamentally different things, one should be repeatable (builds) and
+      can just be stopped on failure and restarted if necesary and the other is often not exactly
+      repeatable (because artefacts can only be moved from a location once etc.) and should often
+      not just be stopped (but rolled-back or not 'committed'). Another example is long running tests
+      for which the results may be fed back into the build system if required but that doesn't
+      necessarily make sense.
 
-- If the build system is the the center of the pipeline then that means that the build system has to start storing
-  persistent data about the state of the pipeline with all the issues that come with this kind of data, for instance:
-  - The data stored in the pipeline is valuable to the development team both at the current time and
-    in the future when the development team needs to determine where an artefact comes from. This means that the data
-    needs to be kept safe for much longer than build information is normally kept. In order to achieve this the
-    standard data protection rules apply for instance access controls and backups.
-  - If the pipeline gets larger or more complex
-  - The information about the pipeline needs to be easily accessible and changable both by the build system and by
-    systems external to the build system. It should be possible to add additional information, e.g. the versions / names
-    of artefacts created by a build. The status of the artefact as it progresses through the pipeline etc.. All this
-    information is important either during the pipeline process or in hindsight when the developers or customer support
-    needs to know when a certain artefact was in the pipeline etc.. Often build systems don't have this capability,
-    they store just enough information that they can do what they need to do, and in general they are not database systems
-    (and if they are it is recommended that you don't tinker with them and in general it is made difficult to append or
-    add information)
-  - Build systems work much better if they are immutable, i.e. created from standard components (e.g. controller and agents)
-    with automatically generated build jobs (more about the reasons both of these will follow in future posts). This allows
-    a build system to be expanded or replaced really easily ([cattle not pets](https://medium.com/@Joachim8675309/devops-concepts-pets-vs-cattle-2380b5aab313)
-    even for build systems). That is much harder if the build system is the core of your pipeline and stores all the data for it.
+- If the build system is the the center of the pipeline then that means that the build system has to
+  start storing persistent data about the state of the pipeline with all the issues that come with this
+  kind of data, for instance:
+    - The data stored in the pipeline is valuable to the development team both at the current time and
+      in the future when the development team needs to determine where an artefact comes from. This means
+      that the data needs to be kept safe for much longer than build information is normally kept. In
+      order to achieve this the standard data protection rules apply for instance access controls and
+      backups.
+    - The information about the pipeline needs to be easily accessible and changable both by the build
+      system and by systems external to the build system. It should be possible to add additional
+      information, e.g. the versions / names of artefacts created by a build. The status of the artefact
+      as it progresses through the pipeline etc.. All this information is important either during the
+      pipeline process or in hindsight when the developers or customer support needs to know when a
+      certain artefact was in the pipeline etc.. Often build systems don't have this capability, they
+      store just enough information that they can do what they need to do, and in general they are
+      not database systems (and if they are it is recommended that you don't tinker with them and in
+      general it is made difficult to append or add information)
+    - Build systems work much better if they are immutable, i.e. created from standard components (e.g.
+      controller and agents) with automatically generated build jobs (more about the reasons both of
+      these will follow in future posts). This allows a build system to be expanded or replaced really
+      easily ([cattle not pets](https://medium.com/@Joachim8675309/devops-concepts-pets-vs-cattle-2380b5aab313)
+      even for build systems). That is much harder if the build system is the core of your pipeline
+      and stores all the data for it.
 
 - Pipelines are specific to the company producing the software because each company has a different development / release
   process. Maybe the overall system is the same (everybody is using agile now right?) but the details differ and for the
