@@ -21,8 +21,8 @@ Most modern build systems have the ability to create a build pipelines in one fo
 and [TeamCity](https://confluence.jetbrains.com/display/TCD18/Build+Chain). With these capabilities
 built into the build system it is easy for developers to quickly create a new pipeline from scratch.
 While this is quick and easy often the pipeline for a product is created by the development team
-without considering if this is the best way to achieve their goal, to deliver their product faster
-with higher quality. Before using the built in pipeline capability in the build system the second
+without considering if this is the best way to achieve their goal, which is to deliver their product
+faster with higher quality. Before using the built-in pipeline capability in the build system the second
 question a development team should ask is when should one use this ability and when should one not
 use this ability? Obviously the first question is, do we need a pipeline at all, which is a question
 for another post.
@@ -103,69 +103,30 @@ are also drawbacks to having the pipeline in the build system.
       even for build systems). That is much harder if the build system is the core of your pipeline
       and stores all the data for it.
 
-- Pipelines are specific to the company producing the software because each company has a different development / release
-  process. Maybe the overall system is the same (everybody is using agile now right?) but the details differ and for the
-  pipeline the details make all the difference. Build system driven pipelines have a large amount of flexibilty but
-  they are still limited to having a standard approach, i.e. the standard approach deemed sensible by the
-  vendor
+- Having the pipeline in the build system in general provides more control for the development teams,
+  which is a great benefit, but less control for the administrators. Because the pipeline provides the
+  development teams with all the abilities there is, in general, less ability for the admins to guide
+  things in the right direction or to block developers from doing things that they shouldn't be doing
+  or have access to. For instance in the Jenkins pipeline it is possible for developers to use all the
+  credentials that jenkins has access to. However this might not be desirable for high power credentials
+  or credentials for highly restricted resources. An other example is that the selection of the build
+  executor is done in the pipeline configuration, however in some cases it may make sense to limit
+  access to executors, after all having a build that can migrate from node to node makes sense in
+  some cases but it's not free. Additionally the ease with which parallel steps can be created will
+  lead to many parallel jobs. This might be great for one pipeline but isn't necessarily the best for
+  the overall system. In some cases serializing the steps for a single pipeline can lead to greater
+  overall throughput if there are many different jobs for many different teams
 
+Based on all the advantages and disadvantages it may still be difficult to decide whether or not a
+development team should use the pipeline in their build system or not. In general it will be sensible
+to use the pipeline capabilities that are build into your build system in cases where you either
+have a fairly simple pipeline that is easy to reason about or where no external systems need to interact
+with the data in the pipeline.
 
-
-
-
-
-
-  - Hides the actual complexity of the build process which may lead to bad design / decisions. Having
-    a build that can migrate from node to node is cool but it's not free. Additionally the ease with
-    which parallel steps can be created will lead to many parallel jobs. This might be great for the
-    one pipeline but isn't necessarily the best for the overall system. In some cases serializing the
-    steps for a single pipeline can lead to greater overall throughput if there are many different jobs
-    for many different teams
-
-
-- More control for the development teams (yay), less control for the administrators (boo). Because the
-    pipeline provides the development teams with all the abilities there is less ability for the admins
-    to guide things in the right direction and / or to block developers from doing things that they shouldn't
-    be doing / shouldn't have access to. For instance in the Jenkins pipeline it is possible for developers
-    to use all the credentials that jenkins has access to. However this might not be desirable for high
-    power credentials / credentials for highly restricted resources.
-  - Shared control is harder, e.g. if different people / teams are responsible for different parts of the
-    work flow, e.g. develop vs deploy.
-
-- This works great for simple cases but as pipelines get more complicated it is harder for every person
-    in a development team to understand what is going on. This can lead to broken pipelines etc.. This
-    is partially caused by the fact that the pipeline building blocks are fairly low level. In these
-    cases a tooling team often needs to write code to abstract away some of the basic functionality through
-    wrappers that do more product / company specific things. This means that in the end developers will not
-    be using the actual pipeline code but some DSL that handles the lower level interaction.
-
-
-- Maybe it is better to have a separate system that tracks the state of the pipeline. That way you can treat it as the
-  critical infrastructure that it is, with the appropriate separation of data and business rule processing etc.
-  - As far as I'm aware there is no software for this purpose out there
-  - Because each pipeline is different, each pipeline tracking application will be different. This sort of means
-    that for most companies it is better to custom write this software
-
-
-
-
-- Dynamic systems are harder. These can happen if you have multiple component stages, e.g. one artefact is build and
-  tested which then triggers the pipeline for one or more artefacts which consume the new artefact, e.g. building
-  a VM image with the binaries for a web service (or something like that)
-
-
-
-
-When to use:
-
-
-- In general it will be sensible to use the pipeline capabilities that are build into your build system for small companies
-  that have a fairly standard pipeline. Often small changes can be made to the pipeline process by using custom scripts.
-
-When not to use:
-
-- However once the pipeline gets more complicated it might well be worth it to develop some custom software that tracks
-  artefacts through the pipeline.
-- Need to track artefacts past the build stage of the pipeline
-- Want to use the information generated by the pipeline in other systems (e.g. metrics or decision making)
-
+Once the pipeline gets more complicated, external systems need access to the metadata describing the
+pipeline or the pipeline gets stages that are incompatible with being executed by a build system it
+will be time to migrate to a different approach to the build and deployment pipeline. In this case
+it is worth it to develop some custom software that tracks artefacts through the pipeline. This makes
+it possible to treat the pipeline system as the critical infrastructure that it is, with the appropriate
+separation of data and business rule processing, data security and controlled access to the data for
+external systems.
