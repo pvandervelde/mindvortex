@@ -1,1 +1,1 @@
-New Post: Software development pipeline - In the build system or not
+New Post: Software development pipeline - Considerations for infrastructure improvements
