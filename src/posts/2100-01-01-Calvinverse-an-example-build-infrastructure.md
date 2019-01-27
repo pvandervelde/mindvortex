@@ -20,3 +20,5 @@ Tags:
         - Teams need to be able to create their own build slaves
 
 - Calvinverse is designed as a self-maintained system. It's not a hosted system
+- Not a drop-in-and-forget-about-it system. It's a complete build environment but it will most likely need
+  tweaking because every company is different and applies different workflows
