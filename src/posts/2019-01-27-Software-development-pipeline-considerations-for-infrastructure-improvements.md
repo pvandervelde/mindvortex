@@ -1,8 +1,9 @@
-Title: Software delivery pipeline - Immutable infrastructure
+Title: Software delivery pipeline - Considerations for infrastructure improvements
 Tags:
   - Delivering software
   - Software delivery pipeline
   - Immutable infrastructure
+  - Infrastructure as code
   - DevOps
 ---
 
