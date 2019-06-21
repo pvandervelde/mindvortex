@@ -1,1 +1,1 @@
-Copyright [P. van der Velde](http://pvandervelde.github.io). All rights reserved.
+Copyright [P. van der Velde](https://www.petrikvandervelde.nl). All rights reserved.
