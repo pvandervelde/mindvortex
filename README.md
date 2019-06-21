@@ -11,4 +11,4 @@ The website is based on the [Open Tools](http://www.freecsstemplates.org/preview
 
 ## License
 
-Copyright [P. van der Velde](http://pvandervelde.github.io). All rights reserved.
+Copyright [P. van der Velde](https://www.petrikvandervelde.nl). All rights reserved.

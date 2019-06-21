@@ -60,7 +60,7 @@ In this case I updated the `settings.props` file, which contains the general inf
 build, test and deploy processes, with [product information](https://gist.github.com/pvandervelde/88aa8f644148b4cdb9fa909fe3ff8f69).
 
 I also [enabled the automatic merging](https://gist.github.com/pvandervelde/9853b15889ccf67bafa5fa2e93594ca2)
-for the [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) process. This allows
+for the [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/) process. This allows
 nBuildKit to automatically complete feature, hotfix and release branches when running on a build
 server so that each build also verifies that the final merge will be successful and the changes will
 not break anything after the merge.

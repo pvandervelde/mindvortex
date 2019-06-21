@@ -135,7 +135,7 @@
             The URL of the company website. This is for instance used for:
             * nuspec files
         -->
-        <CompanyUrl Condition=" '$(CompanyUrl)' == '' ">http://www.petrikvandervelde.nl</CompanyUrl>
+        <CompanyUrl Condition=" '$(CompanyUrl)' == '' ">https://www.petrikvandervelde.nl</CompanyUrl>
 
         <!--
             The email address that is specified in the documentation. This is for instance used for:

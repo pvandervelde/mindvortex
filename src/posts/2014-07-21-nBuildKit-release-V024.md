@@ -28,7 +28,7 @@ Beyond that the C# NuGet package provides capabilities to:
       [AssemblyVersionAttribute][assembly_version_attribute] as `Major.Minor.0.0`; through the
       [AssemblyFileVersionAttribute][assembly_file_version_attribute] as `Major.Minor.Patch.Build`;
       and through the [AssemblyInformationalVersionAttribute][assembly_informational_version_attribute]
-      as the full [semantic version](http://semver.org/).
+      as the full [semantic version](https://semver.org/).
     * `AssemblyInfo.BuildInformation.cs` contains information about the current build of the binaries.
       This includes the configuration, e.g. Release; the date and time that the binary was compiled
       and information describing the build number and the commit number that were used to generate
@@ -59,9 +59,9 @@ NuGet package
 
 The documentation for this library can be found on the nBuildKit [wiki](https://github.com/pvandervelde/nBuildKit/wiki/MsBuild)
 
-[assembly_version_attribute]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute(v=vs.110).aspx
-[assembly_file_version_attribute]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyfileversionattribute(v=vs.110).aspx
-[assembly_informational_version_attribute]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyinformationalversionattribute(v=vs.110).aspx
-[internals_visible_to_attribute]: http://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute(v=vs.110).aspx
-[assembly_company_attribute]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblycompanyattribute(v=vs.110).aspx
-[assembly_copyright_attribute]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblycopyrightattribute(v=vs.110).aspx
+[assembly_version_attribute]: https://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute(v=vs.110).aspx
+[assembly_file_version_attribute]: https://msdn.microsoft.com/en-us/library/system.reflection.assemblyfileversionattribute(v=vs.110).aspx
+[assembly_informational_version_attribute]: https://msdn.microsoft.com/en-us/library/system.reflection.assemblyinformationalversionattribute(v=vs.110).aspx
+[internals_visible_to_attribute]: https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute(v=vs.110).aspx
+[assembly_company_attribute]: https://msdn.microsoft.com/en-us/library/system.reflection.assemblycompanyattribute(v=vs.110).aspx
+[assembly_copyright_attribute]: https://msdn.microsoft.com/en-us/library/system.reflection.assemblycopyrightattribute(v=vs.110).aspx

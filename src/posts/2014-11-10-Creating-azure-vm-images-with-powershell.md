@@ -5,9 +5,9 @@ Tags:
 ---
 
 As part of a new [project](https://github.com/pvandervelde/azure-jenkins) to create a
-[Jenkins CI server](http://jenkins-ci.org/) on Azure I am writing a set of powershell scripts to
+[Jenkins CI server](https://jenkins.io) on Azure I am writing a set of powershell scripts to
 control virtual machines on Azure. For this project the plan is to use virtual machine (VM) images
-as a template for an ['immutable server'](http://martinfowler.com/bliki/ImmutableServer.html) that
+as a template for an ['immutable server'](https://martinfowler.com/bliki/ImmutableServer.html) that
 will contain the Jenkins instance.
 
 Now the actual server isn't really 'immutable' given that the jenkins instance will update, add and
@@ -26,7 +26,7 @@ the Azure VM and the local machine that is executing the creation scripts. You c
 one or you can use a self-signed certificate (which is obviously less secure). Two things of
 interest are:
 
-- The certificate needs to have an [exportable](http://consultingblogs.emc.com/gracemollison/archive/2010/02/19/creating-and-using-self-signed-certificates-for-use-with-azure-service-management-api.aspx)
+- The certificate needs to have an [exportable](https://consultingblogs.emc.com/gracemollison/archive/2010/02/19/creating-and-using-self-signed-certificates-for-use-with-azure-service-management-api.aspx)
   private key because otherwise it cannot be used for the WinRM connection.
 - The certificate needs to be named after the connection that you expect to make. For a connection to
   an Azure VM this will most likely be something like `<RESOURCE_GROUP_NAME>.cloudapp.net`.
@@ -34,7 +34,7 @@ interest are:
 Once the certificate is installed in the user certificate store we can create a new virtual machine
 from a given base image, e.g. a Windows 2012 R2 server image. The following powershell function creates
 a new windows VM with a WinRM endpoint with the certificate that was created earlier. Note that the
-[`New-AzureVM`](http://msdn.microsoft.com/en-us/library/dn495254.aspx) function can create resource
+[`New-AzureVM`](https://msdn.microsoft.com/en-us/library/dn495254.aspx) function can create resource
 and storage groups for the new VM if you don't specify a storage account and a matching resource group.
 
 <script src="https://gist.github.com/pvandervelde/1153f249115780ed2b99.js"></script>
@@ -47,20 +47,20 @@ that can be used to secure the connection.
 <script src="https://gist.github.com/pvandervelde/eb6e28934d5fd16fe186.js"></script>
 
 The next step is to copy all the installer files and configuration scripts to the VM. This can be
-done over the [remoting channnel](http://measureofchaos.wordpress.com/2012/09/26/copying-files-via-powershell-remoting-channel/).
+done over the [remoting channnel](https://measureofchaos.wordpress.com/2012/09/26/copying-files-via-powershell-remoting-channel/).
 
 <script src="https://gist.github.com/pvandervelde/b2f5b4156e5efe67f495.js"></script>
 
 Once all the required files have been copied to the VM the configuration of the machine can be started.
 This can be done in many different ways, e.g through the use of a [configuration](https://www.getchef.com/)
-[management](http://puppetlabs.com/) [tool](http://technet.microsoft.com/en-us/library/dn249912.aspx)
+[management](https://puppetlabs.com/) [tool](https://technet.microsoft.com/en-us/library/dn249912.aspx)
 or just via the use of plain old scripts. When the configuration is complete and all the necessary
 clean-up has been done the time has come to turn the VM into an image. Before doing that a Windows
-machine will have to be [sysprepp'ed](http://en.wikipedia.org/wiki/Sysprep) so that there are no
+machine will have to be [sysprepp'ed](https://en.wikipedia.org/wiki/Sysprep) so that there are no
 unique identifiers in the image (and thus in the copies).
 
 In order to sysprep an Azure VM it is necessary to execute the sysprep command through a script on the
-VM because sysprep [fails](http://blogs.msdn.com/b/brocode/archive/2014/06/20/how-to-automate-sysprep-of-an-iaas-vm-on-microsoft-azure.aspx)
+VM because sysprep [fails](https://blogs.msdn.com/b/brocode/archive/2014/06/20/how-to-automate-sysprep-of-an-iaas-vm-on-microsoft-azure.aspx)
 if the command is given directly through the remoting channel. The following function creates a new
 Powershell script which invokes sysprep, copies that to the VM and then executes that script. Once
 sysprep has completed running the machine will be turned off and an image can be created.

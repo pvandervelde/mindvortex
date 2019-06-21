@@ -10,7 +10,7 @@ The [second property](Software-development-pipeline-Design-introduction.html) to
 *performance*, which in this case means that the pipeline should provide feedback on the quality of
 the current input set as soon as possible in order to reduce the length of the feedback cycle. As is
 [known](https://www.richard-banks.org/2013/04/why-short-feedback-cycle-is-good-thing.html)
-[having](http://www.ambysoft.com/essays/whyAgileWorksFeedback.html) a short
+[having](https://www.ambysoft.com/essays/whyAgileWorksFeedback.html) a short
 [feedback](https://continuousdelivery.com/2012/08/why-software-development-methodologies-suck/)
 cycle makes it easier for the development teams to make improvements and fix issues.
 

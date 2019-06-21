@@ -15,13 +15,13 @@ with not much lift.
 As a little treat for myself I had taken the Monday off from work so that I could go flying if the
 weather proved to be suitable. The weather forecast for Monday showed great promise for some good flying.
 
-On Monday a [convergence](http://en.wikipedia.org/wiki/Convergence_zone) hanging around over the city
+On Monday a [convergence](https://en.wikipedia.org/wiki/Convergence_zone) hanging around over the city
 so our instructor decided that with some luck the wind would turn northerly which would make
-[North head](http://en.wikipedia.org/wiki/North_Head,_New_Zealand) an excellent place to fly. After
+[North head](https://en.wikipedia.org/wiki/North_Head,_New_Zealand) an excellent place to fly. After
 some para-waiting the weather gods decided that the southerly wind would break through the convergence
 which thereby ended our hopes for flying at North head. Fortunately there are quite a few places around
 Auckland where flying is possible so our instructor suggested going to
-[Maori bay](http://en.wikipedia.org/wiki/Muriwai). When we got to Maori bay it turned out that the
+[Maori bay](https://en.wikipedia.org/wiki/Muriwai). When we got to Maori bay it turned out that the
 wind was smooth and from a suitable direction, so indeed the site was flyable. My first flight was a
 tandem flight with my instructor. While flying he showed me how to pick the right soaring lines and
 what to look out for. In the 30 or so minutes that we flew the tandem I learned heaps, and I did most

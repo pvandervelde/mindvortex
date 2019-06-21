@@ -17,7 +17,7 @@ resources. All the work items that have been closed for this release can be foun
 - [5](https://github.com/ops-resource/ops-tools-build/issues/5) - A new function which provides
   the ability to execute [ChefSpec](https://github.com/sethvargo/chefspec) tests.
 - [6](https://github.com/ops-resource/ops-tools-build/issues/6) - A new function which
-  invokes the Chef linting tool [Foodcritic](http://www.foodcritic.io/) on the selected Chef cookbooks.
+  invokes the Chef linting tool [Foodcritic](https://www.foodcritic.io/) on the selected Chef cookbooks.
 - [7](https://github.com/ops-resource/ops-tools-build/issues/7) - A new function which invokes the
   Ruby linting tool [RuboCop](https://github.com/bbatsov/rubocop) on selected Ruby source files.
 - [20](https://github.com/ops-resource/ops-tools-build/issues/20) - A new package restore script

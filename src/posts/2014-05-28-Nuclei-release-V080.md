@@ -55,6 +55,6 @@ options are:
     * Provision of the ID of the endpoint requesting the invocation of the command method.
     * Provision of the ID of the message that was send to request the invocation of the command method.
 
-Finally the Nuclei library versioning was switched to use [semantic versioning](http://semver.org/).
+Finally the Nuclei library versioning was switched to use [semantic versioning](https://semver.org/).
 
-[wcf_discovery]: http://msdn.microsoft.com/en-us/library/dd456782%28v=vs.110%29.aspx
+[wcf_discovery]: https://msdn.microsoft.com/en-us/library/dd456782%28v=vs.110%29.aspx
