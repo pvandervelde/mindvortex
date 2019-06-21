@@ -24,7 +24,7 @@ machine but for the purposes of this post I will assume that this is the case. T
 the host machine consists of:
 
 1. Install the host operating system on the machine. Both the machine and the operating system need to
-  [support Hyper-V](http://en.wikipedia.org/wiki/Hyper-V#System_requirements_and_specifications). On
+  [support Hyper-V](https://en.wikipedia.org/wiki/Hyper-V#System_requirements_and_specifications). On
   top of that for the very least the master controller service has to be installed on the host machine,
   which means it is not possible to install the core Hyper-V version of Windows.
 1. Create or associate a user which you will use to run the Sherlock services. It is strongly
@@ -33,8 +33,8 @@ the host machine consists of:
   permissions to run services, but doesn't need installation permissions etc. For the remainder of
   this post lets call this user the *SherlockUser*. *Note:* If you have a specific user that is used
   for your build server then it makes sense to use that user, although that is not required.
-1. Install the [Hyper-V role](http://technet.microsoft.com/en-us/library/hh846766.aspx) on the host machine.
-1. Grant the *SherlockUser* [permissions](http://blogs.msdn.com/b/virtual_pc_guy/archive/2008/01/17/allowing-non-administrators-to-control-hyper-v.aspx)
+1. Install the [Hyper-V role](https://technet.microsoft.com/en-us/library/hh846766.aspx) on the host machine.
+1. Grant the *SherlockUser* [permissions](https://blogs.msdn.com/b/virtual_pc_guy/archive/2008/01/17/allowing-non-administrators-to-control-hyper-v.aspx)
   to start, stop and reset Hyper-V virtual machines.
 1. Install the [IIS role](http://www.iis.net/learn/get-started/whats-new-in-iis-8/installing-iis-8-on-windows-server-2012)
   on the host machine. *Note:* that in theory (i.e. this has not been tested) IIS can be installed
@@ -45,7 +45,7 @@ the host machine consists of:
     * Windows Authentication
     * Management tools
     * Http logging and tracing
-1. Install [MSSQL Express 2012](http://www.microsoft.com/web/platform/database.aspx) on the host
+1. Install [MSSQL Express 2012](https://www.microsoft.com/web/platform/database.aspx) on the host
   machine. *Note:* As with IIS it is again possible to install the database on any machine as long
   as both IIS and the Hyper-V host can connect to it.
 1. Create a directory that will hold all the files related to Sherlock, e.g. `c:\testing`. In that

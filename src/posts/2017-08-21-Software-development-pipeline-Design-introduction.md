@@ -18,7 +18,7 @@ One of the consequences of this desire to reduce the development cycle time on t
 development process is that more tasks in the development workflow
 have to be automated in order to reduce the time taken for the specific task.
 One way this automation can be achieved is by creating a
-[development pipeline](http://www.informit.com/articles/article.aspx?p=1621865&seqNum=2) which
+[development pipeline](https://www.informit.com/articles/article.aspx?p=1621865&seqNum=2) which
 takes the source code and moves it through a set of largely automatic transformations, e.g. compilation,
 testing, packaging and potentially deployment, to obtain a validated, and potentially deployed, application.
 

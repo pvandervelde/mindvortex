@@ -5,7 +5,7 @@ Tags:
 ---
 
 On Sunday the weather was good enough for some flying on the west coast. So at 11.30am about 8 of us
-gathered at [Kario](http://en.wikipedia.org/wiki/Kariotahi_Beach) and the second day of my
+gathered at [Kario](https://en.wikipedia.org/wiki/Kariotahi_Beach) and the second day of my
 [PG2](/tags/PG2.html) had started.
 
 <p><img align="left" alt="Paraglider soaring high over beautiful west coast" src="/assets/images/paragliding/paraglide_0004.JPG" /></p>
@@ -16,7 +16,7 @@ has. Double win!
 
 But before I get to fly as a qualified pilot a lot more training has to be had and that we did. The
 day started off with some ground handling exercises on the really old gliders. My first taste of
-[reverse launching](http://en.wikipedia.org/wiki/Paragliding#Reverse_launch) except with out the
+[reverse launching](https://en.wikipedia.org/wiki/Paragliding#Reverse_launch) except with out the
 actual turning around and flying bit. It turns out reverse launching isn't actually as simple as I
 thought it would be. Having flown kites for many years I thought I would get the reverse launch down
 pretty easily but when the gliders get larger and the controls are reversed things get difficult.
@@ -39,7 +39,7 @@ observations (which are probably obvious to those that have flown paragliders be
 And then it was time for the unexpected highlight of the day. When I paid for the PG2 course I paid
 for a combination package, which includes the PG2 course, a glider and a harness. Now I still
 haven't selected a harness but I have selected the glider, a bright red
-[Gin Atlas](http://gingliders.com/paragliders/atlas/). I didn't expect to be able to fly it so soon
+[Gin Atlas](https://gingliders.com/paragliders/atlas/). I didn't expect to be able to fly it so soon
 in my course but after my initial three flights both instructors gave me the go ahead to fly it.
 
 I managed a further two flights with it. The first one was a nice long soaring flight where I got to

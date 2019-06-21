@@ -12,6 +12,6 @@ The nAnicitus windows service 'serializes' access to SymStore to allow multiple 
 Besides handling the the access to the symbol server nAnicitus also copies the sources into a UNC source location for access by a source server and performs [source indexing][sourceindexing_msdn] on the PDB files
 before they are stored in the symbol UNC path.
 
-[symstore_msdn]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff558848(v=vs.85).aspx
-[symstore_msdn_singletransaction]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff558851(v=vs.85).aspx
-[sourceindexing_msdn]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff556898(v=vs.85).aspx
+[symstore_msdn]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff558848(v=vs.85).aspx
+[symstore_msdn_singletransaction]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff558851(v=vs.85).aspx
+[sourceindexing_msdn]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff556898(v=vs.85).aspx

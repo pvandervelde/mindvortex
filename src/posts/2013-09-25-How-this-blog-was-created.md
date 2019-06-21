@@ -20,8 +20,8 @@ CSS skills.
 
 As much as I love writing code, the idea of writing my content in an angle bracket language didn't
 really attract me so the plan was hatched (it came out of a purple egg, by the way) to write (nearly)
-all content in [Markdown](http://daringfireball.net/projects/markdown/) by using [Docpad](http://docpad.org).
-Given that I've recently started using [GitHub](http://github.com) for my open source projects why
+all content in [Markdown](https://daringfireball.net/projects/markdown/) by using [Docpad](https://docpad.org).
+Given that I've recently started using [GitHub](https://github.com) for my open source projects why
 not use it for version control and GitHub pages to serve my website.
 
 I won't bore you with the details on how to install Docpad, the Docpad website has an excellent
@@ -42,12 +42,12 @@ the generation of this site the following plugins are used:
 
 - [datefromfilename](https://github.com/grassator/docpad-plugin-datefromfilename) - Extracts the date
   of a post from the file name.
-- [gist](http://docpad.org/plugin/gist/) - Adds [GitHub gists](https://gist.github.com/) to a page.
-- [highlightjs](http://docpad.org/plugin/highlightjs/) - Provides syntax highlighting for code samples.
+- [gist](https://docpad.org/plugin/gist/) - Adds [GitHub gists](https://gist.github.com/) to a page.
+- [highlightjs](https://docpad.org/plugin/highlightjs/) - Provides syntax highlighting for code samples.
   My current plan is to use this for the smaller samples and use GitHub gists for the larger ones.
 - [navlinks](https://github.com/lucor/docpad-plugin-navlinks) - Adds navigation links to the bottom
   of each post, pointing at the previous and next post.
-- [related](http://docpad.org/plugin/related/) - Allows you to find all related documents based on a
+- [related](https://docpad.org/plugin/related/) - Allows you to find all related documents based on a
   given set of tags.
 - [tagging](https://github.com/rantecki/docpad-plugin-tagging) - Generates the tag cloud for the sidebar.
 

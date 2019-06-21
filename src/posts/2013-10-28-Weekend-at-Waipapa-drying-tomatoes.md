@@ -4,13 +4,13 @@ Tags:
   - Waipapa
 ---
 
-On the [long weekend](http://en.wikipedia.org/wiki/Labour_Day#New_Zealand) my friend Chris organised
+On the [long weekend](https://en.wikipedia.org/wiki/Labour_Day#New_Zealand) my friend Chris organised
 a climbing trip to [lake Waipapa](http://www.freeclimb.co.nz/wharepapa.html), a climbing area with
 many delicate slab climbs.
 
 We spend both days at the main wall working on some of the climbs. For Chris his climb of the
-weekend was 'Millennium madness', an amazing corner [trad](http://en.wikipedia.org/wiki/Traditional_climbing)
-climb which is rated [18](http://en.wikipedia.org/wiki/Grade_%28climbing%29#Ewbank). From the trad
+weekend was 'Millennium madness', an amazing corner [trad](https://en.wikipedia.org/wiki/Traditional_climbing)
+climb which is rated [18](https://en.wikipedia.org/wiki/Grade_%28climbing%29#Ewbank). From the trad
 gear side you have to make sure that your rack has several finger size pieces of gear so that you
 can use some at the start of the climb and some near the middle. The crux of the climb is the first
 5 or so meters where you have to figure out how to switch between the different foot placements that
@@ -23,7 +23,7 @@ It seems that the first time climbing in Waipapa after winter is always tricky a
 re-acquire the correct climbing techniques for the delicate Waipapa climbs.
 
 For me the plan was to work my long time project called 'Sun dried tomatoes', a delicate
-[sport](http://en.wikipedia.org/wiki/Sport_climbing) 22. For this climb the main focus is balance
+[sport](https://en.wikipedia.org/wiki/Sport_climbing) 22. For this climb the main focus is balance
 and once again foot placements, however unlike 'Millennium madness' where there are many features
 that can serve as hand holds, 'sun dried tomatoes' has sections where hand holds are very sparse.
 

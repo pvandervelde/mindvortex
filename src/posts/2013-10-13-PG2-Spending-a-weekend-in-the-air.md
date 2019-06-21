@@ -8,7 +8,7 @@ Last weekend another episode in my [PG2 course](/tags/PG2.html) took place with 
 both Saturday _and_ Sunday. Both days started with an off shore breeze but as the day progressed the
 sea breeze brought six to seven knots of wind from the South-West and we were good to go.
 
-This time we flew from the high launch at at [Kariotahi](http://en.wikipedia.org/wiki/Kariotahi_Beach)
+This time we flew from the high launch at at [Kariotahi](https://en.wikipedia.org/wiki/Kariotahi_Beach)
 which has the lowest point of the launch at about 90m above the beach. The walk up follows a narrow,
 relatively steep, sandy and muddy path which increased everybody's desire to top land. Fortunately
 for us our excellent instructor always managed to get us into a position where top landings were
@@ -16,7 +16,7 @@ possible, in spite of the sometimes lacking wind strength.
 
 <p><img align="left" alt="Cruising around on my Gin Atlas" src="/assets/images/paragliding/paraglide_0006.JPG" /></p>
 
-The main learning point for this weekend was the [reverse launch](http://en.wikipedia.org/wiki/Paragliding#Reverse_launch).
+The main learning point for this weekend was the [reverse launch](https://en.wikipedia.org/wiki/Paragliding#Reverse_launch).
 The technique I am being taught has, in some places, been called the
 [Mitsos reverse launch](http://sydneyparagliding.com/flying-techniques/the-effortless-reverse-launch-technique/).
 The reverse launch method provides a lot more control over the glider while it is on the ground than

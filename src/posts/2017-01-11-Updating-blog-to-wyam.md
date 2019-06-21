@@ -6,7 +6,7 @@ After not having done anything with my blog for over a year I have returned and 
 to make this blogging thing happen. Part of my goals for 2017 is to start advancing my career
 independent from my job. And one part of that goal is to blog about all the things I'm learning.
 
-For about a year and a half [Docpad](http://docpad.org/) has been very helpful in adding content to
+For about a year and a half [Docpad](https://docpad.org/) has been very helpful in adding content to
 my blog, however as I was trying to automate my blog more and more I came to the conclusion that
 being on a Windows operating system doesn't make dealing with node and NPM any easier. So I figured
 it might make sense to switch to a [static generator]() which uses technologies that play better on

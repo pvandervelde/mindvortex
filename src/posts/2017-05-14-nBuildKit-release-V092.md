@@ -48,5 +48,5 @@ All the work items that have been closed for this release can be found on
   additionally be unzipped before the final copy takes place.
 
 Additionally the first steps to better documentation have been taken. The [readme](https://github.com/nbuildkit/nBuildKit.MsBuild/blob/master/README.md),
-the [introduction](http://nbuildkit.github.io/nBuildKit.MsBuild/) and the [contributing](http://nbuildkit.github.io/nBuildKit.MsBuild/docs/contributing)
+the [introduction](https://nbuildkit.github.io/nBuildKit.MsBuild/) and the [contributing](https://nbuildkit.github.io/nBuildKit.MsBuild/docs/contributing)
 documents have been updated.

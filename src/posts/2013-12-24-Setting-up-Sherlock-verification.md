@@ -22,7 +22,7 @@ of Sherlock. In order to use the verification package take the following steps:
     * **ConfigurationOperatingSystemServicePack:** Can be left empty if the operating system has no
       service pack. If the operating system has a service pack then it needs to match the service
       pack name of the operating system as registered with the management web site.
-    * **ConfigurationOperatingSystemCulture:** The [culture](http://en.wikipedia.org/wiki/IETF_language_tag)
+    * **ConfigurationOperatingSystemCulture:** The [culture](https://en.wikipedia.org/wiki/IETF_language_tag)
       as defined for the registered operating system.
     * **ConfigurationOperatingSystemPointerSize:** The 'bitness' or pointer size for the operating
       system, either 32 or 64 bits. Should again match the value that was provided when the operating
@@ -104,7 +104,7 @@ Some standard problems that may occur are mentioned below.
   the connection string or a problem with the permissions. In case of a permissions problem again check
   that the user running the master controller can access the stored procedures in the database.
 - If the master controller is unable to start a virtual machine then the *SherlockUser* may not have
-  [permissions](http://blogs.msdn.com/b/virtual_pc_guy/archive/2008/01/17/allowing-non-administrators-to-control-hyper-v.aspx)
+  [permissions](https://blogs.msdn.com/b/virtual_pc_guy/archive/2008/01/17/allowing-non-administrators-to-control-hyper-v.aspx)
   to start the virtual machines. The log will show this as an error in the environment loading. Probably
   a security exception.
 - If the controller is blocked by the firewall, or the firewall on the test environment is blocking,

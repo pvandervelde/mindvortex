@@ -4,7 +4,7 @@ Tags:
   - PG2
 ---
 
-Last weekend once again the wind was suitable for flying at [Kario](http://en.wikipedia.org/wiki/Kariotahi_Beach)
+Last weekend once again the wind was suitable for flying at [Kario](https://en.wikipedia.org/wiki/Kariotahi_Beach)
 and so more flying was had. The weather forecast indicated that the wind was going to be pretty strong
 and as we arrived on the beach that was confirmed by the general feel and the wind socks.
 

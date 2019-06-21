@@ -9,8 +9,8 @@ Tags:
 Once the configuration of [Sherlock](/projects/sherlock.html) is complete the last step needed to
 make use of automatic regression testing is to integrate with a build server. In this post I will
 explain which steps need to be taken to integrate Sherlock with a build server. Examples will be
-given for [Jenkins](http://jenkins-ci.org/), which is used at my work, and
-[TeamCity](http://www.jetbrains.com/teamcity/), which I use personally.
+given for [Jenkins](https://jenkins.io/), which is used at my work, and
+[TeamCity](https://www.jetbrains.com/teamcity/), which I use personally.
 
 In order to integrate with a build server you will need to:
 
@@ -95,7 +95,7 @@ Then the outcome is the following output file:
 
 The next step will be to create a build script that can register the test with the Sherlock system.
 This can either be done with a call to the
-[exec](http://msdn.microsoft.com/en-us/library/x8zx72cd.aspx) task or with the following inline
+[exec](https://msdn.microsoft.com/en-us/library/x8zx72cd.aspx) task or with the following inline
 MsBuild task:
 
 <script src="https://gist.github.com/pvandervelde/8346876.js"></script>
@@ -151,7 +151,7 @@ following set-up is proposed.
 
 For the two build systems I have specifically worked with the following additional notes can be made:
 
-- [Jenkins](http://jenkins-ci.org/)
+- [Jenkins](https://jenkins.io/)
     * In addition to the three standard jobs you will probably need a [Build flow](https://wiki.jenkins-ci.org/display/JENKINS/Build+Flow+Plugin)
       job to trigger the different standard jobs in the right order. This has to be done because at
       the moment it does not seem possible in Jenkins to trigger pre-requisite builds without having
@@ -160,12 +160,12 @@ For the two build systems I have specifically worked with the following addition
     * In order to deal with the build number problems as specified above the simplest way is to write
     the number to a file in the upstream job, archive that and then pull it out in the downstream jobs.
     The same goes for the version control information.
-- [TeamCity](http://www.jetbrains.com/teamcity/)
+- [TeamCity](https://www.jetbrains.com/teamcity/)
     * Downstream jobs have both a snapshot dependency and an artefact dependency on the upstream job.
-      The [snapshot dependency](http://confluence.jetbrains.com/display/TCD8/Configuring+Dependencies)
+      The [snapshot dependency](https://confluence.jetbrains.com/display/TCD8/Configuring+Dependencies)
       takes care of the synchronization of the version control revision. Note that you should create
       different VCS roots for each project, otherwise the projects all share a single check-out directory.
       By sharing a single directory it is possible that upon starting the second job the directory is
       cleaned which will likely remove the artefacts from the first job.
-    * The build number can be copied easily by [synchronizing](http://confluence.jetbrains.com/display/TCD8/Configuring+General+Settings#ConfiguringGeneralSettings-BuildNumberFormat)
+    * The build number can be copied easily by [synchronizing](https://confluence.jetbrains.com/display/TCD8/Configuring+General+Settings#ConfiguringGeneralSettings-BuildNumberFormat)
       the build numbers.
