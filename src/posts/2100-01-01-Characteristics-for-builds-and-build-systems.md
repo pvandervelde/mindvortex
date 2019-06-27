@@ -11,6 +11,7 @@ What are the important characteristics for builds and build systems
 * Should be able to run a build on any machine. Ideally no tools need to be installed so you can just
   build on a fresh OS install.
   * This means that you are independent of your build system because you can always build
+  * Allows developers to build locally to dev test the product
   * Some steps may be hard when not on a build system, e.g. signing with the proper certificates / keys,
     and some may not be desirable when not on a build system, e.g. making changes to source control
     in the local workspace (i.e. local merges / branching / commits).

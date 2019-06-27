@@ -6,21 +6,31 @@ Tags:
   - Immutable infrastructure
 ---
 
-- Introducing: [Calvinverse](http://www.calvinverse.net/). The project where I store the source code
+- Introducing: [Calvinverse](https://www.calvinverse.net/). The project where I store the source code
   for my build infrastructure.
 - The goals for Calvinverse are two-fold.
   - First to provide me with a way to experiment with build infrastructure, infrastructure-as-code etc. etc.
   - Second to provide an example of how to setup build infrastructure so that it works well and is reliable.
+    - Should be able to set it up on both on-prem and in the cloud
+
+## Why would I use this
+
+- Can just use online systems. Don't have to maintain those
+  - but also don't get to configure them as you see fit
+  - Only get the build outputs, not the ability to modify the system
+- Want to keep everything on-prem for what ever reason (maybe you're in an area with crappy network, or there are
+  regulatory / legal reasons for keeping everything on-prem)
+- Need to have custom build agents, either because you need specific tools / libraries / applications installed
+- Need to have control over the agents (eventhough they're not custom) because the contain secrets or because they need
+  access to the internal network
+
+## Layouts
 
 - Different ways to use Calvinverse:
     - For small setups with only a few developers and a few products
-        - Only need a jenkins master + one or two slaves, probably ideally a VM (easier to manage) and maybe
-          a file share for NuGet packages
     - For medium setups with a larger number of developers or lots of products
-        - Need a jenkins master + a number of slaves, possibly use docker containers
     - For large setups with a large number of developers and a lot of products
-        - Need both a production and a test environment
-        - Teams need to be able to create their own build slaves
+        
 
 - Calvinverse is designed as a self-maintained system. It's not a hosted system. Daily maintenance is
   minimal. OS updates are required on a regular basis. These can either be applied on the existing
@@ -33,6 +43,21 @@ Tags:
     store, [Vault]() as secret management system
 - Currently have a full system set up on a quad core Hyper-V host. It works but it's not the best
   performance. Minimal hardware requirements are probably 6 core + 64Gb RAM for the host machine
+- Design principles
+  - Original code for everything is stored in source control, images, configs etc. etc. Everything should
+    be in source control so that it is always possible to see what changes were made and to roll-back / branch etc.
+  - Secrets etc. should be handled in a safe way --> vault
+  - Should never have to log into any of the VMs. VMs are made and then never 'changed' (immutable infrastructure). Any
+    changes will be made to the repository, a new image will be made and once tested it will replace the existing production
+    instances. This also allows adding more instances quickly if that becomes necessary
+  - Logs and metrics should be collected for everything so that diagnosing issues is possible without logging into the
+    VMs
+  - Using Consul as local DNS to contain environments. i.e. each 'environment' is determined by the consul master instances
+    it connects to. This means you can have multiple environments, e.g. production and test, running on the same hardware
+    in the same physical network (or even the same VLAN). Inside the environment the instances can refer to each other based
+    on the consul name, e.g. active.build.service.mynetwork (assuming mynetwork is your consul domain name) and calls will only
+    got to the instance that is in that environment
+    - note that if you need strict separation then you'll need to use vlans etc. to achieve that
 
 ## Characteristics
 
@@ -61,3 +86,7 @@ Tags:
   - Elasticsearch index templates
 - Ideally builds will be configured so that a change to the configuration will be tested and pushed
   to a suitable test environment
+- Image repositories. Contain code to create the VM images. Work in progress to make them able to go
+  to Azure if necessary
+  - With some minor changes could also create images for AWS etc. Images are made using [Packer]() so
+    anything packer can create can be made
