@@ -1,7 +1,7 @@
 Title: Calvinverse - An example build infrastructure
 Tags:
   - Delivering software
-  - Software delivery pipeline
+  - Software development pipeline
   - DevOps
   - Immutable infrastructure
 ---

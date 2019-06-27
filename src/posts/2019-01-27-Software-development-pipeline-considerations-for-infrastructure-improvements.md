@@ -1,7 +1,7 @@
-Title: Software delivery pipeline - Considerations for infrastructure improvements
+Title: Software development pipeline - Considerations for infrastructure improvements
 Tags:
   - Delivering software
-  - Software delivery pipeline
+  - Software development pipeline
   - Immutable infrastructure
   - Infrastructure as code
   - DevOps
@@ -119,3 +119,6 @@ A general workflow for the creation of a new resource or to update a resource co
 
 Using the approaches mentioned above it is possible to improve the development pipeline without
 causing unnecessary disturbances for the development team.
+
+Edit: Changed the title from `software delivery pipeline` to `software development pipeline` to match
+the other posts.
