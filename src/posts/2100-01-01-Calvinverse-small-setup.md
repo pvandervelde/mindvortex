@@ -33,3 +33,4 @@ Tags:
 ## Hardware
 
 - Can run on a quad core with 32Gb of RAM
+- No redundancy, but at this level you probably don't need it

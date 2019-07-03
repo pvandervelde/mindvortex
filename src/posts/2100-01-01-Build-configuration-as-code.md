@@ -26,7 +26,7 @@ Why are manual configurations not cool
 - Recovery
   - In case of a disaster you may lose the configurations that were manually made
   - Manual configurations don't play well with
-    [immutable infrastructure for build systems](Software-development-pipeline-considerations-for-infrastructure-improvements.html)
+    [immutable infrastructure for build systems](/posts/Software-development-pipeline-considerations-for-infrastructure-improvements.html)
     because an update can wipe out all the configurations. Automatically generated ones will come
     back but the manually generated ones will not come back that easily unless there were backups.
 - Ease of use

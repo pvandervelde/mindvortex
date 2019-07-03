@@ -25,4 +25,6 @@ Tags:
   - In that case use 3 so that each consul host can go on it's own machine. That way
     the cluster can survive a restart of one of the physical hosts. Note that if multiple hosts
     restart all at the same time you might still be in trouble
-- 
+  - This is also true for RabbitMQ and Elasticsearch, they both need an uneven number of hosts
+    with a minimum of 3 for H/A
+-

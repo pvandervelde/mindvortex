@@ -24,11 +24,11 @@ Tags:
   - 1 or more Grafana instances
   - 1 or more artefact storage
   - 1 or more backup / sync instances
-  - Alerting 
+  - Alerting
 
 
 
-## Addtional
+## Additional
 
 - Might want additional services that integrate with the development process
   - E.g. at work we have services that process notifications from all kinds of sources, e.g. source control notifications etc.
