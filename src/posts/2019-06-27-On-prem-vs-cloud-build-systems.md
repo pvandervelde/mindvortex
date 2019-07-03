@@ -74,10 +74,10 @@ of the system should also be included, e.g. artefact storage or test systems. On
 that while cloud systems reduce maintenance, they are not maintenance free. The maintenance of the
 infrastructure disappears but the maintenance of the builds and the workflow does not, after all no
 matter where the build pipeline is located it is still important that it delivers the
-[accuracy](Software-development-pipeline-Design-accuracy.html),
-[performance](Software-development-pipeline-Design-performance.html),
-[resilience](Software-development-pipeline-Design-resilience.html) and
-[flexibility](Software-development-pipeline-Design-flexibility.html).
+[accuracy](/posts/Software-development-pipeline-Design-accuracy),
+[performance](/posts/Software-development-pipeline-Design-performance.html),
+[resilience](/posts/Software-development-pipeline-Design-resilience.html) and
+[flexibility](/posts/Software-development-pipeline-Design-flexibility.html).
 
 Once the cost comparison is done there are other things to bring into the decision process. Because
 while costs are important they are not the only reason to select one system or another. For instance

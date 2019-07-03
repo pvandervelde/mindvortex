@@ -6,7 +6,7 @@ Tags:
   - DevOps
 ---
 
-The [third property](Software-development-pipeline-Design-introduction.html) to consider is
+The [third property](/posts/Software-development-pipeline-Design-introduction.html) to consider is
 *resilience*, which in this case means that the pipeline should be able to cope with
 expected and unexpected changes to the environment it executes in and uses.
 

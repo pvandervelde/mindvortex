@@ -7,11 +7,11 @@ Tags:
   - DevOps
 ---
 
-In one of the post from a [while ago](Software-development-pipeline-Design-introduction.html) we
-discussed what a software development pipeline is and what the [most](Software-development-pipeline-Design-accuracy.html)
-[important](Software-development-pipeline-Design-performance.html)
-[characteristics](Software-development-pipeline-Design-resilience.html)
-[are](Software-development-pipeline-Design-flexibility.html). Given that the pipeline is used
+In one of the post from a [while ago](/posts/Software-development-pipeline-Design-introduction.html) we
+discussed what a software development pipeline is and what the [most](/posts/Software-development-pipeline-Design-accuracy.html)
+[important](/posts/Software-development-pipeline-Design-performance.html)
+[characteristics](/posts/Software-development-pipeline-Design-resilience.html)
+[are](/posts/Software-development-pipeline-Design-flexibility.html). Given that the pipeline is used
 during the large majority of the development, test and release process it is fair to say that for
 a software company the build and deployment pipeline infrastructure should be considered critical
 infrastructure because without it the development team will be more limited in their ability to
