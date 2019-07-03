@@ -1,1 +1,3 @@
-New Post: Software development pipeline - Considerations for infrastructure improvements
+New Posts:
+    Software development pipeline - On-prem or in the cloud?
+    Calvinverse - An example build infrastructure
