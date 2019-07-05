@@ -6,7 +6,7 @@ Tags:
   - DevOps
 ---
 
-The [fourth property](Software-development-pipeline-Design-introduction.html) to consider is
+The [fourth property](/posts/Software-development-pipeline-Design-introduction.html) to consider is
 *flexibility*, i.e. the ability of the pipeline to be able to be modified or adapted without
 requiring large changes to be made to the underlying pipeline code and services.
 

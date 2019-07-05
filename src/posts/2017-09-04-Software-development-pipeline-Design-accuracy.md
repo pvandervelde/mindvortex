@@ -29,7 +29,7 @@ pipeline behave correctly for all input sets. However as indicated by
 
 which means that practically achieving accuracy is a difficult task due to the
 many, often complex, interactions between the pipeline components. As a reminder
-the [components](Software-development-pipeline-Design-introduction.html) the
+the [components](/posts/Software-development-pipeline-Design-introduction.html) the
 development pipeline consists of are:
 
 - The scripts that are used during the different parts of the cycle, i.e. the build, test

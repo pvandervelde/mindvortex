@@ -6,7 +6,7 @@ Tags:
   - DevOps
 ---
 
-The [second property](Software-development-pipeline-Design-introduction.html) to consider is
+The [second property](/posts/Software-development-pipeline-Design-introduction.html) to consider is
 *performance*, which in this case means that the pipeline should provide feedback on the quality of
 the current input set as soon as possible in order to reduce the length of the feedback cycle. As is
 [known](https://www.richard-banks.org/2013/04/why-short-feedback-cycle-is-good-thing.html)
@@ -97,6 +97,6 @@ The mentioned improvements form a start for improving the performance of the pip
 the specific characteristics of a given pipeline other improvements and design choices may be valid.
 
 Finally it must be mentioned that some performance improvements will have negative influences on the
-other [properties](Software-development-pipeline-Design-introduction.html). For instance using partial
+other [properties](/posts/Software-development-pipeline-Design-introduction.html). For instance using partial
 builds may influence accuracy. In the end a trade-off will need to be made when it comes to changes
 that influence multiple properties.
