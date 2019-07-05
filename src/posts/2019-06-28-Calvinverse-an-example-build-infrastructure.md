@@ -29,11 +29,12 @@ daily maintenance is minimal it is not a hosted system so some maintenance is re
 OS updates will be required on a regular basis. These can either be applied to existing resources,
 through the automatic updates, or by applying the new updates to the templates and then replacing
 the existing resources with a new instance. The latter approach case can be automated, however there
-is no code in any of the Calvinverse repositories to do so.
+is no code in any of the Calvinverse repositories to do this automatically.
 
-The different resources in the Calvinverse project provide a set of tools and applications to provide
-all the necessary capabilities to create the infrastructure for a build pipeline. Amongst these
-capabilities are service discovery, build execution, metrics, alerting and log processing.
+The different resources in the Calvinverse project contain a set of tools and applications which
+provide all the necessary capabilities to create the infrastructure for a build pipeline. Amongst these
+capabilities are service discovery, build execution, artefact storage, metrics, alerting and
+log processing.
 
 The following applications and approaches are used for service discovery and configuration storage:
 
@@ -64,13 +65,14 @@ For the build work Calvinverse uses the following applications:
   that agents can connect when it starts. In the Calvinverse project there are currently only
   [Windows](https://github.com/Calvinverse/resource.build.agent.windows) based executors.
 
-For message distribution Calvinverse uses the following applications:
+For [artefact storage](https://github.com/Calvinverse/resource.artefacts) Calvin verse uses the
+[Nexus](https://www.sonatype.com/nexus-repository-oss) application. The image is configured such that
+a new instance of the image will create artefact repositories for [NuGet](https://www.nuget.org),
+[Npm](https://www.npmjs.com/), [Docker](https://www.docker.com/) and general ZIP artefacts.
 
-- [RabbitMQ](https://www.rabbitmq.com/) provides distributed message
-  [queues](https://github.com/Calvinverse/resource.queue). The image is configured such that a new
-  instance of the image will try to connect to the existing cluster in the environment. If no
-  cluster exists then the first instance of the image will form the start of the cluster in the
-  environment.
+For [message distribution](https://github.com/Calvinverse/resource.queue) Calvinverse uses the [RabbitMQ](https://www.rabbitmq.com/) application. The image is configured such that a new instance of the image will
+try to connect to the existing cluster in the environment. If no cluster exists then the first
+instance of the image will form the start of the cluster in the environment.
 
 Metrics, monitoring and alerting capabilities are provided by the
 [Influx](https://www.influxdata.com/) stack, consisting of:
