@@ -12,7 +12,7 @@ project. In this post I will explain how I created the regression tests for an A
 with a graphical user interface (UI).
 
 My initial attempt to write a regression test suite for the GUI application was done using the
-[NUnit](http://www.nunit.org/) and [ScriptCS](http://scriptcs.net/) with the idea that NUnit would
+[NUnit](https://www.nunit.org/) and [ScriptCS](https://scriptcs.net/) with the idea that NUnit would
 provide the test execution and validation methods and ScriptCs would provide an easy way to write the
 test scripts without requiring a complete IDE to be used. After some trial-and-error it became clear
 that this approach was not the most suitable solution for the following reasons:
@@ -62,9 +62,9 @@ the application and the test steps.
 
 In order for the tests to interact with the GUI I chose to use the [TestStack.White](https://github.com/TestStack/White)
 library mainly because it is a mature open source library that has a number of active contributors.
-One thing to keep in mind when selecting a GUI automation library is that the [underlying technology](http://en.wikipedia.org/wiki/Microsoft_UI_Automation)
+One thing to keep in mind when selecting a GUI automation library is that the [underlying technology](https://en.wikipedia.org/wiki/Microsoft_UI_Automation)
 has some tricky hooks to it that cannot be completely hidden by the automation library. One example
-is that all controls can be found based on their [automation ID](http://msdn.microsoft.com/en-us/library/aa349646%28v=vs.110%29.aspx)
+is that all controls can be found based on their [automation ID](https://msdn.microsoft.com/en-us/library/aa349646%28v=vs.110%29.aspx)
 but windows cannot, even if the window in question has an automation ID.
 
 The main piece of advice for writing UI automation tests is always to write some helper methods to

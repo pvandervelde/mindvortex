@@ -27,7 +27,7 @@ The test execution part consists of:
 - Selection of the most suitable environment for a test based on the desired combination of operating
   system and available applications.
 - Preparing of the environment for test. This includes loading test environments, i.e. waking up
-  physical test environments through the [Wake-on-LAN](http://en.wikipedia.org/wiki/Wake-on-LAN)
+  physical test environments through the [Wake-on-LAN](https://en.wikipedia.org/wiki/Wake-on-LAN)
   approach and starting virtual machines, and sending over the test data, e.g. installer files.
 - Triggering test execution on the active test environment.
 - Processing test status and test report information.
@@ -36,7 +36,7 @@ The test execution part consists of:
 - Accumulation of test events and generation of the final test report.
 
 In general the Sherlock system will consist of at least one
-[Hyper-V](http://en.wikipedia.org/wiki/Hyper-V) host machine and a set of one or more Hyper-V virtual
+[Hyper-V](https://en.wikipedia.org/wiki/Hyper-V) host machine and a set of one or more Hyper-V virtual
 machines. In this arrangement the host machine handles the test organisation and part of the test
 execution, while the virtual machines serve as test environments.
 
@@ -85,7 +85,7 @@ of sherlock. A release consists of a number of ZIP packages including:
 - **sql.zip** - The SQL change scripts for the database.
 
 The second pre-requisite is the availability of a physical machine on which a Windows version with
-[Hyper-V](http://en.wikipedia.org/wiki/Hyper-V#System_requirements_and_specifications) can be installed.
+[Hyper-V](https://en.wikipedia.org/wiki/Hyper-V#System_requirements_and_specifications) can be installed.
 
 
 ### Planned posts:

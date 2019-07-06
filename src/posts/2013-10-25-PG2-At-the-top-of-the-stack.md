@@ -9,7 +9,7 @@ trick that I pulled a few weeks back. The weather forecast was for sunny and win
 windy. So on Saturday morning we drove out to the beach but when we got to the launch site it became
 clear that it would be touch-and-go due to the high winds. In the end I only got a little hop while
 practising my launches. After that I practised my ground handling with a
-[Gin Nano](http://gingliders.com/speedflying/speedriding-gliders/nano/) which is a fun little glider
+[Gin Nano](https://gingliders.com/speedflying/speedriding-gliders/nano/) which is a fun little glider
 but it did feel more like a kite than a real glider.
 
 The next day was a different story. The wind died down just enough and the sun stayed, all in all a

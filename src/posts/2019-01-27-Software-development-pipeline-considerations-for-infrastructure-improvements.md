@@ -1,17 +1,17 @@
-Title: Software delivery pipeline - Considerations for infrastructure improvements
+Title: Software development pipeline - Considerations for infrastructure improvements
 Tags:
   - Delivering software
-  - Software delivery pipeline
+  - Software development pipeline
   - Immutable infrastructure
   - Infrastructure as code
   - DevOps
 ---
 
-In one of the post from a [while ago](Software-development-pipeline-Design-introduction.html) we
-discussed what a software development pipeline is and what the [most](Software-development-pipeline-Design-accuracy.html)
-[important](Software-development-pipeline-Design-performance.html)
-[characteristics](Software-development-pipeline-Design-resilience.html)
-[are](Software-development-pipeline-Design-flexibility.html). Given that the pipeline is used
+In one of the post from a [while ago](/posts/Software-development-pipeline-Design-introduction.html) we
+discussed what a software development pipeline is and what the [most](/posts/Software-development-pipeline-Design-accuracy.html)
+[important](/posts/Software-development-pipeline-Design-performance.html)
+[characteristics](/posts/Software-development-pipeline-Design-resilience.html)
+[are](/posts/Software-development-pipeline-Design-flexibility.html). Given that the pipeline is used
 during the large majority of the development, test and release process it is fair to say that for
 a software company the build and deployment pipeline infrastructure should be considered critical
 infrastructure because without it the development team will be more limited in their ability to
@@ -119,3 +119,6 @@ A general workflow for the creation of a new resource or to update a resource co
 
 Using the approaches mentioned above it is possible to improve the development pipeline without
 causing unnecessary disturbances for the development team.
+
+Edit: Changed the title from `software delivery pipeline` to `software development pipeline` to match
+the other posts.

@@ -18,7 +18,7 @@ One of the consequences of this desire to reduce the development cycle time on t
 development process is that more tasks in the development workflow
 have to be automated in order to reduce the time taken for the specific task.
 One way this automation can be achieved is by creating a
-[development pipeline](http://www.informit.com/articles/article.aspx?p=1621865&seqNum=2) which
+[development pipeline](https://www.informit.com/articles/article.aspx?p=1621865&seqNum=2) which
 takes the source code and moves it through a set of largely automatic transformations, e.g. compilation,
 testing, packaging and potentially deployment, to obtain a validated, and potentially deployed, application.
 
@@ -66,15 +66,15 @@ In order to start the selection of suitable components for a development pipelin
 it is important to know what the desirable properties of such a system are. The following
 ordered properties are thought to be the most important ones to consider.
 
-- [Accurate](Software-development-pipeline-Design-accuracy.html): The pipeline must return the right
+- [Accurate](/posts/Software-development-pipeline-Design-accuracy.html): The pipeline must return the right
   outputs for a specific input, i.e it should report errors to the interested parties if there are any
   and report success and produce the desired artefacts if there are no errors.
-- [Performance](Software-development-pipeline-Design-performance.html): The pipeline must push changes
+- [Performance](/posts/Software-development-pipeline-Design-performance.html): The pipeline must push changes
   through the different stages fast in order to get results back to the interested parties as soon
   as possible.
-- [Resilience](Software-development-pipeline-Design-resilience.html): The pipeline must be able to
+- [Resilience](/posts/Software-development-pipeline-Design-resilience.html): The pipeline must be able to
   cope with environmental changes, both expected and unexpected.
-- [Flexibility](Software-development-pipeline-Design-flexibility.html): The pipeline must be easy to
+- [Flexibility](/posts/Software-development-pipeline-Design-flexibility.html): The pipeline must be easy to
   adapt to new products and tools so that it can be used without having to replace large parts each
   time a new product or tool needs to be included.
 

@@ -7,7 +7,7 @@ Tags:
 ---
 
 The build server that is being used to build the packages for [nBuildKit](/projects/nbuildkit.html)
-is [AppVeyor](http://www.appveyor.com/). AppVeyor is an Continuous Integration system in the cloud.
+is [AppVeyor](https://www.appveyor.com/). AppVeyor is an Continuous Integration system in the cloud.
 The way AppVeyor works is that every time a commit occurs in a GitHub project AppVeyor is notified.
 AppVeyor then spins up a new clean virtual machine (VM) on which your build scripts are executed.
 Once the build is done the VM is terminated and thrown away. This way there is no way that the
@@ -22,7 +22,7 @@ For this configuration no special settings are required other then to tell AppVe
 The second build configuration handles the [delivery](https://ci.appveyor.com/project/pvandervelde/nbuildkit-244)
 of the artefacts. This configuration gathers the build artefacts from the latest build of the first
 build configuration, tags the revision that was build and then pushes the NuGet packages to
-[NuGet.org](http://www.nuget.org/packages/nbuildkit.msbuild) and marks the given commit as a release
+[NuGet.org](https://www.nuget.org/packages/nbuildkit.msbuild) and marks the given commit as a release
 in [GitHub](https://github.com/pvandervelde/nBuildKit/releases).
 
 For this second configuration a few tweaks need to be made to the environment before the build can be

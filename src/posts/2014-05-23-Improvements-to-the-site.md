@@ -26,5 +26,5 @@ Besides setting up the pagination of the landing page I also created an [archive
 page which, logically, shows all the blog posts in chronological order. Again a future blog post will
 describe the necessary changes to include the archive page.
 
-Last but not least the site has gotten a new [favicon](http://en.wikipedia.org/wiki/Favicon) which is
+Last but not least the site has gotten a new [favicon](https://en.wikipedia.org/wiki/Favicon) which is
 a little more vortex-y than the last icon.

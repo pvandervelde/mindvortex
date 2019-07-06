@@ -32,7 +32,7 @@ This statement should bring up a few questions, cunning questions like:
 Before we continue with the installation of nAnicitus lets have a quick look at how nAnicitus works.
 
 1. The user creates a
-   [NuGet symbol package](http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-symbol-package)
+   [NuGet symbol package](https://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-symbol-package)
    and places that in a pre-configured upload directory.
 1. nAnicitus unpacks the symbol package and extracts the PDB files and the source files.
 1. For each PDB file it is determined which source files were used to create it. Based on that
@@ -42,7 +42,7 @@ Before we continue with the installation of nAnicitus lets have a quick look at 
 1. The source files are uploaded to the source server path.
 
 Before installing nAnicitus it is necessary to install the
-[debugging tools for windows](http://msdn.microsoft.com/en-us/library/windows/hardware/gg463009.aspx).
+[debugging tools for windows](https://msdn.microsoft.com/en-us/library/windows/hardware/gg463009.aspx).
 Make sure to install the complete set of tools so that you get all the symbol server tools as well.
 Once the the debugging tools are installed you can [download](https://github.com/pvandervelde/nAnicitus/releases)
 and unzip the latest version of nAnicitus.
@@ -72,10 +72,10 @@ the service.
 
 And now you should have a working symbol server!
 
-[symbolserver_msdn]:http://msdn.microsoft.com/en-us/library/windows/desktop/ms680693%28v=vs.85%29.aspx
-[symstore_msdn]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff558848(v=vs.85).aspx
-[sourceserver_msdn]:http://msdn.microsoft.com/en-us/library/windows/desktop/ms680641%28v=vs.85%29.aspx
-[symstore_msdn_singletransaction]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff558851(v=vs.85).aspx
-[sourceindexing_msdn]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff556898(v=vs.85).aspx
-[srcsrv_stream]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff552219(v=vs.85).aspx
-[snkfile_msdn]: http://msdn.microsoft.com/en-us/library/6f05ezxy(v=vs.110).aspx
+[symbolserver_msdn]:https://msdn.microsoft.com/en-us/library/windows/desktop/ms680693%28v=vs.85%29.aspx
+[symstore_msdn]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff558848(v=vs.85).aspx
+[sourceserver_msdn]:https://msdn.microsoft.com/en-us/library/windows/desktop/ms680641%28v=vs.85%29.aspx
+[symstore_msdn_singletransaction]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff558851(v=vs.85).aspx
+[sourceindexing_msdn]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff556898(v=vs.85).aspx
+[srcsrv_stream]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff552219(v=vs.85).aspx
+[snkfile_msdn]: https://msdn.microsoft.com/en-us/library/6f05ezxy(v=vs.110).aspx

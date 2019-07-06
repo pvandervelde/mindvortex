@@ -26,11 +26,11 @@ The configuration process for a virtual machine consists of the following steps:
 
 ### Preparing the virtual machine
 
-The first step is to create a [new virtual machine](http://technet.microsoft.com/en-us/library/cc772480.aspx)
+The first step is to create a [new virtual machine](https://technet.microsoft.com/en-us/library/cc772480.aspx)
 and install the operating system. This should be straight forward but there a few things to look out
 for:
 
-- The operating system must (currently) support [.NET 4.5](http://en.wikipedia.org/wiki/.NET_Framework_version_history#.NET_Framework_4.5)
+- The operating system must (currently) support [.NET 4.5](https://en.wikipedia.org/wiki/.NET_Framework_version_history#.NET_Framework_4.5)
   because that is what Sherlock is needs to run on.
 - The network for the virtual machine must be set up so that it can at the very least see the host
   machine and the other virtual machines stored on the same host machine.
@@ -51,7 +51,7 @@ Lets first start with the changes required for Sherlock to function.
 - If .NET 4.5 is not already installed, then install it. Without it Sherlock won't run at all.
 - Create a new user that will be used to execute the tests. This user needs to be an administrator so
   that the execution of an MSI install can succeed without the need for elevation (which is
-  [a bit tricky](http://stackoverflow.com/questions/5098121/how-can-i-get-elevated-permissions-uac-via-impersonation-under-a-non-interacti)
+  [a bit tricky](https://stackoverflow.com/questions/5098121/how-can-i-get-elevated-permissions-uac-via-impersonation-under-a-non-interacti)
   from an application). The user can be either a machine local administrator or a domain user  which
   is granted administration rights on the machine.
     * Note that there might a difference between a domain user with administrative rights on the
@@ -73,18 +73,18 @@ about the settings you want to change and the [reason](http://www.brianbondy.com
 need to change those settings.
 
 - **Interactive user:** If you need to run interactive tests, e.g. UI tests, then you need to make
-  sure a user is logged in. Use [Autologon](http://technet.microsoft.com/en-us/sysinternals/bb963905.aspx)
+  sure a user is logged in. Use [Autologon](https://technet.microsoft.com/en-us/sysinternals/bb963905.aspx)
   to automatically log your user in when the computer starts while still maintaining password security.
 - **Windows 8 switch to desktop:** If you are on Windows 8 you need to make sure that the desktop is
   [available](http://www.7tutorials.com/how-boot-desktop-windows-8-skip-start-screen) for interactive
   applications to execute on.
 - **Screen saver:** In order to prevent any interactive tests from failing due to a
-  [screensaver](http://windows.microsoft.com/en-nz/windows-vista/turn-your-screen-saver-on-or-off) or
-  the [automatic locking of the desktop](http://answers.microsoft.com/en-us/windows/forum/windows_7-security/disable-automatic-lock-with-windows-7/daef8f0a-810f-46e8-9420-3c32c4bd6479)
+  [screensaver](https://windows.microsoft.com/en-nz/windows-vista/turn-your-screen-saver-on-or-off) or
+  the [automatic locking of the desktop](https://answers.microsoft.com/en-us/windows/forum/windows_7-security/disable-automatic-lock-with-windows-7/daef8f0a-810f-46e8-9420-3c32c4bd6479)
   both those features need to be turned off.
 - **Windows error reporting:** Any tests that run on the desktop may hang eternally if the application
   under tests fails and displays the Windows Error Reporting (WER) dialog. In order to prevent this
-  from happening [WER should be disabled](http://4sysops.com/archives/how-to-disable-windows-error-reporting/).
+  from happening [WER should be disabled](https://4sysops.com/archives/how-to-disable-windows-error-reporting/).
   The most efficient way of doing this is to use the group policy controls to disable the following elements:
     * In `Computer Configuration\Administrative Templates\System\Internet Communication Management\Internet Communication settings`
       enable the setting: `Turn off Windows Error Reporting`.
@@ -132,7 +132,7 @@ to make sure it all works. In order to do this take the following steps:
 - After both applications have started stop them both by stopping the update service (`Sherlock.Service`).
 - Once the applications have been stopped remove the data from the directory `c:\ProgramData\Sherlock`.
 - Shut down the machine.
-- Take a [snapshot](http://blogs.msdn.com/b/virtual_pc_guy/archive/2008/01/16/managing-snapshots-with-hyper-v.aspx)
+- Take a [snapshot](https://blogs.msdn.com/b/virtual_pc_guy/archive/2008/01/16/managing-snapshots-with-hyper-v.aspx)
   of the current state of the virtual machine and give it a sensible name.
 
 

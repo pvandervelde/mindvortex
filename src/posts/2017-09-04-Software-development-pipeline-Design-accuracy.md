@@ -7,8 +7,8 @@ Tags:
 ---
 
 [ISO](https://en.wikipedia.org/wiki/Accuracy_and_precision#ISO_definition_.28ISO_5725.29) defines
-accuracy as the combination of [correctness](http://dictionary.cambridge.org/dictionary/english/correct?q=correctness),
-in agreement with the true facts, and [consistency](http://dictionary.cambridge.org/dictionary/english/consistency),
+accuracy as the combination of [correctness](https://dictionary.cambridge.org/dictionary/english/correct?q=correctness),
+in agreement with the true facts, and [consistency](https://dictionary.cambridge.org/dictionary/english/consistency),
 always behaving or performing in a similar way.
 
 The reason to value *accuracy* as the number one characteristic of the development pipeline is
@@ -23,13 +23,13 @@ Once we know that having a development pipeline which delivers correct results i
 next step is to determine how accuracy can be built into the development pipeline.
 In theory this task is a simple one, all one has to do is to ensure that all the parts that form the
 pipeline behave correctly for all input sets. However as indicated by
-[many](http://wiki.c2.com/?DifferenceBetweenTheoryAndPractice) -
+[many](https://wiki.c2.com/?DifferenceBetweenTheoryAndPractice) -
 
 > In theory there is no difference between theory and practice. In practice there is
 
 which means that practically achieving accuracy is a difficult task due to the
 many, often complex, interactions between the pipeline components. As a reminder
-the [components](Software-development-pipeline-Design-introduction.html) the
+the [components](/posts/Software-development-pipeline-Design-introduction.html) the
 development pipeline consists of are:
 
 - The scripts that are used during the different parts of the cycle, i.e. the build, test

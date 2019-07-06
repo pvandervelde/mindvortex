@@ -8,7 +8,7 @@ Tags:
   - UNC
 ---
 
-The [nAnicitus](/projects/nanicitus.html) application processes [NuGet symbol](http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-symbol-package)
+The [nAnicitus](/projects/nanicitus.html) application processes [NuGet symbol](https://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-symbol-package)
 packages to push the symbols and sources up to their respective location for the symbol and source
 servers to work. In order to have a symbol server nothing special needs to be done, just push the
 symbols through the [SymStore][symstore_msdn] application and a nice directory with indexed symbols
@@ -101,9 +101,9 @@ source server changes then the information in the PDB files will no longer be co
 is a way to redirect the embedded paths nAnicitus also stores the processed NuGet symbol packages in
 a designated directory. This makes it possible to re-process the packages should the need ever arise.
 
-[symstore_msdn]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff558848(v=vs.85).aspx
-[sourceserver_msdn]:http://msdn.microsoft.com/en-us/library/windows/desktop/ms680641%28v=vs.85%29.aspx
-[modifying_srcsrv_stream]:http://msdn.microsoft.com/en-us/library/windows/hardware/ff552219%28v=vs.85%29.aspx
-[pdbstr_tool]: http://msdn.microsoft.com/en-us/library/windows/hardware/ff558874%28v=vs.85%29.aspx
-[srcsrv_v1]:http://msdn.microsoft.com/en-us/library/windows/hardware/ff551958%28v=vs.85%29.aspx
-[srcsrv_v2]:http://msdn.microsoft.com/en-us/library/windows/hardware/ff551966%28v=vs.85%29.aspx
+[symstore_msdn]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff558848(v=vs.85).aspx
+[sourceserver_msdn]:https://msdn.microsoft.com/en-us/library/windows/desktop/ms680641%28v=vs.85%29.aspx
+[modifying_srcsrv_stream]:https://msdn.microsoft.com/en-us/library/windows/hardware/ff552219%28v=vs.85%29.aspx
+[pdbstr_tool]: https://msdn.microsoft.com/en-us/library/windows/hardware/ff558874%28v=vs.85%29.aspx
+[srcsrv_v1]:https://msdn.microsoft.com/en-us/library/windows/hardware/ff551958%28v=vs.85%29.aspx
+[srcsrv_v2]:https://msdn.microsoft.com/en-us/library/windows/hardware/ff551966%28v=vs.85%29.aspx

@@ -1,6 +1,6 @@
 Title: Vault secret store - Configuration
 Tags:
-  - Software delivery pipeline
+  - Software development pipeline
   - Immutable infrastructure
   - DevOps
   - Secrets
