@@ -1,4 +1,5 @@
 Title: Archive
+ShowInNavbar: true
 Order: 2500
 ---
 @{
@@ -6,10 +7,10 @@ Order: 2500
 }
 
 @{
-    foreach(IGrouping<int, IDocument> year in Documents[BlogKeys.Posts]
-        .Where(x => x.ContainsKey("Published"))
-        .OrderByDescending(x => x.Get<DateTime>("Published"))
-        .GroupBy(x => x.Get<DateTime>("Published").Year)
+    foreach(IGrouping<int, IDocument> year in Model.DocumentList(Keys.PageDocuments)
+        .Where(x => x.ContainsKey(BlogKeys.Published))
+        .OrderByDescending(x => x.Get<DateTime>(BlogKeys.Published))
+        .GroupBy(x => x.Get<DateTime>(BlogKeys.Published).Year)
         .OrderByDescending(x => x.Key))
     {
         <div class="archive">
