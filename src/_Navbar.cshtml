@@ -1,36 +1,60 @@
 @{
-    var pages = Documents[BlogPipelines.Pages]
-        .Where(x => x.Get<bool>(BlogKeys.ShowInNavbar, true))
+    <!-- @(string.Join(",", Model.Metadata.GetType().GetProperties().Select(x => x.Name))) -->
+    <!-- @(string.Join(",", Model.Metadata.Select(x => "{" + x.Key + ", " + x.Value?.GetType()?.Name + "}"))) -->
+    <!-- @(string.Join(",", Model.Metadata.Where(x => x.Key.Equals("PageDocuments")).Select(x => x.Value).FirstOrDefault()?.GetType())) -->
+    <!-- @(string.Join(",", Model.Metadata.Where(x => x.Key.Equals("PageDocuments")).Select(x => x.Value).Cast<IDocument[]>().FirstOrDefault()?.Length)) -->
+    <!-- @(string.Join(",", Model.Metadata.Where(x => x.Key.Equals("PageDocuments")).Select(x => x.Value).Cast<IDocument[]>().SelectMany(x => x).Select(x => x.Metadata.String(BlogKeys.Title)))) -->
+    <!-- @(string.Join(Environment.NewLine, Documents.Select(x => x.String(BlogKeys.Title)))) -->
+
+
+    foreach(var doc in Context.Documents)
+    {
+        if (doc != null)
+        {
+        <!-- @doc.String(BlogKeys.Title) - @doc.Get(BlogKeys.ShowInNavbar, false) - @doc.Get("Order")?.GetType() -->
+        }
+    }
+
+    var pages = Documents
+        .Where(x => x.Get<bool>(BlogKeys.ShowInNavbar, false))
         .Select(
             x =>
             {
-                var order = x.Get<int>("Order");
-                order = (order != 0) ? order : 1000;
-
                 var link = Context.GetLink(x);
                 var title = x.String(BlogKeys.Title);
+
+                int order = 1000;
                 if (string.IsNullOrEmpty(title) && string.Equals(link, "/", StringComparison.OrdinalIgnoreCase))
                 {
                     title = "Home";
                     order = -1;
                 }
 
+                var orderAsObj = x.Get("Order") as string;
+                if (orderAsObj != null)
+                {
+                    if (!int.TryParse(orderAsObj, out order))
+                    {
+                        title = string.Empty;
+                    }
+                }
+
                 return Tuple.Create(title, link, x.Id, order);
             })
         .Where(x => !string.IsNullOrEmpty(x.Item1))
         .OrderBy(x => x.Item4);
-    foreach(var page in pages)
+    foreach(var blogPage in pages)
     {
-        if (Model.Id == page.Item3)
+        if (Model.Id == blogPage.Item3)
         {
             <li class="active" >
-                @page.Item1
+                @blogPage.Item1
             </li>
         }
         else
         {
             <li class="inactive" >
-                <a href="@page.Item2">@page.Item1</a>
+                <a href="@blogPage.Item2">@blogPage.Item1</a>
             </li>
         }
     }
