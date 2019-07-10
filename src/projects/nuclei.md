@@ -3,7 +3,7 @@ Lead: "Nuclei is a collection of libraries containing classes and functions for 
 exception handling and assembly location and loading."
 Tags:
   - Project
-ShowInNavBar: false
+ShowInNavbar: false
 ---
 
 [Nuclei](https://github.com/thenucleus) is a collection of libraries containing classes and functions for inter-application communication, dealing with run time discovered plugins, diagnostics, configuration information from different sources,

@@ -2,7 +2,7 @@ Title: 'Ops-Resource'
 Lead: "Ops-Resource provides scripts and tools to build immutable build infrastructure."
 Tags:
   - Project
-ShowInNavBar: false
+ShowInNavbar: false
 ---
 
 [Ops-Resource](https://github.com/ops-resource) provides scripts and tools to build immutable build infrastructure. There are several repositories each of which

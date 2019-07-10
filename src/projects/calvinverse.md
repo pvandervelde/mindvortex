@@ -2,7 +2,7 @@ Title: 'Calvinverse'
 Lead: "Calvinverse contains a collection of tools and configuration settings used to create my internal build infrastructure on Hyper-V and Azure."
 Tags:
   - Project
-ShowInNavBar: false
+ShowInNavbar: false
 ---
 
 [Calvinverse](https://github.com/Calvinverse) contains the scripts and tools that I use to create and learn about building 'immutable' build infrastructure on both Azure and Hyper-V.
