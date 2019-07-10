@@ -7,7 +7,7 @@ Settings[Keys.Host] = "www.petrikvandervelde.nl";
 Settings[Keys.LinksUseHttps] = true;
 Settings[BlogKeys.Title] = "Mind vortex";
 Settings[BlogKeys.Intro] = "Dutch software developer, living, working and playing in New Zealand. Rock climber, and paragliding pilot. Developer of [Sherlock](https://www.petrikvandervelde.nl/Sherlock), [Nuclei](https://www.petrikvandervelde.nl/Nuclei) and other projects";
-Settings[BlogKeys.MarkdownExtensions] = "pipetables+emphasisextras+attributes+definitionlists+abbreviations+figures+bootstrap+emojis+smartypants";
+Settings[BlogKeys.MarkdownConfiguration] = "pipetables+emphasisextras+attributes+definitionlists+abbreviations+figures+bootstrap+emojis+smartypants";
 
 Pipelines[Blog.Pages].Replace("RazorFiles",
     Concat(

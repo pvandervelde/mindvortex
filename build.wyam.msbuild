@@ -23,7 +23,7 @@
             Text="The Wyam executable does not exist. Cannot generate the site." />
 
         <Exec
-            Command="&quot;$(ToolsExternalWyamPath)&quot; --input $(DirSrc) --output $(DirBuildSite) --use-local-packages --packages-path $(DirPackages)"
+            Command="dotnet &quot;$(ToolsExternalWyamPath)&quot; build --input $(DirSrc) --output $(DirBuildSite) --use-local-packages --packages-path $(DirPackages)"
             WorkingDirectory="$(DirWorkspace)" />
     </Target>
 
@@ -41,7 +41,7 @@
             Sources="@(NuGetSources)" />
         <SearchPackagesDirectoryForToolPath
             Condition=" '$(ToolsExternalWyamPath)' == 'UNDEFINED' "
-            FileToLocate="wyam.exe"
+            FileToLocate="wyam.dll"
             PackagesDir="$(DirPackages)">
             <Output
                 PropertyName="ToolsExternalWyamPath"
