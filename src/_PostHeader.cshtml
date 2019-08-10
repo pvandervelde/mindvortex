@@ -42,6 +42,7 @@
                 IDocument tagDocument = Documents[BlogKeys.Tags].FirstOrDefault(x => x.String(BlogKeys.Tag) == tag);
                 if(tagDocument != null)
                 {
+
                     <a id="post-category" role="button" href="@Context.GetLink(tagDocument)" class="btn btn-default btn-xs">@Html.Raw(tag.Replace(" ", "&nbsp;"))</a>
                 }
             }
