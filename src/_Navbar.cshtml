@@ -1,18 +1,13 @@
 @{
-    <!-- @(string.Join(",", Model.Metadata.GetType().GetProperties().Select(x => x.Name))) -->
-    <!-- @(string.Join(",", Model.Metadata.Select(x => "{" + x.Key + ", " + x.Value?.GetType()?.Name + "}"))) -->
-    <!-- @(string.Join(",", Model.Metadata.Where(x => x.Key.Equals("PageDocuments")).Select(x => x.Value).FirstOrDefault()?.GetType())) -->
-    <!-- @(string.Join(",", Model.Metadata.Where(x => x.Key.Equals("PageDocuments")).Select(x => x.Value).Cast<IDocument[]>().FirstOrDefault()?.Length)) -->
-    <!-- @(string.Join(",", Model.Metadata.Where(x => x.Key.Equals("PageDocuments")).Select(x => x.Value).Cast<IDocument[]>().SelectMany(x => x).Select(x => x.Metadata.String(BlogKeys.Title)))) -->
-    <!-- @(string.Join(Environment.NewLine, Documents.Select(x => x.String(BlogKeys.Title)))) -->
-
-
-    foreach(var doc in Context.Documents)
+    foreach(var key in Documents.ByPipeline().Keys)
     {
-        if (doc != null)
-        {
-        <!-- @doc.String(BlogKeys.Title) - @doc.Get(BlogKeys.ShowInNavbar, false) - @doc.Get("Order")?.GetType() -->
-        }
+        <!-- @key -->
+    }
+
+    <!-- Context.Documents['Pages'] -->
+    foreach(var doc in Documents.FromPipeline("Pages"))
+    {
+        <!-- @doc.String(BlogKeys.Title) - @doc.Get(BlogKeys.ShowInNavbar, false) - @Context.GetLink(doc) -->
     }
 
     var pages = Documents
@@ -42,10 +37,16 @@
                 return Tuple.Create(title, link, x.Id, order);
             })
         .Where(x => !string.IsNullOrEmpty(x.Item1))
-        .OrderBy(x => x.Item4);
+        .OrderBy(x => x.Item4)
+        .GroupBy(x => x.Item1)
+        .Select(x => x.First());
+
     foreach(var blogPage in pages)
     {
-        if (Model.Id == blogPage.Item3)
+        var pageTitle = Model.String(BlogKeys.Title);
+        var link = Context.GetLink(Model);
+
+        if ((pageTitle == blogPage.Item1) || (string.IsNullOrEmpty(pageTitle) && string.Equals(link, blogPage.Item2, StringComparison.OrdinalIgnoreCase)))
         {
             <li class="active" >
                 @blogPage.Item1
