@@ -7,11 +7,162 @@ Settings[Keys.Host] = "www.petrikvandervelde.nl";
 Settings[Keys.LinksUseHttps] = true;
 Settings[BlogKeys.Title] = "Mind vortex";
 Settings[BlogKeys.Intro] = "Dutch software developer, living, working and playing in New Zealand. Rock climber, and paragliding pilot. Developer of [Sherlock](https://www.petrikvandervelde.nl/Sherlock), [Nuclei](https://www.petrikvandervelde.nl/Nuclei) and other projects";
-Settings[BlogKeys.MarkdownExtensions] = "pipetables+emphasisextras+attributes+definitionlists+abbreviations+figures+bootstrap+emojis+smartypants";
+Settings[BlogKeys.MarkdownConfiguration] = "pipetables+emphasisextras+attributes+definitionlists+abbreviations+figures+bootstrap+emojis+smartypants";
 
-Pipelines[Blog.Pages].Replace("RazorFiles",
-    Concat(
-        ReadFiles($"{{!{@ctx.DirectoryPath(BlogKeys.PostsPath).FullPath},!tags,**}}/{{!_,}}*.cshtml"),
-        FrontMatter(Yaml())
+//
+// ARCHIVE
+//
+
+var blogArchive = new Wyam.Web.Pipelines.Archive
+(
+    "BlogArchive",
+    new Wyam.Web.Pipelines.ArchiveSettings
+    {
+        Pipelines = new string[] { "BlogPosts" },
+        TemplateFile = ctx => "_Archive.cshtml",
+        Layout = "/_Layout.cshtml",
+        PageSize = ctx => ctx.Get(BlogKeys.ArchivePageSize, int.MaxValue),
+        Title = (doc, ctx) => "Archive",
+        RelativePath = (doc, ctx) =>
+            $"{ctx.DirectoryPath(BlogKeys.PostsPath, ".").FullPath}"
+    }
+);
+
+blogArchive.Replace(
+    "WriteFiles",
+    new WriteFiles().OnlyMetadata()
+);
+
+Pipelines["BlogArchive"].Replace
+(
+    0,
+    new If
+    (
+        ctx => ctx.Bool(BlogKeys.GenerateArchive),
+        blogArchive.ToArray()
     )
+);
+
+var renderBlogArchive = new Wyam.Web.Pipelines.Archive
+(
+    "RenderBlogArchive",
+    new Wyam.Web.Pipelines.ArchiveSettings
+    {
+        Pipelines = new string[] { "BlogPosts" },
+        TemplateFile = ctx => "_Archive.cshtml",
+        Layout = "/_Layout.cshtml",
+        PageSize = ctx => ctx.Get(BlogKeys.ArchivePageSize, int.MaxValue),
+        Title = (doc, ctx) => "Archive",
+        RelativePath = (doc, ctx) =>
+            $"{ctx.DirectoryPath(BlogKeys.PostsPath, ".").FullPath}"
+    }
+);
+
+Pipelines.InsertAfter(
+    "Index",
+    "RenderBlogArchive",
+    renderBlogArchive
+);
+
+
+//
+// TAGS
+//
+
+var tags = new Wyam.Web.Pipelines.Archive
+(
+    "Tags",
+    new Wyam.Web.Pipelines.ArchiveSettings
+    {
+        Pipelines = new string[] { "BlogPosts" },
+        TemplateFile = ctx => "_Tag.cshtml",
+        Layout = "/_Layout.cshtml",
+        Group = (doc, ctx) => doc.List<string>(BlogKeys.Tags),
+        CaseInsensitiveGroupComparer = ctx => ctx.Bool(BlogKeys.CaseInsensitiveTags),
+        PageSize = ctx => ctx.Get(BlogKeys.TagPageSize, int.MaxValue),
+        Title = (doc, ctx) => doc.String(Keys.GroupKey),
+        RelativePath = (doc, ctx) => $"tags/{doc.String(Keys.GroupKey)}.html",
+        GroupDocumentsMetadataKey = BlogKeys.Posts,
+        GroupKeyMetadataKey = BlogKeys.Tag
+    }
+);
+
+tags.Replace(
+    "WriteFiles",
+    new WriteFiles().OnlyMetadata()
+);
+
+Pipelines["Tags"].Replace
+(
+    0,
+    new If
+    (
+        ctx => ctx.Bool("true"),
+        tags.ToArray()
+    )
+);
+
+var renderTags = new Wyam.Web.Pipelines.Archive
+(
+    "RenderTags",
+    new Wyam.Web.Pipelines.ArchiveSettings
+    {
+        Pipelines = new string[] { "BlogPosts" },
+        TemplateFile = ctx => "_Tag.cshtml",
+        Layout = "/_Layout.cshtml",
+        Group = (doc, ctx) => doc.List<string>(BlogKeys.Tags),
+        CaseInsensitiveGroupComparer = ctx => ctx.Bool(BlogKeys.CaseInsensitiveTags),
+        PageSize = ctx => ctx.Get(BlogKeys.TagPageSize, int.MaxValue),
+        Title = (doc, ctx) => doc.String(Keys.GroupKey),
+        RelativePath = (doc, ctx) => $"tags/{doc.String(Keys.GroupKey)}.html",
+        GroupDocumentsMetadataKey = BlogKeys.Posts,
+        GroupKeyMetadataKey = BlogKeys.Tag
+    }
+);
+
+Pipelines.InsertAfter(
+    "Index",
+    "RenderTags",
+    renderTags
+);
+
+//
+// TAGINDEX
+//
+
+Pipelines[Blog.TagIndex].Replace(
+    0,
+    new If
+    (
+        ctx => ctx.Documents[Blog.Tags].Any(),
+        new ReadFiles("_Tags.cshtml"),
+        new FrontMatter(new Wyam.Yaml.Yaml()),
+        new Shortcodes(true),
+        new Wyam.Razor.Razor()
+            .IgnorePrefix(null)
+            .WithLayout("/_Layout.cshtml"),
+
+        new Shortcodes(false),
+
+        new WriteFiles((doc, ctx) => "tags/index.html").OnlyMetadata()
+    ).WithoutUnmatchedDocuments()
+);
+
+Pipelines.InsertAfter(
+    "Index",
+    "RenderTagIndex",
+    new If
+    (
+        ctx => ctx.Documents[Blog.Tags].Any(),
+        new ReadFiles("_Tags.cshtml"),
+        new FrontMatter(new Wyam.Yaml.Yaml()),
+        new Shortcodes(true),
+        new Wyam.Razor.Razor()
+            .IgnorePrefix(null)
+            .WithLayout("/_Layout.cshtml"),
+
+        new Shortcodes(false),
+
+        new WriteFiles((doc, ctx) => "tags/index.html")
+    ).WithoutUnmatchedDocuments()
 );

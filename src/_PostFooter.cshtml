@@ -4,7 +4,7 @@
             var previousIndex = -1;
             var nextIndex = -1;
 
-            var list = Documents[BlogPipelines.RawPosts].Where(x => x.ContainsKey("Published")).OrderByDescending(x => x.Get<DateTime>("Published")).ToList();
+            var list = Documents[Blog.BlogPosts].Where(x => x.ContainsKey("Published")).OrderByDescending(x => x.Get<DateTime>("Published")).ToList();
             for(int i = 0; i < list.Count; i++)
             {
                 var doc = list[i];

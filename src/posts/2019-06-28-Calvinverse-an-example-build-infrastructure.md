@@ -1,5 +1,6 @@
 Title: Calvinverse - An example build infrastructure
 Tags:
+  - Calvinverse
   - Delivering software
   - Software development pipeline
   - DevOps

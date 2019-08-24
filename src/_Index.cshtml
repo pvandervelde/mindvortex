@@ -1,9 +1,10 @@
 Title: Home
+ShowInNavbar: true
 Order: 10
 ---
 
 @{
-    foreach(IDocument doc in Documents[BlogPipelines.RawPosts].Take(5))
+    foreach(IDocument doc in Documents[Blog.BlogPosts].Take(5))
     {
         <div id="post-spacer">
             <div id="post">

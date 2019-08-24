@@ -2,7 +2,7 @@ Title: 'nBuildKit'
 Lead: "nBuildKit is a collection of tools and scripts that provide an easy way to set-up a complete build and deployment for a (.NET) project"
 Tags:
   - Project
-ShowInNavBar: false
+ShowInNavbar: false
 ---
 
 [nBuildKit](https://github.com/nbuildkit)  is a collection of tools and scripts that provide an easy way to set-up a complete build and deployment for a (.NET) project.

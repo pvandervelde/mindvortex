@@ -2,7 +2,7 @@ Title: 'Apollo'
 Lead: "Apollo is the code name for an engineering simulation and design application."
 Tags:
   - Project
-ShowInNavBar: false
+ShowInNavbar: false
 ---
 
 [Apollo](https://github.com/pvandervelde/Apollo) is the code name for an application that provides engineering and design simulation capabilities, e.g. [fluid](https://en.wikipedia.org/wiki/Computational_fluid_dynamics), [structural](https://en.wikipedia.org/wiki/Solid_mechanics) or [optimization](https://en.wikipedia.org/wiki/Product_optimization) calculations, for users who aren't highly skilled in the use of modern day simulation tools. The goal for Apollo is to provide the users with a high level abstraction of the simulation so that they can focus on the engineering design while the software handles the underlying simulation details.
