@@ -2,7 +2,7 @@ Title: 'nAnicitus'
 Lead: "nAnicitus is a windows service that acts as a gatekeeper for the SymStore application."
 Tags:
   - Project
-ShowInNavBar: false
+ShowInNavbar: false
 ---
 
 [nAnicitus](https://github.com/pvandervelde/nAnicitus) is a windows service that acts as a gatekeeper for the [SymStore][symstore_msdn] application. SymStore provides a relatively simple way to create

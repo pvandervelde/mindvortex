@@ -1,4 +1,5 @@
 Title: 'About'
+ShowInNavbar: true
 Order: 5000
 ---
 

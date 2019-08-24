@@ -2,7 +2,7 @@ Title: 'Sherlock'
 Lead: "Sherlock provides a means to schedule and automatically execute tests in an controlled environment."
 Tags:
   - Project
-ShowInNavBar: false
+ShowInNavbar: false
 ---
 
 [Sherlock](https://github.com/pvandervelde/Sherlock) provides a means to schedule and automatically execute tests in an controlled environment. In order to schedule a test the configuration and the

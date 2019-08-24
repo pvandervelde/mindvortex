@@ -68,10 +68,10 @@ is a good start. Next are the non-post pages, like the [home page](/) and the [p
 These can simply be dropped in the desired directory. Wyam will automatically generate HTML pages
 from any Markdown file and simply copy the other files (like the favicon etc.). Any non-blog post
 pages will show up in the menu bar so for all pages that should not show up in the menu bar you can
-add the `ShowInNavBar: false` entry in the page front matter like so:
+add the `ShowInNavbar: false` entry in the page front matter like so:
 
     Title: My page that shouldn't show up in the NavBar
-    ShowInNavBar: false
+    ShowInNavbar: false
     ---
     # Content
 
