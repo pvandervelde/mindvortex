@@ -11,10 +11,10 @@ The [third property](/posts/Software-development-pipeline-Design-introduction.ht
 expected and unexpected changes to the environment it executes in and uses.
 
 David Woods defines [four different types of 'resilience'](https://www.researchgate.net/publication/276139783_Four_concepts_for_resilience_and_the_implications_for_the_future_of_resilience_engineering) in a paper in the journal of reliability engineering and system safety. One of the different types
-is the generally well known form of robustness, i.e. the ability to absorb pertubations or disturbances.
+is the generally well known form of robustness, i.e. the ability to absorb perturbations or disturbances.
 In order to be robust for given disturbances one has to know in advance where the disturbances will
 come from, e.g. in the case of a development pipeline it might be expected that pipeline stages will
-fail and will polute or damage parts or all of the executor it was running on. Robustness in this
+fail and will pollute or damage parts or all of the executor it was running on. Robustness in this
 case would be defined as the ability of the pipeline to handle this damage, for instance by repairing
 or replacing the executor. The other definitions for resilience are:
 
@@ -23,7 +23,7 @@ or replacing the executor. The other definitions for resilience are:
   and capacity that was available in excess before the issues occurred.
 - Graceful extensibility, the ability to extend adaptive capacity in the face of surprise. This is
   the ability to stretch resources and capabilities in the face of surprises.
-- Sustained adaptibility, which is the ability to adapt and grow new capabilities in the face of
+- Sustained adaptability, which is the ability to adapt and grow new capabilities in the face of
   unexpected issues. In general this definition applies more to systems / layered networks where
   the loss of sub-systems can be compensated.
 
@@ -51,7 +51,7 @@ Once it is known what resilience actually means and what type of situations the 
 to be able to handle the next question is how the pipeline can handle these situations, both in
 terms of what the expected responses are and in terms of how the pipeline should be designed.
 
-There are a mirriad of simple steps that can be taken to provide a base level of resilience. None
+There are a myriad of simple steps that can be taken to provide a base level of resilience. None
 of these simple steps will guard against major trauma but they will be able to either prevent or
 smooth out many of the smaller issues that would otherwise cause the development team to lose faith
 in the pipeline outputs. Some examples of simple steps that can be taken to improve resilience in
@@ -66,23 +66,23 @@ a development pipeline are:
   possible
 - Do not depend on global, i.e. machine, container or network, state. Global state has a tendency
   to change in random ways at random times.
-- Avoid using source which are external to the pipeline infrastructure becaues these are prone to
-  unspected random changes. If a build step requires data from an external source then the external
-  source should be mirrored and mirrors should be carefully controled for their content. This should
+- Avoid using source which are external to the pipeline infrastructure because these are prone to
+  unexpected random changes. If a build step requires data from an external source then the external
+  source should be mirrored and mirrors should be carefully controlled for their content. This should
   prevent issues with external packages and inputs changing or disappearing, e.g.[leftpad](https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/).
 - If external sources are suitably mirrored inside the pipeline infrastructure then it is possible
   to remove the caches for these external sources on the executors. By pulling data in fresh from the
-  local data store cache polution issues can be prevented
-- Ensure that each resource is appropriately secured against undesirable acces. This is especially
+  local data store cache pollution issues can be prevented
+- Ensure that each resource is appropriately secured against undesirable access. This is especially
   true for the executor resources. It is important to note that pipeline steps are essentially random
   scripts from an unknown source, even if the scripts are pulled from internal sources, because the
   scripts will not be security verified before being used. This means that the pipeline scripts should
   not be allowed to to make any changes or to obtain secrets that they shouldn't have access to.
 
-As mentioned the afforementioned steps form a decent base for improving resilience and they are
+As mentioned the aforementioned steps form a decent base for improving resilience and they are
 fairly easy to implement, hence they make a good first stage in the improvement of the resilience
 of the development pipeline. Once these steps have been implemented more complex steps can be taken
-to futher improve the state of the development pipeline. These additional steps can be divided into
+to further improve the state of the development pipeline. These additional steps can be divided into
 items that help prevent issues, items that test and verify the current state, items that aid in
 recovery and finally items, like logging and metrics, that help during post-mortems of failure cases.
 
@@ -91,7 +91,7 @@ development pipeline are able to handle different error states which can be achi
 extensive error handling capabilities, both for known cases, e.g. service offline, and general error
 handling for unexpected cases. For the tooling / script side of the pipeline this means for instance
 adding error handling structures nearly everywhere and providing the ability to retry actions.
-For the infrastructure side of the pipeline this could mean providng highly available services and
+For the infrastructure side of the pipeline this could mean providing highly available services and
 ensuring that service delivery gracefully degrades if it can no longer be provided at the required
 standard.
 

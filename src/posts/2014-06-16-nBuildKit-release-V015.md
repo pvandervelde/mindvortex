@@ -11,6 +11,6 @@ NuGet package. This package contains build scripts that provide the ability to p
 consisting of workspace preparation, compilation of binaries, execution of unit tests, analysis of
 source code and binaries and finally packing of the binaries as NuGet packages or ZIP archives.
 The `nBuildKit.MsBuild` NuGet package also provides scripts that can be used to tag a release in the
-version control system (VCS) and deploy the artifacts to a file server, NuGet feed or a GitHub release.
+version control system (VCS) and deploy the artefacts to a file server, NuGet feed or a GitHub release.
 
 The documentation for this library can be found on the nBuildKit [wiki](https://github.com/pvandervelde/nBuildKit/wiki/MsBuild)

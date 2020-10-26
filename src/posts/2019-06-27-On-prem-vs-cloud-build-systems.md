@@ -7,14 +7,14 @@ Tags:
   - DevOps
 ---
 
-[Continuous integration (CI) systems](https://en.wikipedia.org/wiki/Continuous_integration) originally and 
+[Continuous integration (CI) systems](https://en.wikipedia.org/wiki/Continuous_integration) originally and
 build pipelines recently have traditionally been available on-prem only with systems like [Jenkins](https://jenkins.io),
 [TeamCity](https://www.jetbrains.com/teamcity/), [Bamboo](https://www.atlassian.com/software/bamboo) and
 [TFS](https://en.wikipedia.org/wiki/Team_Foundation_Server). This is possibly due to the fact that these
 systems needs relatively powerful hardware, mostly consisting of powerful CPU and fast IO, something
 which was not easily available in the cloud until the last few years.
 
-However in the last few years a number of cloud based CI systems have appeared e.g. 
+However in the last few years a number of cloud based CI systems have appeared e.g.
 [Azure DevOps](https://azure.microsoft.com/en-in/services/devops/), [AppVeyor](https://www.appveyor.com/),
 [CircleCi](https://circleci.com/)), [CloudShip](https://codeship.com/),
 [Google cloud build](https://cloud.google.com/cloud-build/) and [Travis CI](https://travis-ci.org/). This
@@ -56,13 +56,13 @@ helps diagnostics, alerting and predictive capabilities on both the infrastructu
 capacity side.
 
 Finally having full control over the CI system means that it is possible to extend the system if
-that is required with custom capabilities, either directly added to the CI system or as additional 
+that is required with custom capabilities, either directly added to the CI system or as additional
 services. It should of course be noted that this requires resources and is thus not free.
 
 ### Selecting a location for your CI system
 
 So how does one select a location for a CI system. Both cloud and on-prem have pros and cons and in the
-end the location of the system depends very much on the situation fo the development team. If the team works
+end the location of the system depends very much on the situation of the development team. If the team works
 for a company where there is no on-prem server infrastructure then a cloud based system will be the
 only sensible approach. However there will also be cases where an on-prem system is the only sensible
 option.

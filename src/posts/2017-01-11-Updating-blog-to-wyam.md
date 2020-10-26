@@ -86,7 +86,7 @@ Once that was done I created [overrides](https://wyam.io/recipes/blog/themes) fo
 
 <script src="https://gist.github.com/pvandervelde/d2825f2c5d67ab30d15ce179ced4b30f.js"></script>
 
-- The sidebar which contains my little 'about me' blurp.
+- The sidebar which contains my little 'about me' blurb.
 - The navbar which by default orders pages alphabetically and does not contain a link to the home page.
   In my Docpad blog both those things are not true, so I did a bit of Razor coding and generated the
   navbar items myself
@@ -101,7 +101,7 @@ the same as it was.
 
 If you don't have an existing layout for your blog or you don't mind changing the layout then
 after the previous steps you should have a very nice looking blog that works just fine. However it
-turns out I'm stuborn and specific in the way I want things to look. In this case I wanted my blog
+turns out I'm stubborn and specific in the way I want things to look. In this case I wanted my blog
 to not look any different than the existing one does, at least for the time being. So that meant
 I had to do a fair amount of tweaking.
 

@@ -67,4 +67,4 @@ tokens are [generated and loaded](https://github.com/nbuildkit/nBuildKit.MsBuild
 overall speed up for the nBuildKit build itself is about a factor two.
 
 All the work items that have been closed for this release can be found on
-[github](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/26?closed=1).
+[GitHub](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/26?closed=1).

@@ -9,8 +9,8 @@ interfering with life in general ... it seems research does that to ones life. I
 blog stalled and no more posts were written.
 
 Recently I have been wanting to improve my writing skills, you see, as software engineer I'm reasonably
-good at writing instructions for a three year old, eh I mean a computer, but I am not particularly
-good at writing concise human-friendly text. I have written two dissertations, one for my master degree
+good at writing instructions for a three-year old, eh I mean a computer, but I am not particularly
+good at writing concise human-friendly text. I have written two dissertations, one for my masters degree
 and one for my PhD, but neither of those qualify as either concise or human-friendly.
 
 Given that the only way to get better at writing is to practise, practise and practise some more, I

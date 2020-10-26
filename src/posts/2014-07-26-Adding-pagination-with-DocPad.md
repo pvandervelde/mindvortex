@@ -23,4 +23,4 @@ In order to make the paged plugin do its work the following 'properties' were ad
 * **pageCollection** - The collection from which the sub-documents that will fill up the current page are taken.
 * **pageSize** - The number of sub-documents per page
 
-Finally two buttons were added to the bottom of the page to naviage to he newer and the older posts.
+Finally two buttons were added to the bottom of the page to navigate to he newer and the older posts.

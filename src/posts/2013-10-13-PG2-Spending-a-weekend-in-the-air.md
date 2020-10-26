@@ -47,4 +47,3 @@ gliders had to, at one point or another, work quite hard to stay at the height o
 or even to scratch their way back up to the launch height. The Atlas just only dropped down to the
 height of the launch a few times, and each time it did a minor puff of wind allowed it to gain more
 than sufficient height again.
-
