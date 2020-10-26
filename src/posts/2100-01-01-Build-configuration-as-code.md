@@ -11,13 +11,13 @@ Tags:
   - Great for cases where a limited number of builds need to be configured
   - If there are many builds to be configured it's annoying / time consuming
 - Build systems store their configurations either in a database (tfs, teamcity) or on the file system
-  (jenkins). Making sure these are safe requires backups.
+  (Jenkins). Making sure these are safe requires backups.
 
 Why are manual configurations not cool
 
-- Tracability
+- Traceability
   - The changes aren't necessarily recorded so it's potentially hard to figure out what changes
-    were made and why. And even if changes are recorded they normally dont' contain change messages,
+    were made and why. And even if changes are recorded they normally don't' contain change messages,
     and even if that is possible users don't normally fill them out because they are annoying which
     means that even if you can trace who made the changes, it's hard to figure out why.
   - In some cases changes may be related to changes in the way you build your product, but
@@ -34,7 +34,7 @@ Why are manual configurations not cool
     are manually generated
   - Creating new builds can be a problem if build have to be created often. For instance with manually
     created builds it is unlikely that you will create a build for each (git) branch in source control
-    because branches are created quickly and destoyed quickly, requiring that you make builds often
+    because branches are created quickly and destroyed quickly, requiring that you make builds often
 
 How to achieve
 

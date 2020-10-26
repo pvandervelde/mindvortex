@@ -8,7 +8,7 @@ of [nBuildKit](https://github.com/nbuildkit/nBuildKit.MsBuild) has been released
 a number of bugs and adds a few new improvements
 
 All the work items that have been closed for this release can be found on
-[github](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/31?closed=1).
+[GitHub](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/31?closed=1).
 
 
 ### Bugs fixed

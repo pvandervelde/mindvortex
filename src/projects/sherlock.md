@@ -7,7 +7,7 @@ ShowInNavbar: false
 
 [Sherlock](https://github.com/pvandervelde/Sherlock) provides a means to schedule and automatically execute tests in an controlled environment. In order to schedule a test the configuration and the
 test data can be uploaded to the server via a console application. The test configuration describes all the steps necessary to perform a complete test. This includes installation of MSI files, copying
-files / directories and execution of powershell scripts.
+files / directories and execution of Powershell scripts.
 
 For environments Sherlock uses Hyper-V virtual machines which allow easy control of the environment state prior to the execution of a test.
 

@@ -86,7 +86,7 @@ Some standard problems that may occur are mentioned below.
   on the transfer of the test files then there is quite likely a problem with the web service permissions
   to write to the `App_Data` directory.
 - If the web service fails on the first call then there is quite likely a problem with the database
-  connection. This is most likley either a problem with the connection string or a problem with the
+  connection. This is most likely either a problem with the connection string or a problem with the
   permissions. In case of a permission issue check if the user which is running the web service can
   access the stored procedures in the database.
 

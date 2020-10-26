@@ -62,7 +62,7 @@ For the build work Calvinverse uses the following applications:
 
 - [Jenkins](https://jenkins.io) is used as the
   [build controller](https://github.com/Calvinverse/resource.build.master).
-- Build executors connect to jenkins using the [swarm plugin](https://plugins.jenkins.io/swarm) so
+- Build executors connect to Jenkins using the [swarm plugin](https://plugins.jenkins.io/swarm) so
   that agents can connect when it starts. In the Calvinverse project there are currently only
   [Windows](https://github.com/Calvinverse/resource.build.agent.windows) based executors.
 
@@ -96,8 +96,8 @@ Build and system logs are processed by the [Elastic](https://www.elastic.co/) st
 - [Kibana](https://www.elastic.co/products/kibana) for
   [log dashboards](https://github.com/Calvinverse/resource.documents.dashboard).
 - Logs collected via [syslog-ng](https://www.syslog-ng.com/products/open-source-log-management/) on
-  linux and a modified version of [filebeat](https://github.com/pvandervelde/filebeat.mqtt) on windows.
-  Logs are sent to rabbitmq to ensure that the unprocessed logs aren't lost when something any part
+  Linux and a modified version of [Filebeat](https://github.com/pvandervelde/filebeat.mqtt) on windows.
+  Logs are sent to RabbitMQ to ensure that the unprocessed logs aren't lost when something any part
   of the log stack goes offline.
 - [Logstash](https://www.elastic.co/products/logstash) for
   [processing logs](https://github.com/Calvinverse/resource.logs.processor) from RabbitMQ to

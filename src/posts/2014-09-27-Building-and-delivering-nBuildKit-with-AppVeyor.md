@@ -17,7 +17,7 @@ For nBuildKit two builds were configured. The first configuration is the standar
 [continuous integration](https://ci.appveyor.com/project/pvandervelde/nbuildkit) build which generates
 the version numbers and templates and then creates the NuGet packages. As the final step the build
 artefacts are archived for later use by the second build configuration.
-For this configuration no special settings are required other then to tell AppVeyor to store the artifacts.
+For this configuration no special settings are required other then to tell AppVeyor to store the artefacts.
 
 The second build configuration handles the [delivery](https://ci.appveyor.com/project/pvandervelde/nbuildkit-244)
 of the artefacts. This configuration gathers the build artefacts from the latest build of the first
@@ -27,7 +27,7 @@ in [GitHub](https://github.com/pvandervelde/nBuildKit/releases).
 
 For this second configuration a few tweaks need to be made to the environment before the build can be
 executed. The first thing to do is to install the [GitHub-release](https://github.com/aktau/github-release)
-application which provides an easy way to push release information to github. A simple Powershell
+application which provides an easy way to push release information to GitHub. A simple Powershell
 script is used to set-up this part of the environment:
 
 <script src="https://gist.github.com/pvandervelde/77bd834239d9f67c40d7.js"></script>

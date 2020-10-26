@@ -9,7 +9,7 @@ Version [0.2.0](https://github.com/ops-resource/ops-tools-build/releases/tag/0.2
 
 This release was focussed on providing the capabilities to use the Chef toolset to create new
 resources. All the work items that have been closed for this release can be found on
-[github](https://github.com/ops-resource/ops-tools-build/milestone/2?closed=1).
+[GitHub](https://github.com/ops-resource/ops-tools-build/milestone/2?closed=1).
 
 
 ### New functionality

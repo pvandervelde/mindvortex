@@ -18,7 +18,7 @@ are available. The climber starts out bridging between a set of small ledges and
 using the crack to foot-jam and then to using some small indentations on the main face. The tricky
 bit is getting the transition between the different types of foot placements correct.
 
-On saturday Chris had two attempts at cleaning 'Millennium Madness' but didn't quite get it right.
+On Saturday Chris had two attempts at cleaning 'Millennium Madness' but didn't quite get it right.
 It seems that the first time climbing in Waipapa after winter is always tricky as you are trying to
 re-acquire the correct climbing techniques for the delicate Waipapa climbs.
 

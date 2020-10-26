@@ -30,7 +30,7 @@ So the goals for this project were
 - Publishing should involve a minimal amount of work done from my side. Ideally all I would have to
   do is commit my changes, merge them to the [master branch](https://github.com/pvandervelde/mindvortex)
   of the source repository and then sit back and see the new post appear online.
-- No maintenance is necessary for what ever system I use to achive this goal. When I build new versions
+- No maintenance is necessary for what ever system I use to achieve this goal. When I build new versions
   of one of my libraries, applications or infrastructure resources I want full control over the
   build, test and deployment environments. For building my blog that is far less important because
   it is a simple process which does not require many different steps.

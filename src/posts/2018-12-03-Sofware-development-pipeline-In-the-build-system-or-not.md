@@ -52,7 +52,7 @@ are also drawbacks to having the pipeline in the build system.
 
 - Having the pipeline in the build system makes some assumptions that may not be correct in certain
   cases.
-    - The first assumption is that the build system is the center of all the work being done
+    - The first assumption is that the build system is the centre of all the work being done
       because the pipeline is controlled by the build system, thus requiring that all actions feed back
       into said build system. This however shouldn't be a given, after all why would the build system
       be the core system and not the source control system or the issue tracker. In reality all systems
@@ -73,13 +73,13 @@ are also drawbacks to having the pipeline in the build system.
     - A third assumption is that every task can somehow be run through the build system, but this is
       not always the case and even when it is possible it is not necessarily sensible. For instance
       builds and deploys are fundamentally different things, one should be repeatable (builds) and
-      can just be stopped on failure and restarted if necesary and the other is often not exactly
+      can just be stopped on failure and restarted if necessary and the other is often not exactly
       repeatable (because artefacts can only be moved from a location once etc.) and should often
       not just be stopped (but rolled-back or not 'committed'). Another example is long running tests
       for which the results may be fed back into the build system if required but that doesn't
       necessarily make sense.
 
-- If the build system is the the center of the pipeline then that means that the build system has to
+- If the build system is the the centre of the pipeline then that means that the build system has to
   start storing persistent data about the state of the pipeline with all the issues that come with this
   kind of data, for instance:
     - The data stored in the pipeline is valuable to the development team both at the current time and
@@ -87,7 +87,7 @@ are also drawbacks to having the pipeline in the build system.
       that the data potentially needs to be kept safe for much longer than build information is
       normally kept. In order to achieve this the standard data protection rules apply for instance
       access controls and backups.
-    - The information about the pipeline needs to be easily accessible and changable both by the build
+    - The information about the pipeline needs to be easily accessible and changeable both by the build
       system and by systems external to the build system. It should be possible to add additional
       information, e.g. the versions / names of artefacts created by a build. The status of the artefact
       as it progresses through the pipeline etc.. All this information is important either during the
@@ -110,7 +110,7 @@ are also drawbacks to having the pipeline in the build system.
   getting in the way, it is in fact a drawback because this behaviour means that the developers take
   on the responsibility to administer some or all of the underlying build system. Examples of the
   change of control are for instance in the Jenkins pipeline it is possible for developers to use
-  all the credentials that jenkins has access to. However this might not be desirable for high power
+  all the credentials that Jenkins has access to. However this might not be desirable for high power
   credentials or credentials for highly restricted resources. An other example is that the selection
   of the build executor is done in the pipeline configuration, however in some cases it may make sense
   to limit access to executors, after all having a build that can migrate from node to node makes

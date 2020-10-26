@@ -94,6 +94,6 @@ Additional posts about this topic can be found via the
   is a better description of the combined concepts of consistency and correctness.
 - September 4th 2017: Added the link to the post providing the high level description on
   how to achieve accuracy for a development pipeline.
-- Nobember 5th 2017: Replaced the term `robustness` with the term `resilience` because it
+- November 5th 2017: Replaced the term `robustness` with the term `resilience` because it
   captures a broader perspective on the ability of the system to handle expected and unexpected
   changes.

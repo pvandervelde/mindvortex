@@ -18,4 +18,4 @@ This release made the following minor changes
   in the test and deploy stages.
 
 All the work items that have been closed for this release can be found on
-github in the milestone list for the [0.10.2](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/36?closed=1) release.
+GitHub in the milestone list for the [0.10.2](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/36?closed=1) release.

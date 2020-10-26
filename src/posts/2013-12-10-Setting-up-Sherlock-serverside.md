@@ -64,7 +64,7 @@ the host machine consists of:
 1. Install the [nAdoni](https://github.com/pvandervelde/nAdoni) manifest signing tool. This application
   will be used sign the update manifest files.
 1. Generate the update keys by executing the following command line (assuming that you installed
-  nadoni in `c:\tools\nadoni`):
+  nAdoni in `c:\tools\nadoni`):
 
   ``` dos
   c:\tools\nadoni\keygenerator\nadoni.keygenerator.exe --private=<PATH_TO_PRIVATE_KEY_FILE> --public=<PATH_TO_PUBLIC_KEY_FILE>

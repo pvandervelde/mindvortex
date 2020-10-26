@@ -23,7 +23,7 @@ Beyond that the C# NuGet package provides capabilities to:
       nBuildKit from the versioning strategies provided. Currently supported are either a version number
       provided through an MsBuild project file or through [GitHubFlowVersion](https://github.com/JakeGinnivan/GitHubFlowVersion).
       By allowing nBuildKit to generate the `AssemblyInfo.VersionNumber.cs` file it is possible to
-      automatically version the binaries the same way as all other artifacts, e.g. NuGet packages,
+      automatically version the binaries the same way as all other artefacts, e.g. NuGet packages,
       installers, documentation etc. etc.. The version number is currently provided through the
       [AssemblyVersionAttribute][assembly_version_attribute] as `Major.Minor.0.0`; through the
       [AssemblyFileVersionAttribute][assembly_file_version_attribute] as `Major.Minor.Patch.Build`;
