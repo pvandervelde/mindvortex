@@ -5,12 +5,12 @@ Tags:
 ---
 
 As part of a new [project](https://github.com/pvandervelde/azure-jenkins) to create a
-[Jenkins CI server](https://jenkins.io) on Azure I am writing a set of powershell scripts to
+[Jenkins CI server](https://jenkins.io) on Azure I am writing a set of Powershell scripts to
 control virtual machines on Azure. For this project the plan is to use virtual machine (VM) images
 as a template for an ['immutable server'](https://martinfowler.com/bliki/ImmutableServer.html) that
 will contain the Jenkins instance.
 
-Now the actual server isn't really 'immutable' given that the jenkins instance will update, add and
+Now the actual server isn't really 'immutable' given that the Jenkins instance will update, add and
 delete files on the hard drive which will obviously change the state of the server. As such the immutable
 idea isn't applied to the whole server but more to the configuration part of the server. The idea being
 that the configuration of the server will not be changed once the server is put in production. Any
@@ -32,7 +32,7 @@ interest are:
   an Azure VM this will most likely be something like `<RESOURCE_GROUP_NAME>.cloudapp.net`.
 
 Once the certificate is installed in the user certificate store we can create a new virtual machine
-from a given base image, e.g. a Windows 2012 R2 server image. The following powershell function creates
+from a given base image, e.g. a Windows 2012 R2 server image. The following Powershell function creates
 a new windows VM with a WinRM endpoint with the certificate that was created earlier. Note that the
 [`New-AzureVM`](https://msdn.microsoft.com/en-us/library/dn495254.aspx) function can create resource
 and storage groups for the new VM if you don't specify a storage account and a matching resource group.
@@ -47,7 +47,7 @@ that can be used to secure the connection.
 <script src="https://gist.github.com/pvandervelde/eb6e28934d5fd16fe186.js"></script>
 
 The next step is to copy all the installer files and configuration scripts to the VM. This can be
-done over the [remoting channnel](https://measureofchaos.wordpress.com/2012/09/26/copying-files-via-powershell-remoting-channel/).
+done over the [remoting channel](https://measureofchaos.wordpress.com/2012/09/26/copying-files-via-powershell-remoting-channel/).
 
 <script src="https://gist.github.com/pvandervelde/b2f5b4156e5efe67f495.js"></script>
 

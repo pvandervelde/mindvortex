@@ -17,7 +17,7 @@ we going to install? The ideal version to install would be the [bare metal Hyper
 option with [Windows 2016 server Core](https://technet.microsoft.com/en-us/windows-server-docs/get-started/windows-server-2016)
 being the second best option. The problem with these version is that it might be harder to
 configure the network and attach the machine to the active directory. I currently don't have enough
-experience managing Windows through (remote) powershell in order to be able to resolve those kinds
+experience managing Windows through (remote) Powershell in order to be able to resolve those kinds
 of issues without a large amount of help from Google or Bing. The goal for this exercise is to get
 the machine updated so that we can use it, not to get the most lean version of Windows installed, so
 I opted to go for the full GUI version of Windows 2016.

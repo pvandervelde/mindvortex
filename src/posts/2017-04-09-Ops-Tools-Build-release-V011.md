@@ -10,7 +10,7 @@ Last week version [0.1.0](https://github.com/ops-resource/ops-tools-build/releas
 of the Ops-Tools-Build toolkit was released.
 
 All the work items that have been closed for this release can be found on
-[github](https://github.com/ops-resource/ops-tools-build/milestone/1?closed=1).
+[GitHub](https://github.com/ops-resource/ops-tools-build/milestone/1?closed=1).
 
 
 ### New functionality

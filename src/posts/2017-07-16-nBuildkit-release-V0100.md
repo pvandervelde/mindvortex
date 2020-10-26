@@ -35,5 +35,5 @@ In addition to the major changes some additional build, test and deploy steps ha
   from [Ops-Tools-Build](https://github.com/ops-resource/ops-tools-build).
 
 All the work items that have been closed for this release can be found on
-github in the milestone list for releases [0.10.0](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/30?closed=1)
+GitHub in the milestone list for releases [0.10.0](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/30?closed=1)
 and [0.10.1](https://github.com/nbuildkit/nBuildKit.MsBuild/milestone/35?closed=1).

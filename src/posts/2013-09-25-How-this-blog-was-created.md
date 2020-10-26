@@ -107,7 +107,7 @@ All pages use the same partial layout file in order to display the post.
 The only difference between the post page and the other pages is that the post page will display all
 the comments. The comment system is based on
 [comments on a GitHub issue](http://ivanzuzak.info/2011/02/18/github-hosted-comments-for-github-hosted-blogs.html)
-and uses a small amount of Javascript to pull the comments across into the comment list.
+and uses a small amount of JavaScript to pull the comments across into the comment list.
 
 <script src="https://gist.github.com/pvandervelde/6375681.js?file=post.html"></script>
 

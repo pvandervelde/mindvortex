@@ -21,7 +21,7 @@ follow in another post.
 
 Just like any other piece of infrastructure the development pipeline will need to be updated
 and improved on a regular basis, either to fix bugs, patch security issues or to add new features
-that will make the development team more productive. Because the pipeline falls in the cricital
+that will make the development team more productive. Because the pipeline falls in the critical
 infrastructure category it is important to keep disturbances to a minimum while performing these
 changes. There are two main parts to providing (nearly) continuous service while still providing
 improvements and updates. The first is to ensure that the changes are tracked and tested properly,
