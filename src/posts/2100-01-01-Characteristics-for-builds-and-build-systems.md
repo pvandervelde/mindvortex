@@ -27,3 +27,7 @@ What are the important characteristics for builds and build systems
     * Every developer is confident with the engine
     * You implicitly trust every developer (possible in a commercial setting, unlikely in OSS)
   * More likely want a build system that has a trust relation between the engine and the tasks
+  * The artefact creation process should be tracable so that you know where the artefacts came from
+    * Ideally you need to know exactly what went into the artefact without there being the possiblity
+      for unknown additions. Note that this ability is hard to achieve due to the nature of
+      build systems.
