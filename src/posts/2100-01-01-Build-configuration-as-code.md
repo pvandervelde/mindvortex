@@ -36,10 +36,23 @@ Why are manual configurations not cool
     created builds it is unlikely that you will create a build for each (git) branch in source control
     because branches are created quickly and destroyed quickly, requiring that you make builds often
 
+Existent systems
+
+- Most build systems already have a system that allows this (e.g. Jenkins pipelines, Azure Devops / TFS yaml files)
+- Uniformity amongst builds matters if people move between teams (if people never change teams it matters less)
+- Complexity of build pipelines will increase. Once you get to a certain level you'll want to have templates
+  and libraries for handling things. Every bit of non-shared complexity means that the team has to maintain that
+- Standard templates are good because they allow quickly starting a new build pipeline with all the bits you need
+  - It is unlikely that teams will standardize by themselves so it is likely that this
+- Also you want to be able to make your build independent from your (current) build system
+  - Wanting to change later
+  - Want to be able to run on any machine (for developer debugging, disaster recovery, performance testing of builds etc.)
+
 How to achieve
 
 - Create a DSL that allows creating build configurations from a configuration file, e.g. Jenkins pipeline,
-  TFS YAML configuration files. Most build systems have a system that allows this
+  TFS YAML configuration files.
+
 - Provide a way to inform the build system that a repository contains said configuration files. Having
   the configuration files is of no use if the build system has to be manually informed that there is a
   repository that needs to be watched. One way is to have [generator builds]() which generate the
