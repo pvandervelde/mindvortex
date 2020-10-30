@@ -1,22 +1,19 @@
 Title: Software development pipeline - Infrastructure dependency reduction
 Tags:
-  - Building software
-  - Build server
-  - Configuration-as-code
+  - Delivering software
+  - Software development pipeline
+  - Build configuration as code
   - DevOps
 ---
 
-CHANGE TO ACTIVE VOICE
-
-
 The [last post](/posts/Software-development-pipeline-considerations-for-infrastructure-improvements.html)
-discussed how to allow improvements and upgrades to the development pipeline infrastructure while
-keeping downtime to a minimum. In that post we mentioned that an important consideration for the
+I explained one way to improve the development pipeline infrastructure while
+keeping downtime to a minimum. In that post I mentioned that an important consideration for the
 [resilience](/posts/Software-development-pipeline-Design-resilience.html) of the
-pipeline was to reduce the dependencies between the pipeline and the infrastructure. This post will
+pipeline was to reduce the dependencies between the pipeline and the infrastructure. In this post I will
 discuss how some dependency decoupling can be achieved.
 
-Before we discuss how to achieve some level of decoupling we will provide some reasons that a certain
+However before that happens lets provide some reasons that a certain
 amount of independence between the pipeline processes and the infrastructure is desirable.
 
 If the pipeline processes are tightly coupled to the infrastructure, e.g. because the development
@@ -35,7 +32,7 @@ pipeline is defined completely using the native tasks for the CI/CD system then
 The first two items mentioned above impact the velocity at which development can take place. By relying
 completely on the CI/CD system for artefact generation cycle times seem to increase.
 
-As a side note. I have noticed that if the build time for an artifact exceeds a certain amount of time
+As a side note. I have noticed that if the build time for an artefact exceeds a certain amount of time
 (somewhere between 5 - 10 minutes) it is highly likely that developers will exclusively use the CI/CD
 system to execute builds. This in turn will cause build times to increase further over time, most likely
 due to the fact that developers are no longer actively waiting for their builds.
