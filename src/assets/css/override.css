@@ -253,9 +253,21 @@ hr {
 
 #post-meta {
     color: #D3D3D3;
+    display: flex;
+    line-height: 2.5em;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
     margin-bottom: 0.2em;
+}
+
+.post-meta-date {
+    flex: 1 0 auto;
+    margin-right: 0.5em;
+    width: fit-content;
+}
+
+.post-meta-tags {
+    margin-left: 0.5em;
 }
 
 #post-category {
