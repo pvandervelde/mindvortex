@@ -26,31 +26,33 @@ pipeline is defined completely using the native tasks for the CI/CD system then
   in order to test them. In general CI/CD systems don't provide easy ways to debug a running pipeline
 
 
+How to achieve
 
-
-* Should be able to run a build on any machine. Ideally no tools need to be installed so you can just
-  build on a fresh OS install.
-  * This means that you are independent of your build system because you can always build
-  * Allows developers to build locally to dev test the product
-  * Easy to add more agents, just spin up a new clean OS install VM or container
-  * Build workspace is guaranteed to be clean when you start. Less time spend debugging build failures
-    due to file system pollution or package caching failures
-
-* Testing builds is time consuming if you need a build server to do so
-  * You'll probably need a test system because otherwise you are blocking people doing work on your
-    actual applications
-  * Build debugging usually involves lots of `writeline` statements and digging through logs, which
-    is slow on a local machine but slower on a build server
-  * Performance testing of builds is tricky because the build server might be doing many different
-    things at the same time
-  * Some steps may be hard when not on a build system, e.g. signing with the proper certificates / keys,
-    and some may not be desirable when not on a build system, e.g. making changes to source control
-    in the local workspace (i.e. local merges / branching / commits).
-  * Requires that you can pull all the tools down. Which probably means you need some kind of entrypoint
-    script to pull down the initial tools and scripts. This entrypoint script should be as small as
-    possible and able to update itself. That way you can still version all the scripts and tools
-    (because they are pulled down) and don't need to add everything to the repository
-
-* Builds should be as independent as possible from the infrastructure with minimal requirements.
-  It is better to not rely on the presence of different services because those are points of failure.
+- No tools need to be installed on any of the executors by default (ideally). Use a bare minimum executor.
+- Never re-use executors. Don't allow developers to do so because that trains them to think that
+  some resources / tools / files will be available
+- Version everything - Tools, scripts etc.. That way you can reproduce the process on any executor
+- Pipeline pulls down all tools required. Which probably means you need some kind of entrypoint
+  script to pull down the initial tools and scripts. This entrypoint script should be as small as
+  possible and able to update itself. That way you can still version all the scripts and tools
+  (because they are pulled down) and don't need to add everything to the repository
+- Don't create a pipeline in the CI/CD system. Consider it to be just a task execution system. Define
+  the task through scripts / tools with a standard 'entrypoint' for all your jobs
+- It is better to not rely on the presence of different services because those are points of failure.
   - For those services that are absolutely required it is important that these are highly available
+
+
+Benefits
+
+- This means that you are independent of your build system because you can always build
+- Allows developers to build locally to dev test the product
+- Easy to add more agents, just spin up a new clean OS install VM or container
+- Build workspace is guaranteed to be clean when you start. Less time spend debugging build failures
+  due to file system pollution or package caching failures
+
+
+
+NOTE:
+Some steps may be hard when not on a build system, e.g. signing with the proper certificates / keys,
+and some may not be desirable when not on a build system, e.g. making changes to source control
+in the local workspace (i.e. local merges / branching / commits).
