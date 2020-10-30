@@ -1,8 +1,8 @@
 Title: Build configuration as code
 Tags:
-  - Building software
-  - Build server
-  - Configuration-as-code
+  - Delivering software
+  - Software development pipeline
+  - Build configuration as code
   - DevOps
 ---
 
