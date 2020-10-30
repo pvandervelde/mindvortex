@@ -38,7 +38,11 @@ complicated if pipeline processes are too tightly coupled to the CI/CD system.
 If any of the issues mentioned above are of concern to you then partially or completely decoupling
 the development pipeline from the infrastructure will be a worth while exercise.
 
-How to achieve
+Once you have decided to reduce coupling between the development pipeline and the infrastructure
+
+
+
+
 
 - No tools need to be installed on any of the executors by default (ideally). Use a bare minimum executor.
 - Never re-use executors. Don't allow developers to do so because that trains them to think that
