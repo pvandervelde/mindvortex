@@ -11,8 +11,7 @@ One of the final chapters in the description of the development pipeline is the 
 security. While it may be one of the final chapters it is just as important as the other chapters
 
 Disclaimer: I don't know enough about security in general and development pipeline security specifically
-to make definitive statements. The following is a description of my thoughts and ideas as opposed
-to a definitive statement
+to make definitive statements. The following is a description of my thoughts and ideas
 
 - Pen testing shows that CI/CD systems are a great way into corporate networks
 - Supply chain attacks are on the rise

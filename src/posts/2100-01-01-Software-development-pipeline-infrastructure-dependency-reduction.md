@@ -6,25 +6,47 @@ Tags:
   - DevOps
 ---
 
+CHANGE TO ACTIVE VOICE
+
+
 The [last post](/posts/Software-development-pipeline-considerations-for-infrastructure-improvements.html)
 discussed how to allow improvements and upgrades to the development pipeline infrastructure while
 keeping downtime to a minimum. In that post we mentioned that an important consideration for the
 [resilience](/posts/Software-development-pipeline-Design-resilience.html) of the
 pipeline was to reduce the dependencies between the pipeline and the infrastructure. This post will
-discuss how some of this dependency decoupling can be achieved.
+discuss how some dependency decoupling can be achieved.
 
 Before we discuss how to achieve some level of decoupling we will provide some reasons that a certain
-amount of independence between the pipeline procesess and the infrastructure is desirable.
+amount of independence between the pipeline processes and the infrastructure is desirable.
 
 If the pipeline processes are tightly coupled to the infrastructure, e.g. because the development
 pipeline is defined completely using the native tasks for the CI/CD system then
 
+- Building the artefacts requires the CI/CD system. Developers cannot build a complete artefact on their
+  own machines, which increases the feedback time. If not enough executors are available in the
+  CI/CD system then it is quite possible that the feedback time increases extensively
+- Testing changes to the pipeline can be slow because changes need to be send to the CI/CD system
+  in order to test them. In general CI/CD systems don't provide easy ways to debug a running pipeline
+  which means developers are limited to general debug statements and log parsing
 - In case of issues with the CI/CD system, e.g. partial or complete outages, then you will not be able
   to execute any of the pipeline steps or stages
 - Migration to a different CI/CD solution may be complicated
-- Testing changes to the pipeline can be slow because changes need to be send to the CI/CD system
-  in order to test them. In general CI/CD systems don't provide easy ways to debug a running pipeline
 
+The first two items mentioned above impact the velocity at which development can take place. By relying
+completely on the CI/CD system for artefact generation cycle times seem to increase.
+
+As a side note. I have noticed that if the build time for an artifact exceeds a certain amount of time
+(somewhere between 5 - 10 minutes) it is highly likely that developers will exclusively use the CI/CD
+system to execute builds. This in turn will cause build times to increase further over time, most likely
+due to the fact that developers are no longer actively waiting for their builds.
+
+The second set of items are related to disaster recovery and vendor lock-in. These may or may not be
+of concern depending on the direction of development and technology. In my experience vendor lock-in
+is something to keep in mind if for no other reason then that switching vendors can be prohibitively
+complicated if pipeline processes are too tightly coupled to the CI/CD system.
+
+If any of the issues above are of concern then partially or completely decoupling the development
+pipeline from the infrastructure will be a worth while exercise.
 
 How to achieve
 
