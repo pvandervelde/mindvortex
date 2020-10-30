@@ -10,18 +10,17 @@ The [last post](/posts/Software-development-pipeline-considerations-for-infrastr
 I explained one way to improve the development pipeline infrastructure while
 keeping downtime to a minimum. In that post I mentioned that an important consideration for the
 [resilience](/posts/Software-development-pipeline-Design-resilience.html) of the
-pipeline was to reduce the dependencies between the pipeline and the infrastructure. In this post I will
-discuss how some dependency decoupling can be achieved.
+pipeline was to reduce the dependencies between the pipeline and the infrastructure. Now I will
+discuss how some dependency decoupling can be achieved. However before that happens lets provide
+a few reasons that a certain amount of independence between the pipeline processes and the
+infrastructure is desirable.
 
-However before that happens lets provide some reasons that a certain
-amount of independence between the pipeline processes and the infrastructure is desirable.
-
-If the pipeline processes are tightly coupled to the infrastructure, e.g. because the development
+If the pipeline processes is tightly coupled to the infrastructure, e.g. because the development
 pipeline is defined completely using the native tasks for the CI/CD system then
 
-- Building the artefacts requires the CI/CD system. Developers cannot build a complete artefact on their
-  own machines, which increases the feedback time. If not enough executors are available in the
-  CI/CD system then it is quite possible that the feedback time increases extensively
+- Building the artefacts requires the CI/CD system, meaning that developers cannot build a complete
+  artefact on their own machines, which increases the feedback time. If not enough executors are
+  available in the CI/CD system then it is quite possible that the feedback time increases extensively
 - Testing changes to the pipeline can be slow because changes need to be send to the CI/CD system
   in order to test them. In general CI/CD systems don't provide easy ways to debug a running pipeline
   which means developers are limited to general debug statements and log parsing
@@ -31,19 +30,13 @@ pipeline is defined completely using the native tasks for the CI/CD system then
 
 The first two items mentioned above impact the velocity at which development can take place. By relying
 completely on the CI/CD system for artefact generation cycle times seem to increase.
-
-As a side note. I have noticed that if the build time for an artefact exceeds a certain amount of time
-(somewhere between 5 - 10 minutes) it is highly likely that developers will exclusively use the CI/CD
-system to execute builds. This in turn will cause build times to increase further over time, most likely
-due to the fact that developers are no longer actively waiting for their builds.
-
 The second set of items are related to disaster recovery and vendor lock-in. These may or may not be
 of concern depending on the direction of development and technology. In my experience vendor lock-in
 is something to keep in mind if for no other reason then that switching vendors can be prohibitively
 complicated if pipeline processes are too tightly coupled to the CI/CD system.
 
-If any of the issues above are of concern then partially or completely decoupling the development
-pipeline from the infrastructure will be a worth while exercise.
+If any of the issues mentioned above are of concern to you then partially or completely decoupling
+the development pipeline from the infrastructure will be a worth while exercise.
 
 How to achieve
 
@@ -75,3 +68,9 @@ NOTE:
 Some steps may be hard when not on a build system, e.g. signing with the proper certificates / keys,
 and some may not be desirable when not on a build system, e.g. making changes to source control
 in the local workspace (i.e. local merges / branching / commits).
+
+
+As a side note. I have noticed that if the build time for an artefact exceeds a certain amount of time
+(somewhere between 5 - 10 minutes) it is highly likely that developers will exclusively use the CI/CD
+system to execute builds. This in turn will cause build times to increase further over time, most likely
+due to the fact that developers are no longer actively waiting for their builds.
