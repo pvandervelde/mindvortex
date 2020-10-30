@@ -38,43 +38,55 @@ complicated if pipeline processes are too tightly coupled to the CI/CD system.
 If any of the issues mentioned above are of concern to you then partially or completely decoupling
 the development pipeline from the infrastructure will be a worth while exercise.
 
-Once you have decided to reduce coupling between the development pipeline and the infrastructure
+Once you have decided to reduce coupling between the development pipeline and the infrastructure then
+you can take one or more of the following steps to help you achieve your decoupling goals. Even
+implementing some of the steps will help you by
 
+- Independence from your CI/CD system because you can can execute your pipeline stages anywhere
+- Developers can build the complete package locally allowing them to test what will be shipped
+- Build workspace is guaranteed to be clean when you start which means less time spend debugging
+  build failures due to file system pollution or package caching failures
+- Adding more agents to your CI/CD system is easy as all agents are the same and relatively simple
+  in form
 
+With all that said here are some suggestions for steps you can take on your journey to fewer
+dependencies.
 
+#### Versions for everybody
 
+Ensure that all code, tools, scripts and resources used in the pipeline are versioned. That way you
+know exactly what is required for a specific pipeline execution.
 
-- No tools need to be installed on any of the executors by default (ideally). Use a bare minimum executor.
-- Never re-use executors. Don't allow developers to do so because that trains them to think that
-  some resources / tools / files will be available
-- Version everything - Tools, scripts etc.. That way you can reproduce the process on any executor
-- Pipeline pulls down all tools required. Which probably means you need some kind of entrypoint
-  script to pull down the initial tools and scripts. This entrypoint script should be as small as
-  possible and able to update itself. That way you can still version all the scripts and tools
-  (because they are pulled down) and don't need to add everything to the repository
-- Don't create a pipeline in the CI/CD system. Consider it to be just a task execution system. Define
-  the task through scripts / tools with a standard 'entrypoint' for all your jobs
-- It is better to not rely on the presence of different services because those are points of failure.
-  - For those services that are absolutely required it is important that these are highly available
+#### Only the workspace is yours
 
+Pipeline actions should work only inside their own workspace. Any code, scripts or tools they require
+can be put in the workspace but never outside the workspace. This reduces scattering of data during
+the execution of a pipeline.
 
-Benefits
+#### Lean executors
 
-- This means that you are independent of your build system because you can always build
-- Allows developers to build locally to dev test the product
-- Easy to add more agents, just spin up a new clean OS install VM or container
-- Build workspace is guaranteed to be clean when you start. Less time spend debugging build failures
-  due to file system pollution or package caching failures
+Make your pipeline actions assume they will run on executors with a bare minimum runtime. This will
+ensure that your pipelines will obtain their preferred version of the tools they need and
+install them in their own workspace. The benefit of doing this that a pipeline can be executed on
+any available executor, either in your CI/CD system or on a developer machine, as it will not be
+making any assumptions about the capabilities of an executor.
 
+#### Single use executors are cleaner
 
+Configure the CI/CD system to use a clean executor for every job. This will ensure that changes made
+by a previous job don't interfere with the current job. Additionally it will enforce the use of
+immutable infrastructure for the executors, thus allowing versioning of the executors.
 
-NOTE:
-Some steps may be hard when not on a build system, e.g. signing with the proper certificates / keys,
-and some may not be desirable when not on a build system, e.g. making changes to source control
-in the local workspace (i.e. local merges / branching / commits).
+#### Use the CI/CD system as a task executor
 
+Keep the configuration for the jobs in the CI/CD system to a minimum. Ideally the entire configuration
+is the execution of a script or tools with a simple set of arguments. By reducing the job of the
+CI/CD system to executing a script or tool it is simple to execute the pipeline actions somewhere
+else, e.g. on a developer machine or a different CI/CD system.
 
-As a side note. I have noticed that if the build time for an artefact exceeds a certain amount of time
-(somewhere between 5 - 10 minutes) it is highly likely that developers will exclusively use the CI/CD
-system to execute builds. This in turn will cause build times to increase further over time, most likely
-due to the fact that developers are no longer actively waiting for their builds.
+#### Treat pipeline services as critical
+
+All services used by the pipeline should be treated as mission critical systems. After all a failure
+in one of these systems can stop all your pipelines from executing. So reduce the number of services
+you use in your pipeline and strengthen the services you have to rely on using the standard
+approaches for service resilience.
