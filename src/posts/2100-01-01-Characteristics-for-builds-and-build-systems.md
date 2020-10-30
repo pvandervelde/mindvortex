@@ -22,3 +22,8 @@ What are the important characteristics for builds and build systems
 * Builds should be as independent as possible from the infrastructure with minimal requirements.
   It is better to not rely on the presence of different services because those are points of failure.
   - For those services that are absolutely required it is important that these are highly available
+* Security is a big issue (one I don't know enough about, other than to be weary / scared)
+  * Using a flexible build engine like MsBuild, rake, cake etc. is great if
+    * Every developer is confident with the engine
+    * You implicitly trust every developer (possible in a commercial setting, unlikely in OSS)
+  * More likely want a build system that has a trust relation between the engine and the tasks
