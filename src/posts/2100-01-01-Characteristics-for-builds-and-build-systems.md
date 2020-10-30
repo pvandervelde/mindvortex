@@ -31,3 +31,9 @@ What are the important characteristics for builds and build systems
     * Ideally you need to know exactly what went into the artefact without there being the possiblity
       for unknown additions. Note that this ability is hard to achieve due to the nature of
       build systems.
+  * Note that often people say build system security isn't an issue because you trust all the developers
+    given that you hired them. This is not entirely true given that:
+    * most companies have permission restrictions for developers on what they can commit to
+    * It's not just your own developers that you are protecting from, but also outside parties that
+      attack the company. Defense in depth is important. For those that say this isn't a problem
+      * Supply chain attacks are a thing
