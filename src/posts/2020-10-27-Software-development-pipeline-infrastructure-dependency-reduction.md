@@ -8,65 +8,52 @@ Tags:
 
 The [last post](/posts/Software-development-pipeline-considerations-for-infrastructure-improvements.html)
 I explained one way to improve the development pipeline infrastructure while
-keeping downtime to a minimum. In that post I mentioned that an important consideration for the
+keeping downtime minimal. One important consideration for the
 [resilience](/posts/Software-development-pipeline-Design-resilience.html) of the
-pipeline was to reduce the dependencies between the pipeline and the infrastructure. Now I will
-discuss how some dependency decoupling can be achieved. However before that happens lets provide
-a few reasons that a certain amount of independence between the pipeline processes and the
-infrastructure is desirable.
+pipeline is to reduce the dependencies between the pipeline and the infrastructure.
 
-If the pipeline processes is tightly coupled to the infrastructure, e.g. because the development
-pipeline is defined completely using the native tasks for the CI/CD system then
+So what does unwanted coupling between the pipeline and the
+infrastructure mean? After all the pipeline code makes assumptions about the capabilities
+of the infrastructure it runs on, just like every other piece of code.
+Examples of unwanted dependencies are:
 
-- Building the artefacts requires the CI/CD system, meaning that developers cannot build a complete
-  artefact on their own machines, which increases the feedback time. If not enough executors are
-  available in the CI/CD system then it is quite possible that the feedback time increases extensively
-- Testing changes to the pipeline can be slow because changes need to be send to the CI/CD system
-  in order to test them. In general CI/CD systems don't provide easy ways to debug a running pipeline
-  which means developers are limited to general debug statements and log parsing
-- In case of issues with the CI/CD system, e.g. partial or complete outages, then you will not be able
-  to execute any of the pipeline steps or stages
-- Migration to a different CI/CD solution may be complicated
+- The pipeline is created by using tasks specific to a CI/CD system which means that the artefacts
+  can only be created on the infrastructure
+- A pipeline task assumes that certain tools have been installed on the executors
+- A pipeline task assumes that it has specific permissions on an executor
+- Pipeline stages expect the outputs from previous stages to be available on the executor,
+  or worse, they expect the outputs from other pipelines to be on the executor
 
-The first two items mentioned above impact the velocity at which development can take place. By relying
-completely on the CI/CD system for artefact generation cycle times seem to increase.
-The second set of items are related to disaster recovery and vendor lock-in. These may or may not be
-of concern depending on the direction of development and technology. In my experience vendor lock-in
-is something to keep in mind if for no other reason then that switching vendors can be prohibitively
-complicated if pipeline processes are too tightly coupled to the CI/CD system.
+The first item mentioned impacts the velocity at which development can take place. By relying
+completely on the CI/CD system for artefact creation cycle times increases. Additionally
+making changes to the pipeline often requires executing it multiple times to debug it.
 
-If any of the issues mentioned above are of concern to you then partially or completely decoupling
-the development pipeline from the infrastructure will be a worth while exercise.
+The second set of items are related to the ease of switching tooling, e.g. when changing vendors
+or during disaster recovery. These may or may not be of concern depending on the direction of
+development and technology. In my experience vendor lock-in is something to keep in mind if for no
+other reason then that switching vendors can be prohibitively complicated if pipeline processes are
+too tightly coupled to the CI/CD system.
 
-Once you have decided to reduce coupling between the development pipeline and the infrastructure then
-you can take one or more of the following steps to help you achieve your decoupling goals. Even
-implementing some of the steps will help you by
-
-- Independence from your CI/CD system because you can can execute your pipeline stages anywhere
-- Developers can build the complete package locally allowing them to test what will be shipped
-- Build workspace is guaranteed to be clean when you start which means less time spend debugging
-  build failures due to file system pollution or package caching failures
-- Adding more agents to your CI/CD system is easy as all agents are the same and relatively simple
-  in form
-
-With all that said here are some suggestions for steps you can take on your journey to fewer
-dependencies.
+If any of the issues mentioned are concerning to you then partially or completely decoupling
+the development pipeline from the infrastructure will be a worth while exercise. This
+can be achieved with some of the following steps.
 
 #### Versions for everybody
 
 Ensure that all code, tools, scripts and resources used in the pipeline are versioned. That way you
-know exactly what is required for a specific pipeline execution.
+know exactly what is required for a specific pipeline execution. Which make executions repeatable
+in the future when newer versions of tools and resources have been released.
 
 #### Only the workspace is yours
 
-Pipeline actions should work only inside their own workspace. Any code, scripts or tools they require
-can be put in the workspace but never outside the workspace. This reduces scattering of data during
-the execution of a pipeline.
+Pipeline actions should work only in their own workspace. Any code, scripts or tools they require
+are put in the workspace. This reduces scattering of data during the execution of a pipeline and
+reduces pollution of the executors.
 
 #### Lean executors
 
-Make your pipeline actions assume they will run on executors with a bare minimum runtime. This will
-ensure that your pipelines will obtain their preferred version of the tools they need and
+Make your pipeline actions assume they will run on a bare minimum runtime. This will
+ensure that your pipelines will obtain their preferred version of tools they need and
 install them in their own workspace. The benefit of doing this that a pipeline can be executed on
 any available executor, either in your CI/CD system or on a developer machine, as it will not be
 making any assumptions about the capabilities of an executor.
@@ -88,5 +75,5 @@ else, e.g. on a developer machine or a different CI/CD system.
 
 All services used by the pipeline should be treated as mission critical systems. After all a failure
 in one of these systems can stop all your pipelines from executing. So reduce the number of services
-you use in your pipeline and strengthen the services you have to rely on using the standard
-approaches for service resilience.
+you use in your pipeline and improve the resilience the services you have to rely on using the standard
+approaches.
