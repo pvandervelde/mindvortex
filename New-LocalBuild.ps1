@@ -20,7 +20,7 @@ if ($wyamExe -eq '')
 $commandLine = "& dotnet '$wyamExe' --input $source --output $destination --use-local-packages --packages-path $packages"
 if ($preview)
 {
-    $commandLine += ' -p'
+    $commandLine += ' -p 5090'
 }
 
 if ($watch)
