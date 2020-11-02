@@ -7,7 +7,7 @@ Tags:
 ---
 
 The [last post](/posts/Software-development-pipeline-considerations-for-infrastructure-improvements.html)
-I explained one way to improve the development pipeline infrastructure while
+I explained a few ways to improve the development pipeline infrastructure while
 keeping downtime minimal. One important consideration for the
 [resilience](/posts/Software-development-pipeline-Design-resilience.html) of the
 pipeline is to reduce the dependencies between the pipeline and the infrastructure.
@@ -15,16 +15,16 @@ pipeline is to reduce the dependencies between the pipeline and the infrastructu
 So what does unwanted coupling between the pipeline and the
 infrastructure mean? After all the pipeline code makes assumptions about the capabilities
 of the infrastructure it runs on, just like every other piece of code.
-Examples of unwanted dependencies are:
+For development pipelines examples of unwanted dependencies are:
 
 - The pipeline is created by using tasks specific to a CI/CD system which means that the artefacts
   can only be created on the infrastructure
-- A pipeline task assumes that certain tools have been installed on the executors
-- A pipeline task assumes that it has specific permissions on an executor
 - Pipeline stages expect the outputs from previous stages to be available on the executor,
   or worse, they expect the outputs from other pipelines to be on the executor
+- A pipeline task assumes that certain tools have been installed on the executors
+- A pipeline task assumes that it has specific permissions on an executor
 
-The first item mentioned impacts the velocity at which development can take place. By relying
+The first two items mentioned impacts the velocity at which development can take place. By relying
 completely on the CI/CD system for artefact creation cycle times increases. Additionally
 making changes to the pipeline often requires executing it multiple times to debug it.
 
@@ -35,7 +35,7 @@ other reason then that switching vendors can be prohibitively complicated if pip
 too tightly coupled to the CI/CD system.
 
 If any of the issues mentioned are concerning to you then partially or completely decoupling
-the development pipeline from the infrastructure will be a worth while exercise. This
+the development pipeline from the infrastructure will be a worthwhile exercise. This
 can be achieved with some of the following steps.
 
 #### Versions for everybody
@@ -61,7 +61,7 @@ making any assumptions about the capabilities of an executor.
 #### Single use executors are cleaner
 
 Configure the CI/CD system to use a clean executor for every job. This will ensure that changes made
-by a previous job don't interfere with the current job. Additionally it will enforce the use of
+during a previous job don't interfere with the current job. Additionally it will enforce the use of
 immutable infrastructure for the executors, thus allowing versioning of the executors.
 
 #### Use the CI/CD system as a task executor
