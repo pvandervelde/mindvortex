@@ -17,33 +17,26 @@ statements. The following is a description of my thoughts and ideas not guidance
 your pipeline. With that out of the way, lets move on.
 
 Why should we care about the security of the pipeline? After all development pipelines are, mostly,
-used internally by a relatively small group of developers. Generally the developers are trusted
+used internally by developers. Generally the developers are trusted
 with the source code and access permissions are set at the source control level.
 In addition normally high trust levels exist between the pipeline processes, the infrastructure and
-the source repository.
+the source repository. With all these facts most companies deem the security of the pipeline lower
+on the priority list.
 
-- In general security of the
-  pipeline just isn't very high on the list compared to delivering new versions of the product etc.
+So if many companies deem the security of the pipeline less critical are there any issues
+that could convince them to increase the importance of the issue?
+
+- [Pen testing](https://www.researchgate.net/publication/332834111_Vulnerabilities_in_Continuous_Delivery_Pipelines_A_Case_Study)
+  shows that CI/CD systems are a great way into
+[corporate networks](https://www.blackhat.com/docs/eu-15/materials/eu-15-Mittal-Continuous-Intrusion-Why-CI-Tools-Are-An-Attackers-Best-Friend.pdf)
+- There have been a number of attacks aimed at
+  [distributing](https://medium.com/@hkparker/analysis-of-a-supply-chain-attack-2bd8fa8286ac)
+  malicious code through trusted software packages. These so called
+  [supply chain attacks](https://en.wikipedia.org/wiki/Supply_chain_attack) try to
+  compromise the user by inserting malicious code in third-party dependencies, i.e. the source
+  code supply chain
 
 
-Why important
-
-- Pen testing shows that [CI/CD systems](https://www.blackhat.com/docs/eu-15/materials/eu-15-Mittal-Continuous-Intrusion-Why-CI-Tools-Are-An-Attackers-Best-Friend.pdf) are a great way into corporate networks. See also https://www.researchgate.net/publication/332834111_Vulnerabilities_in_Continuous_Delivery_Pipelines_A_Case_Study
-- Supply chain attacks are on the rise
-  - This is one way in which people can endanger your software
-
-
-As per normal security is a complex issue and security for development pipelines isn't discussed
-very much.
-
-
-- Note that often people say build system security isn't an issue because you trust all the developers
-  given that you hired them. This is not entirely true given that:
-  - most companies have permission restrictions for developers on what they can commit to
-  - It's not just your own developers that you are protecting from, but also outside parties that
-    attack the company. Defence in depth is important. For those that say this isn't a problem
-    - Supply chain attacks are a thing
-- Not much is being said / done with regards to CI/CD security
 
 
 - Using a flexible build engine like MsBuild, rake, cake etc. is great if
@@ -59,3 +52,8 @@ very much.
   - Ideally you need to know exactly what went into the artefact without there being the possibility
     for unknown additions. Note that this ability is hard to achieve due to the nature of
     build systems.
+
+In the end the goal of this post is more to point out that the security of the development
+pipeline is important, rather than providing ways to make a pipeline more secure. The exact
+solutions for pipeline security depend very heavily on the way the pipeline is constructed
+and what other forms of security validation have been placed around the pipeline
