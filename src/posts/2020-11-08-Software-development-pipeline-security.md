@@ -57,9 +57,8 @@ our systems.
 
 One of the problems with securing the development pipeline is that all the actions mentioned above
 are in one way or another required for the pipeline to function, after all the pipeline needs to be
-able to build and distribute artefacts. The follow up question then becomes
-
-    how do we distinguish between normal use and malicious use
+able to build and distribute artefacts. The follow up question then becomes can you distinguish between
+normal use and malicious use?
 
 The answer to that is that it will be difficult because both forms of actions are essentially the
 same, they both use the development pipeline for its intended purpose. So then in order to prevent
