@@ -1,3 +1,2 @@
 New Posts:
-    Software development pipeline - On-prem or in the cloud?
-    Calvinverse - An example build infrastructure
+    Building an autonomous mobile robot
