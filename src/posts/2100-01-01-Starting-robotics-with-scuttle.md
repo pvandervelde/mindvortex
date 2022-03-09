@@ -6,9 +6,13 @@ Tags:
 
 ---
 
-- Could build something myself but for those first quick wins (and thus the desire to continue) it might be better
-  to buy something
+- Could build something myself but for those first quick wins (and thus the desire to continue)
+  it might be better to get something that has been tested and then buy that.
 - Decided to buy the SCUTTLE robot kit
+- Tinkering set-up, not a closed system
+- Capable of actually carrying a load. Most robot kits are fun platforms to play with but other
+  than driving around they're not actually very useful. I want my robot to be able to do stuff,
+  to carry things for me.
 - Lots of excellent support on the SCUTTLE discord
 - Comes with sample code and excellent documentation
 - Affordable, and extendable
