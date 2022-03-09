@@ -13,6 +13,7 @@ Tags:
 - Capable of actually carrying a load. Most robot kits are fun platforms to play with but other
   than driving around they're not actually very useful. I want my robot to be able to do stuff,
   to carry things for me.
+- Open sourced, all drawings are available online, including material BOM
 - Lots of excellent support on the SCUTTLE discord
 - Comes with sample code and excellent documentation
 - Affordable, and extendable
