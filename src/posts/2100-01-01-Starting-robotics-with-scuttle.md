@@ -36,7 +36,7 @@ You can probably imagine how well that went.
 
 Assembly of the SCUTTLE robot is pretty easy, it consists of aluminium T-slot lengths, some 3D
 printed parts and some electronics parts. The T-slot lengths are fastened with angle brackets and
-the 3D printed parts bolt to the T-slot lenghts. The kit I bought only required connecting electronic parts
+the 3D printed parts bolt to the T-slot lengths. The kit I bought only required connecting electronic parts
 with connectors, no soldering required. If you build a SCUTTLE from scratch there is some soldering to
 be done.
 
