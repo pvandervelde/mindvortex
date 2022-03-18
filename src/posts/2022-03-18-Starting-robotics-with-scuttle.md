@@ -70,4 +70,5 @@ contact switches but am still thinking about the design for the bumper. Later on
 sonar, [Time of Flight (ToF) sensors](https://en.wikipedia.org/wiki/Time-of-flight_camera) and
 potentially cameras as well.
 
-[*] SCUTTLE drove straight at the red coloured couch instead of following the object I wanted it to follow
+[*] SCUTTLE drove straight at the red coloured couch instead of following the red object I wanted
+it to follow
