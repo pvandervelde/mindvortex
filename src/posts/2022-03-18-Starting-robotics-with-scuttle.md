@@ -26,7 +26,10 @@ start off buying a kit that I could assemble and learn to work with. The basic r
 - With accessible hardware and software so that I could modify and extend it.
 - Affordable, because money is still finite
 
-<p><img align="right" alt="Scuttle assembled" src="/assets/images/robotics/scuttle/scuttle-assembled.jpg" /></p>
+<figure style="float:right">
+<img alt="Scuttle assembled" src="/assets/images/robotics/scuttle/scuttle-assembled.jpg" />
+<figcaption>SCUTTLE robot assembled</figcaption>
+</figure>
 
 After a little bit of searching I decided to buy the [SCUTTLE robot](https://scuttlerobot.org/) kit.
 The SCUTTLE kit is an [open source kit](https://github.com/scuttlerobot) for which all the build
@@ -49,7 +52,10 @@ verify the encoders and the motors. Note that it is wise to review your cabling 
 on because it is possible to connect some of the electronics incorrectly. I ended up breaking my
 Raspberry Pi, quite possibly by connecting the encoders backwards or something similar.
 
-<p><img align="left" alt="Scuttle in RViz" src="/assets/images/robotics/scuttle/scuttle-rviz.png" /></p>
+<figure style="float:left">
+<img alt="Scuttle in RViz" src="/assets/images/robotics/scuttle/scuttle-rviz.png" />
+<figcaption>SCUTTLE in RViz</figcaption>
+</figure>
 
 After verifying that the motors rotate in the correct direction you can try controlling the
 robot via the gamepad and drive it around the house.
@@ -64,4 +70,5 @@ contact switches but am still thinking about the design for the bumper. Later on
 sonar, [Time of Flight (ToF) sensors](https://en.wikipedia.org/wiki/Time-of-flight_camera) and
 potentially cameras as well.
 
-[*] SCUTTLE drove straight at the red coloured couch instead of following the object I wanted it to follow
+[*] SCUTTLE drove straight at the red coloured couch instead of following the red object I wanted
+it to follow
