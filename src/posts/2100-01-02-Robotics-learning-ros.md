@@ -18,7 +18,7 @@ Tags:
 
 Catches I found
 
-- Running ROS on Windows can be done, either via Robostack straight on windows, or using WSL2.
+- Running ROS on Windows can be done, either via Robostack straight on windows, using WSL2 or on a VM.
 - If you use WSL2 then keep in mind that you can run virtual robots via Gazebo and RViz, but
   connecting to physical robots is difficult due to the fact that the WSL2 system doesn't really
   allow uninitiated network connections, i.e. request-response initiated from inside WSL2 works, but
@@ -34,4 +34,11 @@ Catches I found
 
 - The navigation stack is big and requires lots of learning. More posts about that will undoubtedly
   be posted later.
-- The ROS 1 navigation stack assumes you have a Lidar or similar way of getting object distances
+- The ROS 1 navigation stack assumes you have a Lidar or similar way of getting object distances. It
+  looks that the ROS2 navigation stack is a little more flexible
+
+- Aiming to learn ROS1 (noetic) first as there's lots of example material around. Then switching
+  to ROS2 as it has a more modern stack (better security, faster, better nav stack etc.). And more
+  active development
+
+
