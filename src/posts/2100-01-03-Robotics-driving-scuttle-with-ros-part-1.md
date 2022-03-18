@@ -17,3 +17,8 @@ Lessons learned
 
 - Configuration that describes the robot. There are many parts and some information is duplicated
   - Gazebo has information about the drive system, so does the navigation stack
+
+
+- Picture of SCUTTLE in gazebo / rviz / foxglove
+
+- Maybe link to a video of driving scuttle in Gazebo / rviz and one of scuttle driving for real
