@@ -12,7 +12,7 @@ Patrick van der Velde. Online mostly written as Petrik.
 Studied [aerodynamics](https://www.tudelft.nl/en/lr/) and subsequently completed a PhD in [mechanical engineering](https://www.auckland.ac.nz/en/engineering/about-the-faculty/mechanical-engineering.html) writing software
 sprinkled with some [computational fluid dynamics](https://en.wikipedia.org/wiki/Computational_fluid_dynamics) and optimization calculations.
 
-Commercial software developer since 2008. Worked on projects in C#, Delphi and C++. Miles more skilled in C# than the other languages. As a bonus has a pet hate for C++.
+Commercial software developer since 2008. Worked on projects in C#, Golang, Python, Delphi and C++.
 
 ### Where
 
