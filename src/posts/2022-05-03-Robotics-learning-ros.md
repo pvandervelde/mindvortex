@@ -15,12 +15,12 @@ between different parts of the robot, hardware abstractions for different sensor
 controllers, device drivers and many other libraries and packages.
 
 The main benefit of using ROS is that it provides a lot of integrations and functionality that you
-can quickly use. The drawback is that the learning curve for ROS is very steep. The documentation is
-pretty good and so are the tutorials, however there are a lot of different parts in ROS which makes
-for a lot of ways to get confused. So to speed up my progress with ROS I decided to do the
-[ROS for beginners I](https://www.udemy.com/course/ros-essentials/) and
-[II courses](https://www.udemy.com/course/ros-navigation/) on Udemy. These courses were very helpful
-to flatten the learning curve for ROS and quickly get me familiar with ROS.
+can quickly use. On the other hand drawback that comes with all of this is that the learning curve
+for ROS is very steep. The documentation is pretty good and so are the tutorials, however there are
+a lot of different parts in ROS, which makes for a lot of ways to get confused. So to speed up my
+progress with ROS I decided to do the [ROS for beginners I](https://www.udemy.com/course/ros-essentials/)
+and [II courses](https://www.udemy.com/course/ros-navigation/) on Udemy. These courses were very helpful
+to reduce the learning curve for ROS and quickly get me familiar with ROS.
 
 <figure style="float:left">
 <img alt="Scuttle in Gazebo" src="/assets/images/robotics/scuttle/scuttle-in-gazebo.jpg" />
@@ -53,10 +53,8 @@ other nodes won't be able to send messages to the WSL nodes.
 
 The final approach to running ROS is to create an [Ubuntu VM](https://gist.github.com/pvandervelde/2282dafc080945ecb7981edb740ed47c)
 or physical machine. In this case as long as the machine is reachable over the network for other
-compute devices, it is possible to run ROS distributed over the network.
-
-After having tried all three approaches I am currently using an Ubuntu 20.04 VM with ROS Noetic
-installed as this provided the most natural way to run ROS (on Ubuntu) and have good networking.
+compute devices, it is possible to run ROS distributed over the network. This is the way I currently
+run ROS.
 
 <figure style="float:right">
 <img alt="Scuttle in RViz" src="/assets/images/robotics/scuttle/scuttle-in-rviz-no-sensors.jpg" />
@@ -111,5 +109,5 @@ to me".
 
 Another part of my plans is to upgrade to using [ROS2](https://docs.ros.org/en/galactic/index.html).
 ROS1 end-of-life is 2025, which is only 3 years away, and additionally ROS2 has a more modern stack
-with python 3, better connectivity security, an improved navigation stack and more active development.
+with python 3, better communication security, an improved navigation stack and more active development.
 More on this will follow in a future post once I have upgraded my robot to ROS2
