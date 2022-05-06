@@ -23,6 +23,17 @@ Tags:
 - I added the scuttle_gazebo, scuttle_slam and scuttle_navigation packages. Based on the turtlebot3
   settings but adjusted for SCUTTLE
 
+- Navigation
+    + Navigation in ROS1 consists requires a global planner, takes the map and determines a path
+    from the current location to the goal, and local planner, which moves the robot towards the
+    goal and tries to follow the path planned by the global planner
+    + Default ROS nav is path planning, a route from A to B, but it doesn't prescribe velocities /
+  acceleration along the path. For that you need trajectory planner. Drone path planning is
+  often done in trajectory planning, prescribing both velocity and accelerations along the path to
+  ensure the most smooth path
+
+
+
 Lessons learned
 
 - Configuration that describes the robot. There are many parts and some information is duplicated
