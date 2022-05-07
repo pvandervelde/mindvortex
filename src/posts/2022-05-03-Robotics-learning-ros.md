@@ -15,10 +15,10 @@ between different parts of the robot, hardware abstractions for different sensor
 controllers, device drivers and many other libraries and packages.
 
 The main benefit of using ROS is that it provides a lot of integrations and functionality that you
-can quickly use. On the other hand drawback that comes with all of this is that the learning curve
+can quickly use. On the other hand the drawback that comes with all of this is that the learning curve
 for ROS is very steep. The documentation is pretty good and so are the tutorials, however there are
-a lot of different parts in ROS, which makes for a lot of ways to get confused. So to speed up my
-progress with ROS I decided to do the [ROS for beginners I](https://www.udemy.com/course/ros-essentials/)
+a lot of different parts in ROS, which makes for a lot of interesting ways to get confused. So to
+speed up my progress with ROS I decided to do the [ROS for beginners I](https://www.udemy.com/course/ros-essentials/)
 and [II courses](https://www.udemy.com/course/ros-navigation/) on Udemy. These courses were very helpful
 to reduce the learning curve for ROS and quickly get me familiar with ROS.
 
