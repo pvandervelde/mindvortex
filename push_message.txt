@@ -1,2 +1,2 @@
 New Posts:
-    Starting robotics with the SCUTTLE robot
+    Starting robotics - Learning Robot Operating System (ROS)
