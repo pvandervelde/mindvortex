@@ -10,7 +10,7 @@ Tags:
 
 - My first piece of electronics / addition to scuttle
 - A bumper that will tell scuttle if it has hit something
-- Bumpers are really a last resort sensor
+- Bumpers are really a last resort sensor (and they are not even a sensor as such, they're a component)
 
 - CAD image for assembly
 
