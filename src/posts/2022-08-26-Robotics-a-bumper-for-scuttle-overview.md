@@ -15,6 +15,11 @@ unit. Unfortunately I don't have one of those, and LIDAR units are relatively ex
 Additionally I figured I'd learn more about robot sensors if I set up some simple sensors for my
 SCUTTLE robot before getting a LIDAR.
 
+<figure style="float:left">
+<img alt="CAD model of the SCUTTLE bumper" src="/assets/images/robotics/scuttle/scuttle-bumper-cad-model.png" />
+<figcaption>The CAD model of the SCUTTLE bumper</figcaption>
+</figure>
+
 So I decided to start with the simplest kind of sensor, the bump sensor. This type of sensor
 consists of one or more [limit switches](https://en.wikipedia.org/wiki/Limit_switch) and a bumper
 surface, i.e. some kind of plate that bumps into things. This plate is held in place by springs thereby
@@ -27,11 +32,6 @@ it is no longer in contact with the obstacle and can thus continue on its journe
 
 Overall this doesn't sound very complicated so it should be pretty quick and easy to build the
 bump sensor ...Several weeks down the line I nearly finished my bump sensors
-
-<figure style="float:left">
-<img alt="CAD model of the SCUTTLE bumper" src="/assets/images/robotics/scuttle/scuttle-bumper-cad-model.png" />
-<figcaption>The CAD model of the SCUTTLE bumper</figcaption>
-</figure>
 
 The first part of my build was the design of the physical parts that I need to attach to SCUTTLE. I
 build the bumper with simple parts because I don't have access to a workshop. So
