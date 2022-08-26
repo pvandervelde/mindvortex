@@ -21,8 +21,11 @@ Lessons learned
 
 - Maybe link to a video of driving scuttle in Gazebo / rviz and one of scuttle driving for real
 
+- Need to check the odometry
+
 Things to do
 
 - Push the logs off the robot and not store them on the Rpi
 - Stream metrics off the robot and setup Grafana
-- Get some better sensors
+- Get some better sensors, currently I don't have a LIDAR or any sensors really
+  - First sensor we'll be getting is a bumper sensor, more on that
