@@ -26,7 +26,7 @@ bumper plate away from the limit switches. The change in switch state then signa
 it is no longer in contact with the obstacle and can thus continue on its journey.
 
 Overall this doesn't sound very complicated so it should be pretty quick and easy to build the
-bump sensor ...
+bump sensor ...Several weeks down the line I nearly finished my bump sensors
 
 <figure style="float:left">
 <img alt="CAD model of the SCUTTLE bumper" src="/assets/images/robotics/scuttle/scuttle-bumper-cad-model.png" />
@@ -41,14 +41,17 @@ attached using four M3 bolts wrapped with springs, 2 bolts for each side. The id
 2 bolts per side is that this should provide some rotational stability while keeping the construction
 simple. Finally the angle brackets is attached to the scuttle frame with two T slot nuts.
 
-The springs that keep the plate in the extended position have to be quite soft, otherwise
+I found that the springs that keep the plate in the extended position have to be quite soft, otherwise
 SCUTTLE won't be able to compress the springs when it hits something at low speed. The first
 set of springs I got from Amazon were too stiff. For the second set of springs I got some ballpoint
 pen springs of Aliexpress which are much less stiff.
 
-PICTURE OF THE BUMPER WITHOUT ELECTRONICS
+<figure style="float:right">
+<img alt="SCUTTLE with its new bumper" src="/assets/images/robotics/scuttle/scuttle-with-bumper.jpg" />
+<figcaption>SCUTTLE with its new bumper</figcaption>
+</figure>
 
-Finally the first version of the bumper design works relatively well but for the next version there
+This first version of the bumper mechanics works relatively well but for the next version there
 are some things I want to change
 
 - The bolts have full thread on them which sometimes causes the bolts to get hung up on the tread. I
@@ -64,5 +67,8 @@ are some things I want to change
   an obstacle without getting stuck. Obviously creating a curved bumper will increase construction
   effort.
 
-The electronics and the software that I created for this bumper will be described in their
-own posts.
+The mechanical design of the bumper is only one part of the task. In order for SCUTTLE to be able
+to respond to hitting an object I need to have have software that can respond to signals from the
+limit switches and the appropriate electronics that transfers the limit switch state to the
+raspberry pi. The electronics and the software that I created for this bumper will be described in
+separate posts.
