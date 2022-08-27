@@ -31,15 +31,18 @@ bumper plate away from the limit switches. The change in switch state then signa
 it is no longer in contact with the obstacle and can thus continue on its journey.
 
 Overall this doesn't sound very complicated so it should be pretty quick and easy to build the
-bump sensor ...Several weeks down the line I nearly finished my bump sensors
+bump sensor ...
+
+Several weeks down the line I nearly finished my bump sensors
 
 The first part of my build was the design of the physical parts that I need to attach to SCUTTLE. I
-build the bumper with simple parts because I don't have access to a workshop. So
-the bumper is a flat plate with some reinforcements to prevent it from flexing. This plate
-is attached to two angle brackets, one on the left side and one on the right side. The plate is
-attached using four M3 bolts wrapped with springs, 2 bolts for each side. The idea behind using
-2 bolts per side is that this should provide some rotational stability while keeping the construction
-simple. Finally the angle brackets is attached to the scuttle frame with two T slot nuts.
+build the bumper with simple parts because I don't have access to a workshop or a 3D printer. So
+the bumper is a UHMWPE plate reinforced by some 90 degree aluminium extrusions. This prevents the
+plate from flexing when it contacts an obstacle. The plate is attached to two angle brackets, one on
+the left side and one on the right side. It is attached using four M3 bolts wrapped with springs,
+2 bolts for each side. The idea behind using 2 bolts per side is that this should provide some
+rotational stability while keeping the construction simple. Finally the angle brackets is attached
+to the scuttle frame with two T slot nuts.
 
 I found that the springs that keep the plate in the extended position have to be quite soft, otherwise
 SCUTTLE won't be able to compress the springs when it hits something at low speed. The first
