@@ -118,26 +118,9 @@ priorities are, from low to high
 By using the twist multiplexer mode it is easy for users to change the priority by changing a configuration
 file instead of having to change the bumper code.
 
+With that the bumper code is able to make SCUTTLE respond to objects it bumps into. The next step in
+the process of adding bump sensors to SCUTTLE is to assemble the electronic components so that the
+movement of the bumper can be registered and reported to the software components.
 
-
-
-
-
-
-
-
-
-- Drawbacks of this model is that you have message transitions (i.e. something sends messages and you
-  have to process multiple messages). Not quite as fast
-- Benefit. You can test it virtually. Can handle as many bumpers as you want
-
-
-
-
-
-
-
-
-With that the bumper code is able to make SCUTTLE respond to objects it bumps into. The next steps
-for the development of the bumper code is the ability to add the obstacles in the navigation map
-so that SCUTTLE can navigate around the newly discovered obstacles.
+Finally a addition to the software that needs to be made is the ability to add the obstacles in the
+navigation map so that SCUTTLE can navigate around the newly discovered obstacles.
