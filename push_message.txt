@@ -1,2 +1,2 @@
 New Posts:
-    Starting robotics - Driving scuttle with ROS - Gazebo simulation
+    Starting robotics - Building a bumper for scuttle. The overview
