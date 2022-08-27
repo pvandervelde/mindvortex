@@ -9,22 +9,29 @@ Tags:
 ---
 
 In my [previous post](posts/Robotics-a-bumper-for-scuttle-overview) I talked about creating a bump
-sensor for my SCUTTLE robot. The next part necessary for a working bump sensor are the software
-components. Given that my SCUTTLE runs [ROS](https://www.ros.org/) I coded up some ROS nodes for the
-bump sensor. A node to process the bumper events and generate movement actions for the robot; another
-node to translate the status of the microswitches into bumper events.
+sensor for my SCUTTLE robot. The next part necessary for a working bump sensor is the software. There
+are two parts to the software, translating the state of the micro switches and
+processing the state changes into movement commands for the robot, i.e. if the robot runs into
+an obstacle it should stop and reverse its last movement. In order to achieve these things I decided
+to split these two actions into two different [ROS](https://www.ros.org/) nodes, one node
+for the movement generation and one to translate the switch states. The reason for
+creating two nodes instead of one is that this allows me to run the movement generation code both
+in a simulation and on the physical robot. So I gain the ability to test more of my code, but I
+lose a bit of performance because the two nodes communicate using messages.
 
-In order to be able to test the bump sensor code I wanted to be able to use [Gazebo](https://gazebosim.org/home)
-to simulate how the bump sensor would work. Fortunately Gazebo has the ability to calculate collisions
+To test the bump sensor code I use [Gazebo](https://gazebosim.org/home) to simulate how the bump
+sensor would work. Gazebo has the ability to calculate collisions
 and create [ContactsState](http://docs.ros.org/en/api/gazebo_msgs/html/msg/ContactsState.html)
-messages based on these collision calculations. So I created another ROS node to translate these
-Gazebo messages to my own bumper event messages. With that I can test my obstacle response code in
-Gazebo which provides a more controlled environment.
+messages based on these collision calculations. So I created a third ROS node to translate these
+Gazebo messages to my own [bumper event messages](https://github.com/pvandervelde/scuttle_ros_msgs/blob/noetic/msg/BumperEvent.msg).
+With that I can test my obstacle response code in Gazebo which provides a more controlled environment
+than the physical robot does.
 
-So the first thing I did was to add the [links](http://wiki.ros.org/urdf/XML/link) and
-[joints](http://wiki.ros.org/urdf/XML/joint) that make up my bumper to an
-[URDF file](https://github.com/pvandervelde/scuttle_bumper/blob/master/urdf/bumper.xacro). After that
-I added the information for the [Gazebo bumper sensor](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Bumper).
+The first thing to do is to update the robot definition to include the bumper. This is done by adding
+the [links](http://wiki.ros.org/urdf/XML/link) and [joints](http://wiki.ros.org/urdf/XML/joint) that
+make up my bumper to an [URDF file](https://github.com/pvandervelde/scuttle_bumper/blob/master/urdf/bumper.xacro).
+This URDF file is linked to the main [model description](https://github.com/scuttlerobot/scuttle_description)
+for SCUTTLE. After that I added the information for the [Gazebo bumper sensor](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Bumper).
 In the URDF file this looks as follows:
 
 ```
@@ -68,7 +75,7 @@ Once you have defined the URDF Gazebo will generate contact messages when the bu
 These contact messages contain information describing where the contact occurred on the geometry mesh,
 so in theory I could have used this information to determine if the contact would trigger the left
 limit switch or the right limit switch or both. However that requires a decent amount of calculations
-which is both work and introduces potential bugs in the code. So I opted to split the bumper into
+which is both work and introduces the potential for errors. So I opted to split the bumper into
 two parts, one for the left side and one for the right side. If anything contacts anywhere on the
 left side I consider that a trigger for the left part of the bumper and similar for the right side.
 
@@ -77,8 +84,8 @@ left side I consider that a trigger for the left part of the bumper and similar 
 <figcaption>SCUTTLE with bumper in RViz</figcaption>
 </figure>
 
-With the URDF work done I could get started on writing the code for the different ROS nodes. The first
-node I created was the [gazebo translator node](https://github.com/pvandervelde/scuttle_bumper/blob/master/src/gazebo_contact_sensor_translator.py).
+With the URDF work done I started writing the code for the different ROS nodes. The first
+node was the [gazebo translator node](https://github.com/pvandervelde/scuttle_bumper/blob/master/src/gazebo_contact_sensor_translator.py).
 This is a simple node that subscribes to the [ContactsState](http://docs.ros.org/en/api/gazebo_msgs/html/msg/ContactsState.html)
 messages that Gazebo sends when the bumper geometry collides with something. These messages then
 get translated to a [BumperEvent](https://github.com/pvandervelde/scuttle_ros_msgs/blob/noetic/msg/BumperEvent.msg)
@@ -94,18 +101,22 @@ some sensible way.
 Once the bumper event messages have been generated they are processed by the
 [second node](https://github.com/pvandervelde/scuttle_bumper/blob/master/src/bumper_navigator.py).
 This node subscribes to both odometry events and bumper events. Internally it keeps track of the
-motion state of SCUTTLE, which can be either one of stopped, moving or obstacle avoiding. On
-reception of a bumper event the node sends a [velocity command](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Twist.html)
-to stop the robot. Once the robot has stopped it sends commands for it to back up far enough
+motion state of SCUTTLE. On reception of a bumper event the node sends a
+[velocity command](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Twist.html)
+to stop the robot. Once the robot has stopped it sends commands for it to reverse course far enough
 that it is no longer contact with the obstacle.
 
-The bumper code does not try to supress velocity commands coming from other ROS nodes, e.g. those
-belonging to the navigation stack. This was done because allowing the bumper code to supress velocity
+One thing to note is that while the bumper code is working to reverse course after hitting an obstacle,
+the other parts of ROS, e.g. the navigation stack, are probably still trying to steer the robot in the
+original direction because those parts don't know about the obstacle. After all it is not on the
+navigation map. This results in many different velocity commands being send, which could be very
+confusing for the robot. One design decision was to make the bumper code unaware of other nodes. This
+was done because allowing the bumper code to supress velocity
 commands from other nodes would imply that the bumper code is always the most important publisher
 when it comes to velocity commands. There are cases where this isn't true, e.g. when using
 the bumpers to park SCUTTLE against a specific object like in the case of a docking station.
 
-To make the bumper code override velocity commands from other nodes I used the
+To ensure that a consistent set of velocity commands are sent to the motors I used the
 [twist multiplexer node](http://wiki.ros.org/twist_mux) which takes in velocity commands from
 many nodes and forwards them using a priority-based scheme. In the current implementation the
 priorities are, from low to high
