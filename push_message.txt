@@ -1,2 +1,2 @@
 New Posts:
-    Starting robotics - Building a bumper for scuttle. The overview
+    Starting robotics - Building a bumper for scuttle. The software
