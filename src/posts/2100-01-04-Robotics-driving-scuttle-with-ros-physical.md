@@ -29,3 +29,4 @@ Things to do
 - Stream metrics off the robot and setup Grafana
 - Get some better sensors, currently I don't have a LIDAR or any sensors really
   - First sensor we'll be getting is a bumper sensor, more on that
+- Find a way to do automatic updates on the robot --> fullmetalupdate looks interesting but it's no longer maintained
