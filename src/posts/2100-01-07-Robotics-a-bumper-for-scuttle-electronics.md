@@ -8,6 +8,11 @@ Tags:
 
  ---
 
+The final part of building a bumper for SCUTTLE is to assemble the electronics component which translate
+the movement of the bumper into signals that inform the bumper software that an obstacle has been hit.
+
+
+
 - Electronics design
     + Kicad image
         * Microswitch as trigger
@@ -16,17 +21,25 @@ Tags:
         * Pull-down resistor to ensure that the pin is always low. Could do this in software but did it in hardware
           as an exercise
     + Send to board that joins signals from both switches, leave space for a rear bumper
-
+    + Picked pins N ... M on the raspberry pi. Need a 3.3V pin, a ground pin and some GPIO pins, ideally all in the
+      area. So picked the specific pins.
+    + Creating a distribution board with JST female headers. Set it up so that we could have a bumper at the front
+      and the back.
 - Pictures of the breadboard
 - Picture of the circuit
-- Testing set up
+- Testing set up on the breadboard
+- Soldering the different boards
+- Attaching the boards
 - Final set-ups
 
 
-
-- Physical bumper
-    + Use ROSSerial to send bumper messages
-    + Use the same node as in virtual to respond to bumper messages
+- The software necessary to translate the microswitch signals to the BumperEvent message
     + GPIO for RPi. Make sure to reset all pins when you're done
 
-- Learning to solder
+- Learning to solder. Not very good at it at the moment.
+- Learning to crimp connectors.
+
+- Seeing some weird behaviour when an obstacle is encountered.
+    + One motor turns and the other doesn't --> Deadband issues
+    + One encoder is weird --> probably broken
+    + The scuttle driver code is open loop. This might cause issues.
