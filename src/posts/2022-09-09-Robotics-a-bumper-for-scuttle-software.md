@@ -9,15 +9,16 @@ Tags:
 ---
 
 In my [previous post](posts/Robotics-a-bumper-for-scuttle-overview) I talked about creating a bump
-sensor for my SCUTTLE robot. The next part necessary for a working bump sensor is the software. There
-are two parts to the software, translating the state of the micro switches and
-processing the state changes into movement commands for the robot, i.e. if the robot runs into
-an obstacle it should stop and reverse its last movement. In order to achieve these things I decided
-to split these two actions into two different [ROS](https://www.ros.org/) nodes, one node
+sensor for my SCUTTLE robot. After creating the mechanical design I started working on the software.
+There are two parts to the software, translating the state of the micro switches and turning the state
+changes into movement commands for the robot, i.e. if the robot runs into
+an obstacle it should stop and reverse its last movement. I decided to create a
+[ROS](https://www.ros.org/) node for each of these actions, i.e. one node
 for the movement generation and one to translate the switch states. The reason for
-creating two nodes instead of one is that this allows me to run the movement generation code both
-in a simulation and on the physical robot. So I gain the ability to test more of my code, but I
-lose a bit of performance because the two nodes communicate using messages.
+creating two nodes instead of putting all the code into one node is that this allows me to run the
+movement generation code both in a simulation and on the physical robot. So I gain the ability to
+test more of my code, but I lose a bit of performance because the two nodes communicate using
+messages which is slower than just using method calls.
 
 To test the bump sensor code I use [Gazebo](https://gazebosim.org/home) to simulate how the bump
 sensor would work. Gazebo has the ability to calculate collisions
@@ -54,7 +55,7 @@ In the URDF file this looks as follows:
 ```
 
 I found that defining a contact sensor for Gazebo requires getting the link ID correct. In order to
-do so you need to follow these rules:
+do so you need to follow these steps:
 
 - The bumper contact information needs to be defined inside a [`gazebo`](https://classic.gazebosim.org/tutorials?tut=ros_urdf&cat=connect_ros)
   element. This `gazebo` element should have a `reference` attribute that points to the link that is
@@ -84,18 +85,19 @@ left side I consider that a trigger for the left part of the bumper and similar 
 <figcaption>SCUTTLE with bumper in RViz</figcaption>
 </figure>
 
-With the URDF work done I started writing the code for the different ROS nodes. The first
-node was the [gazebo translator node](https://github.com/pvandervelde/scuttle_bumper/blob/master/src/gazebo_contact_sensor_translator.py).
-This is a simple node that subscribes to the [ContactsState](http://docs.ros.org/en/api/gazebo_msgs/html/msg/ContactsState.html)
-messages that Gazebo sends when the bumper geometry collides with something. These messages then
-get translated to a [BumperEvent](https://github.com/pvandervelde/scuttle_ros_msgs/blob/noetic/msg/BumperEvent.msg)
+With the URDF work done I started writing the code for the different ROS nodes. First
+the [gazebo translator node](https://github.com/pvandervelde/scuttle_bumper/blob/master/src/gazebo_contact_sensor_translator.py).
+This node subscribes to the [ContactsState](http://docs.ros.org/en/api/gazebo_msgs/html/msg/ContactsState.html)
+messages that Gazebo sends when the bumper geometry collides with something. These messages are then
+translated to a [BumperEvent](https://github.com/pvandervelde/scuttle_ros_msgs/blob/noetic/msg/BumperEvent.msg)
 message for further processing.
 
 One interesting observation about the Gazebo contact messages are that they exhibit something
-similar to [switch bounce](https://www.pcmag.com/index.php/encyclopedia/term/switch-bounce). I'm
-guessing that this is caused by the fact that calculating collisions between moving surfaces is
-difficult. In the end it doesn't matter what causes this behaviour though because you need to
-[deal with it](https://github.com/pvandervelde/scuttle_bumper/blob/master/src/debounce.py) in
+similar to [switch bounce](https://www.pcmag.com/index.php/encyclopedia/term/switch-bounce), in other
+words it seems that the contact is intermittent even if the bumper plate is in solid contact with
+the object. I'm guessing that this is caused by the fact that calculating collisions between moving
+surfaces is difficult. In the end it doesn't matter what causes this behaviour though because we
+need to [deal with it](https://github.com/pvandervelde/scuttle_bumper/blob/master/src/debounce.py) in
 some sensible way.
 
 Once the bumper event messages have been generated they are processed by the
@@ -125,6 +127,17 @@ priorities are, from low to high
 - Keyboard
 - Bumper
 - Joypad / Joystick
+
+<iframe
+    style="float:right"
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/SddexyGTJ0M"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+</iframe>
 
 By using the twist multiplexer mode it is easy for users to change the priority by changing a configuration
 file instead of having to change the bumper code.
