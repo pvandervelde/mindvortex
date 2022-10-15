@@ -24,7 +24,7 @@ the movement of the bumper into signals that inform the bumper software that an 
     + Picked pins N ... M on the raspberry pi. Need a 3.3V pin, a ground pin and some GPIO pins, ideally all in the
       area. So picked the specific pins.
     + Creating a distribution board with JST female headers. Set it up so that we could have a bumper at the front
-      and the back.
+      and the back. Picked JST XH headers because the connectors are
 - Pictures of the breadboard
 - Picture of the circuit
 - Testing set up on the breadboard
@@ -38,6 +38,8 @@ the movement of the bumper into signals that inform the bumper software that an 
 
 - Learning to solder. Not very good at it at the moment.
 - Learning to crimp connectors.
+- Making electronics look good is hard
+
 
 - Seeing some weird behaviour when an obstacle is encountered.
     + One motor turns and the other doesn't --> Deadband issues
