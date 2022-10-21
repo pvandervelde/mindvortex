@@ -6,7 +6,7 @@ Tags:
 - ROS Noetic
 - Scuttle
 
- ---
+---
 
 The final part of building a bumper for SCUTTLE is to assemble the electronics component which translate
 the movement of the bumper into signals that inform the bumper software that an obstacle has been hit.
@@ -33,13 +33,12 @@ For this purpose I added a yellow LED to the circuit, which lights up when the c
 Finally in order to protect the LED from over current in case that the input pin was programmed to
 be an output pin I added a resistor next to the input pin.
 
-The first test of the circuit was done on a breadboard with some [jumper wires](https://en.wikipedia.org/wiki/Jump_wire)
-
-<figure style="float:right">
-<img alt="SCUTTLE bumper electronics on a breadboard" src="/assets/images/robotics/scuttle/scuttle-bumper-circuit-breadboard.png" />
-<figcaption>SCUTTLE bumper electronics on a breadboard</figcaption>
+<figure style="float:left">
+<img alt="SCUTTLE bumper electronics boards" src="/assets/images/robotics/scuttle/scuttle-bumper-electronics-boards.jpg" />
+<figcaption>SCUTTLE bumper electronics boards</figcaption>
 </figure>
 
+The first test of the circuit was done on a breadboard with some [jumper wires](https://en.wikipedia.org/wiki/Jump_wire).
 After testing the circuit on the breadboard the next step was to create two switch boards and
 a distribution board. Each switch board would have a micro-switch, the LED, the resistors and a
 JST-XH three pin connector for power, ground and signal wires.
@@ -49,9 +48,9 @@ having two switch boards. I used JST-XH connectors instead of the Dupont connect
 JST connectors are directional, thereby removing any potential issues with plugging the connector
 in the wrong way.
 
-<figure style="float:left">
-<img alt="SCUTTLE bumper electronics boards" src="/assets/images/robotics/scuttle/scuttle-bumper-electronics-boards.jpg" />
-<figcaption>SCUTTLE bumper electronics boards</figcaption>
+<figure style="float:right">
+<img alt="SCUTTLE bumper electronics assembled" src="/assets/images/robotics/scuttle/scuttle-bumper-assembled.jpg" />
+<figcaption>SCUTTLE bumper electronics assembled</figcaption>
 </figure>
 
 Part of this journey involved learning how to solder electronics components. I bought a Weller WE 1010
@@ -64,11 +63,6 @@ I got an Iwiss SN-025 crimper. It works pretty well for those connectors. Howeve
 too wide for the JST-XH connectors. So to crimp the JST-XH connectors I had to get a different
 crimper with narrower dies. So for this I got an Engineer PAD-11 crimper. While this is not a
 ratcheting crimper it works really well, at least for the JST-XH connectors.
-
-<figure style="float:right">
-<img alt="SCUTTLE bumper electronics assembled" src="/assets/images/robotics/scuttle/scuttle-bumper-assembled.jpg" />
-<figcaption>SCUTTLE bumper electronics assembled</figcaption>
-</figure>
 
 So now that the mechanical setup is done, the software is, mostly, done and the electronics have
 been soldered and connected my bumper works. Sort of. It turns out that there is a

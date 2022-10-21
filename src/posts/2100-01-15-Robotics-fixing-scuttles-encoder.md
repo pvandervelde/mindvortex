@@ -35,3 +35,11 @@ PICTURE OF THE NOT SCATTER
 
 - Should improve odometry etc. but haven't tested that. Need to do a proper odometry test one day
 
+
+The second issue is that the current SCUTTLE driver code is written as an open loop. This means
+that there is no feedback to the motor control software that indicates how fast the wheels are
+actually turning in response to a given motor input. And because even motors of the same type
+are all slightly different, they all react differently to the same motor input. In my case at
+low speeds one of my motors responds earlier than the other motor. In the end this means that
+at low speeds the bumper code thinks scuttle is driving backwards in a straight line while it
+is actually driving around in circles.
