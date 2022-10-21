@@ -8,6 +8,12 @@ Tags:
 
 ---
 
+- Scuttle in simulation has issues where it slowly drifts across the map
+    + One reason given on the interwebz is that the contact calculation is wrong
+    + Inertias of the different parts are important
+    + friction is important
+
+
 Different ways we can make a model of our robot for use with ROS and Gazebo
 
 * Start simple with primitives
