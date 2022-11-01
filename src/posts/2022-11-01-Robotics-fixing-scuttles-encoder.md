@@ -33,8 +33,8 @@ were:
 
 - The encoder is broken in some way. SCUTTLE uses the
   [AS5048A position sensor](https://nz.mouser.com/ProductDetail/ams-OSRAM/AS5048B-TS_EK_AB?qs=Rt6VE0PE%2FOduJIB%252BRfeBZQ%3D%3D)
-  which is relatively robust, but can be broken if you send the I2c commands on the wrong pins, e.g.
-  by putting the connectors on the wrong way when assembling your SCUTTLE.
+  which is relatively robust, but can be broken if you send the I2c commands on the wrong pins. Which
+  could happen if you say ... put the connector on the wrong way when assembling your SCUTTLE ...
 - The distance between the encoder and the magnet on the motor shaft isn't correct. The specifications
   for the encoder state that the distance between the chip and the magnet on the motor shaft should
   be between 0.5mm and 2.5mm, assuming a magnet of the recommended size and strength is used.
