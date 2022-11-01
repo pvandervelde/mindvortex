@@ -1,6 +1,7 @@
 Title: Starting robotics - Learning Robot Operating System (ROS)
 Tags:
 
+- Gazebo
 - Robotics
 - ROS
 - ROS Noetic
@@ -111,3 +112,7 @@ Another part of my plans is to upgrade to using [ROS2](https://docs.ros.org/en/g
 ROS1 end-of-life is 2025, which is only 3 years away, and additionally ROS2 has a more modern stack
 with python 3, better communication security, an improved navigation stack and more active development.
 More on this will follow in a future post once I have upgraded my robot to ROS2
+
+#### Edits
+
+- October 26th 2022: Added the `Gazebo` tag.

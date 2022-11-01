@@ -1,6 +1,7 @@
 Title: Starting robotics - Driving scuttle with ROS - Gazebo simulation
 Tags:
 
+- Gazebo
 - Robotics
 - ROS
 - ROS Noetic
@@ -88,3 +89,7 @@ a robot should take at a given location. They don't describe velocity or acceler
 describing the direction can generate paths with abrupt turns that force the robot to slow
 down significantly. Using a trajectory planner, which at least prescribes velocities, makes for a
 smoother experience for robot and cargo.
+
+#### Edits
+
+- October 26th 2022: Added the `Gazebo` tag.

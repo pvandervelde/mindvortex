@@ -12,3 +12,5 @@ Tags:
     + The odometry twist values are sent as v_y instead of v_x
 
 - Doesn't use closed loop control
+
+- Also need to measure the behaviour of the motors, i.e. motor speed vs voltage / current
