@@ -7,6 +7,20 @@ Tags:
 
 ---
 
+- Want to build a robot with a swerve drive. Probably going to be a bit of a journey
+    + Want a drive which infinite steering rotation, so drive shaft will be
+      co-axial with the steering axis
+- What do we need
+    + Hardware design
+        * Tricky bit is power transfer
+        * Backlash for the drive system
+        * Suspension
+    + Software design
+    + Electronics
+        * encoder placement, because the steering axis and the drive shaft are co-axial, there isn't
+          space for encoders for both, but we need encoders on both systems. Can put one of the
+          encoders on the motor shaft
+
 - What is a swerve drive - all wheel drive + all wheel steering. Done with 3 or more wheels
     + Often done with 4 wheels, but 3 wheel variants exist, and so do 6 or 8 wheel variants.
     + Full swerve has infinite rotation for the steering part of the drive, i.e. the wheel can
@@ -33,19 +47,6 @@ Tags:
       excess friction / wear
     + More failure modes
 
-- Want to build a robot with a swerve drive. Probably going to be a bit of a journey
-    + Want a drive which infinite steering rotation, so drive shaft will be
-      co-axial with the steering axis
-- What do we need
-    + Hardware design
-        * Tricky bit is power transfer
-        * Backlash for the drive system
-        * Suspension
-    + Software design
-    + Electronics
-        * encoder placement, because the steering axis and the drive shaft are co-axial, there isn't
-          space for encoders for both, but we need encoders on both systems. Can put one of the
-          encoders on the motor shaft
 
 - First part is going to be the software design. Need to find out if we can write
   some kind of control algorithm
