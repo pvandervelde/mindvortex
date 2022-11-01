@@ -8,10 +8,10 @@ Tags:
 
 ---
 
-The final part of building a bumper for SCUTTLE is to assemble the electronics component which translate
-the movement of the bumper into signals that inform the bumper software that an obstacle has been hit.
-In order to do this I designed a simple circuit using [KiCad](https://www.kicad.org/) and advice from
-one of the many robotics forums.
+The final part of building a bumper for SCUTTLE is to assemble the electronics component which translates
+the movement of the bumper into signals which can be processed by the bumper software. In order to do
+this I designed a simple circuit using [KiCad](https://www.kicad.org/) and advice from one of the
+many robotics forums.
 
 <figure style="float:left">
 <img alt="SCUTTLE bumper electronics schematic" src="/assets/images/robotics/scuttle/scuttle-bumper-kicad.png" />
@@ -44,9 +44,9 @@ a distribution board. Each switch board would have a micro-switch, the LED, the 
 JST-XH three pin connector for power, ground and signal wires.
 The distribution board would have four JST-XH three pin connectors and one JST-XH six pin connector.
 The four three pin connectors would allow me to have a front bumper and a rear bumper, each
-having two switch boards. I used JST-XH connectors instead of the Dupont connectors because the
-JST connectors are directional, thereby removing any potential issues with plugging the connector
-in the wrong way.
+having a switch board on the left and the right. I used JST-XH connectors instead of the Dupont
+connectors because the JST connectors are directional, thereby removing any potential issues with
+plugging the connector in the wrong way.
 
 Part of this journey involved learning how to solder electronics components. I bought a Weller WE 1010
 soldering station for this and future jobs. I managed to do a reasonable job soldering the parts but
