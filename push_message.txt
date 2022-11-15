@@ -1,2 +1,2 @@
 New Posts:
-    Starting robotics - Building a bumper for scuttle. The electronics
+    Starting robotics - Fixing the wheel encoders
