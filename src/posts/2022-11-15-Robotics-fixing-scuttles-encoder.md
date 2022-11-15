@@ -8,11 +8,11 @@ Tags:
 
 ---
 
-While testing the [bumper](posts/Robotics-a-bumper-for-scuttle-electronics) I noticed that when
-reversing SCUTTLE would start a turn instead of driving straight backwards due to one motor turning
-faster than the other motor. There are a number of reasons this could be happening, for instance
-the driver code isn't properly commanding the motors, or the encoders are returning incorrect data,
-etc..
+While testing the [bumper](posts/Robotics-a-bumper-for-scuttle-electronics) for SCUTTLE I noticed
+that when reversing SCUTTLE would start a turn instead of driving straight backwards due to one
+motor turning faster than the other motor. There are a number of reasons this could be happening,
+for instance the driver code isn't properly commanding the motors, or the encoders are returning
+incorrect data, etc..
 
 <figure style="float:left">
 <img alt="Encoder output for failing encode" src="/assets/images/robotics/scuttle/scuttle-encoder-fail.png" />
@@ -58,7 +58,7 @@ As the latter is relatively easy to do that is the first solution I tried. I too
 of their brackets and attached them to the other bracket. These brackets were put back on SCUTTLE and
 the test script was executed once again. And this time both encoders gave me consistent results. I was
 expecting the other encoder to go bad due to distance, but apparently both encoders are with in the
-distance specification.
+distance specification with this new configuration.
 
 With the encoder issue fixed I can get back to diagnosing the issue with the bumper reverse action.
 My current suspicion is that the issue is caused by the fact that the the current SCUTTLE driver
