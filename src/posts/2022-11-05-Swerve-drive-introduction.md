@@ -20,8 +20,9 @@ The chassis of the robot will have four drive modules. Each module has one wheel
 both be independently driven, and independently steerable. This configuration is called
 `four wheel independent steering` or `swerve drive`. These kind of steering systems are used in
 [heavy transport](https://en.wikipedia.org/wiki/Self-propelled_modular_transporter),
-[agriculture machines](), [mars rovers](https://en.wikipedia.org/wiki/Curiosity_(rover)) and
-[robot competitions](). The advantages of a swerve drive system are that:
+agriculture machines, [mars rovers](https://en.wikipedia.org/wiki/Curiosity_(rover)) and
+[robot competitions](https://www.chiefdelphi.com/t/best-frc-swerve-drive/399865). The advantages of
+a swerve drive system are that:
 
 - It provides a high degree of mobility. In a swerve drive direction of movement and orientation
   are independent so the robot can face forwards while driving sideways. Additionally in a swerve drive
@@ -82,6 +83,18 @@ decisions that have been made so far.
 - The initial design will be an indoor model and about the same size as my SCUTTLE robot is. This will
   simplify the initial design and allow me to compare with SCUTTLE.
 
+The parts of the robot that I expect to be complicated and quite possibly show stoppers are the
+software and the mechanical design. For the software the drive controller software, which translates
+the requested velocity commands to motor commands for both the drive and steering motors, will be
+complicated as it needs to make sure that all drive modules are the correct state. This piece of
+software also needs to handle all the error conditions that occur.
+
+On the mechanical side I need to design the drive module such that it can drive the wheel forwards
+and backwards while allowing 'infinite' steering rotation. This will require a co-axial setup and a
+bit of gearing. The second complicated part of the mechanical design is the inclusion of a suspension
+system. Ideally the motors should be attached to the sprung side of the suspension system so that
+they don't get exposed to excessive vibration. This however will complicate the mechanical design.
+
 <iframe
     style="float:left"
     width="560"
@@ -94,37 +107,19 @@ decisions that have been made so far.
 </iframe>
 
 My plan is to work on the control software first. I can test that software using simulation and so
-figure out if I can even make it work. So far I have created a simple URDF model and using
-ROS2 controllers simulated a four wheel steering platform. This allowed me to learn more about
+figure out if I can even make it work. I have created a simple URDF model that uses
+ROS2 controllers to simulate a four wheel steering platform. This allowed me to learn more about
 ROS2, ROS2 controls and how the interaction of those two with Gazebo works.
 
-The next step will be to implement a control algorithm and subject it to a battery of tests. At the
-moment I'm reading a number of scientific papers which explain
+At the moment I'm implementing a prototype for the controller in python so that I can use the model to
+test if my algorithm works before I turn it into a proper ROS2 controller, which will need to be
+written in C++.
 
-Neal Seegmiller   -  <https://scholar.google.com/citations?hl=en&user=H10kxZgAAAAJ>
+Once I have some kind of controlling software I am aiming to build a single drive module with a drive
+motor, a steering motor and the mechanical assembly that allows a single wheel to be steered and driven.
+I will use this module to work out both the details on the mechanical and software sides of the project.
 
-
-- First part is going to be the software design. Need to find out if we can write
-  some kind of control algorithm
-    + There are some online but none for ROS2
-    + Looking at a number of scientific papers to learn more about the kinematics / dynamics
-      of swerve drive
-    + Also looking at the time aspect, i.e. what happens when the swerve modules are changing
-      from one velocity / position to another one, how do we keep them synchronised
-- Once I have some kind of software working the next step is to build a simple model, similar in
-  size to scuttle and see if I can make that work
-- The mechanical part is also going to be tricky, especially the co-axial part
-    + Suspension is tricky, especially if we want the motors to be in / near the
-      body and only have the wheels as the un-suspended mass (which is better for
-      behaviour and vibration management etc.)
-
-
-    + Hardware design
-        * Tricky bit is power transfer
-        * Backlash for the drive system
-        * Suspension
-    + Software design
-    + Electronics
-        * encoder placement, because the steering axis and the drive shaft are co-axial, there isn't
-          space for encoders for both, but we need encoders on both systems. Can put one of the
-          encoders on the motor shaft
+Once I have the controller and the drive module working properly I will build a simple robot, similar
+in size to my SCUTTLE robot to further work on swerve drives. It will take me a little while
+to get to that state though. In the mean time I will keep working on my design and documenting my
+journey.
