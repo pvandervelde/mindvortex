@@ -12,8 +12,8 @@ learning about robotics and all the related fields like mechanics and electronic
 this journey is the desire to design and build an autonomous mobile robot from the ground up.
 
 My goal is to build an off-road capable robot that can navigate autonomously between different
-locations to execute tasks either by itself or in cooperation with other robots. This would
-obviously be quite an inspirational goal that involves quite a few robot different parts, a lot
+locations to execute tasks either by itself or in cooperation with other robots. This is
+quite an inspirational goal that involves quite a few robot different parts, a lot
 of code and many hours of building and testing to achieve.
 
 The chassis of the robot will have four drive modules. Each module has one wheel attached that will
@@ -35,6 +35,8 @@ a swerve drive system are that:
   [omni-wheels](https://en.wikipedia.org/wiki/Omni_wheel) have the similar degree of freedom as a
   swerve drive does, omni-wheels but can often not carry the same load due to the lower carrying
   capacity of the rollers.
+- It doesn't rely on wheel slip, as multi-wheel differential drive does. This means that it has
+  lower power demands, so more of the motor torque can be used to move the robot forward.
 - It has the ability to traverse rough and dirty terrain due to the fact that all wheels are
   driven as well as using normal wheels on each drive module. Omni-wheels and [mecanum wheels](https://en.wikipedia.org/wiki/Mecanum_wheel)
   face more issues in these environments due to dust and dirt clogging up the wheels as well as
@@ -54,11 +56,11 @@ of disadvantages. For instance swerve drive systems:
   than there are degrees of freedom in the robot, 2 translation directions and a rotation. This
   means that all modules have to be synchronised at all times in order to prevent wheels from being
   dragged along. The available degrees of freedom combined with the synchronisation demand means some
-  moderately complicated math is required to make a swerve drive control work.
+  complicated math is required to make a swerve drive control work.
 - Similar to the control side of the drive determining the position and velocity of the robot using
   wheel [odometry](https://en.wikipedia.org/wiki/Odometry) requires more complicated math. This is
   due to the fact that the different drive modules don't necessarily agree with each other.
-- Have more failure modes than other drive systems.
+- Have more failure modes than other drive systems due to the fact that there are more moving parts.
 
 So with all these complications why would I try to build a swerve drive as my second robot and not
 a differential drive robot or something similar. As pointed out previously there are good
