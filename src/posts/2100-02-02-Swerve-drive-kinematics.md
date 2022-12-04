@@ -1,4 +1,4 @@
-Title: Swerve drive - Kinematics
+Title: Swerve drive - Kinematics and dynamics
 Tags:
 
 - Robotics
@@ -22,3 +22,27 @@ Tags:
     + Also depends on the surroundings, in some cases you can take a wider turn, thus
       you don't need to stop the entire vehicle and accelerate it again. In other
       cases there is not enough space for a wider turn.
+    + Finally the wheel movement isn't independent from the movement of the other
+      wheels / the robot.
+
+
+- Have to deal with 3D systems
+- Wheel slip
+- Lift off
+
+Neal Seegmiller   -  <https://scholar.google.com/citations?hl=en&user=H10kxZgAAAAJ>
+
+
+High-fidelity yet fast dynamic models of wheeled mobile robots
+N Seegmiller, A Kelly - IEEE Transactions on robotics, 2016
+
+
+Recursive kinematic propagation for wheeled mobile robots
+A Kelly, N Seegmiller - The International Journal of Robotics Research, 2015
+
+
+Dynamic model formulation and calibration for wheeled mobile robots
+NA Seegmiller - 2014
+
+Energy-aware Planning and Control of Off-road Wheeled Mobile Robots
+ND Wallace - 2020
