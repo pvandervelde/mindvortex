@@ -86,35 +86,37 @@ The second observation is that the linear control algorithm causes sharp changes
 to extremely high acceleration demands. It seems unlikely that the motors and the structure would
 be able to cope with these demands.
 
-- Indicates that the control algorithm needs to synchronise actively
-- Indicates that linear behaviour for drive modules isn't a sensible approach. Better would be
-  a higher order model, or similar
+From this relatively simple simulation we can see that there are a number of behaviours that the
+control system needs to cope with:
 
-- What are the future plans?
+- The state of the drive modules actively needs to be kept in sync at all times, including during
+  transitions from one movement state to another. This indicates that dynamic control is required
+  and thus poses questions about the update frequency for drive module sensors and control commands.
+- The capabilities and behaviour of the motors needs to be taken into account in order to prevent
+  impossible movement commands and also to ensure that the drive modules remain synchronised during
+  movement commands that require fast state changes from the motors, e.g. to deal with motor
+  [deadband](https://en.wikipedia.org/wiki/Deadband) or fast accelerations.
+- The structural and kinematic limitations need to be considered when giving and processing movement
+  commands.
+- Linear control behaviour is not ideal as it causes large acceleration demands.
+
+So now that I have some working simulation code what are the next steps? The first stage is to simulation
+some more simple movement trajectories to validate the simulation code. Once I have confidence that
+the code actually simulates real world behaviour I can implement different control algorithms. These
+algorithms can then be compared to see which algorithm behaves the best. Currently I'm thinking to
+implement
+
+- A control algorithm that uses a known movement profile for the robot base. It can then calculate
+  the desired drive module state across time to match the robot base movement.
+- A controller that optimizes module turn time by having it turn the shortest amount and reversing
+  the wheel velocity if required.
+- A low [jerk](https://en.wikipedia.org/wiki/Jerk_(physics)) controller that ensures smooth movement
+  of the robot body and drive modules.
+
+In future posts I will provide more details about the different controller and model algorithms
 
 
 
-- Plan to implement several algorithms
-    + Base module desired state on desired body end state. Assume linear profiles. These are generally
-      a reflection of the behaviour I have seen in other algorithms, making the wheel velocity and
-      steering angle change from one value to another (with no control over the intermediate states)
-    + Modules turn shortest direction
-    + Create body trajectory, derive module trajectories. Assume body trajectory is linear
-    + Create body trajectory, derive module trajectories. Use low jerk algorithms
 
+???????
 
-- All these algorithms make the following assumptions
-    + The robot is moving on a flat, horizontal surface
-    + The robot has no suspension
-    + There is no wheel slip
-    + There is no wheel lift-off
-    + The motors are infinitely powerful and fast, i.e. there are no limits on the motor performance,
-      so we can ignore them
-    + All movements take the same amount of time (1 unit of time)
-
-- Verification of the model
-
-- Future posts will provide more details about the controller and the models being used.
-
-- All control algorithms based on simple kinematics
-    + insert pics and math here
