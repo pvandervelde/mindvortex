@@ -21,5 +21,6 @@ SHOW DIAGRAM OF THE MODEL
     + The robot has no suspension
     + There is no wheel slip
     + There is no wheel lift-off
-
-
+    + The motors are infinitely powerful and fast, i.e. there are no limits on the motor performance,
+      so we can ignore them
+    + All movements take the same amount of time (1 unit of time)
