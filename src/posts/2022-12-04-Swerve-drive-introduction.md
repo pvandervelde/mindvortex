@@ -33,8 +33,8 @@ a swerve drive system are that:
   other drive systems cannot.
 - It has normal size wheels which provide a high carry capacity. While
   [omni-wheels](https://en.wikipedia.org/wiki/Omni_wheel) have the similar degree of freedom as a
-  swerve drive does, omni-wheels but can often not carry the same load due to the lower carrying
-  capacity of the rollers.
+  swerve drive does, omni-wheels can often not carry the same load due to the lower carrying
+  capacity of the rollers that allow the omni-wheels to move sideways.
 - It doesn't rely on wheel slip, as multi-wheel differential drive does. This means that it has
   lower power demands, so more of the motor torque can be used to move the robot forward.
 - It has the ability to traverse rough and dirty terrain due to the fact that all wheels are
