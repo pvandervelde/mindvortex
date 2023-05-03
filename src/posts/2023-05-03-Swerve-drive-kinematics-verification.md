@@ -1,4 +1,4 @@
-Title: Swerve drive - Validation of the kinematics solution
+Title: Swerve drive - Verification of the kinematics solution
 Tags:
 
 - Robotics
@@ -9,10 +9,7 @@ Tags:
 ---
 
 As I explained in an [earlier post](posts/Swerve-drive-kinematics-simulation) I have written some
-code to simulate the movement of a four wheel swerve drive. Currently I have only implemented a
-[simple kinematics based approach](https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383).
-This approach is based on the following degrees of freedom for the swerve drive as well as
-the coordinate systems for the different parts.
+code to simulate the movement of a four wheel swerve drive.
 
 <figure style="float:left">
   <a href="/assets/images/robotics/swerve/swerve-dof.png" target="_blank">
@@ -21,8 +18,12 @@ the coordinate systems for the different parts.
   <figcaption>Degrees of freedom for a swerve drive system.</figcaption>
 </figure>
 
-The simple kinematics approach makes a number of assumptions which greatly simplify the problem
-space.
+
+Currently I have only implemented a
+[simple kinematics based approach](https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383).
+This approach is based on the following degrees of freedom for the swerve drive as well as
+the coordinate systems for the different parts. The simple kinematics approach makes a number of
+assumptions which greatly simplify the problem space.
 
 - The steering axis of a drive module is vertical and passes through the centre of the wheel, i.e.
   no positional changes occur when the wheel steering angle changes.
@@ -36,7 +37,6 @@ space.
 
 With diagram and the given assumptions we can derive the equations for the wheel velocity
 and the steering angle of each drive module.
-
 
     v_i = v + W x r_i
 
@@ -53,8 +53,8 @@ Where
 - `r_i` - the position vector of the i-th drive module.
 - `alpha_i` - the steering angle of the i-th drive module relative to the robot coordinate system.
 
-Based on these equations we can determine the forward kinematics, i.e. which translates the movement
-of the drive modules to the movement of the robot body, and the inverse kinematics, i.e. which translates
+Based on these equations we can determine the forward kinematics, which translates the movement
+of the drive modules to the movement of the robot body, and the inverse kinematics, which translates
 the movement of the robot body to the movement of the drive modules. When doing the calculations for
 a four wheel swerve drive it is important to note that the forward kinematics calculations are
 [overdetermined](https://en.wikipedia.org/wiki/Overdetermined_system), i.e. there are more control
@@ -72,13 +72,13 @@ later on only changing the trajectory code to use a more suitable one, for insta
 [jerk limited](https://en.wikipedia.org/wiki/Jerk_(physics)#In_motion_control) profile.
 
 The code gives me a graphs like the ones presented in my [previous post](posts/Swerve-drive-kinematics-simulation).
-However before I can use this code to test new control algorithms I will need to make sure my code is
+However before I use this code to test new control algorithms I want to make sure my code is
 actually producing the correct results. The [verification](https://en.wikipedia.org/wiki/Software_verification_and_validation)
 is done by running a bunch of simple simulations for which I am able to predict the behaviour using
 some simple maths.
 
-To verify that my code is correct I a ran a number of sets of verifications. The
-[first set](https://github.com/pvandervelde/basic-swerve-sim/blob/master/validation/linear_module_first/simple_4w_steering/linear_with_single_axis/README.md)
+To verify that my code is correct I a ran a number of sets of simulations. The
+[first set](https://github.com/pvandervelde/basic-swerve-sim/blob/master/verification/linear_module_first/simple_4w_steering/linear_with_single_axis/README.md)
 is used to ensure that both the positive and the negative direction behaviour for the main axis directions.
 Any differences in behaviour between the positive and the negative direction point to issues in the
 simulation code. So the simulations that were done for this verification set are:
@@ -90,7 +90,7 @@ simulation code. So the simulations that were done for this verification set are
 - Drive the robot in a rotation only movement, one simulation going clockwise and one simulation going
   counter-clockwise.
 
-The [second simulation set](https://github.com/pvandervelde/basic-swerve-sim/blob/master/validation/linear_module_first/simple_4w_steering/rotation_with_single_axis/README.md)
+The [second simulation set](https://github.com/pvandervelde/basic-swerve-sim/blob/master/verification/linear_module_first/simple_4w_steering/rotation_with_single_axis/README.md)
 is designed to verify the coordinate calculations related to rotations. The
 simulations that were done for this verification set are:
 
@@ -103,13 +103,13 @@ simulations that were done for this verification set are:
     <img
         alt="Drive the robot in a circle."
         src="/assets/images/robotics/swerve/swerve_sim_circle.png"
-        width="512"
-        height="121"/>
+        width="833"
+        height="800"/>
   </a>
   <figcaption>Transition from 45 degree linear motion to in-place rotation.</figcaption>
 </figure>
 
-The [third set of simulations](https://github.com/pvandervelde/basic-swerve-sim/blob/master/validation/linear_module_first/simple_4w_steering/combined/README.md)
+The [third set of simulations](https://github.com/pvandervelde/basic-swerve-sim/blob/master/verification/linear_module_first/simple_4w_steering/combined/README.md)
 is designed to verify the behaviour during combined movements. The
 simulations that were done for this verification set are:
 
@@ -118,7 +118,7 @@ simulations that were done for this verification set are:
   backwards from the origin.
 - Drive the robot in a circle around a centre point outside the robot body.
 
-While running the validation sets a number of bugs were found and fixed. At the end of the process
+While running the verification sets a number of bugs were found and fixed. At the end of the process
 all the validations passed indicating that the simulation code is usable.
 
 With all of this done it is now time to do some more complicated simulations both for robot behaviour
