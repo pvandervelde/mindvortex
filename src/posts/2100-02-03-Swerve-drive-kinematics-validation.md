@@ -1,4 +1,4 @@
-Title: Swerve drive - Kinematics models
+Title: Swerve drive - Validation of the kinematics solution
 Tags:
 
 - Robotics
@@ -65,49 +65,21 @@ calculations are based on the [pseudoinverse](https://en.wikipedia.org/wiki/Moor
 approach which computes a best fit, a.k.a. least squares, using the drive module wheel velocities and
 steering angles.
 
+The transition between states, i.e. from one combination of x-velocity, y-velocity and rotation velocity
+to another combination, is done using a linear trajectory for the drive module controls, i.e. wheel
+velocity and steering angle. While linear control trajectories are not the best method it does allow
+later on only changing the trajectory code to use a more suitable one, for instance a
+[jerk limited](https://en.wikipedia.org/wiki/Jerk_(physics)#In_motion_control) profile.
 
+The code gives me a graphs like the ones presented in my [previous post](posts/Swerve-drive-kinematics-simulation).
+However before I can use this code to test new control algorithms I will need to make sure my code is
+actually producing the correct results. The [verification](https://en.wikipedia.org/wiki/Software_verification_and_validation)
+is done by running a bunch of simple simulations for which I am able to predict the behaviour using
+some simple maths.
 
-
-
-
-
-This code gives me a graphs like in the previous post
-
-
-However ....
-
-
-
-
-
-
-
-
-Before I can start using this code I will
-need to make sure my code is actually producing the correct results. The
-[verification](https://en.wikipedia.org/wiki/Software_verification_and_validation) is  done by
-running a bunch of simple simulations for which I am able to predict the behaviour using some
-simple maths.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-To verify that my code is correct I a ran a number of sets of verifications. The first set is used
-to ensure that both the positive and the negative direction behaviour for the main axis directions.
+To verify that my code is correct I a ran a number of sets of verifications. The
+[first set](https://github.com/pvandervelde/basic-swerve-sim/blob/master/validation/linear_module_first/simple_4w_steering/linear_with_single_axis/README.md)
+is used to ensure that both the positive and the negative direction behaviour for the main axis directions.
 Any differences in behaviour between the positive and the negative direction point to issues in the
 simulation code. So the simulations that were done for this verification set are:
 
@@ -118,79 +90,40 @@ simulation code. So the simulations that were done for this verification set are
 - Drive the robot in a rotation only movement, one simulation going clockwise and one simulation going
   counter-clockwise.
 
-The second simulation set is designed to verify the coordinate calculations related to rotations. The
+The [second simulation set](https://github.com/pvandervelde/basic-swerve-sim/blob/master/validation/linear_module_first/simple_4w_steering/rotation_with_single_axis/README.md)
+is designed to verify the coordinate calculations related to rotations. The
 simulations that were done for this verification set are:
 
-- Rotate the robot by 90 degrees and then drive it in the robot x-direction. One set of simulations
-  for a clockwise 90 degree rotation, driving forwards and backwards. A second set of simulations
-  for a counter-clockwise 90 degree rotation, again driving forwards and backwards.
-- Rotate the robot by 90 degrees and then drive it in the robot y-direction. One set of simulations
-  for a clockwise 90 degree rotation, driving left and right. A second set of simulations
-  for a counter-clockwise 90 degree rotation, again driving left and right.
-- Rotate the robot by 180 degrees and then drive it in the robot x-direction. One set of simulations
-  for a clockwise 180 degree rotation, driving forwards and backwards. A second set of simulations
-  for a counter-clockwise 180 degree rotation, again driving forwards and backwards.
-- Rotate the robot by 180 degrees and then drive it in the robot y-direction. One set of simulations
-  for a clockwise 180 degree rotation, driving left and right. A second set of simulations
-  for a counter-clockwise 180 degree rotation, again driving left and right.
+- Rotate the robot by 90 degrees and then drive it in the robot x-direction, driving forwards
+  and backwards.
+- Rotate the robot by 90 degrees and then drive it in the robot y-direction, driving left and right.
 
-The third set of simulations is designed to verify the behaviour during combined movements. The
+<figure style="float:right">
+  <a href="/assets/images/robotics/swerve/swerve_sim_circle.png" target="_blank">
+    <img
+        alt="Drive the robot in a circle."
+        src="/assets/images/robotics/swerve/swerve_sim_circle.png"
+        width="512"
+        height="121"/>
+  </a>
+  <figcaption>Transition from 45 degree linear motion to in-place rotation.</figcaption>
+</figure>
+
+The [third set of simulations](https://github.com/pvandervelde/basic-swerve-sim/blob/master/validation/linear_module_first/simple_4w_steering/combined/README.md)
+is designed to verify the behaviour during combined movements. The
 simulations that were done for this verification set are:
 
-- Drive the robot on the 45 degree diagonals (45 degrees, 135 degrees, 225 degrees and 315 degrees),
-  i.e. equal amounts in x and y-directions, while facing in the x-direction, one simulation going
-  forwards from the origin and one going backwards from the origin.
-- Drive the robot on the 45 degree diagonals, while facing in the y-direction,
-  one simulation going forwards from the origin and one going backwards from the origin.
-- Drive the robot on the 30 degree diagonals (30 degrees, 60 degrees, 120 degrees, 150 degrees,
-  210 degrees, 240 degrees, 300 degrees and 330 degrees), while facing in the x-direction, one
-  simulation going forwards from the origin and one going backwards from the origin.
-- Drive the robot on the 30 degree diagonals, while facing in the y-direction, one
-  simulation going forwards from the origin and one going backwards from the origin.
+- Drive the robot on the 30 degree diagonals (30 degrees, 60 degrees, 120 degrees, 150 degrees),
+  while facing in the x-direction, one simulation going forwards from the origin and one going
+  backwards from the origin.
+- Drive the robot in a circle around a centre point outside the robot body.
 
+While running the validation sets a number of bugs were found and fixed. At the end of the process
+all the validations passed indicating that the simulation code is usable.
 
-
-
-- Forward + rotation, X + rotation
-- Sideways + rotation, Y + rotation
-- Diagonal + rotation
-
-
-The bits of the code that need to be tested are the algorithm used to determine the drive module
-behaviour. The second thing is the controller. And the third part is the trajectory code.
-
-- We use trajectory code to move from one state (x_vel, y_vel, rot_vel) to another. The trajectory
-  might be a linear one, but we specifically want trajectories so that we can alter them to something
-  that is not linear
-
-- Currently
-
-
-
-
-
-
-Once this is all done we want to do some more complicated simulations for robot behaviour that
-is specific to swerve drive systems
-
-- Simulation runs
-    + Drive in circle
-    + Straigh linear movement into rotation
-    + linear move with rotation around center
-
-
-
-
-- Notes
-    + More wheels means we need suspension if the surface we move on isn't flat
-    + controllers generally don't deal with dynamic situations
-
-
-
-- Do forward and inverse kinematics
-    + Should really determine the error in the forward kinematics calcs
-
-
+With all of this done it is now time to do some more complicated simulations both for robot behaviour
+that is specific to swerve drive systems and for different control algorithms. More on that in the next
+post.
 
 [*] Mostly independent. In reality the motors used in the drive modules will have
     limits on how fast they can be driven, how much torque they can produce and

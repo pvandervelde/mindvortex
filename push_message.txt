@@ -1,2 +1,2 @@
 New Posts:
-    Swerve drive - Kinematics simulation
+    Swerve drive - Validation of the kinematics solution
