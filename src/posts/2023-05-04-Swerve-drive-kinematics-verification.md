@@ -107,7 +107,7 @@ simulations that were done for this verification set are:
         width="833"
         height="800"/>
   </a>
-  <figcaption>Transition from 45 degree linear motion to in-place rotation.</figcaption>
+  <figcaption>Swerve drive position and velocities for driving in a circle.</figcaption>
 </figure>
 
 The [third set of simulations](https://github.com/pvandervelde/basic-swerve-sim/blob/master/verification/linear_module_first/simple_4w_steering/combined/README.md)
