@@ -21,7 +21,7 @@ code to simulate the movement of a four wheel swerve drive.
 
 Currently I have only implemented a
 [simple kinematics based approach](https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383).
-This approach is based on the following degrees of freedom for the swerve drive as well as
+This approach is based on the diagram displaying degrees of freedom for the swerve drive as well as
 the coordinate systems for the different parts. The simple kinematics approach makes a number of
 assumptions which greatly simplify the problem space.
 
@@ -63,15 +63,16 @@ play with. One obvious one for a swerve drive is that we can control the orienta
 independent[*] from the direction of movement of the robot. This also means that the forward kinematics
 calculations are based on the [pseudoinverse](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse)
 approach which computes a best fit, a.k.a. least squares, using the drive module wheel velocities and
-steering angles.
+steering angles. In order words the wheel velocities and steering angles are approximations, not exact
+values.
 
 The transition between states, i.e. from one combination of x-velocity, y-velocity and rotation velocity
-to another combination, is done using a linear trajectory for the drive module controls, i.e. wheel
-velocity and steering angle. While linear control trajectories are not the best method it does allow
-later on only changing the trajectory code to use a more suitable one, for instance a
-[jerk limited](https://en.wikipedia.org/wiki/Jerk_(physics)#In_motion_control) profile.
+to another combination, is done by assuming that there is linear control for the drive module variables,
+i.e. wheel velocity and steering angle. While linear control trajectories are not the best control
+method it does allow later on only changing the trajectory code to use a more suitable one, for
+instance a [jerk limited](https://en.wikipedia.org/wiki/Jerk_(physics)#In_motion_control) profile.
 
-The code gives me a graphs like the ones presented in my [previous post](posts/Swerve-drive-kinematics-simulation).
+The code I wrote gives me a graphs like the ones presented in my [previous post](posts/Swerve-drive-kinematics-simulation).
 However before I use this code to test new control algorithms I want to make sure my code is
 actually producing the correct results. The [verification](https://en.wikipedia.org/wiki/Software_verification_and_validation)
 is done by running a bunch of simple simulations for which I am able to predict the behaviour using
@@ -124,6 +125,8 @@ all the validations passed indicating that the simulation code is usable.
 With all of this done it is now time to do some more complicated simulations both for robot behaviour
 that is specific to swerve drive systems and for different control algorithms. More on that in the next
 post.
+
+--
 
 [*] Mostly independent. In reality the motors used in the drive modules will have
     limits on how fast they can be driven, how much torque they can produce and
