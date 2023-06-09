@@ -1,4 +1,4 @@
-Title: Swerve drive - Better control by controlling the body motions
+Title: Swerve drive - Better movement by controlling the body motions
 Tags:
 
 - Robotics
