@@ -54,7 +54,7 @@ causing wheel slip.
 
 One way to improve the synchronization between the drive modules is apply the movement control at
 an indirect level, for instance on the robot body, and then to work out from there what the drive modules
-should be doing at any that given point in time along the transition trajectory.
+should be doing at any that given point in time along the transition profile.
 
 As with the previous approach I will use a
 [linear profile](https://github.com/pvandervelde/basic-swerve-sim/blob/103b321c471ced6c8865680d1e550ab4f5893526/swerve_controller/profile.py#L47)
@@ -88,14 +88,14 @@ steering angle motor would not be capable of delivering the enormous velocities 
 necessary to achieve this change.
 
 To resolve this issue the simulation calculated the difference in rotation and velocity between the
-current point in time and the previous point in time along the transition trajectory, for both the
+current point in time and the previous point in time along the transition profile, for both the
 forward and backward motions. Then [general rule](https://github.com/pvandervelde/basic-swerve-sim/blob/103b321c471ced6c8865680d1e550ab4f5893526/swerve_controller/multi_wheel_steering_controller.py#L140)
 is to pick the smallest change in both rotation and velocity of the drive module. If that isn't
 possible then we pick the one with the smallest rotation difference for no real reason other than we
 have to pick something. In future work a more thorough algorithm will be implemented.
 
 With all that code in place the simulation delivers a much smoother result for the transition from
-a 45 degree linear motion into a in-place rotation. The ICR trajectory for all the wheel pairs is
+a 45 degree linear motion into a in-place rotation. The ICR path for all the wheel pairs is
 following a single path indicating that all the drive modules are all synchronised during the
 movement transition.
 
@@ -122,3 +122,10 @@ desired end state with a control approach that will provide
 [smooth transitions](https://en.wikipedia.org/wiki/Jerk_(physics)#In_motion_control) for velocity and
 accelerations. This will make the motions of the robot less jerky and thus less likely to damage
 parts while also providing a smoother ride for the payload.
+
+#### Edits
+
+- July 3rd 2023: Changed the term `control trajectory` to `control profile` because the term
+  `trajectory` is generally reserved for path planning situations.
+- July 3rd 2023: Changed the term `ICR trajectory` to `ICR path` because the the ICR does not
+  follow a trajectory, it follows a path.

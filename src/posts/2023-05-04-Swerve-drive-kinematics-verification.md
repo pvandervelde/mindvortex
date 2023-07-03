@@ -68,8 +68,8 @@ values.
 
 The transition between states, i.e. from one combination of x-velocity, y-velocity and rotation velocity
 to another combination, is done by assuming that there is linear control for the drive module variables,
-i.e. wheel velocity and steering angle. While linear control trajectories are not the best control
-method it does allow later on only changing the trajectory code to use a more suitable one, for
+i.e. wheel velocity and steering angle. While linear control profiles are not the best control
+method it does allow later on only changing the profile code to use a more suitable one, for
 instance a [jerk limited](https://en.wikipedia.org/wiki/Jerk_(physics)#In_motion_control) profile.
 
 The code I wrote gives me a graphs like the ones presented in my [previous post](posts/Swerve-drive-kinematics-simulation).
@@ -136,3 +136,8 @@ post.
     not possible to drive the robot diagonally any faster than this velocity, even
     though we can drive the robot in x-direction at 1.0 m/s and we can drive the
     robot in y-direction at 1.0 m/s. We just can't do both at the same time.
+
+#### Edits
+
+- July 3rd 2023: Changed the term `control trajectory` to `control profile` because the term
+  `trajectory` is generally reserved for path planning situations.
