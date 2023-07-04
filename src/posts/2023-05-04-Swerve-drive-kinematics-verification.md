@@ -139,5 +139,5 @@ post.
 
 #### Edits
 
-- July 3rd 2023: Changed the term `control trajectory` to `control profile` because the term
+- July 4th 2023: Changed the term `control trajectory` to `control profile` because the term
   `trajectory` is generally reserved for path planning situations.

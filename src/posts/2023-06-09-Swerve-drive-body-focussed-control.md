@@ -125,7 +125,7 @@ parts while also providing a smoother ride for the payload.
 
 #### Edits
 
-- July 3rd 2023: Changed the term `control trajectory` to `control profile` because the term
+- July 4th 2023: Changed the term `control trajectory` to `control profile` because the term
   `trajectory` is generally reserved for path planning situations.
-- July 3rd 2023: Changed the term `ICR trajectory` to `ICR path` because the the ICR does not
+- July 4th 2023: Changed the term `ICR trajectory` to `ICR path` because the the ICR does not
   follow a trajectory, it follows a path.
