@@ -1,2 +1,2 @@
 New Posts:
-    Swerve drive - Better movement by controlling the body motions
+    Swerve drive - Movement animations
