@@ -24,7 +24,7 @@ the body and derives the desired state for the drive modules from that.
 </figure>
 
 To see the difference between these control methods my simulation code created all kinds of interesting
-plots like the one above. However I was still having trouble visualizing what was actually happening,
+plots like the ones above. However I was still having trouble visualizing what was actually happening,
 especially in the case of the movement of the Instantaneous Centre of Rotation (ICR), i.e. the
 rotation point for the robot at a given point in time. The lower left graph shows the paths the
 ICR for different combinations of drive modules. While it looks pretty it does not make a lot of
