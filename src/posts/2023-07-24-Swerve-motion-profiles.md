@@ -1,4 +1,4 @@
-Title: Swerve drive - Jerk free movements
+Title: Swerve drive - Motion profiles
 Tags:
 
 - Robotics
