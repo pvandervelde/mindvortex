@@ -1,2 +1,2 @@
 New Posts:
-    Swerve drive - Movement animations
+    Swerve drive - Motion profiles

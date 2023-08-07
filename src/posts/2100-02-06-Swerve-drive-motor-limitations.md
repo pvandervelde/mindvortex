@@ -14,4 +14,5 @@ Tags:
   - Max acceleration
   - Max jerk
   - Torque vs rotation speed
+  - Response time
 
