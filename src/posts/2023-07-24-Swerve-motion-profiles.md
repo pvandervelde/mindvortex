@@ -11,15 +11,16 @@ Tags:
 In the last few posts I have described the simulations I did of a robot with a swerve drive. In
 other words a robot with four wheels each of which is independently driven and steered. I did
 simulations for the case where we specified movement commands [directly for the drive modules](https://youtu.be/LlyopmLMlZY)
-and one for the case where we specified movement commands for [the robot body](https://youtu.be/U6Z_meFKNrI).
+and one for the case where we specified movement commands for [the robot body](https://youtu.be/U6Z_meFKNrI)
+which were then translated in the appropriate movements for the drive modules.
 One of the things you can see in both simulations is that the motions is quite 'jerky', i.e. with
 sudden changes of velocity or acceleration. In real life this kind of change would be noticed by
 humans as shocks which are [uncomfortable and can potentially cause injury](https://en.wikipedia.org/wiki/Jerk_(physics)#Physiological_effects_and_human_perception).
-In machinery a jerky motion adds load to the equipment which can cause failures. So for both humans
-and equipment it is sensible to keep the 'jerkiness' as low as possible.
+For the equipment, i.e. the robot parts, a jerky motion adds load which can cause failures. So for
+both humans and equipment it is sensible to keep the 'jerkiness' as low as possible.
 
 In order to achieve this we first need to understand what jerk actually is. Once we understand it
-we can figure out ways to control it. In physics Jerk is defined as the change of acceleration
+we can figure out ways to control it. Jerk is defined as the change of acceleration
 with time, i.e the first time derivative of acceleration. So jerk vector as a function of time,
 <la-tex>\vec{{j}}(t)</la-tex> can be defined as:
 
@@ -31,20 +32,20 @@ with time, i.e the first time derivative of acceleration. So jerk vector as a fu
 
 Where
 
-- <la-tex>t</la-tex> is time
+- <la-tex>t</la-tex> is time.
 - <la-tex>\frac{{d}}{{dt}}</la-tex>, <la-tex>\frac{{d}}{{dt^{2}}}</la-tex>, <la-tex>\frac{{d}}{{dt^{3}}}</la-tex>
   are the [first](https://en.wikipedia.org/wiki/Time_derivative), [second](https://en.wikipedia.org/wiki/Second_derivative)
-  and [third](https://en.wikipedia.org/wiki/Third_derivative) time derivative
-- <la-tex>\vec{{a}}</la-tex> is the acceleration vector
-- <la-tex>\vec{{v}}</la-tex> is the velocity vector
-- <la-tex>\vec{{r}}</la-tex> is the position vector
+  and [third](https://en.wikipedia.org/wiki/Third_derivative) time derivatives.
+- <la-tex>\vec{{a}}</la-tex> is the acceleration vector.
+- <la-tex>\vec{{v}}</la-tex> is the velocity vector.
+- <la-tex>\vec{{r}}</la-tex> is the position vector.
 
 From these equations we can for instance deduce that a linearly increasing acceleration is caused by
 a constant jerk value. And a constant jerk value leads to a quadratic behaviour in the velocity. A
 more interesting deduction is that an acceleration that changes from a linear increase to a constant
 value means that there must be a discontinuous change in jerk. After all a linear increasing acceleration
 is caused by a constant positive jerk, and a constant acceleration is achieved by a zero jerk. Where
-these two acceleration profiles meet there must be a jump in jerk. This is demonstrated in the plot below.
+these two acceleration profiles meet there must be a jump in jerk.
 
 With that you can probably imagine what happens if the velocity has a change from a linearly increasing
 value to a constant value. The acceleration drops from a positive constant value to zero. And the
@@ -55,11 +56,11 @@ which requires significant acceleration and jerk spikes at the start and end of 
 <figure style="float:left">
   <a href="/assets/images/robotics/control/position_velocity_acceleration_and_jerk_for_linear_motion_profile.png" target="_blank">
     <img
-        alt="Position, velocity, acceleration and jerk curves for the trapezoidal motion profile"
+        alt="Position, velocity, acceleration and jerk curves for the linear motion profile"
         src="/assets/images/robotics/control/position_velocity_acceleration_and_jerk_for_linear_motion_profile.png"
         width="800"/>
   </a>
-  <figcaption>Position, velocity, acceleration and jerk curves for the trapezoidal motion profile.</figcaption>
+  <figcaption>Position, velocity, acceleration and jerk curves for the linear motion profile.</figcaption>
 </figure>
 
 So in order to move a robot, or robot part, from one location to another in a way that the jerk
@@ -107,7 +108,9 @@ Where
 - <la-tex>t</la-tex> is the amount of time spend in the current phase.
 - <la-tex>n</la-tex> is the current phase
 
-The differences for each phase are
+For my calculations I assumed that the acceleration phase and the deceleration phase take the same
+amount of time, thus they have the same acceleration magnitude but different signs. With this the
+differences for each phase are:
 
 1) <la-tex>a(t) = a_{{max}}</la-tex>
 1) <la-tex>a(t) = 0</la-tex>
@@ -129,7 +132,7 @@ maximum velocity is that we need in order to travel the desired distance.
 
 <p>
   <la-tex class="block">
-    s = 0.5 * v * t_{accelerate} + v * t_{constant} + 0.5 * v * t_{decelerate}
+    r = 0.5 * v * t_{accelerate} + v * t_{constant} + 0.5 * v * t_{decelerate}
   </la-tex>
 </p>
 
@@ -146,7 +149,7 @@ Simplifying leads to
 
 <p>
   <la-tex class="block">
-    s = \frac{2}{3} v t \Longrightarrow v = \frac{3}{2} \frac{s}{t}
+    r = \frac{2}{3} v t \Longrightarrow v = \frac{3}{2} \frac{s}{t}
   </la-tex>
 </p>
 
@@ -216,7 +219,9 @@ Where
 - <la-tex>t</la-tex> is the amount of time spend in the current phase.
 - <la-tex>n</la-tex> is the current phase
 
-The differences for each phase are
+As with the trapezoidal motion profile I assumed that the acceleration and deceleration phases
+span the same amount of time. Again this means the acceleration and deceleration have magnitude but
+different signs. The differences for each phase are:
 
 1) <la-tex>j(t) = j_{{max}}</la-tex>
 1) <la-tex>j(t) = 0</la-tex>
@@ -271,7 +276,7 @@ body control case, probably due to the fact that the values were very high for t
 of the module control with a linear motion profile. Interestingly the acceleration and jerk
 maximum values are lower for the module control approach than they are for the body control
 approach. This is most likely due to the fact that in order to keep the drive modules synchronised
-relatively high steering velocities are required. To compare the module control approach using the
+relatively high steering velocities are required. For instance, the module control approach using the
 trapezoidal motion profile sees a maximum steering velocity of about 1.8 radians per second. Compare
 this to the the body control approach with the trapezoidal motion profile which sees a maximum
 steering velocity of about 3.8 radians per second.
@@ -286,7 +291,6 @@ steering velocity of about 3.8 radians per second.
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen>
 </iframe>
-
 
 When we look at the simulations using the s-curve motion profile we can see that the maximum
 acceleration and jerk values actually increase when compared to the trapezoidal motion profile, except
