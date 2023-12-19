@@ -5,99 +5,143 @@ Tags:
 - ROS
 - ROS2
 - Gazebo
-- Scuttle
+- Simulation
 
 ---
 
-- In a previous post I talked about simulating the SCUTTLE robot using ROS and Gazebo.
+In a [previous post](posts/Robotics-driving-scuttle-with-ros-gazebo-simulation) I talked about simulating
+the [SCUTTLE robot](https://scuttlerobot.org) using ROS and Gazebo.  The reason I used Gazebo to
+simulate the SCUTTLE robot was so that I could learn more about ROS without needing to involve a real
+robot with all the setup and complications that come with that. Additionally when I was designing the
+[bump sensor](posts/Robotics-a-bumper-for-scuttle-overview) for SCUTTLE using the simulation allowed
+me to reduce the feedback time compared to testing the design on a physical robot. This speeds up
+the design iteration process and allowed me to quickly and verify the design and the code. In the end
+you always need to do the final testing on a real robot, but by using simulation you can quickly
+iterate to a solution without major issues.
 
-- Why simulate
-    + Robotics is hard. It's hard to ensure that the product you are designing / making will do what it is intended to do.
-      Especially when you are dealing with the real world. All kinds of strange things can happen.
-    + In engineering one of the issues we have is that it can take a long time between our design and the final product. This
-      means that we need to wait a long time before we can figure out if what we designed actually works. This can be
-      very expensive, both in time and money.
-        - Feedback time is important. The shorter the feedback time the better (because we can figure out quicker
-          if our ideas are right or wrong). This is one reason we use simulation.
-    + So we try to iterate quickly, i.e. create a design and verify it as quickly as possible. Then feed the results
-      back to the design process. The faster we can iterate the better our final product becomes. Additionally we
-      have prototypes we can share with our customers to ensure that it does what they want.
-    + Using simulations gives us a way to shorten our feedback time. We can create a model of our robot and test it
-      in a virtual environment. This allows us to test our design and verify that it does what we want it to do.
-    + The other reasons for using simulation is that we can verify that things work in a safe environment. Crashing
-      a robot in simulation is far less expensive than crashing a real robot. And a lot safer too.
-    + Finally we can test situations that are hard to test in the real world. For example we can test the robot in
-      a variety of different environments. We can test the robot in a variety of different situations. We can test
-      the robot in situations that are dangerous or expensive to test in the real world.
+In order to progress my [swerve drive robot](posts/Swerve-drive-introduction) I wanted to verify that
+the control algorithms that I had developed would work for an actual robot. Ideally before spending
+money on the hardware. So I decided to use Gazebo to run some simulations that would enable me to
+verify the control algorithm.
 
-- When you want to simulate a robot there are different ways. One of those ways is to use ROS and Gazebo
-- In order to use ROS and Gazebo you need to create a model of your robot and its surroundings. The model of the
-  robot is called a URDF model. The model of the surroundings is called a world model.
-- The URDF model consists of the model the parts of the robots, including the mechanical parts, the sensors and the
-  actuators.
-- The mechanical parts of the robots consist of links and joints (link to ROS page). Links are the physical parts of
-  the robot. Joints are the connections between the links. The joints allow the links to move relative to each other.
+In order for me to use Gazebo as my simulation environment I had to create a model of the robot
+and its surrounding environment. As there are some interesting details to this process I will
+describe it in this post.
 
-Different ways we can make a model of our robot for use with ROS and Gazebo
+Gazebo natively uses the [SDF](http://sdformat.org/) format to define both the robot and the
+environment. However if you want ROS nodes to be able to understand the geometry definition of your
+robot you need to use the [URDF](http://wiki.ros.org/urdf) format. This is important for instance
+if you want to make use of the [tf2](https://docs.ros.org/en/humble/Concepts/Intermediate/About-Tf2.html)
+library to transform between different coordinate frames then your ROS nodes will have to have the
+[geometry of the robot](https://github.com/ros/robot_state_publisher/tree/humble) available.
 
+There are different ways to create an URDF model. One way is to draw the robot in a CAD program
+and then use a plugin to export the model to an URDF file. This is a relatively quick approach, it
+takes time to create the robot in the CAD program but then the export is very quick. The drawback
+of this method is that the resulting URDF file is not very clean which makes it harder to edit
+later on.
+Another way is to create the URDF manually. This approach is slower than the CAD export approach,
+however it results in a much more minimal and clean URDF file. This makes editing the file at a
+later stage a lot easier. Additionally manually creating the URDF file give you a better understanding
+of the URDF format and how it works. In the end the model for my swerve drive robot is very simple,
+consisting of a body, four wheels, the steering and drive controllers and the sensors. So I decided
+to create the URDF file manually.
 
-- There are thee different geometries that you should care about:
-    + The visual geometry, what you see on the screen. Only used to make things look good
-    + The collision geometry, used to calculate when two bodies collide
-    + The inertial geometry, used to calculate the inertia of the body / parts
+IMAGE OF ZINGER URDF MODEL
 
-- Start simple with primitives
-    + You can use meshes for all the different geometries, however this is not necessarily sensible.
-      Using meshes for the collision geometry can be very expensive computationally and can also lead
-      to problems with the collision detection. These problems can show themselves as issues in the simulation,
-      for instance two colliding bodies start to move. This is a problem especially when one of the bodies is
-      the wheel of your robot against the ground because it causes your robot to move around.
-      It's better to use primitives for the collision geometry.
+The URDF model describes the different parts of the robot relative to each other. The robot parts
+consist of the physical parts of the robot, the sensors and the actuators. The physical parts, e.g.
+the wheels or the body, are described using [links](https://wiki.ros.org/urdf/XML/link). The links
+are connected to each other using [joints](https://wiki.ros.org/urdf/XML/joint). Joints allow the
+links to move relative to each other. Joints can be fixed, e.g. when two structural parts are statically
+connected to each other, or they can be movable. If a joint is movable then be one of:
 
-- Make sure to get the collision geometry right. It's probably more sensible to use primitives
-  for the collision geometry. If you don't you can have issues with the model moving when it shouldn't
-    + This is due to numerical issues in the collision detection. The collision detection is not perfect
-      and can lead to issues when using meshes for the collision geometry. This is especially true when
-      the collision geometry is very complex. For instance when using a mesh for the wheel of your robot
-      and the ground. This can lead to the wheel and the ground colliding and the robot moving around
-      because of this.
-- Inertia needs to be reasonably accurate
-- Can use meshes for the visual geometry
+- A revolute joint, which allows the two links to rotate relative to each other around a single axis.
+- A continuous joint, which is similar to a revolute joint but allows the joint to rotate continuously
+  without any limits.
+- A prismatic joint, which allows the two links to move relative to each other along a single axis.
+- A floating joint, which allows the two links to move relative to each other in 6 degrees of freedom.
+- A planar joint, which allows the two links to move relative to each other in 3 degrees of freedom
+  in a plane.
 
-- Moving parts should be their own link
+In the URDF file each link defines the visual geometry, the collision geometry and the inertial
+properties for that link. The visual and collision geometry can be defined either by a primitive
+(box, cylinder or sphere) or a triangle mesh. It is recommended to use simple primitives for the
+collision geometry since these make the collision calculations faster and more stable. If you use a
+triangle mesh for the collision geometry then you can get issues with the collision detection. This
+can lead to the robot moving around when it shouldn't. For instance when the wheel of the robot is
+modelled as a triangle mesh then the collision calculation between the wheel and the ground may not
+be numerically stable which leads to undesired movement of the robot. The current version of the SCUTTLE
+URDF has this problem. In a future post I'll describe how to fix this.
 
-- Always have a foot print frame with nothing in it
-    + You don't get to define the location of the top level frame (during use it gets anchored by the odom / map)
+Using meshes for the visual geometry is fine as this geometry is only used for the visual
+representation of the robot. Note that the meshes should be relatively simple as well since Gazebo
+will have to render the meshes in real time which is expensive if the mesh consists of a large number
+of vertices and triangles.
 
+I normally start by defining a link that represents the [footprint](https://www.ros.org/reps/rep-0120.html#base-footprint)
+of the robot on the ground, called `base_footprint`. This link doesn't define any geometry, it is
+only used to define the origin of the robot. When navigation is configured it will be referencing
+this footprint link. The next link that is defined is the `base_link`. This link is generally defined
+to be the 'middle' of the robot frame and it forms the parent for all the other robot parts.
 
-- Can use meshes on the visual geometry to make the robot look good
-    + But generally we keep the collision and inertia geometry simple
+The next step is to define the rest of the links and joints. For the swerve drive robot I have four
+drive modules, each consisting of a wheel and a steering motor. The wheel is connected to the steering
+motor using a continuous joint. The steering motor is connected to the base link using another continuous
+joint. Because the four modules are all the same I use the [xacro](http://wiki.ros.org/xacro) format.
+This allows me to define [a single module as a template](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/macros.xacro)
+and then use that template to create the four modules. The benefit of this is that it makes the URDF
+file easier to edit and a lot smaller and easier to read.
 
-- Other parts of the geometry include ROS control nodes etc.
+To add sensors you need to add two pieces of information, the information about the sensor body and,
+if you are using gazebo, the information about the sensors behaviour. The former consist of the
+visual and collision geometry of the sensor. The latter consists of the sensor plugin that is used
+to simulate the sensor. For the swerve drive robot I have two sensors, a lidar and an IMU.
 
-- Materials and colours
+- The Lidar is there so that I can run SLAM algorithms easily.
+- The IMU is there to learn more about IMU's
+
+- Additional other bits
+    + ROS2 control
+        - `ign_ros2_control/IgnitionSystem`
+        - <https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/gazebo.xacro#L148>
+        - <https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/base.xacro#L205>
+    + Gazebo specific information
+        - A gazebo reference for each wheel to specify the friction coefficients etc.
+        - Lidar - based on the rplidar
+    + Materials and colours
 
 - Issues you can come across
-  -
 
-- Scuttle in simulation has issues where it slowly drifts across the map
-    + One reason given on the interwebz is that the contact calculation is wrong
-    + Inertias of the different parts are important
-    + friction is important
+- Once you have the URDF you need to get Gazebo to load it.
+    + Load the `robot state publisher` and provide it with the robot description (URDF)
+    + Spawn the robot in Gazebo using the `ros_ign_gazebo` package with the command line
 
-- SCUTTLE drifts in Gazebo when no Twist commands are given
-    + This seems to be caused by incorrect moments of inertia as well as issues with the collision geomtry
-    + Also possible not enough friction
-    + Contact surface is important. Using meshes for the collision geometry might make it nasty
-    + Another trick is to limit the contact surface to a line
+``` python
 
-- Graphs of movement
+    def generate_launch_description():
+        spawn_robot = Node(
+            package='ros_ign_gazebo',
+            executable='create',
+            arguments=[
+                '-name', LaunchConfiguration('robot_name'),
+                '-x', x,
+                '-y', y,
+                '-z', z,
+                '-Y', yaw,
+                '-topic', '/robot_description'], # <-- There might not be a topic with this ....
+            output='screen')
 
-- Figure out if movement is only in forward direction
-    + Is any rotation caused by the differential movement of the wheels
-    + are the wheels actually rolling
+        # Define LaunchDescription variable
+        ld = LaunchDescription(ARGUMENTS)
 
-- New URDF geometry to improve the collision geometry
+        # .... Load all your other Nodes here ....
 
-- Add friction to the forward movement
+        # Spawn the model in Gazebo.
+        ld.add_action(spawn_robot)
 
+        return ld
+```
+
+- If you set up the ros2 controls then you can directly control the different joints of the robot
+  with the appropriate commands.
