@@ -39,7 +39,8 @@ There are different ways to create an URDF model. One way is to draw the robot i
 and then use a plugin to export the model to an URDF file. This is a relatively quick approach, it
 takes time to create the robot in the CAD program but then the export is very quick. The drawback
 of this method is that the resulting URDF file is not very clean which makes it harder to edit
-later on.
+later on. Additionally the CAD software will use meshes for both the visual geometry and the collision
+geometry. As discussed below this can lead to issues with the collision detection.
 Another way is to create the URDF manually. This approach is slower than the CAD export approach,
 however it results in a much more minimal and clean URDF file. This makes editing the file at a
 later stage a lot easier. Additionally manually creating the URDF file give you a better understanding
@@ -47,7 +48,31 @@ of the URDF format and how it works. In the end the model for my swerve drive ro
 consisting of a body, four wheels, the steering and drive controllers and the sensors. So I decided
 to create the URDF file manually.
 
-IMAGE OF ZINGER URDF MODEL
+<figure style="float:left">
+  <a href="/assets/images/robotics/swerve/rviz_zinger_front_top_view.png" target="_blank">
+    <img
+        alt="The Zinger swerve robot as seen from the front and top in RViz."
+        src="/assets/images/robotics/swerve/rviz_zinger_front_top_view.png"
+        width="840"
+        height="368"/>
+  </a>
+  <figcaption>
+    The Zinger swerve robot as seen from the front and top in RViz.
+  </figcaption>
+</figure>
+
+<figure style="float:right">
+  <a href="/assets/images/robotics/swerve/rviz_zinger_side_view.png" target="_blank">
+    <img
+        alt="The Zinger swerve robot as seen from the side in RViz."
+        src="/assets/images/robotics/swerve/rviz_zinger_side_view.png"
+        width="840"
+        height="368"/>
+  </a>
+  <figcaption>
+    The Zinger swerve robot as seen from the side in RViz.
+  </figcaption>
+</figure>
 
 The URDF model describes the different parts of the robot relative to each other. The robot parts
 consist of the physical parts of the robot, the sensors and the actuators. The physical parts, e.g.
@@ -72,7 +97,18 @@ triangle mesh for the collision geometry then you can get issues with the collis
 can lead to the robot moving around when it shouldn't. For instance when the wheel of the robot is
 modelled as a triangle mesh then the collision calculation between the wheel and the ground may not
 be numerically stable which leads to undesired movement of the robot. The current version of the SCUTTLE
-URDF has this problem. In a future post I'll describe how to fix this.
+URDF has this problem as is shown in the video below. In a future post I'll describe how to fix this.
+
+<iframe
+    style="float:left"
+    width="560"
+    height="315"
+    src="https://youtu.be/kyMvlBAQGoE"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+</iframe>
 
 Using meshes for the visual geometry is fine as this geometry is only used for the visual
 representation of the robot. Note that the meshes should be relatively simple as well since Gazebo
@@ -96,26 +132,99 @@ file easier to edit and a lot smaller and easier to read.
 To add sensors you need to add two pieces of information, the information about the sensor body and,
 if you are using gazebo, the information about the sensors behaviour. The former consist of the
 visual and collision geometry of the sensor. The latter consists of the sensor plugin that is used
-to simulate the sensor. For the swerve drive robot I have two sensors, a lidar and an IMU.
+to simulate the sensor. For the swerve drive robot I have two sensors, a lidar and an IMU. The
+lidar is used to provide a point cloud for the different [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping)
+algorithms which allow the robot to determine where it is and what the environment looks like. The
+[Gazebo configuration](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/gazebo.xacro#L90)
+is based on the use of a [rplidar](https://www.slamtec.com/en/Lidar/A1) sensor. The IMU is experimental
+and currently not used in any of the control algorithms. The
+[Gazebo configuration](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/gazebo.xacro#L26)
+is based on a generic IMU.
 
-- The Lidar is there so that I can run SLAM algorithms easily.
-- The IMU is there to learn more about IMU's
+The last part of the URDF file is the definition of the [ROS2 control](https://ros-controls.github.io/control.ros.org/)
+interface. This interface allows you to control the different joints of the robot using ROS2 topics.
+The ROS2 control configuration consists of the [general configuration](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/base.xacro#L205)
+and the configuration specific to [Gazebo](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/gazebo.xacro#L148).
+It should be noted that the Gazebo specific configuration depends on linking to the correct control
+plugin for Gazebo. In my case, using [ROS2 Humble](https://docs.ros.org/en/humble/),
+and [Gazebo Ignition Fortress](https://gazebosim.org/docs/fortress/install), I need to use the
+`ign_ros2_control-system` plugin with the `ign_ros2_control::IgnitionROS2ControlPlugin` entrypoint.
+For other versions of ROS2 and Gazebo you may need to use a different plugin.
 
-- Additional other bits
-    + ROS2 control
-        - `ign_ros2_control/IgnitionSystem`
-        - <https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/gazebo.xacro#L148>
-        - <https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/urdf/base.xacro#L205>
-    + Gazebo specific information
-        - A gazebo reference for each wheel to specify the friction coefficients etc.
-        - Lidar - based on the rplidar
-    + Materials and colours
+When you are using this information to create your URDF model there are a number of issues that you may
+run into. The main ones I ran in to are:
 
-- Issues you can come across
+- ROS2 control documentation is lacking in that it doesn't necessarily exist for the combination of
+  your version of ROS and Gazebo. That means you need to look at the source code to figure out the
+  names of the plugins and which controllers are available. For instance ROS2 control defines a
+  [joint trajectory controller](https://control.ros.org/humble/doc/ros2_controllers/joint_trajectory_controller/doc/userdoc.html).
+  This controller should be able to work with a velocity trajectory, i.e. a trajectory that defines
+  changes in velocity. However the current implementation of the controller doesn't support this. Additionally
+  the Gazebo plugin doesn't support all the controller types that are available in ROS2 control. To find out
+  which controllers actually work in Gazebo you need to search the source code of the Gazebo control plugin.
+- In order to run ROS2 control you need to load the [controller manager](https://control.ros.org/humble/doc/ros2_control/controller_manager/doc/userdoc.html).
+  This component manages the lifecyle of the controllers. However when running in Gazebo you don't need
+  to load the controller manager as Gazebo loads one for you. If you do load the controller manager
+  then you will get an error message that the controller manager is already loaded. Also note that in
+  order to optionally load the controller when using the Python launch files you need to use the
+  [unless](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/launch/controllers.launch.py#L52)
+  construct, not the Python `if .. then` approach. Because the latter doesn't work due to the delayed
+  evaluation of the launch file.
 
-- Once you have the URDF you need to get Gazebo to load it.
-    + Load the `robot state publisher` and provide it with the robot description (URDF)
-    + Spawn the robot in Gazebo using the `ros_ign_gazebo` package with the command line
+Finally one issue  that applies specifically to ROS2 Humble and Gazebo Ignition has to do with the
+fact that Gazebo Ignition was renamed back to Gazebo. This means that some of the plugins have been
+renamed as well. So the information you find on the internet about the correct name of the plugin
+may be out of date.
+
+Once you have the URDF you need to get Gazebo to load it. This is done in two parts. First you need
+to load the [`robot state publisher`](https://github.com/ros/robot_state_publisher/tree/humble) and
+provide it with the robot description (URDF). The code below provides an example on how to achieve
+this.
+
+``` python
+def generate_launch_description():
+    is_simulation = LaunchConfiguration("use_sim_time")
+    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
+
+    robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            PathJoinSubstitution([get_package_share_directory('zinger_description'), "urdf", 'base.xacro']),
+            " ",
+            "is_simulation:=",
+            is_simulation,
+             " ",
+            "use_fake_hardware:=",
+            use_fake_hardware,
+            " ",
+            "fake_sensor_commands:=",
+            fake_sensor_commands,
+        ]
+    )
+    robot_description = {"robot_description": ParameterValue(robot_description_content, value_type=str)}
+
+    # Takes the joint positions from the 'joint_state' topic and updates the position of the robot with tf2.
+    robot_state_publisher = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='screen',
+        parameters=[
+            {'use_sim_time': LaunchConfiguration('use_sim_time')},
+            robot_description,
+        ],
+    )
+
+    ld = LaunchDescription(ARGUMENTS)
+    ld.add_action(robot_state_publisher)
+    return ld
+
+```
+
+Then you need to spawn the robot in Gazebo. Assuming you're using Gazebo Ignition then you can use
+ the `ros_ign_gazebo` package with the command line as shown below.
 
 ``` python
 
@@ -129,15 +238,10 @@ to simulate the sensor. For the swerve drive robot I have two sensors, a lidar a
                 '-y', y,
                 '-z', z,
                 '-Y', yaw,
-                '-topic', '/robot_description'], # <-- There might not be a topic with this ....
+                '-topic', '/robot_description'],
             output='screen')
 
-        # Define LaunchDescription variable
         ld = LaunchDescription(ARGUMENTS)
-
-        # .... Load all your other Nodes here ....
-
-        # Spawn the model in Gazebo.
         ld.add_action(spawn_robot)
 
         return ld
@@ -145,3 +249,5 @@ to simulate the sensor. For the swerve drive robot I have two sensors, a lidar a
 
 - If you set up the ros2 controls then you can directly control the different joints of the robot
   with the appropriate commands.
+
+LINK TO TEST CONTROL LIBRARY
