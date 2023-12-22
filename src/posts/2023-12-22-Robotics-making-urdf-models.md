@@ -1,4 +1,4 @@
-Title: Starting robotics - Making URDF models
+Title: Robotics - Making URDF models
 Tags:
 
 - Robotics
