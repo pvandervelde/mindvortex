@@ -10,24 +10,21 @@ Tags:
 ---
 
 In a [previous post](posts/Robotics-driving-scuttle-with-ros-gazebo-simulation) I talked about simulating
-the [SCUTTLE robot](https://scuttlerobot.org) using ROS and Gazebo.  The reason I used Gazebo to
-simulate the SCUTTLE robot was so that I could learn more about ROS without needing to involve a real
+the [SCUTTLE robot](https://scuttlerobot.org) using ROS and Gazebo.  I used Gazebo to
+simulate the SCUTTLE robot so that I could learn more about ROS without needing to involve a real
 robot with all the setup and complications that come with that. Additionally when I was designing the
 [bump sensor](posts/Robotics-a-bumper-for-scuttle-overview) for SCUTTLE using the simulation allowed
 me to reduce the feedback time compared to testing the design on a physical robot. This speeds up
 the design iteration process and allowed me to quickly and verify the design and the code. In the end
 you always need to do the final testing on a real robot, but by using simulation you can quickly
-iterate to a solution without major issues.
+iterate to a solution that will most likely work without major issues.
 
 In order to progress my [swerve drive robot](posts/Swerve-drive-introduction) I wanted to verify that
 the control algorithms that I had developed would work for an actual robot. Ideally before spending
 money on the hardware. So I decided to use Gazebo to run some simulations that would enable me to
 verify the control algorithm.
 
-In order for me to use Gazebo as my simulation environment I had to create a model of the robot
-and its surrounding environment. As there are some interesting details to this process I will
-describe it in this post.
-
+The first step in using Gazebo is to create a model of the robot and its surrounding environment.
 Gazebo natively uses the [SDF](http://sdformat.org/) format to define both the robot and the
 environment. However if you want ROS nodes to be able to understand the geometry definition of your
 robot you need to use the [URDF](http://wiki.ros.org/urdf) format. This is important for instance
@@ -46,31 +43,32 @@ however it results in a much more minimal and clean URDF file. This makes editin
 later stage a lot easier. Additionally manually creating the URDF file give you a better understanding
 of the URDF format and how it works. In the end the model for my swerve drive robot is very simple,
 consisting of a body, four wheels, the steering and drive controllers and the sensors. So I decided
-to create the URDF file manually.
+to create the URDF file manually. The images below show the resulting model in RViz. The model consists
+of the robot body in orange, the four drive modules in blue and black, and the lidar unit in red.
 
 <figure style="float:left">
-  <a href="/assets/images/robotics/swerve/rviz_zinger_front_top_view.png" target="_blank">
-    <img
-        alt="The Zinger swerve robot as seen from the front and top in RViz."
-        src="/assets/images/robotics/swerve/rviz_zinger_front_top_view.png"
-        width="840"
-        height="368"/>
-  </a>
-  <figcaption>
-    The Zinger swerve robot as seen from the front and top in RViz.
-  </figcaption>
-</figure>
-
-<figure style="float:right">
   <a href="/assets/images/robotics/swerve/rviz_zinger_side_view.png" target="_blank">
     <img
         alt="The Zinger swerve robot as seen from the side in RViz."
         src="/assets/images/robotics/swerve/rviz_zinger_side_view.png"
-        width="840"
-        height="368"/>
+        width="375"
+        height="186"/>
   </a>
   <figcaption>
     The Zinger swerve robot as seen from the side in RViz.
+  </figcaption>
+</figure>
+
+<figure style="float:right">
+  <a href="/assets/images/robotics/swerve/rviz_zinger_front_top_view.png" target="_blank">
+    <img
+        alt="The Zinger swerve robot as seen from the front and top in RViz."
+        src="/assets/images/robotics/swerve/rviz_zinger_front_top_view.png"
+        width="375"
+        height="260"/>
+  </a>
+  <figcaption>
+    The Zinger swerve robot as seen from the front and top in RViz.
   </figcaption>
 </figure>
 
@@ -160,16 +158,42 @@ run into. The main ones I ran in to are:
   [joint trajectory controller](https://control.ros.org/humble/doc/ros2_controllers/joint_trajectory_controller/doc/userdoc.html).
   This controller should be able to work with a velocity trajectory, i.e. a trajectory that defines
   changes in velocity. However the current implementation of the controller doesn't support this. Additionally
-  the Gazebo plugin doesn't support all the controller types that are available in ROS2 control. To find out
-  which controllers actually work in Gazebo you need to search the source code of the Gazebo control plugin.
+  the Gazebo plugin doesn't support all the controller types that are available in ROS2 control. To
+  find out which controllers actually work in Gazebo you need to search the source code of the Gazebo
+  control plugin.
 - In order to run ROS2 control you need to load the [controller manager](https://control.ros.org/humble/doc/ros2_control/controller_manager/doc/userdoc.html).
-  This component manages the lifecyle of the controllers. However when running in Gazebo you don't need
+  This component manages the lifecyle of the controllers. However when running in Gazebo you shouldn't
   to load the controller manager as Gazebo loads one for you. If you do load the controller manager
   then you will get an error message that the controller manager is already loaded. Also note that in
   order to optionally load the controller when using the Python launch files you need to use the
   [unless](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/launch/controllers.launch.py#L52)
-  construct, not the Python `if .. then` approach. Because the latter doesn't work due to the delayed
+  construct, not the Python `if .. then` approach. The latter doesn't work due to the delayed
   evaluation of the launch file.
+- The start up order of the ROS2 control controllers relative to other ROS nodes is important. When
+  the controllers start they will try to get the joint and link descriptions from the
+  [`robot state publisher`](https://github.com/ros/robot_state_publisher/tree/humble). This won't
+  be running until after the simulation starts. So you need to [delay](https://github.com/pvandervelde/zinger_description/blob/bb24b884f8bcc62c9c2e8f12bac431f4b62dea6f/launch/controllers.launch.py#L72)
+  the start of the controllers until after the robot is loaded in Gazebo and the state publisher node
+  is running.
+- Unlike with ROS1 if you want your ROS2 nodes to get information from Gazebo, e.g. the simulation
+  time or the current position or velocity of a joint, then you need to set up a
+  [ROS bridge](https://github.com/pvandervelde/zinger_ignition/blob/5e71f841d1db557c3e62ff38291701ddc31a0d73/launch/ignition_bridge.launch.py#L19).
+  This is because Gazebo no longer connects to the ROS2 messaging system automatically. For my simulation
+  I bridged the following topics:
+    + `/clock` - The simulation time. This was bridged unidirectionally from Gazebo to ROS2 into the
+      `/clock` topic.
+    + `/cmd_vel` - The velocity commands for the robot. This was bridged bidirectionally between Gazebo
+      and ROS2.
+    + `/model/<ROBOT_NAME>/pose` and `/model/<ROBOT_NAME>/pose_static` - The position of the robot
+      in the simulation as seen by the simulation. This was bridged unidirectionally from Gazebo to
+      ROS2 into the `/ground_truth_pose` and `/ground_truth_pose_static` topics.
+    + `/model/<ROBOT_NAME>/tf` - The transformation between the different coordinate frames of the
+      robot as seen by the simulation. This was bridged unidirectionally from Gazebo to ROS2 into the
+      `/model/<ROBOT_NAME>/tf` topic.
+    + `/<LIDAR_NAME>/scan` and `/<LIDAR_NAME>/scan/points` - The point cloud from the lidar sensor.
+      These were bridged unidirectionally from Gazebo to ROS2 into the `/scan` and `/scan/points` topics.
+    + `/world/<WORLD_NAME>/model/<MODEL_NAME>/link/<IMU_SENSOR_LINK_NAME>/sensor/<IMU_NAME>/imu` - The
+      IMU data. This was bridged unidirectionally from Gazebo to ROS2 into the `/imu` topic.
 
 Finally one issue  that applies specifically to ROS2 Humble and Gazebo Ignition has to do with the
 fact that Gazebo Ignition was renamed back to Gazebo. This means that some of the plugins have been
@@ -177,9 +201,8 @@ renamed as well. So the information you find on the internet about the correct n
 may be out of date.
 
 Once you have the URDF you need to get Gazebo to load it. This is done in two parts. First you need
-to load the [`robot state publisher`](https://github.com/ros/robot_state_publisher/tree/humble) and
-provide it with the robot description (URDF). The code below provides an example on how to achieve
-this.
+to load the `robot state publisher` and provide it with the robot description (URDF). The code below
+provides an example on how to achieve this.
 
 ``` python
 def generate_launch_description():
@@ -247,7 +270,23 @@ Then you need to spawn the robot in Gazebo. Assuming you're using Gazebo Ignitio
         return ld
 ```
 
-- If you set up the ros2 controls then you can directly control the different joints of the robot
-  with the appropriate commands.
+<iframe
+    style="float:right"
+    width="560"
+    height="315"
+    src="https://youtu.be/fR47Y7p4mtQ"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+</iframe>
 
-LINK TO TEST CONTROL LIBRARY
+Once you have set this all up you should be able to run Gazebo and see your robot in the simulation.
+At this point you can then control the robot using the ROS2 control interface by sending the
+appropriate messages. For an example you can look at the [test control library](https://github.com/pvandervelde/zinger_controller_test_nodes)
+for the swerve robot. That should allow you to get the robot moving as shown in the video. In the video
+two different control commands are given. One controls the motion of the steering actuators and makes
+the wheels steer from left to right and back again on a timed loop. The other controls the motion of
+the wheels, driving them forwards and then backwards, also on a timed loop. Obviously this is not
+a good way to control the robot, but it does allow you to verify that you have correctly configured
+all the parts of your robot for use in Gazebo.
