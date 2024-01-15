@@ -1,2 +1,3 @@
-New Posts:
-    Robotics - Making URDF models
+Maintenance:
+    Updating the about pages
+    Adding a project page for the Zinger robot and linking blog posts
