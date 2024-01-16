@@ -6,6 +6,7 @@ Tags:
 - Omnidirectional
 - ROS2
 - Nav2
+- Zinger
 
 ---
 
@@ -46,52 +47,47 @@ constraints.
 Note that robot navigation is a very complex topic and there are many ways in which it can fail
 or not work as expected. For example some of the issues I have seen are:
 
-- Unable to find path to goal
-    + Either the map isn't comnpletely known, or there is no actual way for the robot to get to the goal
-          (maybe the gaps are too small for the robot to fit through)
-- Unable to follow path. Generally the robot will get to the end but it won't follow the
-  the original path
-    + This can also lead to unnecessary in-place rotations
-- Robot gets stuck in a corner / hallway. It considers the hallway / door frame too narrow to fit
-  through safely. Sometimes this is caused by the robot being too wide. However most of the cases
-  I have seen it in is caused by the planner configuration.
+- The planner is unable to find a path to the goal. This can happen when there is no actual way to
+  get to the goal, e.g. the robot is in a room with a closed door with the goal outside the room.
+  Or when the path would pass through a section that is too narrow for the robot to fit through.
+- The controller is unable to follow path created by the planner, most likely because the path is not
+  kinematically possible for the robot. For example the path might require the robot to turn in place
+  when it is using an Ackerman steering system. Or the path requires the robot to pass through a
+  narrow space that the controller deems to narrow.
+- The robot gets stuck in a corner or hallway. It considers the hallway too narrow to fit
+  through safely or has no way to perform the directional changes it wants to make. Sometimes this is
+  caused by the robot being too wide. However most of the cases I have seen it in is caused by the
+  planner configuration.
+- The robot is slow to respond to movement commands, leading to ever larger commanded steering and velocities.
+  This was mostly an issue with the DWB controller, the MPPI controller seems to be more responsive.
+  However there is definitely an issue with the swerve controller code that I need to investigate.
+- The VM I was running the simulation on wasn't quick enough to run the simulation close to real time.
+  So at some point I need to switch to running on a desktop.
 
 Now that we know roughly what is needed for successful navigation let's have a look at what is
 needed for the swerve drive robot. The first thing we need is a way to figure out where we are. Because
-I don't have a map of the environment I will be using an [online SLAM approach]().
-For this I will be using the [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) package.
+I don't have a map of the environment I am using an online SLAM approach, which creates the map
+as the robot moves around the area. The [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox)
+package makes this easy. The  [configuration](https://github.com/pvandervelde/zinger_nav/blob/master/config/slam.yaml)
+for the robot is mostly the default configuration, except for the changes required to match the URDF
+model.
 
-- SLAM setup
-    + Can run in synchronous and asynchronous mode. Generally running async
-    + Using the Cerses solver
-    + Configuration file is [config/slam.yaml](https://github.com/pvandervelde/zinger_nav/blob/master/config/slam.yaml)
-    + Using mostly the default configuration settings, except for the `base_frame` which has been
-      adjusted to match the URDF model
-
-- Nav setup
-    + [MPPI](https://github.com/ros-planning/navigation2/tree/main/nav2_mppi_controller) for the controller / aka local planner
-    + [SMAC lattice](https://github.com/ros-planning/navigation2/tree/main/nav2_smac_planner) for the planner / aka global planner
-        - Using SMAC Lattice because we want a planner that supports omnidirectional movement for
-          non-circular, arbitrary shaped robots
-    + Originally tried the DWB controller and the navfn planner. Both are said to support omnidirectional
-      movement. But when applied the DWB planner didn't really enable omnidirectional movement. Additionally
-      it gets stuck for certain movements, but the DWB controller doesn't
-      support omnidirectional movement, and the navfn planner doesn't support non-holonomic
-      movement. This leads to the robot turning in wide circles instead of turning in place or
-      moving sideways.
-
-- Need a few different packages to get this to work
-    + [zinger_description](https://github.com/pvandervelde/zinger_description) - Contains the URDF model
-    + [zinger_ignition](https://github.com/pvandervelde/zinger_ignition) - Contains the configuration for Gazebo
-    + [zinger_viz](https://github.com/pvandervelde/zinger_viz) - Contains the configuration for RViz
-    + [zinger_swerve_controller](https://github.com/pvandervelde/zinger_swerve_controller) - Contains the actual movement controller
-    + [zinger_nav](https://github.com/pvandervelde/zinger_nav) - Contains the SLAM and nav configuration
-
-- To different ways to run the `zinger_nav` package
-    + use the `slam.launch.py` to run the SLAM nodes
-    + use the `nav2.launch.py` to run the Nav2 nodes
-
-An example:
+For the planner I am using the [SMAC lattice](https://github.com/ros-planning/navigation2/tree/main/nav2_smac_planner)
+and for the controller the [MPPI](https://github.com/ros-planning/navigation2/tree/main/nav2_mppi_controller) controller.
+These two were selected because they both support omnidirectional movement for non-circular,
+arbitrary shaped robots. The omnidirectional movement is required because the swerve drive robot
+can move in all directions and it would be a waste not to use that capability. The non-circular robot
+comes from the fact that the robot is rectangular and could pass through narrow passages in one
+orientation but not the other. Originally I tried the
+[DWB controller](https://github.com/ros-planning/navigation2/tree/main/nav2_dwb_controller)
+and the [navfn planner](https://github.com/ros-planning/navigation2/tree/main/nav2_navfn_planner).
+Both are said to support omnidirectional movement. But when applied the DWB planner didn't really
+use the omnidirectional capabilities. Additionally it gets stuck for certain movements for unknown
+reasons. Once I changed to using the SMAC planner and the MPPI controller the robot was successfully
+able to navigate around the environment.
+Again the [configuration](https://github.com/pvandervelde/zinger_nav/blob/master/config/nav2.yaml)
+is mostly the default configuration except that I have updated some of the values to match the robot's
+capabilities.
 
 <iframe
     style="float:none"
@@ -104,20 +100,22 @@ An example:
     allowfullscreen>
 </iframe>
 
-- 15 seconds in it starts sideways translating while rotating to get around the corner
-- Translates sideways through the room at the end turning while moving to fit through the door opening
-- It continues its journey mostly traversing sideways. At the end it rotates into the direction
-  it was commanded to face once it got to the goal
-- Note that the gobal planner inserted a turn, stop and back-up segment to get to the right orientation
-  but the local planner opted to perform an inplace rotation at the end. (probably because it just
-  drove to the end and then had to still turn)
+With all that set I got the robot to navigate to a goal. The video shows the robot starting the navigation
+from one room to another. As it moves at the [15 second](https://youtu.be/U2IOLwuCvrQ?t=15) mark it
+starts sideways translating while rotating to get around the corner in order to get through the door
+of the room. It continues its journey mostly traversing sideways, occasionally rotating into the
+direction it is moving. At the [52 second](https://youtu.be/U2IOLwuCvrQ?t=52)
+mark it reaches the goal location and rotates into the orientation it was commanded to
+end up in. Note that the planner inserted a turn, stop and back-up segment to get to the right
+orientation but the local planner opted to perform an in-place rotation at the end.
 
-Issues I've seen
+While there was a bit of tuning required to get the SLAM and navigation stacks to work, in the
+end it worked well. Obviously this is only one test case so once I have a dedicated PC to run
+the simulation I can do more testing.
 
-- Robot not moving from the starting position. This was using the DWB controller. Not quite sure
-  what is causing it
-- Slow response to movement commands, leading to ever larger commanded steering and velocities.
-  Mostly an issue with the DWB controller. The MPPI controller seems to be more responsive. However
-  there is definitely an issue with the swerve controller part
-- Found that the VM I was using wasn't quick enough to run the simulation close to real time. So at
-  some point I need to switch to running on a desktop
+One of the things that is currently not implemented is limits on the steering and drive velocities.
+This means that currently the robot can move at any speed and turn at any rate. This is not
+realistic and will in the real world lead to the motors in the robot being overloaded. So the
+next step is to add the limits to the controller. The main issue with this is the need to keep the
+drive modules synchronised. So when one of the modules exceeds its velocity limits the other modules
+have to be slowed down as well so that we don't lose synchronisation between the modules.
