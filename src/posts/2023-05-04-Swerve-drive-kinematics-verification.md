@@ -5,6 +5,7 @@ Tags:
 - Swerve
 - Omnidirectional
 - Kinematics
+- Zinger
 
 ---
 
@@ -17,7 +18,6 @@ code to simulate the movement of a four wheel swerve drive.
   </a>
   <figcaption>Degrees of freedom for a swerve drive system.</figcaption>
 </figure>
-
 
 Currently I have only implemented a
 [simple kinematics based approach](https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383).
