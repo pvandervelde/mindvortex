@@ -1,2 +1,2 @@
 New Blog Posts:
-    SSwerve drive - Using Nav2
+    Swerve drive - Using Nav2
