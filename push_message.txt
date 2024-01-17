@@ -1,3 +1,2 @@
-Maintenance:
-    Updating the about pages
-    Adding a project page for the Zinger robot and linking blog posts
+New Blog Posts:
+    Swerve drive - Using Nav2
