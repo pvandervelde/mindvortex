@@ -17,21 +17,21 @@ first version of the [steering and drive controller](posts/Swerve-drive-body-foc
 added [motion profiles](posts/Swerve-motion-profiles) for smoother changes in velocity and acceleration,
 and I have created the [URDF files](posts/Robotics-making-urdf-models) that allow me to simulate the
 robot in Gazebo. The next part is to add the ability to navigate the robot, autonomously,
-to a goal location. This can be achieved using the [Nav2](https://navigation.ros.org/) and
-[slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) packages.
+to a goal location.
 
 So how does the navigation in general work? The first step is to figure out where the robot is, or
 at least what is around the robot. Using the robot sensors, e.g. a lidar, we can see what the direct
 environment looks like, e.g. the robot is in a room of a building. If we have a map of the larger
-environment, e.g. the building, then using a [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping)
-algorithm we can figure out where in the building we are. Assuming there are enough features in the
+environment, e.g. the building, then using a [location algorithm](https://github.com/ros-planning/navigation2/tree/main/nav2_amcl)
+we can figure out where in the building we are. Assuming there are enough features in the
 room to make it obvious which room we are in. If we don't have a map of the environment then we can
-use the SLAM algorithm to create a map while the robot is moving. Having a map makes planning
-more reliable, because we can plan a path that takes into account the surroundings. However it is
-not strictly necessary, we can also plan a path without a map, but then it is possible that the
-planner will plan a path that is not possible to follow, e.g. because there is a wall in the way.
-Of course if there are dynamic obstacles, e.g. if a door is closed, then the map might not be
-accurate and we might still not be able to get to the goal.
+use a [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping) algorithm to create
+a map while the robot is moving. Having a map makes planning more reliable, because we can plan a
+path that takes into account the surroundings. However it is not strictly necessary, we can also
+plan a path without a map, but then it is possible that the planner will plan a path that is not
+possible to follow, e.g. because there is a wall in the way. Of course if there are dynamic obstacles,
+e.g. if a door is closed, then the map might not be accurate and we might still not be able to get
+to the goal.
 
 Once the robot knows where it is and it has a goal location, it can plan a path from the current
 location to the goal location. This is generally done by a [global planner or planner for short](https://navigation.ros.org/concepts/index.html#planners).
@@ -44,8 +44,9 @@ is used. The controller works to make the robot follow the path while making pro
 the goal and avoiding obstacles. Again there are a number of different algorithms, each with it own
 constraints.
 
-Note that robot navigation is a very complex topic and there are many ways in which it can fail
-or not work as expected. For example some of the issues I have seen are:
+Note that robot navigation is a very complex topic that is very actively being researched. A result
+of this is that there are many ways in which navigation can fail or not work as expected. For example
+some of the issues I have seen are:
 
 - The planner is unable to find a path to the goal. This can happen when there is no actual way to
   get to the goal, e.g. the robot is in a room with a closed door with the goal outside the room.
@@ -64,6 +65,10 @@ or not work as expected. For example some of the issues I have seen are:
 - The VM I was running the simulation on wasn't quick enough to run the simulation close to real time.
   So at some point I need to switch to running on a desktop.
 
+And these are only the ones I have seen. There are many more ways in which the navigation can fail.
+So it pays to stay up to date with the latest developments and to ensure that you have good ways
+to test and debug your robot and the navigation stack.
+
 Now that we know roughly what is needed for successful navigation let's have a look at what is
 needed for the swerve drive robot. The first thing we need is a way to figure out where we are. Because
 I don't have a map of the environment I am using an online SLAM approach, which creates the map
@@ -72,9 +77,10 @@ package makes this easy. The  [configuration](https://github.com/pvandervelde/zi
 for the robot is mostly the default configuration, except for the changes required to match the URDF
 model.
 
-For the planner I am using the [SMAC lattice](https://github.com/ros-planning/navigation2/tree/main/nav2_smac_planner)
-and for the controller the [MPPI](https://github.com/ros-planning/navigation2/tree/main/nav2_mppi_controller) controller.
-These two were selected because they both support omnidirectional movement for non-circular,
+For the navigation I am using the [Nav2](https://navigation.ros.org/) package. From that package I
+selected the [SMAC lattice](https://github.com/ros-planning/navigation2/tree/main/nav2_smac_planner)
+for the planner and the [MPPI](https://github.com/ros-planning/navigation2/tree/main/nav2_mppi_controller)
+controller. These two were selected because they both support omnidirectional movement for non-circular,
 arbitrary shaped robots. The omnidirectional movement is required because the swerve drive robot
 can move in all directions and it would be a waste not to use that capability. The non-circular robot
 comes from the fact that the robot is rectangular and could pass through narrow passages in one
@@ -111,11 +117,12 @@ orientation but the local planner opted to perform an in-place rotation at the e
 
 While there was a bit of tuning required to get the SLAM and navigation stacks to work, in the
 end it worked well. Obviously this is only one test case so once I have a dedicated PC to run
-the simulation I can do more testing.
+the simulation I am going to do a lot more testing.
 
 One of the things that is currently not implemented is limits on the steering and drive velocities.
 This means that currently the robot can move at any speed and turn at any rate. This is not
 realistic and will in the real world lead to the motors in the robot being overloaded. So the
 next step is to add the limits to the controller. The main issue with this is the need to keep the
 drive modules synchronised. So when one of the modules exceeds its velocity limits the other modules
-have to be slowed down as well so that we don't lose synchronisation between the modules.
+have to be slowed down as well so that we don't lose synchronisation between the modules. More on this
+in one of my next posts.
