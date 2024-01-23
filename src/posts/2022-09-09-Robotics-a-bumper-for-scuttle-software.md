@@ -8,7 +8,7 @@ Tags:
 
 ---
 
-In my [previous post](posts/Robotics-a-bumper-for-scuttle-overview) I talked about creating a bump
+In my [previous post](/posts/Robotics-a-bumper-for-scuttle-overview) I talked about creating a bump
 sensor for my SCUTTLE robot. After creating the mechanical design I started working on the software.
 There are two parts to the software, translating the state of the micro switches and turning the state
 changes into movement commands for the robot, i.e. if the robot runs into

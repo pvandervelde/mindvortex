@@ -10,12 +10,12 @@ Tags:
 
 ---
 
-The [goals for the development of my swerve drive robot](posts/Swerve-drive-introduction) were to
+The [goals for the development of my swerve drive robot](/posts/Swerve-drive-introduction) were to
 develop an off-road capable robot that can navigate autonomously between different locations to
 execute tasks either by itself or in cooperation with other robots. So far I have implemented the
-first version of the [steering and drive controller](posts/Swerve-drive-body-focussed-control),
-added [motion profiles](posts/Swerve-motion-profiles) for smoother changes in velocity and acceleration,
-and I have created the [URDF files](posts/Robotics-making-urdf-models) that allow me to simulate the
+first version of the [steering and drive controller](/posts/Swerve-drive-body-focussed-control),
+added [motion profiles](/posts/Swerve-motion-profiles) for smoother changes in velocity and acceleration,
+and I have created the [URDF files](/posts/Robotics-making-urdf-models) that allow me to simulate the
 robot in Gazebo. The next part is to add the ability to navigate the robot, autonomously,
 to a goal location.
 

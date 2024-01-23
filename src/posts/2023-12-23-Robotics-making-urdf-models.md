@@ -10,17 +10,17 @@ Tags:
 
 ---
 
-In a [previous post](posts/Robotics-driving-scuttle-with-ros-gazebo-simulation) I talked about simulating
+In a [previous post](/posts/Robotics-driving-scuttle-with-ros-gazebo-simulation) I talked about simulating
 the [SCUTTLE robot](https://scuttlerobot.org) using ROS and Gazebo.  I used Gazebo to
 simulate the SCUTTLE robot so that I could learn more about ROS without needing to involve a real
 robot with all the setup and complications that come with that. Additionally when I was designing the
-[bump sensor](posts/Robotics-a-bumper-for-scuttle-overview) for SCUTTLE using the simulation allowed
+[bump sensor](/posts/Robotics-a-bumper-for-scuttle-overview) for SCUTTLE using the simulation allowed
 me to reduce the feedback time compared to testing the design on a physical robot. This speeds up
 the design iteration process and allowed me to quickly and verify the design and the code. In the end
 you always need to do the final testing on a real robot, but by using simulation you can quickly
 iterate to a solution that will most likely work without major issues.
 
-In order to progress my [swerve drive robot](posts/Swerve-drive-introduction) I wanted to verify that
+In order to progress my [swerve drive robot](/posts/Swerve-drive-introduction) I wanted to verify that
 the control algorithms that I had developed would work for an actual robot. Ideally before spending
 money on the hardware. So I decided to use Gazebo to run some simulations that would enable me to
 verify the control algorithm.

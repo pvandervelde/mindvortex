@@ -9,7 +9,7 @@ Tags:
 
 ---
 
-In my [first attempt](posts/Swerve-drive-kinematics-simulation) to model a swerve drive I controlled
+In my [first attempt](/posts/Swerve-drive-kinematics-simulation) to model a swerve drive I controlled
 the movement of the robot by directly providing commands to the individual drive modules, i.e. by
 controlling the steering angle and the wheel velocity of each of the four drive modules. Additionally
 I assumed that the transition from one state (steering angle, wheel velocity) to another state would

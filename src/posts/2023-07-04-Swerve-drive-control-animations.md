@@ -57,7 +57,7 @@ isn't very fast for our robot simulation because a large number of image frames 
 the 6 second movement in the animation anywhere between 150 and 600 frames need to be created.
 
 The animation above shows how the robot behaves when using the
-[direct module controller](posts/Swerve-drive-kinematics-simulation). As you can see in the video different
+[direct module controller](/posts/Swerve-drive-kinematics-simulation). As you can see in the video different
 pairs of wheels have different rotation points, signified by the red dots. As the movement progresses
 these rotation points have quite a large range of motion. This indicates that the wheels are not
 synchronized and most likely some of the wheels are slipping.
@@ -74,7 +74,7 @@ synchronized and most likely some of the wheels are slipping.
 </iframe>
 
 I created another animation for the same situation but with the
-[body oriented controller](posts/Swerve-drive-body-focussed-control). In this case the rotation points
+[body oriented controller](/posts/Swerve-drive-body-focussed-control). In this case the rotation points
 are all in a single location leading me to conclude that all the wheels are synchronized and little
 to no wheel slip is occurring.
 

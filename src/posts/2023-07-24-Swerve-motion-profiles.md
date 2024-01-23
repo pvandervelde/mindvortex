@@ -342,4 +342,4 @@ swerve drive it should even be possible for the robot to follow a trajectory whi
 the orientation of the robot body.
 
 Finally the path of progression is to take the controller code that I have written for this
-simulation and use it with my [ROS2 based swerve robot](posts/Swerve-drive-introduction).
+simulation and use it with my [ROS2 based swerve robot](/posts/Swerve-drive-introduction).
