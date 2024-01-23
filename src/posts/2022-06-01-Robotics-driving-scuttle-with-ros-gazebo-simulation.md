@@ -9,7 +9,7 @@ Tags:
 
 ---
 
-After getting familiar with [ROS](posts/Robotics-learning-ros), the next step was to get the
+After getting familiar with [ROS](/posts/Robotics-learning-ros), the next step was to get the
 navigation stack working in Gazebo for the SCUTTLE robot. Fortunately, the SCUTTLE developers
 had already created a number of ROS packages containing the
 [scuttle model](https://github.com/scuttlerobot/scuttle_description),

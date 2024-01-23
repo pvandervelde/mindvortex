@@ -9,7 +9,7 @@ Tags:
 
 ---
 
-As I explained in an [earlier post](posts/Swerve-drive-kinematics-simulation) I have written some
+As I explained in an [earlier post](/posts/Swerve-drive-kinematics-simulation) I have written some
 code to simulate the movement of a four wheel swerve drive.
 
 <figure style="float:left">
@@ -72,7 +72,7 @@ i.e. wheel velocity and steering angle. While linear control profiles are not th
 method it does allow later on only changing the profile code to use a more suitable one, for
 instance a [jerk limited](https://en.wikipedia.org/wiki/Jerk_(physics)#In_motion_control) profile.
 
-The code I wrote gives me a graphs like the ones presented in my [previous post](posts/Swerve-drive-kinematics-simulation).
+The code I wrote gives me a graphs like the ones presented in my [previous post](/posts/Swerve-drive-kinematics-simulation).
 However before I use this code to test new control algorithms I want to make sure my code is
 actually producing the correct results. The [verification](https://en.wikipedia.org/wiki/Software_verification_and_validation)
 is done by running a bunch of simple simulations for which I am able to predict the behaviour using

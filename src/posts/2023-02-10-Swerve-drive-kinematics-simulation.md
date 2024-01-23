@@ -9,7 +9,7 @@ Tags:
 
 ---
 
-As [mentioned](posts/Swerve-drive-introduction) I am designing and building four wheel steering
+As [mentioned](/posts/Swerve-drive-introduction) I am designing and building four wheel steering
 mobile robot for use in outdoor environments and rough terrain. In that post I mused that both
 the mechanical design and the software would be the most complicated parts of the drive system and
 thus the parts I should focus on first. At the moment I don't have good access to a workshop where I
