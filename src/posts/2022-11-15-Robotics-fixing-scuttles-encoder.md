@@ -8,7 +8,7 @@ Tags:
 
 ---
 
-While testing the [bumper](posts/Robotics-a-bumper-for-scuttle-electronics) for SCUTTLE I noticed
+While testing the [bumper](/posts/Robotics-a-bumper-for-scuttle-electronics) for SCUTTLE I noticed
 that when reversing SCUTTLE would start a turn instead of driving straight backwards due to one
 motor turning faster than the other motor. There are a number of reasons this could be happening,
 for instance the driver code isn't properly commanding the motors, or the encoders are returning
