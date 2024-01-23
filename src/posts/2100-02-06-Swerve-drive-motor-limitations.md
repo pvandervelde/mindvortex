@@ -43,6 +43,10 @@ Tags:
       difference between the current velocity and the previous velocity. If the current velocity is limited to the
       maximum velocity of the motor, then the acceleration will also be limited to the maximum acceleration of the
       motor.
+        - But it will make deceleration more extreme at the end of the motion profile, because we keep the steering
+          angle change constant. So the velocity will be limited, but the acceleration will be limited even more for the
+          initial time steps. This means that we need to start reducing the time step (instead of increasing it). And then
+          it all goes to hell.
     + Max acceleration is more difficult. The acceleration is calculated based on the difference between the current
       velocity and the previous velocity. We want to keep the steering angle change between the previous and
       current timestep constant. Generally to limit the velocity we increase the duration of the timestep. However for
@@ -55,16 +59,16 @@ Tags:
     + This issue is probably due to the fact that:
         - We use a kinematic approach (deal with velocities and angles), not a dynamic one (deal with forces and accelerations)
         - We apply the commands to the body and thus indirectly to the modules in order to keep things synchronized
-- This
-
-
+- This probably requires either including the velocities, accelerations and jerks in the current model, or switching to
+  a dynamic model. The dynamic model will probably be more accurate, but also more complex. The kinematic model might
+  good enough for now.
+    + As soon as we want to go to a full 3d model (to include the vertical movement of the body) we will need to switch
+      to a dynamic model anyway.
 
 - Show video's for different profiles for the motion of driving straight and then going into a rotation
-
 
 - For later
     + Max jerk
     + Deadband
     + Torque vs rotation speed
     + Response time
-
