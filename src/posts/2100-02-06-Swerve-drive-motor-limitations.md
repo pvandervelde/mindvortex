@@ -8,67 +8,160 @@ Tags:
 
 ---
 
-- The simulations so far have assumed that we can make all the movements we want to make. Especially with respect to the
-  capabilities of the drive and steering motor. In reality these motors have limitations in terms of rotational velocity,
-  acceleration and torque.
-- Take into account the motor limitations, because this has an effect on our motions and possibly on the synchronisation
-  between the drive modules
+The [swerve controller](/posts/Swerve-drive-kinematics-simulation) I have implemented so far assumes
+that the robot is able to follow all the movement commands it has been given. This leads to extreme
+velocity and acceleration for the drive and steering motors. The image below shows the result of a
+simulation where the robot is commanded to move in a straight line followed by a rotate in-place. The
+simulation used a s-curve [motion profile](/posts/Swerve-motion-profiles) to generate a smooth movement
+between different states. The graphs show that the drive velocity and acceleration are smooth and
+don't reach very high values. It is thus expected that these are well within the capabilities of the
+drive motors. The steering velocity and acceleration show significant peaks which are likely to tax
+the steering motors.
 
-- Implemented limitations for the steering motor and the drive motor in terms of
-    + Max velocity (+/-)
-    + Max acceleration
+<figure style="float:left">
+  <a href="/assets/images/robotics/control/inplace_rotation_from_0_fwd_unlimited.png" target="_blank">
+    <img
+        alt="The positions, velocities and accelerations of the robot and the drive modules as it moves in a straight line and then rotates in place with no limiters applied."
+        src="/assets/images/robotics/control/inplace_rotation_from_0_fwd_unlimited.png"
+        width="416"
+        height="200"/>
+  </a>
+  <figcaption>
+    The positions, velocities and accelerations of the robot and the drive modules as it moves in a
+    straight line and then rotates in place. No limitations were applied to the steering and drive
+    velocities and accelerations.
+  </figcaption>
+</figure>
 
-- Assume that the motors have equal maximum speeds in both clock-wise and counter clock-wise direction
-- We will deal with the steering velocity / acceleration first and then do the drive velocity / acceleration, because
-  changing the steering velocity / acceleration will have an effect on the drive velocity / acceleration, but not
-  necessarily the other way around. As long as the drive velocity ratios between the modules are maintained, the
-  steering angle isn't affected while keeping the modules synchronised.
+In order to ensure that the motors are able to follow the movement commands while keeping the motions
+of the different drive modules [synchronised](/posts/Swerve-drive-body-focussed-control), we need to
+take into account the capabilities of the motors.
 
-- Created the motion profile for all 4 modules based on the desired body movement
-    + Create the body movement profile (x, y, theta)
-    + Divide the body movement profiles into N+1 points, dividing the profile into N sections of equal time
-    + for each point calculate the state for the drive modules (velocity, steering angle)
-    + Use the calculated points to create a motion profile for each module
-    + For each point in time check the steering velocity for each module. Record the maximum velocity of all the profiles
-    + If the maximum velocity is larger than what the motor can deliver then calculate the time duration of the current
-      timestep in order to limit the steering velocity to the maximum velocity of the motor (generally increases the
-      duration of the timestep). Increasing the duration of the timestep will reduce the velocity magnitudes of all the
-      module profiles. This should limit the steering velocity to the maximum velocity of the motor.
-    + NEXT IS STEERING ACCELERATION
-    + NEXT IS DRIVE VELOCITY
+Now there are many different motor characteristics that we could take into account. For instance:
+
+- The maximum velocity the motor can achieve. This obviously limits how fast the drive module can steer
+  or rotate the wheels.
+- The existence of any motor [deadband](https://en.wikipedia.org/wiki/Deadband). This is the region
+  around zero rotation speed where the motor doesn't have enough torque to overcome the static
+  friction of the motor and attached systems. Once enough torque is applied the motor will start
+  running at the rotation speed that it would normally have for that amount of torque. This means that
+  there is a minimum rotation speed that the motor can achieve.
+- The behaviour of the motor under load. For instance the motor may not be able to reach the desired
+  rotation speed under load.
+- The motor settling time, which is the time it takes the motor to reach the commanded speed.
+- The motor behaves differently when running 'forwards' than it does when running 'backwards'. For
+  instance the motor may have a different maximum velocity in the two directions.
+
+At the moment I will only be looking at the maximum motor velocities and the accelerations. These two
+have a direct effect on the synchronisation between the drive modules. The other characteristics will
+be dealt at a later stage as they require more information and thought.
+
+In order to limit the steering and drive velocities I've implemented the following process
+
+1. [Determine](https://github.com/pvandervelde/basic-swerve-sim/blob/d6c8349b7f184c85ac77fa8b19298bb79e22cebf/swerve_controller/control_profile.py#L612)
+   the body movement profile that allows the body to achieve the desired movement state in
+   a smooth manner using [s-curve motion profiles](/posts/Swerve-motion-profiles).
+1. Divide the body movement profiles into N+1 points, dividing the profile into N sections of equal
+   time. For each of these points
+   [calculate the velocity and steering angle](https://github.com/pvandervelde/basic-swerve-sim/blob/d6c8349b7f184c85ac77fa8b19298bb79e22cebf/swerve_controller/control_profile.py#L635)
+   for the drive modules. These velocities and steering angles then form the motion profiles for each
+   of the drive modules.
+1. For each point in time check the steering velocity for each module. Record the maximum velocity of
+   all the profiles. If the maximum velocity is larger than what the motor can deliver then
+   [increase or decrease the current timestep](https://github.com/pvandervelde/basic-swerve-sim/blob/d6c8349b7f184c85ac77fa8b19298bb79e22cebf/swerve_controller/control_profile.py#L414)
+   in order to limit the steering velocity to the maximum velocity of the motor. Changing the
+   duration of the timestep will change the steering velocities of all the modules. Thus we limit
+   the steering velocities while maintaining synchronisation between the modules.
+1. Repeat the previous step for the [drive velocities](https://github.com/pvandervelde/basic-swerve-sim/blob/d6c8349b7f184c85ac77fa8b19298bb79e22cebf/swerve_controller/control_profile.py#L546).
+
+The following video shows the result of the simulation using the new velocity limiter code. The video
+shows the robot moving in a straight line and then rotating in place. When the rotation starts the
+steering velocity for the different drive modules increases. As the steering velocity reaches 2 rad/s
+for the left front and left rear modules the limiter kicks in and maintains that steering velocity.
+In response the steering velocities of the other wheels reduces in order to keep the drive modules
+synchronised. The wheel velocities are slightly altered.
+
+<iframe
+    style="float:none"
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/XXXXXXXXXXX"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+</iframe>
+
+With the steering and wheel velocities limited in a reasonable way I attempted to do the same for the
+steering acceleration. The results of this can be seen in the next images. The first image limits the
+steering acceleration to 15 rad/s^2. The second image limits the steering acceleration to 10 rad/s^2.
+
+<figure style="float:left">
+  <a href="/assets/images/robotics/control/inplace_rotation_from_0_fwd_acc_limited_15_rad_s2.png" target="_blank">
+    <img
+        alt="The positions, velocities and accelerations of the robot and the drive modules as it moves in a straight line and then rotates in place. Limits are applied to the velocities and the steering acceleration."
+        src="/assets/images/robotics/control/inplace_rotation_from_0_fwd_acc_limited_15_rad_s2.png"
+        width="416"
+        height="200"/>
+  </a>
+  <figcaption>
+    The positions, velocities and accelerations of the robot and the drive modules as it moves in a
+    straight line and then rotates in place. The steering velocity is limited to 2 rad/s, the drive
+    velocity is limited to 1.0 m/2 and the steering acceleration is limited to 15 rad/s^2.
+  </figcaption>
+</figure>
+
+<figure style="float:left">
+  <a href="/assets/images/robotics/control/inplace_rotation_from_0_fwd_acc_limited_10_rad_s2.png" target="_blank">
+    <img
+        alt="The positions, velocities and accelerations of the robot and the drive modules as it moves in a straight line and then rotates in place. Limits are applied to the velocities and the steering acceleration."
+        src="/assets/images/robotics/control/inplace_rotation_from_0_fwd_acc_limited_10_rad_s2.png"
+        width="416"
+        height="200"/>
+  </a>
+  <figcaption>
+    The positions, velocities and accelerations of the robot and the drive modules as it moves in a
+    straight line and then rotates in place. The steering velocity is limited to 2 rad/s, the drive
+    velocity is limited to 1.0 m/2 and the steering acceleration is limited to 10 rad/s^2.
+  </figcaption>
+</figure>
+
+When comparing the two simulation results it becomes clear that something happens if we limit the
+steering acceleration to 10 rad/s^2. The velocities over all for both cases looks reasonable, except
+for the 10 rad/s^2 case where the steering velocity snaps to zero at the end of the transition from
+the straight line to the rotation. This is reflected in a momentary acceleration of over 100 rad/s^2.
+
+The acceleration is calculated based on the difference between the velocity at the current timestep
+and the velocity at the previous timestep. Additionally the algorithm has to ensure that the steering
+angle change between the previous and current timestep is controlled so that synchronisation of the
+drive modules is maintained. Generally to limit the velocity the duration of the timestep is increased.
+However for the acceleration, especially when decelerating from a positive velocity, there is a limit
+to how much the timestep can be increased. A larger time step increase decreases the velocity. This
+then increases the deceleration needed. So this means that you get very large timesteps, or very small
+timesteps. The current algorithm favours small timesteps.
+
+In either case the problem occurs when slowing down. At the end of the deceleration profile the desired
+position is achieved, but the velocity and acceleration are not zero. This is not realistic or physically
+possible.
+
+<FROM HERE ONWARDS>
 
 - Issues with this approach
-    + Max velocity is relatively easy. Changing the timestep duration will limit the velocity to the maximum velocity
-      of the motor. NOTE: This will also limit the acceleration, because the acceleration is calculated based on the
-      difference between the current velocity and the previous velocity. If the current velocity is limited to the
-      maximum velocity of the motor, then the acceleration will also be limited to the maximum acceleration of the
-      motor.
-        - But it will make deceleration more extreme at the end of the motion profile, because we keep the steering
-          angle change constant. So the velocity will be limited, but the acceleration will be limited even more for the
-          initial time steps. This means that we need to start reducing the time step (instead of increasing it). And then
-          it all goes to hell.
-    + Max acceleration is more difficult. The acceleration is calculated based on the difference between the current
-      velocity and the previous velocity. We want to keep the steering angle change between the previous and
-      current timestep constant. Generally to limit the velocity we increase the duration of the timestep. However for
-      the acceleration, especially when decelerating from a positive velocity, we are limited to how much we can increase
-      the timestep. A larger time step increase decreases the velocity. This then increases the deceleration needed. So
-      this means that you get very large timesteps, or very small timesteps. That is not necessarily a problem, but it
-      can lead to the fact that the velocity / acceleration won't get to zero at the end of the profile. Obviously
-      this is not realistic (or physically possible).
+
+    + This is possibly due to the fact that we're tinkering with individual timesteps and not the overall profile
     + This problem will only get more pronounced when we want to deal with the steering motor maximum jerk.
     + This issue is probably due to the fact that:
         - We use a kinematic approach (deal with velocities and angles), not a dynamic one (deal with forces and accelerations)
         - We apply the commands to the body and thus indirectly to the modules in order to keep things synchronized
+    + The motion profiles are no longer smooth on the transition between unlimited and limited movement
 - This probably requires either including the velocities, accelerations and jerks in the current model, or switching to
   a dynamic model. The dynamic model will probably be more accurate, but also more complex. The kinematic model might
   good enough for now.
     + As soon as we want to go to a full 3d model (to include the vertical movement of the body) we will need to switch
       to a dynamic model anyway.
 
-- Show video's for different profiles for the motion of driving straight and then going into a rotation
-
 - For later
     + Max jerk
     + Deadband
     + Torque vs rotation speed
-    + Response time
+    + Settling time
