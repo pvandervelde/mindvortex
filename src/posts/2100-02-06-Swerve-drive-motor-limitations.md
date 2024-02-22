@@ -85,7 +85,7 @@ synchronised. The wheel velocities are slightly altered.
     style="float:none"
     width="560"
     height="315"
-    src="https://www.youtube.com/embed/XXXXXXXXXXX"
+    src="https://www.youtube.com/embed/H7HTa4b6f_0"
     title="YouTube video player"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -142,26 +142,29 @@ timesteps. The current algorithm favours small timesteps.
 
 In either case the problem occurs when slowing down. At the end of the deceleration profile the desired
 position is achieved, but the velocity and acceleration are not zero. This is not realistic or physically
-possible.
+possible. This behaviour is possibly due to the fact that the timesteps are individually calculated.
+This means that the algorithm doesn't know what the desired end states are and so those are not taken
+into account.
 
-<FROM HERE ONWARDS>
+Additionally if we look at this approach from a higher level we can see that there are two potential
+areas where improvements can be made in the control model. The first area is related to the fact that
+the steering velocity and acceleration are computed values, i.e. they are derived from the change in
+the steering position. This means that there is no direct control over the steering velocity and
+acceleration. A better algorithm would include these values directly and be able to apply boundary
+conditions on these values. This could be achieved by extending the current kinematic model with the
+body accelerations and [jerks](https://en.wikipedia.org/wiki/Jerk_(physics)).
+The second area is related tot the fact that the module states are derived from the body state. This
+is necessary to keep the modules synchronised with the body. However this means that the module states
+are not directly controlled. Which means that it is more difficult to include the module limitations
+in the control model.
 
-- Issues with this approach
+These issues will only become more pronounced if we want to start limiting the with the maximum jerk
+values for the steering and drive directions. Limiting the maximum jerk is required to prevent excessive
+forces on the drive modules and the body.
 
-    + This is possibly due to the fact that we're tinkering with individual timesteps and not the overall profile
-    + This problem will only get more pronounced when we want to deal with the steering motor maximum jerk.
-    + This issue is probably due to the fact that:
-        - We use a kinematic approach (deal with velocities and angles), not a dynamic one (deal with forces and accelerations)
-        - We apply the commands to the body and thus indirectly to the modules in order to keep things synchronized
-    + The motion profiles are no longer smooth on the transition between unlimited and limited movement
-- This probably requires either including the velocities, accelerations and jerks in the current model, or switching to
-  a dynamic model. The dynamic model will probably be more accurate, but also more complex. The kinematic model might
-  good enough for now.
-    + As soon as we want to go to a full 3d model (to include the vertical movement of the body) we will need to switch
-      to a dynamic model anyway.
-
-- For later
-    + Max jerk
-    + Deadband
-    + Torque vs rotation speed
-    + Settling time
+One possible solution to these issues is to switch to a dynamic model. This would allow for the inclusion
+of the body accelerations and jerks. Additionally the dynamic model would allow for the inclusion of
+the behaviour of the steering modules more directly and thus lead to a more accurate control model.
+However the dynamic model is more complex and requires more information. Dynamic models are easier to
+extend to 3 dimensions, which is required if we want the robot to be able to move around on uneven
+non-horizontal terrain.
