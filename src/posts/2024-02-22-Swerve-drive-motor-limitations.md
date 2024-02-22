@@ -9,14 +9,14 @@ Tags:
 ---
 
 The [swerve controller](/posts/Swerve-drive-kinematics-simulation) I have implemented so far assumes
-that the robot is able to follow all the movement commands it has been given. This leads to extreme
+that the robot is able to follow all the movement commands it has been given. This can lead to extreme
 velocity and acceleration for the drive and steering motors. The image below shows the result of a
 simulation where the robot is commanded to move in a straight line followed by a rotate in-place. The
-simulation used a s-curve [motion profile](/posts/Swerve-motion-profiles) to generate a smooth movement
-between different states. The graphs show that the drive velocity and acceleration are smooth and
-don't reach very high values. It is thus expected that these are well within the capabilities of the
-drive motors. The steering velocity and acceleration show significant peaks which are likely to tax
-the steering motors.
+simulation used a s-curve [motion profile](/posts/Swerve-motion-profiles) to generate a smooth body
+movement between different states. The graphs show that the drive velocity and acceleration are
+smooth and don't reach very high values. It is thus expected that these are well within the
+capabilities of the drive motors. The steering velocity and acceleration show significant peaks which
+are likely to tax the steering motors.
 
 <figure style="float:left">
   <a href="/assets/images/robotics/control/inplace_rotation_from_0_fwd_unlimited.png" target="_blank">
@@ -41,6 +41,10 @@ Now there are many different motor characteristics that we could take into accou
 
 - The maximum velocity the motor can achieve. This obviously limits how fast the drive module can steer
   or rotate the wheels.
+- The maximum acceleration the motor can achieve. This limits how fast the drive module can change the
+  drive or steering velocity and thus how quickly it can respond to command changes.
+- The maximum jerk the motor can achieve. This limits how quickly the motor can achieve the desired
+  acceleration.
 - The existence of any motor [deadband](https://en.wikipedia.org/wiki/Deadband). This is the region
   around zero rotation speed where the motor doesn't have enough torque to overcome the static
   friction of the motor and attached systems. Once enough torque is applied the motor will start
@@ -49,8 +53,9 @@ Now there are many different motor characteristics that we could take into accou
 - The behaviour of the motor under load. For instance the motor may not be able to reach the desired
   rotation speed under load.
 - The motor settling time, which is the time it takes the motor to reach the commanded speed.
-- The motor behaves differently when running 'forwards' than it does when running 'backwards'. For
-  instance the motor may have a different maximum velocity in the two directions.
+- The behaviour of the motor when running 'forwards' versus when running 'backwards'. For
+  instance the motor may have a different maximum velocity in the 'forward' direction than it does
+  in the 'backwards' direction.
 
 At the moment I will only be looking at the maximum motor velocities and the accelerations. These two
 have a direct effect on the synchronisation between the drive modules. The other characteristics will
@@ -94,7 +99,7 @@ synchronised. The wheel velocities are slightly altered.
 
 With the steering and wheel velocities limited in a reasonable way I attempted to do the same for the
 steering acceleration. The results of this can be seen in the next images. The first image limits the
-steering acceleration to 15 rad/s^2. The second image limits the steering acceleration to 10 rad/s^2.
+steering acceleration to 15 rad/s\^2. The second image limits the steering acceleration to 10 rad/s\^2.
 
 <figure style="float:left">
   <a href="/assets/images/robotics/control/inplace_rotation_from_0_fwd_acc_limited_15_rad_s2.png" target="_blank">
@@ -107,7 +112,7 @@ steering acceleration to 15 rad/s^2. The second image limits the steering accele
   <figcaption>
     The positions, velocities and accelerations of the robot and the drive modules as it moves in a
     straight line and then rotates in place. The steering velocity is limited to 2 rad/s, the drive
-    velocity is limited to 1.0 m/2 and the steering acceleration is limited to 15 rad/s^2.
+    velocity is limited to 1.0 m/s and the steering acceleration is limited to 15 rad/s^2.
   </figcaption>
 </figure>
 
@@ -122,14 +127,14 @@ steering acceleration to 15 rad/s^2. The second image limits the steering accele
   <figcaption>
     The positions, velocities and accelerations of the robot and the drive modules as it moves in a
     straight line and then rotates in place. The steering velocity is limited to 2 rad/s, the drive
-    velocity is limited to 1.0 m/2 and the steering acceleration is limited to 10 rad/s^2.
+    velocity is limited to 1.0 m/s and the steering acceleration is limited to 10 rad/s^2.
   </figcaption>
 </figure>
 
 When comparing the two simulation results it becomes clear that something happens if we limit the
-steering acceleration to 10 rad/s^2. The velocities over all for both cases looks reasonable, except
+steering acceleration to 10 rad/s\^2. The velocities over all for both cases looks reasonable, except
 for the 10 rad/s^2 case where the steering velocity snaps to zero at the end of the transition from
-the straight line to the rotation. This is reflected in a momentary acceleration of over 100 rad/s^2.
+the straight line to the rotation. This is reflected in a momentary acceleration of over 100 rad/s\^2.
 
 The acceleration is calculated based on the difference between the velocity at the current timestep
 and the velocity at the previous timestep. Additionally the algorithm has to ensure that the steering
@@ -158,13 +163,21 @@ is necessary to keep the modules synchronised with the body. However this means 
 are not directly controlled. Which means that it is more difficult to include the module limitations
 in the control model.
 
-These issues will only become more pronounced if we want to start limiting the with the maximum jerk
+These issues will only become more pronounced if we want to start limiting the maximum jerk
 values for the steering and drive directions. Limiting the maximum jerk is required to prevent excessive
-forces on the drive modules and the body.
+forces on the drive module components.
 
-One possible solution to these issues is to switch to a dynamic model. This would allow for the inclusion
-of the body accelerations and jerks. Additionally the dynamic model would allow for the inclusion of
-the behaviour of the steering modules more directly and thus lead to a more accurate control model.
-However the dynamic model is more complex and requires more information. Dynamic models are easier to
-extend to 3 dimensions, which is required if we want the robot to be able to move around on uneven
-non-horizontal terrain.
+One possible solution to these issues is to switch to a dynamic model for the control of the robot,
+i.e. one that is based on the forces and accelerations observed by the robot as it moves.
+The current model is a kinematic model, i.e. based on the positions and velocities of the different
+components. Using a dynamic model would allow for the inclusion of the body accelerations and jerks.
+Additionally the dynamic model would allow for the inclusion of the behaviour of the steering modules
+more directly and thus lead to a more accurate control model. Finally a dynamic model would also allow
+for the inclusion of skid and slip conditions as well as three dimensional movement on uneven terrain.
+The drawback of a dynamic model is that it is more complex and thus requires more effort during
+implementation and at run time.
+
+At the moment I have not made any decisions on how to progress the swerve controller. It seems
+logical to implement a dynamic model, however which model should be used and how to implement it
+requires a bit more research. For the time being I'm planning my next step to be to design and
+build a single drive module in real life.
