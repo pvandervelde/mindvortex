@@ -10,13 +10,16 @@ Tags:
 
 - Swerve drive kinematics for uneven and outdoor environments
 
+- kinematics vs dynamics. At some point there is a limitation in the kinematics (velocities) approach
+  and it's better to changes to the dynamics approach (forces and accelerations)
+    + But why?
+
 - As I'm interested in outdoor mobile robots eventually I'll have to deal with uneven surfaces,
   wheel slip and wheel lift-off. And robots that move around in a 3D world and have
   suspension.
     + For these cases you need a more advanced algorithm than the one I have used.
       Neal Seegmiller has developed one such algorithm that will be implemented
       in a later stage.
-
 
 Neal Seegmiller   -  <https://scholar.google.com/citations?hl=en&user=H10kxZgAAAAJ>
 
